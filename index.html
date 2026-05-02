@@ -49,11 +49,14 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
   font-family:'Heebo',sans-serif; letter-spacing:0.22em; cursor:pointer;
   transition:background 0.18s, color 0.18s, border-color 0.18s;
 }
+/* solid red — primary action */
 .va-btn-primary {
   background:#e01a00; color:#ffffff; border:2px solid #e01a00;
   font-size:13px; font-weight:700; padding:16px 52px;
 }
 .va-btn-primary:hover { background:#c01500; border-color:#c01500; }
+
+/* black outline — secondary action */
 .va-btn-secondary {
   background:#ffffff; color:#111111; border:2px solid #111111;
   font-size:12px; font-weight:700; padding:14px 40px;
@@ -86,16 +89,23 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
   border:1px solid #e0e0e0;
 }
 .mode-card {
-  background:#ffffff; border:none;
-  border-right:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0;
-  padding:22px 18px 18px; cursor:pointer; transition:background 0.15s; position:relative;
+  background:#ffffff;
+  border:none;
+  border-right:1px solid #e0e0e0;
+  border-bottom:1px solid #e0e0e0;
+  padding:22px 18px 18px;
+  cursor:pointer;
+  transition:background 0.15s;
+  position:relative;
 }
 .mode-card:last-child  { border-right:none; }
 .mode-card:nth-child(3){ border-right:none; }
 .mode-card:nth-child(4),
 .mode-card:nth-child(5),
 .mode-card:nth-child(6){ border-bottom:none; }
+
 .mode-card:hover { background:#fafafa; }
+
 .mode-card.selected { background:#fafafa; }
 .mode-card.selected::before {
   content:''; position:absolute; top:0; left:0; right:0;
@@ -103,9 +113,11 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
 }
 .mode-card.selected .mode-num  { color:#e01a00; }
 .mode-card.selected .mode-name { color:#111111; }
+
 .mode-num {
   font-family:'Heebo',sans-serif; font-size:10px; font-weight:300;
-  color:#cccccc; letter-spacing:0.15em; margin-bottom:8px; transition:color 0.15s;
+  color:#cccccc; letter-spacing:0.15em; margin-bottom:8px;
+  transition:color 0.15s;
 }
 .mode-name {
   font-family:'Heebo',sans-serif; font-size:12px; font-weight:700;
@@ -134,9 +146,11 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
 }
 #modePillCollapsed:hover { border-color:#e01a00; color:#e01a00; }
 #modePillCollapsed .pill-dot { color:#e01a00; font-size:8px; }
+
 #modePillExpanded {
   display:none; flex-direction:column;
-  background:#ffffff; border:1.5px solid #dddddd; min-width:178px;
+  background:#ffffff; border:1.5px solid #dddddd;
+  min-width:178px;
 }
 .pill-mode-row {
   padding:10px 16px; font-size:10px; font-weight:500; color:#999999;
@@ -145,20 +159,23 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
 }
 .pill-mode-row:hover { color:#111111; background:#fafafa; }
 .pill-mode-row.active {
-  border-left-color:#e01a00; font-weight:700; color:#e01a00; background:#fff8f8;
+  border-left-color:#e01a00; font-weight:700;
+  color:#e01a00; background:#fff8f8;
 }
 #pillSaveBtn {
   margin:6px 10px 10px; cursor:pointer;
   font-family:'Heebo',sans-serif; font-size:10px; font-weight:700;
   letter-spacing:0.18em; padding:10px 12px;
-  background:#e01a00; color:#ffffff; border:none; transition:background 0.15s;
+  background:#e01a00; color:#ffffff; border:none;
+  transition:background 0.15s;
 }
 #pillSaveBtn:hover { background:#c01500; }
 
 /* ── name screen ── */
 #nameScreen {
   display:none; position:fixed; inset:0; z-index:2000;
-  background:#ffffff; flex-direction:column; align-items:center; justify-content:center;
+  background:#ffffff;
+  flex-direction:column; align-items:center; justify-content:center;
 }
 #nameScreen .ns-title {
   font-size:9px; font-weight:300; letter-spacing:0.55em;
@@ -177,12 +194,15 @@ body { background:#ffffff; overflow:hidden; width:100vw; height:100vh; cursor:no
 
 /* ── gallery overlay ── */
 #galleryOverlay {
-  display:none; position:fixed; inset:0; z-index:1500; background:#ffffff;
-  flex-direction:column; align-items:center; padding:72px 40px 48px; overflow-y:auto;
+  display:none; position:fixed; inset:0; z-index:1500;
+  background:#ffffff;
+  flex-direction:column; align-items:center;
+  padding:72px 40px 48px; overflow-y:auto;
 }
 .gallery-inner { width:100%; max-width:560px; }
 .gallery-heading {
-  font-size:9px; font-weight:300; letter-spacing:0.5em; color:#bbbbbb; margin-bottom:8px;
+  font-size:9px; font-weight:300; letter-spacing:0.5em;
+  color:#bbbbbb; margin-bottom:8px;
 }
 .gallery-divider { border-bottom:1px solid #eeeeee; margin-bottom:38px; }
 
@@ -279,6 +299,7 @@ import { FaceLandmarker, FilesetResolver }
    CONSTANTS
    ══════════════════════════════════════════════════════════════════════ */
 
+// GAZE mode (Sobel + AOI)
 const W_ANA        = 160;
 const H_ANA        = 90;
 const N_ANN        = 250;
@@ -297,6 +318,7 @@ const AOI_MIN_W    = 0.04;
 const AOI_MIN_H    = 0.03;
 const AOI_MAX_SIZE = 0.40;
 
+// Analysis modes
 const FIX_DISPERSION   = 0.04;
 const FIX_MIN_DURATION = 150;
 const SAC_VELOCITY     = 0.8;
@@ -306,6 +328,7 @@ const HEAT_SIGMA  = 0.07;
 const HEAT_WEIGHT = 0.18;
 const HEAT_DECAY  = 0.9975;
 
+// Calibration
 const GAZE_LERP      = 0.08;
 const CAL_PTS = [
   [0.1,0.1],[0.5,0.1],[0.9,0.1],
@@ -369,7 +392,7 @@ let lastAoiTs = -9999;
 
 let fixationHistory = [];
 let currentFixation = null;
-let scanPathHistory = [];
+let scanPathHistory = [];  // separate from fixationHistory — only records when SCANPATH mode active
 let saccadeHistory  = [];
 let saccadeActive   = false;
 let saccadeStart    = null;
@@ -377,7 +400,7 @@ let heatmap         = new Float32Array(W_HEAT * H_HEAT);
 let heatCanvas, heatCtx;
 let firstFix        = null;
 let firstFixDone    = false;
-let firstFixModeTs  = 0;
+let firstFixModeTs  = 0;  // timestamp when FIRSTFIX mode was entered
 let sessionStartTs  = 0;
 let gazeLog         = [];
 
@@ -395,35 +418,17 @@ const offXBuf = [], offYBuf = [];
 const BUF_MAX = 30;
 let calMap = null;
 
-// ── Eye tracking state (new) ──
-let eyeCalMap    = null;
-let curEyeOffX   = 0.5, curEyeOffY = 0.5;
-let eyeValid     = false;
-const eyeOffXBuf = [], eyeOffYBuf = [];
-
 window._gazeHistory = [];
 window._dotPts      = null;
 
 /* ══════════════════════════════════════════════════════════════════════
-   SHARED STABILITY + CLASSIFIER
+   SHARED STABILITY + CLASSIFIER  (used by GAZE mode dots & AOI)
    ══════════════════════════════════════════════════════════════════════ */
 
 function currentStability() {
   const N = Math.min(offXBuf.length, 20);
   if (N < 8) return 0;
   const xs = offXBuf.slice(-N), ys = offYBuf.slice(-N);
-  const mx = xs.reduce((a,b) => a+b, 0) / N;
-  const my = ys.reduce((a,b) => a+b, 0) / N;
-  const vx = xs.reduce((a,b) => a+(b-mx)**2, 0) / N;
-  const vy = ys.reduce((a,b) => a+(b-my)**2, 0) / N;
-  return Math.max(0, Math.min(1, 1 - (vx+vy) / CAL_VAR_THRESH));
-}
-
-// Eye-buffer stability — same formula, separate buffers
-function eyeStability() {
-  const N = Math.min(eyeOffXBuf.length, 20);
-  if (N < 8) return 0;
-  const xs = eyeOffXBuf.slice(-N), ys = eyeOffYBuf.slice(-N);
   const mx = xs.reduce((a,b) => a+b, 0) / N;
   const my = ys.reduce((a,b) => a+b, 0) / N;
   const vx = xs.reduce((a,b) => a+(b-mx)**2, 0) / N;
@@ -682,7 +687,7 @@ function detectAOI(px, w, h) {
   for (const r of regions) {
     let dup = false;
     for (const k of kept) {
-      if (Math.hypot(r.cx-k.cx, r.cy-k.cy) < CLUSTER_DIST*1.4) { dup=true; break; }
+      if (Math.hypot(r.cx-k.cx,r.cy-k.cy) < CLUSTER_DIST*1.4) { dup=true; break; }
     }
     if (!dup) kept.push(r);
     if (kept.length >= MAX_AOI) break;
@@ -795,7 +800,7 @@ function applyAOIGaze(ts, scanSpeed, microMovement, dt) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — FIXATION I-DT
+   ANALYSIS — FIXATION I-DT (runs unconditionally)
    ══════════════════════════════════════════════════════════════════════ */
 
 function updateFixations(ts) {
@@ -821,6 +826,7 @@ function updateFixations(ts) {
         const fixEntry = { x:currentFixation.cx, y:currentFixation.cy, startTs:currentFixation.startTs, endTs:ts, duration };
         fixationHistory.push(fixEntry);
         if (fixationHistory.length > 50) fixationHistory.shift();
+        // scanPath only accumulates while that mode is active
         if (activeMode === 'SCANPATH') {
           scanPathHistory.push(fixEntry);
           if (scanPathHistory.length > 14) scanPathHistory.shift();
@@ -832,7 +838,7 @@ function updateFixations(ts) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — SACCADE I-VT
+   ANALYSIS — SACCADE I-VT (runs unconditionally)
    ══════════════════════════════════════════════════════════════════════ */
 
 function updateSaccades(ts) {
@@ -857,7 +863,7 @@ function updateSaccades(ts) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — HEATMAP
+   ANALYSIS — HEATMAP (runs unconditionally)
    ══════════════════════════════════════════════════════════════════════ */
 
 function updateHeatmap() {
@@ -877,12 +883,13 @@ function updateHeatmap() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — FIRST FIXATION
+   ANALYSIS — FIRST FIXATION (runs unconditionally)
    ══════════════════════════════════════════════════════════════════════ */
 
 function updateFirstFix() {
   if (activeMode !== 'FIRSTFIX') return;
   if (firstFixDone) return;
+  // Only count fixations that started after we entered FIRSTFIX mode
   const recent = fixationHistory.filter(f => f.startTs >= firstFixModeTs);
   if (recent.length > 0) {
     firstFix = recent[0];
@@ -891,17 +898,19 @@ function updateFirstFix() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   DRAW — GAZE MODE
+   DRAW — GAZE MODE (Sobel dots + AOI rectangles)
    ══════════════════════════════════════════════════════════════════════ */
 
 function drawGazeMode() {
   const W=dotCanvas.width, H=dotCanvas.height;
+  // Sobel dots
   if (window._dotPts) {
     dotCtx.fillStyle='rgba(224,26,0,0.82)';
     dotCtx.beginPath();
     for (const p of window._dotPts) dotCtx.rect(p.nx*W-1,p.ny*H-1,2,2);
     dotCtx.fill();
   }
+  // AOI rectangles
   for (const a of aoiPool) {
     if (!a.active||!a.visible) continue;
     const sx=a.x*W,sy=a.y*H,sw=a.w*W,sh=a.h*H;
@@ -983,6 +992,7 @@ function drawScanPath(ts) {
   const recent=scanPathHistory.slice(-14);
   if (recent.length<1) return;
   const W=dotCanvas.width, H=dotCanvas.height, total=recent.length;
+  // dashed connecting lines
   if (recent.length>=2) {
     dotCtx.save(); dotCtx.setLineDash([4,6]);
     dotCtx.strokeStyle='rgba(224,26,0,0.6)'; dotCtx.lineWidth=1.5;
@@ -993,13 +1003,16 @@ function drawScanPath(ts) {
     }
     dotCtx.stroke(); dotCtx.setLineDash([]); dotCtx.restore();
   }
+  // numbered circles — no background fill, just stroke + number
   for (let i=0;i<total;i++) {
     const {x,y}=recent[i];
     const cx=x*W, cy=y*H;
     const isNewest=i===total-1;
     const r=isNewest ? 12+Math.sin(ts/300)*2 : 11;
+    // circle: transparent fill, red stroke
     dotCtx.beginPath(); dotCtx.arc(cx,cy,r,0,Math.PI*2);
     dotCtx.strokeStyle='rgba(224,26,0,1)'; dotCtx.lineWidth=2; dotCtx.stroke();
+    // number: solid red, no background
     dotCtx.fillStyle='rgba(224,26,0,1)';
     dotCtx.font='bold 9px Heebo'; dotCtx.textAlign='center'; dotCtx.textBaseline='middle';
     dotCtx.fillText(i+1,cx,cy);
@@ -1013,7 +1026,7 @@ function drawScanPath(ts) {
 
 function drawHeatmap() {
   let maxVal=0;
-  for (let i=0; i<heatmap.length; i++) { if (heatmap[i]>maxVal) maxVal=heatmap[i]; }
+  for (let i=0;i<heatmap.length;i++) { if (heatmap[i]>maxVal) maxVal=heatmap[i]; }
   if (maxVal<0.01) return;
   heatCtx.clearRect(0,0,W_HEAT,H_HEAT);
   const img=heatCtx.createImageData(W_HEAT,H_HEAT);
@@ -1050,11 +1063,14 @@ function drawFirstFix(ts) {
   }
   const cx=firstFix.x*W, cy=firstFix.y*H;
   const pulse=20+Math.sin(ts/400)*5;
+  // pulsing outer ring
   dotCtx.beginPath(); dotCtx.arc(cx,cy,pulse,0,Math.PI*2);
   dotCtx.strokeStyle='rgba(224,26,0,0.35)'; dotCtx.lineWidth=1.5; dotCtx.stroke();
+  // solid red filled circle
   dotCtx.beginPath(); dotCtx.arc(cx,cy,14,0,Math.PI*2);
   dotCtx.fillStyle='rgba(224,26,0,1)'; dotCtx.fill();
   dotCtx.strokeStyle='rgba(224,26,0,1)'; dotCtx.lineWidth=2; dotCtx.stroke();
+  // text clearly above the circle, no transparency
   const offset = (firstFix.startTs - firstFixModeTs) / 1000;
   const textY = cy - 46;
   dotCtx.textAlign='center'; dotCtx.textBaseline='alphabetic';
@@ -1081,7 +1097,9 @@ function drawFrame(ts) {
   if (activeMode==='FIRSTFIX')  drawFirstFix(ts);
   if (activeMode==='GAZE')      drawGazeMode();
 
+  // annLayer visible only in GAZE mode
   annLayer.style.opacity = activeMode==='GAZE' ? '1' : '0';
+  // gaze dot visible only in GAZE mode
   gazeDot.style.display  = activeMode==='GAZE' ? '' : 'none';
 }
 
@@ -1106,6 +1124,7 @@ function applyGaze(ts) {
   window._gazeHistory.push({x:sGX,y:sGY,ts});
   if (window._gazeHistory.length>90) window._gazeHistory.shift();
 
+  // GAZE mode: apply dot and AOI logic
   if (activeMode==='GAZE') {
     const scanSpeed=aoiPool.filter(a=>a.lastVisitTs>ts-2000).length;
     const _gh=window._gazeHistory.slice(-8);
@@ -1123,11 +1142,14 @@ function applyGaze(ts) {
 
 function mainLoop(ts) {
   applyGaze(ts);
+
+  // Analysis — always unconditional (all modes benefit)
   updateFixations(ts);
   updateSaccades(ts);
   updateHeatmap();
   updateFirstFix();
 
+  // GAZE mode: run Sobel + AOI on interval
   if (activeMode==='GAZE') {
     if (ts-lastAnaTs>ANA_INTERVAL) { analyzeDots(); lastAnaTs=ts; }
     if (ts-lastAoiTs>AOI_INTERVAL) { analyzeAOI();  lastAoiTs=ts; }
@@ -1181,8 +1203,13 @@ function mv3(m,v){
          m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];
 }
 
+let eyeCalMap    = null;   // affine map for iris gaze
+let curEyeOffX   = 0.5, curEyeOffY = 0.5;
+let eyeValid     = false;
+const eyeOffXBuf = [], eyeOffYBuf = [];
+
 /* ══════════════════════════════════════════════════════════════════════
-   CALIBRATION
+   CALIBRATION  (eye-only)
    ══════════════════════════════════════════════════════════════════════ */
 
 function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
@@ -1190,20 +1217,10 @@ function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.i
 function drawIntro(){
   const W=calCanvas.width,H=calCanvas.height;
   calCtx.fillStyle='#ffffff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
-  calCtx.fillStyle='#111111';calCtx.font='bold 22px Heebo';calCtx.fillText('HEAD TRACKING CALIBRATION',W/2,H/2-52);
-  calCtx.strokeStyle='#dddddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();
-  calCtx.fillStyle='#666666';calCtx.font='14px Heebo';calCtx.fillText('Point your head at each dot and hold still',W/2,H/2-14);
-  calCtx.fillText('until the ring fills completely',W/2,H/2+8);
-  calCtx.fillStyle='#aaaaaa';calCtx.font='12px Heebo';calCtx.fillText('Move only your head — keep your body still',W/2,H/2+34);
-}
-
-function drawEyeIntro(){
-  const W=calCanvas.width,H=calCanvas.height;
-  calCtx.fillStyle='#ffffff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
   calCtx.fillStyle='#111111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);
   calCtx.strokeStyle='#dddddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();
-  calCtx.fillStyle='#666666';calCtx.font='14px Heebo';calCtx.fillText('Now keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
-  calCtx.fillText('Look at each dot and hold your gaze until the ring fills',W/2,H/2+8);
+  calCtx.fillStyle='#666666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
+  calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);
   calCtx.fillStyle='#aaaaaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);
 }
 
@@ -1214,45 +1231,19 @@ function drawDone(){
   calCtx.fillStyle='#aaaaaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);
 }
 
-// Head calibration dot — reads curOffX / curOffY (head position)
-function awaitDot(px,py,index){
-  return new Promise(resolve=>{
-    let progress=0,prevTs=null;const samples=[];
-    function frame(ts){
-      const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;
-      const stab=stability();
-      progress+=stab*CAL_FILL_RATE*dt;progress-=(1-stab)*CAL_DRAIN_RATE*dt;
-      progress=Math.max(0,Math.min(1,progress));
-      if(stab>0.45)samples.push({ox:curOffX,oy:curOffY});
-      const W=calCanvas.width,H=calCanvas.height;
-      calCtx.fillStyle='#ffffff';calCtx.fillRect(0,0,W,H);
-      calCtx.textAlign='right';calCtx.fillStyle='#aaaaaa';calCtx.font='14px Heebo';
-      calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`,W-28,36);
-      calCtx.textAlign='center';calCtx.fillStyle='#aaaaaa';calCtx.font='13px Heebo';
-      calCtx.fillText('POINT HEAD AT DOT · HOLD STILL',W/2,H-26);
-      calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);
-      calCtx.strokeStyle='#dddddd';calCtx.lineWidth=1.5;calCtx.stroke();
-      if(progress>0){
-        calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);
-        calCtx.strokeStyle=`rgba(224,26,0,${0.35+stab*0.65})`;calCtx.lineWidth=2;calCtx.stroke();
-      }
-      const r=3.5+stab*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);
-      calCtx.fillStyle=`rgba(224,26,0,${0.2+stab*0.8})`;calCtx.fill();
-      if(progress>=1){
-        calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);
-        calCtx.strokeStyle='rgba(224,26,0,0.9)';calCtx.lineWidth=2;calCtx.stroke();
-        const n=samples.length||1;
-        const ox=samples.reduce((s,v)=>s+v.ox,0)/n;
-        const oy=samples.reduce((s,v)=>s+v.oy,0)/n;
-        setTimeout(()=>resolve({ox,oy}),280);
-      } else requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  });
+// Eye stability — uses eyeOffXBuf / eyeOffYBuf
+function eyeStability() {
+  const N = Math.min(eyeOffXBuf.length, 20);
+  if (N < 8) return 0;
+  const xs = eyeOffXBuf.slice(-N), ys = eyeOffYBuf.slice(-N);
+  const mx = xs.reduce((a,b)=>a+b,0)/N, my = ys.reduce((a,b)=>a+b,0)/N;
+  const vx = xs.reduce((a,b)=>a+(b-mx)**2,0)/N;
+  const vy = ys.reduce((a,b)=>a+(b-my)**2,0)/N;
+  return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));
 }
 
-// Eye calibration dot — reads curEyeOffX / curEyeOffY (iris position)
-function awaitDotEye(px,py,index){
+// Calibration dot — reads curEyeOffX / curEyeOffY
+function awaitDot(px,py,index){
   return new Promise(resolve=>{
     let progress=0,prevTs=null;const samples=[];
     function frame(ts){
@@ -1293,8 +1284,6 @@ async function runCalibration(){
   calStartBtn.style.display='block';
   await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));
   calStartBtn.style.display='none';
-
-  // ── Pass 1: head calibration (unchanged) ──
   const calData=[];
   for(let i=0;i<CAL_PTS.length;i++){
     const[nx,ny]=CAL_PTS[i];
@@ -1303,33 +1292,13 @@ async function runCalibration(){
     const{ox,oy}=await awaitDot(px,py,i);
     calData.push({sx:nx,sy:ny,ox,oy});
   }
-  if(calData.length>=4)calMap=fitAffine(calData);
-
-  // ── Transition: eye calibration intro ──
-  drawEyeIntro();
-  calStartBtn.textContent='BEGIN EYE CALIBRATION';
-  calStartBtn.style.display='block';
-  await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));
-  calStartBtn.style.display='none';
-  calStartBtn.textContent='BEGIN CALIBRATION';
-
-  // ── Pass 2: eye calibration ──
-  const eyeCalData=[];
-  for(let i=0;i<CAL_PTS.length;i++){
-    const[nx,ny]=CAL_PTS[i];
-    const px=nx*window.innerWidth,py=ny*window.innerHeight;
-    if(i>0)await new Promise(r=>setTimeout(r,320));
-    const{ox,oy}=await awaitDotEye(px,py,i);
-    eyeCalData.push({sx:nx,sy:ny,ox,oy});
-  }
-  if(eyeCalData.length>=4)eyeCalMap=fitAffine(eyeCalData);
-
+  if(calData.length>=4)eyeCalMap=fitAffine(calData);
   drawDone();await new Promise(r=>setTimeout(r,900));
   calOverlay.style.display='none';
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   HEAD TRACKING  (modified: adds iris/eye gaze, combines with head)
+   EYE TRACKING  (iris-only, no head position)
    ══════════════════════════════════════════════════════════════════════ */
 
 async function startHeadTracking(){
@@ -1343,14 +1312,14 @@ async function startHeadTracking(){
       },
       outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1
     });
-  }catch(e){console.warn('[head]',e);return false;}
+  }catch(e){console.warn('[eye]',e);return false;}
   try{
     const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});
     webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});
-  }catch(e){console.warn('[head] webcam',e);return false;}
+  }catch(e){console.warn('[eye] webcam',e);return false;}
 
   let lastCamT=-1;
-  function trackHead(){
+  function trackEye(){
     if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){
       lastCamT=webcamEl.currentTime;
       try{
@@ -1358,34 +1327,23 @@ async function startHeadTracking(){
         if(res.faceLandmarks?.length>0){
           const lm=res.faceLandmarks[0];
 
-          // ── Head position (unchanged) ──
+          // Keep head buffers stable (used by stability() for GAZE mode classifier)
           const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];
           const hxRaw=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8;
           const hyRaw=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;
-          const headX=1-hxRaw,headY=hyRaw;
-          curOffX=headX;curOffY=headY;
-          offXBuf.push(headX);if(offXBuf.length>BUF_MAX)offXBuf.shift();
-          offYBuf.push(headY);if(offYBuf.length>BUF_MAX)offYBuf.shift();
+          const headX=1-hxRaw, headY=hyRaw;
+          curOffX=headX; curOffY=headY;
+          offXBuf.push(headX); if(offXBuf.length>BUF_MAX)offXBuf.shift();
+          offYBuf.push(headY); if(offYBuf.length>BUF_MAX)offYBuf.shift();
 
-          // Apply head affine map → headGX, headGY
-          let headGX,headGY;
-          if(calMap){
-            headGX=calMap.ax*headX+calMap.bx*headY+calMap.cx;
-            headGY=calMap.ay*headX+calMap.by*headY+calMap.cy;
-          }else{
-            headGX=headX;headGY=headY;
-          }
-          headGX=Math.max(0,Math.min(1,headGX));
-          headGY=Math.max(0,Math.min(1,headGY));
-
-          // ── Iris / eye gaze ──
+          // ── Iris landmarks ──
           const lIris =lm[468], rIris =lm[473];
           const lInner=lm[33],  lOuter=lm[133];
           const rInner=lm[362], rOuter=lm[263];
 
           if(lIris&&rIris&&lInner&&lOuter&&rInner&&rOuter){
-            const lEyeW=Math.hypot(lOuter.x-lInner.x,lOuter.y-lInner.y);
-            const rEyeW=Math.hypot(rOuter.x-rInner.x,rOuter.y-rInner.y);
+            const lEyeW=Math.hypot(lOuter.x-lInner.x, lOuter.y-lInner.y);
+            const rEyeW=Math.hypot(rOuter.x-rInner.x, rOuter.y-rInner.y);
 
             if(lEyeW>0.01&&rEyeW>0.01){
               // Iris offset normalized by eye width
@@ -1405,35 +1363,42 @@ async function startHeadTracking(){
 
               curEyeOffX=eyeGX;
               curEyeOffY=eyeGY;
-              eyeOffXBuf.push(eyeGX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();
-              eyeOffYBuf.push(eyeGY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();
+              eyeOffXBuf.push(eyeGX); if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();
+              eyeOffYBuf.push(eyeGY); if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();
               eyeValid=true;
-            }else{
-              eyeValid=false;
-            }
-          }else{
+
+              // Apply eye calibration map → rawGX / rawGY
+              if(eyeCalMap){
+                rawGX=eyeCalMap.ax*eyeGX+eyeCalMap.bx*eyeGY+eyeCalMap.cx;
+                rawGY=eyeCalMap.ay*eyeGX+eyeCalMap.by*eyeGY+eyeCalMap.cy;
+              } else {
+                rawGX=eyeGX;
+                rawGY=eyeGY;
+              }
+              rawGX=Math.max(0,Math.min(1,rawGX));
+              rawGY=Math.max(0,Math.min(1,rawGY));
+              if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}
+
+            } else { eyeValid=false; }
+          } else {
             eyeValid=false;
+            // iris not available — show warning once
+            if(!window._irisWarnShown){
+              window._irisWarnShown=true;
+              const w=document.createElement('div');
+              w.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#e01a00;color:#fff;font-family:"Heebo",sans-serif;font-size:12px;font-weight:700;letter-spacing:0.15em;padding:12px 24px;z-index:9999;pointer-events:none;';
+              w.textContent='IRIS LANDMARKS NOT AVAILABLE — CHECK CAMERA & LIGHTING';
+              document.body.appendChild(w);
+              setTimeout(()=>w.remove(),6000);
+              console.warn('[eye] landmarks 468/473 not found');
+            }
           }
-
-          // ── Combine head + eye (or fall back to head-only) ──
-          if(eyeValid&&eyeCalMap){
-            const eyeCalX=eyeCalMap.ax*curEyeOffX+eyeCalMap.bx*curEyeOffY+eyeCalMap.cx;
-            const eyeCalY=eyeCalMap.ay*curEyeOffX+eyeCalMap.by*curEyeOffY+eyeCalMap.cy;
-            rawGX=headGX*0.45+eyeCalX*0.55;
-            rawGY=headGY*0.45+eyeCalY*0.55;
-          }else{
-            rawGX=headGX;rawGY=headGY;
-          }
-          rawGX=Math.max(0,Math.min(1,rawGX));
-          rawGY=Math.max(0,Math.min(1,rawGY));
-
-          if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}
         }
       }catch(_){}
     }
-    requestAnimationFrame(trackHead);
+    requestAnimationFrame(trackEye);
   }
-  requestAnimationFrame(trackHead);return true;
+  requestAnimationFrame(trackEye);return true;
 }
 
 function enablePointerFallback(){
@@ -1484,9 +1449,19 @@ function setActiveMode(id){
   document.querySelectorAll('.pill-mode-row').forEach(row=>{
     row.classList.toggle('active',row.dataset.mode===id);
   });
-  if(id==='FIRSTFIX'){ firstFix=null; firstFixDone=false; firstFixModeTs=performance.now(); }
-  if(id==='SCANPATH'){ scanPathHistory=[]; }
-  if(id!=='GAZE'){ annLayer.style.opacity='0'; gazeDot.style.display='none'; }
+  // Reset FIRST FIXATION so it starts fresh from this mode selection
+  if(id==='FIRSTFIX'){
+    firstFix=null; firstFixDone=false; firstFixModeTs=performance.now();
+  }
+  // Reset SCAN PATH so it starts fresh from this mode selection
+  if(id==='SCANPATH'){
+    scanPathHistory=[];
+  }
+  // annLayer and gazeDot only in GAZE mode
+  if(id!=='GAZE'){
+    annLayer.style.opacity='0';
+    gazeDot.style.display='none';
+  }
 }
 
 function initModePill(){
@@ -1571,16 +1546,19 @@ async function boot(){
   if(ok){await runCalibration();}
   else{calOverlay.style.display='none';enablePointerFallback();}
 
+  // Init heatmap canvas once
   heatCanvas=document.createElement('canvas');
   heatCanvas.width=W_HEAT; heatCanvas.height=H_HEAT;
   heatCtx=heatCanvas.getContext('2d');
 
+  // Pause while user picks mode
   mainVideo.pause();
   await showModeScreen();
   mainVideo.play().catch(()=>{});
 
   sessionStartTs=Date.now();
 
+  // 10 Hz gaze log
   setInterval(()=>{
     if(!gazeOn)return;
     gazeLog.push({
@@ -1593,6 +1571,7 @@ async function boot(){
     });
   },100);
 
+  // First Sobel analysis
   analyzeDots();analyzeAOI();
   lastAnaTs=lastAoiTs=performance.now();
 
