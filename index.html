@@ -11,29 +11,24 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 #imgWrapper { position:relative; width:100vw; height:100vh; overflow:hidden; }
 #mainImg { display:block; width:100%; height:100%; object-fit:contain; background:#000; }
 #dotCanvas { position:absolute; inset:0; pointer-events:none; z-index:5; }
-#annLayer  { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:6; transition:opacity 0.3s; }
-.ann { position:absolute; font-family:'Heebo',sans-serif; font-size:11px; font-weight:700; color:#e01a00; letter-spacing:0.06em; white-space:nowrap; text-shadow:none; pointer-events:none; opacity:0; transition:opacity 0.5s ease; }
+#annLayer  { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:6; opacity:0; }
 #gazeDot { position:fixed; width:22px; height:22px; border-radius:50%; border:2px solid rgba(224,26,0,0.85); background:rgba(224,26,0,0.12); transform:translate(-50%,-50%); pointer-events:none; z-index:50; }
 #webcamEl { position:fixed; bottom:8px; right:8px; width:96px; height:72px; opacity:0.05; transform:scaleX(-1); border:1px solid #ccc; z-index:50; }
 #info { position:fixed; bottom:14px; left:50%; transform:translateX(-50%); font-family:'Heebo',sans-serif; font-size:10px; font-weight:300; letter-spacing:0.22em; color:rgba(0,0,0,0.35); pointer-events:none; transition:opacity 2s ease; white-space:nowrap; z-index:50; }
 
-/* btns */
 .va-btn { font-family:'Heebo',sans-serif; letter-spacing:0.22em; cursor:pointer; transition:background 0.18s,color 0.18s,border-color 0.18s; }
 .va-btn-primary { background:#e01a00; color:#fff; border:2px solid #e01a00; font-size:13px; font-weight:700; padding:16px 52px; }
 .va-btn-primary:hover { background:#c01500; border-color:#c01500; }
 .va-btn-secondary { background:#fff; color:#111; border:2px solid #111; font-size:12px; font-weight:700; padding:12px 36px; }
 .va-btn-secondary:hover { background:#111; color:#fff; }
 
-/* calibration */
 #calOverlay { position:fixed; inset:0; z-index:1000; background:#fff; }
 #calCanvas { position:absolute; inset:0; width:100%; height:100%; }
 #calStartBtn { position:absolute; top:58%; left:50%; transform:translateX(-50%); display:none; z-index:1001; }
 
-/* overlay screens */
 .screen { display:none; position:fixed; inset:0; z-index:1100; background:#fff; flex-direction:column; align-items:center; justify-content:center; }
 .screen-title { font-size:9px; font-weight:300; letter-spacing:0.6em; color:#bbb; margin-bottom:36px; }
 
-/* image library */
 .lib-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:720px; width:90vw; margin-bottom:36px; max-height:52vh; overflow-y:auto; }
 .lib-card { aspect-ratio:4/3; border:1.5px solid #e0e0e0; cursor:pointer; overflow:hidden; position:relative; transition:border-color 0.15s; }
 .lib-card:hover { border-color:#999; }
@@ -46,41 +41,9 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 .lib-add-label { font-size:9px; font-weight:300; letter-spacing:0.2em; color:#ccc; }
 #libFileInput { display:none; }
 
-/* mode selection */
-.mode-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:660px; width:90vw; margin-bottom:44px; border:1px solid #e0e0e0; }
-.mode-card { background:#fff; border:none; border-right:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0; padding:22px 18px 18px; cursor:pointer; transition:background 0.15s; position:relative; }
-.mode-card:last-child,.mode-card:nth-child(3) { border-right:none; }
-.mode-card:nth-child(4),.mode-card:nth-child(5),.mode-card:nth-child(6) { border-bottom:none; }
-.mode-card:hover { background:#fafafa; }
-.mode-card.selected::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:#e01a00; }
-.mode-card.selected .mode-num { color:#e01a00; }
-.mode-card.selected .mode-name { color:#111; }
-.mode-num { font-size:10px; font-weight:300; color:#ccc; letter-spacing:0.15em; margin-bottom:8px; }
-.mode-name { font-size:12px; font-weight:700; color:#999; letter-spacing:0.08em; margin-bottom:6px; }
-.mode-desc { font-size:8.5px; font-weight:300; color:#ccc; letter-spacing:0.04em; line-height:1.6; }
-.mode-card.selected .mode-name { color:#111; }
-.mode-card.selected .mode-desc { color:#999; }
-
-/* mode pill */
-#modePill { display:none; position:fixed; bottom:16px; right:16px; z-index:60; }
-#modePillCollapsed { display:flex; align-items:center; gap:6px; background:#fff; border:1.5px solid #ddd; padding:10px 16px; cursor:pointer; font-size:10px; font-weight:700; color:#111; letter-spacing:0.14em; transition:color 0.15s,border-color 0.15s; white-space:nowrap; user-select:none; }
-#modePillCollapsed:hover { border-color:#e01a00; color:#e01a00; }
-#modePillCollapsed .pill-dot { color:#e01a00; font-size:8px; }
-#modePillExpanded { display:none; flex-direction:column; background:#fff; border:1.5px solid #ddd; min-width:178px; }
-.pill-mode-row { padding:10px 16px; font-size:10px; font-weight:500; color:#999; letter-spacing:0.1em; cursor:pointer; border-left:3px solid transparent; transition:color 0.12s,background 0.12s; user-select:none; }
-.pill-mode-row:hover { color:#111; background:#fafafa; }
-.pill-mode-row.active { border-left-color:#e01a00; font-weight:700; color:#e01a00; background:#fff8f8; }
-
-/* RECORD */
-#recordBtn { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); background:#e01a00; color:#fff; border:none; font-family:'Heebo',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.3em; padding:10px 28px; cursor:pointer; z-index:60; transition:background 0.15s; display:none; }
-#recordBtn:hover { background:#c01500; }
-#recordBtn.done { background:#111; }
-
-/* DATA btn */
 #dataBtn { position:fixed; bottom:16px; left:16px; font-size:10px; font-weight:700; letter-spacing:0.18em; color:#111; cursor:pointer; z-index:60; transition:color 0.15s,border-color 0.15s; user-select:none; background:#fff; border:1.5px solid #ddd; padding:8px 14px; display:none; }
 #dataBtn:hover { color:#e01a00; border-color:#e01a00; }
 
-/* DATA screen */
 #dataScreen { display:none; position:fixed; inset:0; z-index:1500; background:#fff; flex-direction:column; overflow:hidden; }
 #dataHeader { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid #eee; flex-shrink:0; }
 #dataHeader .data-title { font-size:9px; font-weight:300; letter-spacing:0.55em; color:#bbb; }
@@ -95,12 +58,13 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 #dataImgArea { position:relative; flex:1; overflow:hidden; background:#111; }
 #dataImg { width:100%; height:100%; object-fit:contain; display:block; }
 #dataCanvas { position:absolute; inset:0; pointer-events:none; }
-#dataLayerBar { display:flex; border-top:1px solid #eee; flex-shrink:0; }
+#dataLayerBar { display:flex; border-top:1px solid #eee; flex-shrink:0; align-items:stretch; }
 .layer-btn { flex:1; padding:8px 2px; font-family:'Heebo',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.08em; color:#aaa; background:#fff; border:none; border-right:1px solid #eee; cursor:pointer; transition:color 0.15s,background 0.15s; }
-.layer-btn:last-child { border-right:none; }
 .layer-btn:hover { color:#111; background:#fafafa; }
 .layer-btn.active { color:#e01a00; background:#fff8f8; }
-#dataStats { width:210px; flex-shrink:0; overflow-y:auto; padding:18px 14px; }
+#playBtn { padding:8px 14px; font-family:'Heebo',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; color:#fff; background:#e01a00; border:none; cursor:pointer; flex-shrink:0; transition:background 0.15s; }
+#playBtn:hover { background:#c01500; }
+#dataStats { width:220px; flex-shrink:0; overflow-y:auto; padding:18px 14px; }
 .stat-group { margin-bottom:18px; }
 .stat-label { font-size:8px; font-weight:300; letter-spacing:0.35em; color:#bbb; margin-bottom:10px; }
 .stat-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid #f5f5f5; }
@@ -108,7 +72,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 .stat-val { font-size:13px; font-weight:700; color:#111; }
 .stat-unit { font-size:9px; font-weight:300; color:#bbb; margin-left:2px; }
 
-/* name screen */
 #nameScreen { display:none; position:fixed; inset:0; z-index:2000; background:#fff; flex-direction:column; align-items:center; justify-content:center; }
 .ns-title { font-size:9px; font-weight:300; letter-spacing:0.55em; color:#bbb; margin-bottom:72px; }
 #nameScreen label { display:block; font-size:10px; font-weight:700; letter-spacing:0.3em; color:#111; margin-bottom:18px; }
@@ -133,11 +96,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
   <button id="calStartBtn" class="va-btn va-btn-primary">BEGIN CALIBRATION</button>
 </div>
 
-<canvas id="anaC" style="display:none" width="160" height="90"></canvas>
-<canvas id="preC" style="display:none" width="160" height="90"></canvas>
-<canvas id="aoiC" style="display:none" width="320" height="180"></canvas>
-<canvas id="aoiP" style="display:none" width="320" height="180"></canvas>
-
 <!-- image library -->
 <div id="libraryScreen" class="screen">
   <div class="screen-title">SELECT IMAGE</div>
@@ -146,27 +104,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
   <button id="libBeginBtn" class="va-btn va-btn-primary" disabled style="opacity:0.4">BEGIN SESSION</button>
 </div>
 
-<!-- mode selection -->
-<div id="modeScreen" class="screen">
-  <div class="screen-title">SELECT ANALYSIS MODE</div>
-  <div class="mode-grid">
-    <div class="mode-card selected" data-mode="GAZE"><div class="mode-num">01</div><div class="mode-name">GAZE POINT</div><div class="mode-desc">Behavioral dot classification overlay</div></div>
-    <div class="mode-card" data-mode="FIXATION"><div class="mode-num">02</div><div class="mode-name">FIXATION</div><div class="mode-desc">I-DT fixation cluster detection</div></div>
-    <div class="mode-card" data-mode="SACCADE"><div class="mode-num">03</div><div class="mode-name">SACCADE</div><div class="mode-desc">I-VT velocity-based saccade detection</div></div>
-    <div class="mode-card" data-mode="SCANPATH"><div class="mode-num">04</div><div class="mode-name">SCAN PATH</div><div class="mode-desc">Numbered fixation sequence trail</div></div>
-    <div class="mode-card" data-mode="HEATMAP"><div class="mode-num">05</div><div class="mode-name">HEATMAP</div><div class="mode-desc">Topographic attention contour map</div></div>
-    <div class="mode-card" data-mode="FIRSTFIX"><div class="mode-num">06</div><div class="mode-name">FIRST FIXATION</div><div class="mode-desc">First stable fixation with time offset</div></div>
-  </div>
-  <button id="modeBeginBtn" class="va-btn va-btn-primary">BEGIN</button>
-</div>
-
-<!-- mode pill -->
-<div id="modePill">
-  <div id="modePillCollapsed"><span class="pill-dot">●</span> <span id="modePillName">GAZE POINT</span> ▾</div>
-  <div id="modePillExpanded"><div id="pillModeRows"></div></div>
-</div>
-
-<button id="recordBtn">● RECORD</button>
 <div id="dataBtn">DATA</div>
 
 <!-- data screen -->
@@ -189,6 +126,7 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
         <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
         <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
         <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
+        <button id="playBtn">▶ PLAY</button>
       </div>
     </div>
     <div id="dataStats">
@@ -204,10 +142,19 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
         <div class="stat-row"><span class="stat-name">Avg amplitude</span><span><span class="stat-val" id="st-sac-amp">—</span><span class="stat-unit">%</span></span></div>
       </div>
       <div class="stat-group">
+        <div class="stat-label">SCAN PATH</div>
+        <div class="stat-row"><span class="stat-name">Fixation steps</span><span><span class="stat-val" id="st-scan-steps">—</span></span></div>
+      </div>
+      <div class="stat-group">
         <div class="stat-label">FIRST FIXATION</div>
         <div class="stat-row"><span class="stat-name">Time to first fix</span><span><span class="stat-val" id="st-ttff">—</span><span class="stat-unit">s</span></span></div>
         <div class="stat-row"><span class="stat-name">Position X</span><span><span class="stat-val" id="st-ff-x">—</span></span></div>
         <div class="stat-row"><span class="stat-name">Position Y</span><span><span class="stat-val" id="st-ff-y">—</span></span></div>
+      </div>
+      <div class="stat-group">
+        <div class="stat-label">SESSION</div>
+        <div class="stat-row"><span class="stat-name">Gaze samples</span><span><span class="stat-val" id="st-gaze-n">—</span></span></div>
+        <div class="stat-row"><span class="stat-name">Duration</span><span><span class="stat-val" id="st-duration">—</span><span class="stat-unit">s</span></span></div>
       </div>
     </div>
   </div>
@@ -225,255 +172,839 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 'use strict';
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 
-/* ── constants ── */
-const N_ANN=250,DOT_STEP=2,DOT_THRESH=10,ANA_INTERVAL=600,REVEAL_FRAC=0.030,DOT_FADE_MS=5000;
-const W_AOI=320,H_AOI=180,AOI_INTERVAL=900,MAX_AOI=16,AOI_FADE_MS=5000,CLUSTER_DIST=0.07,AOI_MIN_W=0.04,AOI_MIN_H=0.03,AOI_MAX_SIZE=0.40;
-const FIX_DISPERSION=0.04,FIX_MIN_DURATION=150,SAC_VELOCITY=0.8,SAC_MIN_AMP=0.03;
-const W_HEAT=200,H_HEAT=112,HEAT_SIGMA=0.07,HEAT_WEIGHT=0.18,HEAT_DECAY=0.9975;
-const GAZE_LERP=0.08;
-const CAL_PTS=[[0.1,0.1],[0.5,0.1],[0.9,0.1],[0.9,0.5],[0.5,0.5],[0.1,0.5],[0.1,0.9],[0.5,0.9],[0.9,0.9]];
-const CAL_VAR_THRESH=0.0012,CAL_FILL_RATE=0.6,CAL_DRAIN_RATE=0.8;
-const LAYERS=['GAZE','FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
-const MODE_LABELS={GAZE:'GAZE POINT',FIXATION:'FIXATION',SACCADE:'SACCADE',SCANPATH:'SCAN PATH',HEATMAP:'HEATMAP',FIRSTFIX:'FIRST FIXATION'};
+/* ══════════════════════════════════════════════════════════════════════
+   CONSTANTS
+   ══════════════════════════════════════════════════════════════════════ */
+const FIX_DISPERSION   = 0.04;
+const FIX_MIN_DURATION = 150;
+const SAC_VELOCITY     = 0.8;
+const SAC_MIN_AMP      = 0.03;
+const W_HEAT = 200, H_HEAT = 112;
+const HEAT_SIGMA  = 0.07;
+const HEAT_WEIGHT = 0.18;
+const HEAT_DECAY  = 0.9975;
+const GAZE_LERP   = 0.08;
+const CAL_PTS = [
+  [0.1,0.1],[0.5,0.1],[0.9,0.1],
+  [0.9,0.5],[0.5,0.5],[0.1,0.5],
+  [0.1,0.9],[0.5,0.9],[0.9,0.9]
+];
+const CAL_VAR_THRESH = 0.0012;
+const CAL_FILL_RATE  = 0.6;
+const CAL_DRAIN_RATE = 0.8;
+const BUF_MAX = 30;
 
-/* ── DOM ── */
-const mainImg=document.getElementById('mainImg');
-const imgWrapper=document.getElementById('imgWrapper');
-const dotCanvas=document.getElementById('dotCanvas');
-const dotCtx=dotCanvas.getContext('2d');
-const annLayer=document.getElementById('annLayer');
-const gazeDot=document.getElementById('gazeDot');
-const webcamEl=document.getElementById('webcamEl');
-const infoEl=document.getElementById('info');
-const calOverlay=document.getElementById('calOverlay');
-const calCanvas=document.getElementById('calCanvas');
-const calCtx=calCanvas.getContext('2d');
-const calStartBtn=document.getElementById('calStartBtn');
-const anaCtx=document.getElementById('anaC').getContext('2d',{willReadFrequently:true});
-const preCtx=document.getElementById('preC').getContext('2d',{willReadFrequently:true});
-const aoiCtx=document.getElementById('aoiC').getContext('2d',{willReadFrequently:true});
-const aoiPCtx=document.getElementById('aoiP').getContext('2d',{willReadFrequently:true});
+/* ══════════════════════════════════════════════════════════════════════
+   DOM
+   ══════════════════════════════════════════════════════════════════════ */
+const mainImg    = document.getElementById('mainImg');
+const imgWrapper = document.getElementById('imgWrapper');
+const dotCanvas  = document.getElementById('dotCanvas');
+const dotCtx     = dotCanvas.getContext('2d');
+const annLayer   = document.getElementById('annLayer');
+const gazeDot    = document.getElementById('gazeDot');
+const webcamEl   = document.getElementById('webcamEl');
+const infoEl     = document.getElementById('info');
+const calOverlay = document.getElementById('calOverlay');
+const calCanvas  = document.getElementById('calCanvas');
+const calCtx     = calCanvas.getContext('2d');
+const calStartBtn = document.getElementById('calStartBtn');
 
-/* ── state ── */
-let activeMode='GAZE',currentUser='';
-let imageLibrary=[],currentImageIdx=0,snapshots=[];
-let dotPool=[],aoiPool=[],prevPx=null,lastAnaTs=-9999,lastAoiTs=-9999;
-let fixationHistory=[],currentFixation=null,scanPathHistory=[],saccadeHistory=[],saccadeActive=false,saccadeStart=null;
-let heatmap=new Float32Array(W_HEAT*H_HEAT),heatCanvas,heatCtx2;
-let firstFix=null,firstFixDone=false,firstFixModeTs=0,sessionStartTs=0;
-let rawGX=0.5,rawGY=0.5,sGX=0.5,sGY=0.5,gazeOn=false,lastGazeTs=0;
-let curOffX=0.5,curOffY=0.5,curEyeOffX=0.5,curEyeOffY=0.5,eyeValid=false;
-const offXBuf=[],offYBuf=[],eyeOffXBuf=[],eyeOffYBuf=[],BUF_MAX=30;
-let eyeCalMap=null;
-window._gazeHistory=[];window._dotPts=null;
+/* ══════════════════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════════════════ */
+let currentUser = '';
+let imageLibrary = [], currentImageIdx = 0;
 
-/* ── persistent layer canvases ── */
-const persistCanvas={},persistCtx={};
-function initPersist(){
-  for(const L of LAYERS){
-    const c=document.createElement('canvas');
-    c.style.cssText='position:absolute;inset:0;pointer-events:none;display:none;';
-    c.style.zIndex='4';
-    imgWrapper.appendChild(c);
-    persistCanvas[L]=c; persistCtx[L]=c.getContext('2d');
+// Analysis
+let fixationHistory  = [], currentFixation = null;
+let scanPathHistory  = [];
+let saccadeHistory   = [], saccadeActive = false, saccadeStart = null;
+let heatmap          = new Float32Array(W_HEAT * H_HEAT);
+let heatCanvas, heatCtx2;
+let firstFix         = null, firstFixDone = false, firstFixModeTs = 0;
+let sessionStartTs   = 0;
+let gazeLog          = [];
+
+// Gaze runtime
+let rawGX = 0.5, rawGY = 0.5;
+let sGX   = 0.5, sGY   = 0.5;
+let gazeOn = false, lastGazeTs = 0;
+
+// Tracking buffers
+let curOffX = 0.5, curOffY = 0.5;
+let curEyeOffX = 0.5, curEyeOffY = 0.5, eyeValid = false;
+const offXBuf = [], offYBuf = [];
+const eyeOffXBuf = [], eyeOffYBuf = [];
+let eyeCalMap = null;
+
+window._gazeHistory = [];
+
+// Data screen animation
+let currentAnimation = null;
+let dataActiveLayer  = 'GAZE';
+
+/* ══════════════════════════════════════════════════════════════════════
+   EYE STABILITY  (used by calibration)
+   ══════════════════════════════════════════════════════════════════════ */
+function eyeStab() {
+  const N = Math.min(eyeOffXBuf.length, 20);
+  if (N < 8) return 0;
+  const xs = eyeOffXBuf.slice(-N), ys = eyeOffYBuf.slice(-N);
+  const mx = xs.reduce((a,b)=>a+b,0)/N, my = ys.reduce((a,b)=>a+b,0)/N;
+  const vx = xs.reduce((a,b)=>a+(b-mx)**2,0)/N;
+  const vy = ys.reduce((a,b)=>a+(b-my)**2,0)/N;
+  return Math.max(0, Math.min(1, 1-(vx+vy)/CAL_VAR_THRESH));
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ANALYSIS — FIXATION I-DT
+   ══════════════════════════════════════════════════════════════════════ */
+function updateFixations(ts) {
+  const gh = window._gazeHistory;
+  if (gh.length < 2) return;
+  const win = gh.filter(p => p.ts > ts - 600);
+  if (win.length < 2) return;
+  const xs = win.map(p => p.x), ys = win.map(p => p.y);
+  const disp = (Math.max(...xs)-Math.min(...xs)) + (Math.max(...ys)-Math.min(...ys));
+  if (disp < FIX_DISPERSION) {
+    const cx = xs.reduce((a,b)=>a+b,0)/xs.length;
+    const cy = ys.reduce((a,b)=>a+b,0)/ys.length;
+    if (!currentFixation) {
+      currentFixation = { startTs:ts, cx, cy };
+    } else {
+      currentFixation.cx = cx; currentFixation.cy = cy;
+      currentFixation.duration = ts - currentFixation.startTs;
+    }
+  } else {
+    if (currentFixation) {
+      const dur = ts - currentFixation.startTs;
+      if (dur >= FIX_MIN_DURATION) {
+        const fe = { x:currentFixation.cx, y:currentFixation.cy, startTs:currentFixation.startTs, endTs:ts, duration:dur };
+        fixationHistory.push(fe);
+        if (fixationHistory.length > 100) fixationHistory.shift();
+        scanPathHistory.push(fe);
+        if (scanPathHistory.length > 50) scanPathHistory.shift();
+      }
+      currentFixation = null;
+    }
   }
 }
-function sizePersist(){
-  const W=window.innerWidth,H=window.innerHeight;
-  dotCanvas.width=W; dotCanvas.height=H;
-  for(const L of LAYERS){persistCanvas[L].width=W;persistCanvas[L].height=H;}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ANALYSIS — SACCADE I-VT
+   ══════════════════════════════════════════════════════════════════════ */
+function updateSaccades(ts) {
+  const gh = window._gazeHistory;
+  if (gh.length < 2) return;
+  const last = gh[gh.length-1], prev = gh[gh.length-2];
+  const dt = (last.ts - prev.ts) / 1000;
+  if (dt <= 0) return;
+  const vel = Math.hypot(last.x-prev.x, last.y-prev.y) / dt;
+  if (vel >= SAC_VELOCITY) {
+    if (!saccadeActive) { saccadeActive = true; saccadeStart = {x:prev.x, y:prev.y, ts:prev.ts}; }
+  } else {
+    if (saccadeActive && saccadeStart) {
+      const amp = Math.hypot(last.x-saccadeStart.x, last.y-saccadeStart.y);
+      if (amp >= SAC_MIN_AMP) {
+        saccadeHistory.push({ fromX:saccadeStart.x, fromY:saccadeStart.y, toX:last.x, toY:last.y, startTs:saccadeStart.ts, endTs:ts, duration:ts-saccadeStart.ts });
+        if (saccadeHistory.length > 100) saccadeHistory.shift();
+      }
+      saccadeActive = false; saccadeStart = null;
+    }
+  }
 }
 
-/* ── stability + classifier ── */
-function stab(){const N=Math.min(offXBuf.length,20);if(N<8)return 0;const xs=offXBuf.slice(-N),ys=offYBuf.slice(-N),mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N,vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));}
-function eyeStab(){const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N),mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N,vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));}
-function searchPat(){const h=window._gazeHistory;if(h.length<6)return false;const r=h.slice(-6),dxs=[],dys=[];for(let i=1;i<r.length;i++){dxs.push(r[i].x-r[i-1].x);dys.push(r[i].y-r[i-1].y);}const ax=dxs.reduce((a,b)=>a+b,0)/dxs.length,ay=dys.reduce((a,b)=>a+b,0)/dys.length;return(Math.abs(ax)>0.02||Math.abs(ay)>0.02)&&(dxs.every(d=>Math.sign(d)===Math.sign(ax))||dys.every(d=>Math.sign(d)===Math.sign(ay)));}
-function classify(a,ts,ss,mm){const s=stab();if(a.dwellTime>900&&s>0.75)return'ATTENTION LOCKED';if(a.revisitCount>=2&&a.totalDwellTime>900)return'REPEATED GLANCE';if(a.revisitCount>=2&&a.totalDwellTime<900&&s<0.5)return'FOCUS UNSTABLE';if(a.dwellTime>500&&s<0.4&&mm>0.015)return'VISUAL DRIFT';if(ss>8&&a.dwellTime<150&&s<0.3)return'SCAN WITHOUT PROCESSING';if(a.dwellTime>200&&a.dwellTime<700&&s<0.6)return'LOW ENGAGEMENT';if(searchPat()&&ss>=2)return'SEARCH PATTERN';return'UNCLASSIFIED';}
-
-/* ── sobel dots ── */
-function buildDotPool(){annLayer.innerHTML='';dotPool=[];for(let i=0;i<N_ANN;i++){const el=document.createElement('span');el.className='ann';annLayer.appendChild(el);dotPool.push({el,x:0.5,y:0.5,jX:((i*137.508)%1-0.5)*0.06,jY:((i*97.314)%1-0.5)*0.03,labelX:0.5,labelY:0.5,active:false,visible:false,shownAt:0,state:'UNCLASSIFIED',dwellTime:0,totalDwellTime:0,revisitCount:0,lastVisitTs:0,timeBetweenVisits:0,isNear:false,visitDwells:[],_visitStart:0,_lastClassifyTs:0,classificationBuffer:[],classificationStableTime:0,stableFor:0});}}
-function sobel(px,w,h){const g=new Float32Array(w*h),mg=new Float32Array(w*h);for(let i=0;i<w*h;i++){const o=i*4;g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2];}for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x,tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];mg[i]=Math.hypot((tr+2*mr+br)-(tl+2*ml+bl),(bl+2*bc+br)-(tl+2*tc+tr));}return mg;}
-function analyzeDots(){if(!mainImg.naturalWidth)return;anaCtx.drawImage(mainImg,0,0,160,90);const id=anaCtx.getImageData(0,0,160,90),mg=sobel(id.data,160,90);const all=[];for(let y=1;y<89;y+=DOT_STEP)for(let x=1;x<159;x+=DOT_STEP){const i=y*160+x;if(mg[i]>=DOT_THRESH)all.push({i,mag:mg[i]});}all.sort((a,b)=>b.mag-a.mag);if(all.length>N_ANN)all.length=N_ANN;const pts=[];for(const{i}of all)pts.push({nx:Math.max(0.01,Math.min(0.99,(i%160)/160)),ny:Math.max(0.01,Math.min(0.99,Math.floor(i/160)/90))});window._dotPts=pts;const n=Math.min(pts.length,N_ANN);for(let i=0;i<N_ANN;i++){const a=dotPool[i];if(i<n){const p=pts[i];a.active=true;if(!a.visible){const mv=Math.hypot(a.x-p.nx,a.y-p.ny)>0.05;if(mv){a.dwellTime=0;a.totalDwellTime=0;a.revisitCount=0;a.lastVisitTs=0;a.timeBetweenVisits=0;a.isNear=false;a.visitDwells=[];a._visitStart=0;a._lastClassifyTs=0;a.classificationBuffer=[];a.classificationStableTime=0;a.stableFor=0;a.shownAt=0;}a.x=p.nx;a.y=p.ny;a.labelX=Math.max(0.01,Math.min(0.99,p.nx+a.jX));a.labelY=Math.max(0.01,Math.min(0.99,p.ny+a.jY));}}else{a.active=false;if(!a.visible){a.el.textContent='';a.el.style.opacity='0';}}}preCtx.drawImage(mainImg,0,0,160,90);prevPx=preCtx.getImageData(0,0,160,90).data.slice();}
-function revealDot(a,label,ts){a.state=label;a.visible=true;a.shownAt=ts;a.el.textContent=label;a.el.style.left=(a.labelX*100).toFixed(2)+'%';a.el.style.top=(a.labelY*100).toFixed(2)+'%';a.el.style.transform=a.labelX>0.62?'translate(calc(-100% - 12px),-50%)':'translate(12px,-50%)';a.el.style.opacity='1';const W=persistCanvas.GAZE.width,H=persistCanvas.GAZE.height;persistCtx.GAZE.fillStyle='rgba(224,26,0,0.5)';persistCtx.GAZE.fillRect(a.x*W-1,a.y*H-1,2,2);}
-function hideDot(a){a.visible=false;a.shownAt=0;a.el.style.transition='opacity 0.8s ease';a.el.style.opacity='0';}
-function applyDotGaze(ts,gpx,gpy,W,H,ss,mm){const revR=Math.min(W,H)*REVEAL_FRAC;for(const a of dotPool){if(!a.active)continue;if(a.visible&&a.shownAt>0&&ts-a.shownAt>DOT_FADE_MS){hideDot(a);continue;}const d=Math.hypot(a.x*W-gpx,a.y*H-gpy),near=d<revR;if(near&&!a.isNear){a.isNear=true;a.revisitCount++;if(a.lastVisitTs>0)a.timeBetweenVisits=ts-a.lastVisitTs;a._visitStart=ts;}if(near&&a.isNear){a.dwellTime=ts-a._visitStart;if(ts-a._lastClassifyTs>200){a._lastClassifyTs=ts;const live=classify(a,ts,ss,mm);if(live!=='UNCLASSIFIED'){a.classificationBuffer.push(live);if(a.classificationBuffer.length>5)a.classificationBuffer.shift();const c=a.classificationBuffer.every(v=>v===live);c?(a.classificationStableTime+=200):(a.classificationStableTime=0);if(!a.visible&&a.classificationStableTime>250)revealDot(a,live,ts);else if(a.visible&&live!==a.state&&a.classificationStableTime>250){a.state=live;a.el.textContent=live;}}}}if(!near&&a.isNear){a.isNear=false;a.visitDwells.push(a.dwellTime);a.totalDwellTime+=a.dwellTime;a.lastVisitTs=ts;a.dwellTime=0;if(!a.visible){const e=classify(a,ts,ss,mm);if(e!=='UNCLASSIFIED')revealDot(a,e,ts);}}}}
-
-/* ── AOI ── */
-function sobelMag(px,w,h){const g=new Float32Array(w*h),mg=new Float32Array(w*h);for(let i=0;i<w*h;i++){const o=i*4;g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2];}for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x,tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];mg[i]=Math.hypot((tr+2*mr+br)-(tl+2*ml+bl),(bl+2*bc+br)-(tl+2*tc+tr));}return mg;}
-function detectAOI(px,w,h){const mg=sobelMag(px,w,h),pts=[];for(let y=2;y<h-2;y+=3)for(let x=2;x<w-2;x+=3)if(mg[y*w+x]>=20)pts.push({nx:x/w,ny:y/h,mag:mg[y*w+x]});if(!pts.length)return[];pts.sort((a,b)=>b.mag-a.mag);const used=new Uint8Array(pts.length),regions=[];for(let i=0;i<pts.length&&regions.length<MAX_AOI*4;i++){if(used[i])continue;const s=pts[i];let x0=s.nx,x1=s.nx,y0=s.ny,y1=s.ny,cnt=1;used[i]=1;for(let j=i+1;j<pts.length;j++){if(used[j])continue;if(Math.hypot(pts[j].nx-s.nx,pts[j].ny-s.ny)<CLUSTER_DIST){x0=Math.min(x0,pts[j].nx);x1=Math.max(x1,pts[j].nx);y0=Math.min(y0,pts[j].ny);y1=Math.max(y1,pts[j].ny);cnt++;used[j]=1;}}if(cnt<4)continue;const p=0.022,rx=Math.max(0,x0-p),ry=Math.max(0,y0-p),rw=Math.min(1,x1+p)-rx,rh=Math.min(1,y1+p)-ry;if(rw<AOI_MIN_W||rh<AOI_MIN_H||rw>AOI_MAX_SIZE||rh>AOI_MAX_SIZE)continue;regions.push({x:rx,y:ry,w:rw,h:rh,cx:rx+rw/2,cy:ry+rh/2});}const kept=[];for(const r of regions){let dup=false;for(const k of kept)if(Math.hypot(r.cx-k.cx,r.cy-k.cy)<CLUSTER_DIST*1.4){dup=true;break;}if(!dup)kept.push(r);if(kept.length>=MAX_AOI)break;}return kept;}
-function analyzeAOI(){if(!mainImg.naturalWidth)return;aoiCtx.drawImage(mainImg,0,0,W_AOI,H_AOI);const id=aoiCtx.getImageData(0,0,W_AOI,H_AOI),regions=detectAOI(id.data,W_AOI,H_AOI),newPool=[];for(const r of regions){let matched=null,bestD=999;for(const a of aoiPool){const d=Math.hypot(r.cx-(a.x+a.w/2),r.cy-(a.y+a.h/2));if(d<bestD&&d<CLUSTER_DIST*1.3){bestD=d;matched=a;}}if(matched){matched.x=r.x;matched.y=r.y;matched.w=r.w;matched.h=r.h;matched.cx=r.cx;matched.cy=r.cy;matched.active=true;newPool.push(matched);}else{const el=document.createElement('span');el.className='ann';annLayer.appendChild(el);newPool.push({el,x:r.x,y:r.y,w:r.w,h:r.h,cx:r.cx,cy:r.cy,active:true,visible:false,state:'UNCLASSIFIED',shownAt:0,dwellTime:0,totalDwellTime:0,revisitCount:0,lastVisitTs:0,timeBetweenVisits:0,isInside:false,visitDwells:[],_visitStart:0,_lastClassifyTs:0,classificationBuffer:[],classificationStableTime:0,stableFor:0});}}for(const a of aoiPool)if(!newPool.includes(a))a.el.remove();aoiPool=newPool;aoiPCtx.drawImage(mainImg,0,0,W_AOI,H_AOI);}
-function revealAOI(a,label,ts){a.state=label;a.visible=true;a.shownAt=ts;a.el.textContent=label;const eX=a.x+a.w,W=dotCanvas.width,H=dotCanvas.height;let mY=(a.y+a.h*0.5)*H;const mX=eX*W;for(const b of aoiPool){if(b===a||!b.visible)continue;const bX=(b.x+b.w)*W,bY=(b.y+b.h*0.5)*H;if(Math.abs(mX-bX)<80&&Math.abs(mY-bY)<18)mY+=18;}a.el.style.left=(eX*100).toFixed(2)+'%';a.el.style.top=((mY/H)*100).toFixed(2)+'%';a.el.style.transform=eX>0.62?'translate(calc(-100% - 8px),-50%)':'translate(8px,-50%)';a.el.style.opacity='0';a.el.style.filter='blur(4px)';requestAnimationFrame(()=>{a.el.style.transition='opacity 0.5s ease,filter 0.5s ease';a.el.style.opacity='1';a.el.style.filter='blur(0)';});}
-function hideAOI(a){a.visible=false;a.shownAt=0;a.el.style.opacity='0';}
-function applyAOIGaze(ts,ss,mm,dt){for(const a of aoiPool){if(!a.active)continue;if(a.visible&&a.shownAt>0&&ts-a.shownAt>AOI_FADE_MS){hideAOI(a);continue;}const inside=sGX>a.x&&sGX<a.x+a.w&&sGY>a.y&&sGY<a.y+a.h;if(inside&&!a.isInside){a.isInside=true;a.revisitCount++;if(a.lastVisitTs>0)a.timeBetweenVisits=ts-a.lastVisitTs;a._visitStart=ts;}if(inside&&a.isInside){a.dwellTime=ts-a._visitStart;const s=stab();a.stableFor=s>0.6?(a.stableFor+dt*1000):0;if(ts-a._lastClassifyTs>200){a._lastClassifyTs=ts;const live=classify(a,ts,ss,mm);if(live!=='UNCLASSIFIED'){a.classificationBuffer.push(live);if(a.classificationBuffer.length>5)a.classificationBuffer.shift();const c=a.classificationBuffer.every(v=>v===live);c?(a.classificationStableTime+=dt*1000):(a.classificationStableTime=0);if(!a.visible&&a.classificationStableTime>250)revealAOI(a,live,ts);if(a.visible&&live!==a.state&&a.classificationStableTime>250){a.state=live;a.el.textContent=live;}}}}if(!inside&&a.isInside){a.isInside=false;a.visitDwells.push(a.dwellTime);a.totalDwellTime+=a.dwellTime;a.lastVisitTs=ts;a.dwellTime=0;a.stableFor=0;if(!a.visible){const e=classify(a,ts,ss,mm);if(e!=='UNCLASSIFIED')revealAOI(a,e,ts);}}}}
-
-/* ── analysis ── */
-function updateFixations(ts){const gh=window._gazeHistory;if(gh.length<2)return;const win=gh.filter(p=>p.ts>ts-600);if(win.length<2)return;const xs=win.map(p=>p.x),ys=win.map(p=>p.y),disp=(Math.max(...xs)-Math.min(...xs))+(Math.max(...ys)-Math.min(...ys));if(disp<FIX_DISPERSION){const cx=xs.reduce((a,b)=>a+b,0)/xs.length,cy=ys.reduce((a,b)=>a+b,0)/ys.length;if(!currentFixation)currentFixation={startTs:ts,cx,cy};else{currentFixation.cx=cx;currentFixation.cy=cy;currentFixation.duration=ts-currentFixation.startTs;}}else{if(currentFixation){const dur=ts-currentFixation.startTs;if(dur>=FIX_MIN_DURATION){const fe={x:currentFixation.cx,y:currentFixation.cy,startTs:currentFixation.startTs,endTs:ts,duration:dur};fixationHistory.push(fe);if(fixationHistory.length>100)fixationHistory.shift();if(activeMode==='SCANPATH'){scanPathHistory.push(fe);if(scanPathHistory.length>14)scanPathHistory.shift();}drawFixPersist(fe);}currentFixation=null;}}}
-function drawFixPersist(fix){const W=persistCanvas.FIXATION.width,H=persistCanvas.FIXATION.height,pc=persistCtx.FIXATION,cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);pc.beginPath();pc.arc(cx,cy,r,0,Math.PI*2);pc.fillStyle='rgba(224,26,0,0.12)';pc.fill();pc.beginPath();pc.arc(cx,cy,r,0,Math.PI*2);pc.strokeStyle='rgba(224,26,0,0.85)';pc.lineWidth=2;pc.stroke();if(fix.duration>300){pc.fillStyle='rgba(224,26,0,0.9)';pc.font='bold 9px Heebo';pc.textAlign='center';pc.textBaseline='alphabetic';pc.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}}
-function updateSaccades(ts){const gh=window._gazeHistory;if(gh.length<2)return;const last=gh[gh.length-1],prev=gh[gh.length-2],dt=(last.ts-prev.ts)/1000;if(dt<=0)return;const vel=Math.hypot(last.x-prev.x,last.y-prev.y)/dt;if(vel>=SAC_VELOCITY){if(!saccadeActive){saccadeActive=true;saccadeStart={x:prev.x,y:prev.y,ts:prev.ts};}}else{if(saccadeActive&&saccadeStart){const amp=Math.hypot(last.x-saccadeStart.x,last.y-saccadeStart.y);if(amp>=SAC_MIN_AMP){const se={fromX:saccadeStart.x,fromY:saccadeStart.y,toX:last.x,toY:last.y,startTs:saccadeStart.ts,endTs:ts,duration:ts-saccadeStart.ts};saccadeHistory.push(se);if(saccadeHistory.length>100)saccadeHistory.shift();drawSacPersist(se);}saccadeActive=false;saccadeStart=null;}}}
-function drawSacPersist(sac){const W=persistCanvas.SACCADE.width,H=persistCanvas.SACCADE.height,pc=persistCtx.SACCADE,fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;pc.beginPath();pc.moveTo(fx,fy);pc.lineTo(tx,ty);pc.strokeStyle='rgba(224,26,0,0.8)';pc.lineWidth=1.5;pc.stroke();const a=Math.atan2(ty-fy,tx-fx),l=9;pc.beginPath();pc.moveTo(tx,ty);pc.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));pc.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));pc.closePath();pc.fillStyle='rgba(224,26,0,0.8)';pc.fill();}
-function updateHeatmap(){for(let i=0;i<heatmap.length;i++)heatmap[i]*=HEAT_DECAY;const gx=sGX*W_HEAT,gy=sGY*H_HEAT,sigma=HEAT_SIGMA*Math.max(W_HEAT,H_HEAT),r=Math.ceil(3*sigma),x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(W_HEAT-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(H_HEAT-1,Math.ceil(gy+r)),inv2s2=1/(2*sigma*sigma);for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const d2=(x-gx)**2+(y-gy)**2;heatmap[y*W_HEAT+x]+=HEAT_WEIGHT*Math.exp(-d2*inv2s2);}}
-function drawHeatmapPersist(){let mx=0;for(let i=0;i<heatmap.length;i++)if(heatmap[i]>mx)mx=heatmap[i];if(mx<0.01)return;heatCtx2.clearRect(0,0,W_HEAT,H_HEAT);const img=heatCtx2.createImageData(W_HEAT,H_HEAT),d=img.data;for(let i=0;i<W_HEAT*H_HEAT;i++){const val=heatmap[i]/mx;if(val<0.08)continue;const x=i%W_HEAT,y=Math.floor(i/W_HEAT);if(x<1||x>=W_HEAT-1||y<1||y>=H_HEAT-1)continue;const nb=[heatmap[i-1],heatmap[i+1],heatmap[i-W_HEAT],heatmap[i+W_HEAT]].map(v=>v/mx);let isCont=false;for(const band of[0.2,0.4,0.6,0.8]){if((val>=band&&nb.some(n=>n<band))||(val<band&&nb.some(n=>n>=band))){isCont=true;break;}}if(isCont){const intensity=Math.min(1,val*1.3);d[i*4]=224;d[i*4+1]=26;d[i*4+2]=0;d[i*4+3]=Math.round(intensity*210);}}heatCtx2.putImageData(img,0,0);const W=persistCanvas.HEATMAP.width,H=persistCanvas.HEATMAP.height,pc=persistCtx.HEATMAP;pc.clearRect(0,0,W,H);pc.drawImage(heatCanvas,0,0,W,H);}
-function updateFirstFix(){if(activeMode!=='FIRSTFIX'||firstFixDone)return;const r=fixationHistory.filter(f=>f.startTs>=firstFixModeTs);if(r.length>0){firstFix=r[0];firstFixDone=true;drawFirstFixPersist();}}
-function drawFirstFixPersist(){if(!firstFix)return;const W=persistCanvas.FIRSTFIX.width,H=persistCanvas.FIRSTFIX.height,pc=persistCtx.FIRSTFIX,cx=firstFix.x*W,cy=firstFix.y*H;pc.beginPath();pc.arc(cx,cy,20,0,Math.PI*2);pc.strokeStyle='rgba(224,26,0,0.3)';pc.lineWidth=1.5;pc.stroke();pc.beginPath();pc.arc(cx,cy,14,0,Math.PI*2);pc.fillStyle='rgba(224,26,0,1)';pc.fill();const off=(firstFix.startTs-firstFixModeTs)/1000;pc.textAlign='center';pc.textBaseline='alphabetic';pc.fillStyle='rgba(224,26,0,1)';pc.font='bold 11px Heebo';pc.fillText('FIRST FIXATION',cx,cy-46);pc.font='300 9px Heebo';pc.fillText('+'+off.toFixed(2)+'s',cx,cy-32);}
-function updateScanPath(){if(activeMode!=='SCANPATH')return;const W=persistCanvas.SCANPATH.width,H=persistCanvas.SCANPATH.height,pc=persistCtx.SCANPATH;pc.clearRect(0,0,W,H);const r=scanPathHistory.slice(-14);if(r.length<1)return;if(r.length>=2){pc.save();pc.setLineDash([4,6]);pc.strokeStyle='rgba(224,26,0,0.6)';pc.lineWidth=1.5;pc.beginPath();for(let i=0;i<r.length;i++){const{x,y}=r[i];i===0?pc.moveTo(x*W,y*H):pc.lineTo(x*W,y*H);}pc.stroke();pc.setLineDash([]);pc.restore();}for(let i=0;i<r.length;i++){const{x,y}=r[i],cx=x*W,cy=y*H;pc.beginPath();pc.arc(cx,cy,11,0,Math.PI*2);pc.strokeStyle='rgba(224,26,0,1)';pc.lineWidth=2;pc.stroke();pc.fillStyle='rgba(224,26,0,1)';pc.font='bold 9px Heebo';pc.textAlign='center';pc.textBaseline='middle';pc.fillText(i+1,cx,cy);pc.textBaseline='alphabetic';}}
-
-/* ── draw frame ── */
-function drawFrame(ts){
-  const W=dotCanvas.width,H=dotCanvas.height;if(!W||!H)return;
-  dotCtx.clearRect(0,0,W,H);
-  // live fixation pulse
-  if(activeMode==='FIXATION'&&currentFixation){const p=3+Math.sin(ts/160)*3,cx=currentFixation.cx*W,cy=currentFixation.cy*H;dotCtx.beginPath();dotCtx.arc(cx,cy,p,0,Math.PI*2);dotCtx.fillStyle='rgba(224,26,0,0.9)';dotCtx.fill();}
-  // live saccade dash
-  if(activeMode==='SACCADE'&&saccadeActive&&saccadeStart){dotCtx.save();dotCtx.setLineDash([4,4]);dotCtx.beginPath();dotCtx.moveTo(saccadeStart.x*W,saccadeStart.y*H);dotCtx.lineTo(sGX*W,sGY*H);dotCtx.strokeStyle='rgba(224,26,0,0.5)';dotCtx.lineWidth=1.2;dotCtx.stroke();dotCtx.setLineDash([]);dotCtx.restore();}
-  // GAZE sobel dots
-  if(activeMode==='GAZE'&&window._dotPts){dotCtx.fillStyle='rgba(224,26,0,0.82)';dotCtx.beginPath();for(const p of window._dotPts)dotCtx.rect(p.nx*W-1,p.ny*H-1,2,2);dotCtx.fill();}
-  // AOI brackets
-  if(activeMode==='GAZE'){for(const a of aoiPool){if(!a.active||!a.visible)continue;const sx=a.x*W,sy=a.y*H,sw=a.w*W,sh=a.h*H;dotCtx.strokeStyle='rgba(224,26,0,0.7)';dotCtx.lineWidth=1;dotCtx.strokeRect(sx,sy,sw,sh);const c=Math.min(sw,sh)*0.25;dotCtx.strokeStyle='rgba(224,26,0,0.9)';dotCtx.lineWidth=1.5;[[sx,sy,c,0,0,c],[sx+sw,sy,-c,0,0,c],[sx,sy+sh,c,0,0,-c],[sx+sw,sy+sh,-c,0,0,-c]].forEach(([x,y,dx1,dy1,dx2,dy2])=>{dotCtx.beginPath();dotCtx.moveTo(x+dx1,y+dy1);dotCtx.lineTo(x,y);dotCtx.lineTo(x+dx2,y+dy2);dotCtx.stroke();});}}
-  // first fix waiting
-  if(activeMode==='FIRSTFIX'&&!firstFix){dotCtx.fillStyle='rgba(150,150,150,0.7)';dotCtx.font='300 11px Heebo';dotCtx.textAlign='center';dotCtx.textBaseline='middle';dotCtx.fillText('WAITING FOR FIRST FIXATION',W/2,H/2);dotCtx.textBaseline='alphabetic';}
-  // heatmap + scanpath redraw each frame
-  if(activeMode==='HEATMAP')drawHeatmapPersist();
-  if(activeMode==='SCANPATH')updateScanPath();
-  annLayer.style.opacity=activeMode==='GAZE'?'1':'0';
-  gazeDot.style.display=activeMode==='GAZE'?'':'none';
-  for(const L of LAYERS)persistCanvas[L].style.display=L===activeMode?'block':'none';
+/* ══════════════════════════════════════════════════════════════════════
+   ANALYSIS — HEATMAP
+   ══════════════════════════════════════════════════════════════════════ */
+function updateHeatmap() {
+  for (let i = 0; i < heatmap.length; i++) heatmap[i] *= HEAT_DECAY;
+  const gx = sGX*W_HEAT, gy = sGY*H_HEAT;
+  const sigma = HEAT_SIGMA * Math.max(W_HEAT, H_HEAT);
+  const r = Math.ceil(3*sigma);
+  const x0 = Math.max(0, Math.floor(gx-r)), x1 = Math.min(W_HEAT-1, Math.ceil(gx+r));
+  const y0 = Math.max(0, Math.floor(gy-r)), y1 = Math.min(H_HEAT-1, Math.ceil(gy+r));
+  const inv2s2 = 1/(2*sigma*sigma);
+  for (let y = y0; y <= y1; y++)
+    for (let x = x0; x <= x1; x++)
+      heatmap[y*W_HEAT+x] += HEAT_WEIGHT * Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
 }
 
-/* ── gaze apply ── */
-function applyGaze(ts){
-  const dt=lastGazeTs?Math.min((ts-lastGazeTs)/1000,0.05):0;lastGazeTs=ts;
-  sGX+=(rawGX-sGX)*GAZE_LERP;sGY+=(rawGY-sGY)*GAZE_LERP;
-  const W=imgWrapper.offsetWidth,H=imgWrapper.offsetHeight;if(!W||!H)return;
-  const gpx=sGX*W,gpy=sGY*H,rect=imgWrapper.getBoundingClientRect();
-  gazeDot.style.left=(rect.left+gpx)+'px';gazeDot.style.top=(rect.top+gpy)+'px';
-  window._gazeHistory.push({x:sGX,y:sGY,ts});if(window._gazeHistory.length>90)window._gazeHistory.shift();
-  if(activeMode==='GAZE'){const ss=aoiPool.filter(a=>a.lastVisitTs>ts-2000).length,_gh=window._gazeHistory.slice(-8),_mx=_gh.reduce((s,p)=>s+p.x,0)/_gh.length,_my=_gh.reduce((s,p)=>s+p.y,0)/_gh.length,mm=_gh.reduce((s,p)=>s+Math.hypot(p.x-_mx,p.y-_my),0)/_gh.length;applyDotGaze(ts,gpx,gpy,W,H,ss,mm);applyAOIGaze(ts,ss,mm,dt);}
+/* ══════════════════════════════════════════════════════════════════════
+   ANALYSIS — FIRST FIXATION
+   ══════════════════════════════════════════════════════════════════════ */
+function updateFirstFix() {
+  if (firstFixDone) return;
+  const recent = fixationHistory.filter(f => f.startTs >= firstFixModeTs);
+  if (recent.length > 0) { firstFix = recent[0]; firstFixDone = true; }
 }
 
-/* ── main loop ── */
-function mainLoop(ts){
-  applyGaze(ts);updateFixations(ts);updateSaccades(ts);updateHeatmap();updateFirstFix();
-  if(activeMode==='GAZE'){if(ts-lastAnaTs>ANA_INTERVAL){analyzeDots();lastAnaTs=ts;}if(ts-lastAoiTs>AOI_INTERVAL){analyzeAOI();lastAoiTs=ts;}}
-  drawFrame(ts);requestAnimationFrame(mainLoop);
+/* ══════════════════════════════════════════════════════════════════════
+   MAIN DRAW FRAME  (live view: gaze dot only, no overlays)
+   ══════════════════════════════════════════════════════════════════════ */
+function drawFrame() {
+  dotCtx.clearRect(0, 0, dotCanvas.width, dotCanvas.height);
 }
 
-/* ── RECORD ── */
-function recordSnapshot(){
-  const layers={};for(const L of LAYERS)layers[L]=persistCanvas[L].toDataURL();
-  const fixC=fixationHistory.length,fixAvg=fixC?Math.round(fixationHistory.reduce((s,f)=>s+f.duration,0)/fixC):0,fixTotal=fixationHistory.reduce((s,f)=>s+f.duration,0);
-  const sacC=saccadeHistory.length,sacAmp=sacC?+(saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;
-  const ttff=firstFix?(firstFix.startTs-firstFixModeTs)/1000:null;
-  const snap={imageIdx:currentImageIdx,imageSrc:imageLibrary[currentImageIdx]?.src||'',imageName:imageLibrary[currentImageIdx]?.name||'image',layers,stats:{fixC,fixAvg,fixTotal,sacC,sacAmp,ttff,ffX:firstFix?(firstFix.x*100).toFixed(1):null,ffY:firstFix?(firstFix.y*100).toFixed(1):null}};
-  const ex=snapshots.findIndex(s=>s.imageIdx===currentImageIdx);
-  if(ex>=0)snapshots[ex]=snap;else snapshots.push(snap);
-  const btn=document.getElementById('recordBtn');
-  btn.textContent='✓ RECORDED';btn.classList.add('done');
-  setTimeout(()=>{btn.textContent='● RECORD';btn.classList.remove('done');},1800);
-  try{fetch('/api/save-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:currentUser,data:{...snap.stats,imageName:snap.imageName,timestamp:Date.now()}})});}catch(_){}
+/* ══════════════════════════════════════════════════════════════════════
+   GAZE APPLICATION
+   ══════════════════════════════════════════════════════════════════════ */
+function applyGaze(ts) {
+  lastGazeTs = ts;
+  sGX += (rawGX - sGX) * GAZE_LERP;
+  sGY += (rawGY - sGY) * GAZE_LERP;
+  const W = imgWrapper.offsetWidth, H = imgWrapper.offsetHeight;
+  if (!W || !H) return;
+  const rect = imgWrapper.getBoundingClientRect();
+  gazeDot.style.left = (rect.left + sGX*W) + 'px';
+  gazeDot.style.top  = (rect.top  + sGY*H) + 'px';
+  window._gazeHistory.push({x:sGX, y:sGY, ts});
+  if (window._gazeHistory.length > 90) window._gazeHistory.shift();
 }
 
-/* ── DATA screen ── */
-function openData(){
-  if(!snapshots.length)return;
-  document.getElementById('dataScreen').style.display='flex';
-  buildDataList();selectDataSnap(0);
-}
-function buildDataList(){
-  const list=document.getElementById('dataImgList');list.innerHTML='';
-  snapshots.forEach((s,i)=>{const d=document.createElement('div');d.className='d-thumb'+(i===0?' active':'');d.innerHTML=`<img src="${s.imageSrc}" alt=""/><div class="d-thumb-label">${s.imageName}</div>`;d.onclick=()=>{document.querySelectorAll('.d-thumb').forEach(x=>x.classList.remove('active'));d.classList.add('active');selectDataSnap(i);};list.appendChild(d);});
-}
-function selectDataSnap(idx){
-  const snap=snapshots[idx];if(!snap)return;
-  document.getElementById('dataImg').src=snap.imageSrc;
-  const al=document.querySelector('.layer-btn.active');renderDataLayer(snap,al?al.dataset.layer:'GAZE');renderStats(snap.stats);
-}
-function renderDataLayer(snap,layer){
-  document.querySelectorAll('.layer-btn').forEach(b=>b.classList.toggle('active',b.dataset.layer===layer));
-  const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');
-  dc.width=area.offsetWidth;dc.height=area.offsetHeight;
-  const ctx=dc.getContext('2d');ctx.clearRect(0,0,dc.width,dc.height);
-  if(snap.layers[layer]){const img=new Image();img.onload=()=>ctx.drawImage(img,0,0,dc.width,dc.height);img.src=snap.layers[layer];}
-}
-function renderStats(s){
-  document.getElementById('st-fix-count').textContent=s.fixC??'—';
-  document.getElementById('st-fix-avg').textContent=s.fixAvg??'—';
-  document.getElementById('st-fix-total').textContent=s.fixTotal??'—';
-  document.getElementById('st-sac-count').textContent=s.sacC??'—';
-  document.getElementById('st-sac-amp').textContent=s.sacAmp??'—';
-  document.getElementById('st-ttff').textContent=s.ttff!=null?s.ttff.toFixed(2):'—';
-  document.getElementById('st-ff-x').textContent=s.ffX!=null?s.ffX+'%':'—';
-  document.getElementById('st-ff-y').textContent=s.ffY!=null?s.ffY+'%':'—';
-}
-
-/* ── affine + calibration ── */
-function fitAffine(data){let A00=0,A01=0,A02=0,A11=0,A12=0,Bx0=0,Bx1=0,Bx2=0,By0=0,By1=0,By2=0;const n=data.length;for(const d of data){A00+=d.ox*d.ox;A01+=d.ox*d.oy;A02+=d.ox;A11+=d.oy*d.oy;A12+=d.oy;Bx0+=d.ox*d.sx;Bx1+=d.oy*d.sx;Bx2+=d.sx;By0+=d.ox*d.sy;By1+=d.oy*d.sy;By2+=d.sy;}const M=[[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];const inv=inv3(M);if(!inv)return null;const[ax,bx,cx]=mv3(inv,[Bx0,Bx1,Bx2]);const[ay,by,cy]=mv3(inv,[By0,By1,By2]);return{ax,bx,cx,ay,by,cy};}
-function inv3(m){const[[a,b,c],[d,e,f],[g,h,k]]=m;const det=a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);if(Math.abs(det)<1e-12)return null;const s=1/det;return[[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],[(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],[(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];}
-function mv3(m,v){return[m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];}
-function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
-function drawCalIntro(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();calCtx.fillStyle='#666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);calCtx.fillStyle='#aaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);}
-function drawCalDone(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 24px Heebo';calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);}
-function awaitDot(px,py,index){return new Promise(resolve=>{let progress=0,prevTs=null;const samples=[];function frame(ts){const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;const s=eyeStab();progress+=s*CAL_FILL_RATE*dt;progress-=(1-s)*CAL_DRAIN_RATE*dt;progress=Math.max(0,Math.min(1,progress));if(s>0.45&&eyeValid)samples.push({ox:curEyeOffX,oy:curEyeOffY});const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='right';calCtx.fillStyle='#aaa';calCtx.font='14px Heebo';calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`,W-28,36);calCtx.textAlign='center';calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('LOOK AT DOT · HEAD STILL · EYES ONLY',W/2,H-26);calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1.5;calCtx.stroke();if(progress>0){calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);calCtx.strokeStyle=`rgba(224,26,0,${0.35+s*0.65})`;calCtx.lineWidth=2;calCtx.stroke();}const r=3.5+s*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);calCtx.fillStyle=`rgba(224,26,0,${0.2+s*0.8})`;calCtx.fill();if(progress>=1){calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='rgba(224,26,0,0.9)';calCtx.lineWidth=2;calCtx.stroke();const n=samples.length||1;setTimeout(()=>resolve({ox:samples.reduce((a,v)=>a+v.ox,0)/n,oy:samples.reduce((a,v)=>a+v.oy,0)/n}),280);}else requestAnimationFrame(frame);}requestAnimationFrame(frame);});}
-async function runCalibration(){resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();calStartBtn.style.display='block';await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));calStartBtn.style.display='none';const calData=[];for(let i=0;i<CAL_PTS.length;i++){const[nx,ny]=CAL_PTS[i],px=nx*window.innerWidth,py=ny*window.innerHeight;if(i>0)await new Promise(r=>setTimeout(r,320));const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});}if(calData.length>=4)eyeCalMap=fitAffine(calData);drawCalDone();await new Promise(r=>setTimeout(r,900));calOverlay.style.display='none';}
-
-/* ── eye tracking ── */
-async function startEyeTracking(){
-  let fl;try{const fs=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');fl=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1});}catch(e){console.warn('[eye]',e);return false;}
-  try{const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});}catch(e){console.warn('[eye] webcam',e);return false;}
-  let lastCamT=-1;
-  function track(){if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){lastCamT=webcamEl.currentTime;try{const res=fl.detectForVideo(webcamEl,performance.now());if(res.faceLandmarks?.length>0){const lm=res.faceLandmarks[0];const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];const hxR=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8,hyR=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;curOffX=1-hxR;curOffY=hyR;offXBuf.push(curOffX);if(offXBuf.length>BUF_MAX)offXBuf.shift();offYBuf.push(curOffY);if(offYBuf.length>BUF_MAX)offYBuf.shift();const lI=lm[468],rI=lm[473],lIn=lm[33],lO=lm[133],rIn=lm[362],rO=lm[263];if(lI&&rI&&lIn&&lO&&rIn&&rO){const lEW=Math.hypot(lO.x-lIn.x,lO.y-lIn.y),rEW=Math.hypot(rO.x-rIn.x,rO.y-rIn.y);if(lEW>0.01&&rEW>0.01){let eX=((lI.x-lIn.x)/lEW+(rI.x-rIn.x)/rEW)/2,eY=((lI.y-lIn.y)/lEW+(rI.y-rIn.y)/rEW)/2;eX=(eX-0.5)*2.5+0.5;eY=(eY-0.5)*2.5+0.5;eX=1-eX;curEyeOffX=eX;curEyeOffY=eY;eyeOffXBuf.push(eX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();eyeOffYBuf.push(eY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();eyeValid=true;if(eyeCalMap){rawGX=eyeCalMap.ax*eX+eyeCalMap.bx*eY+eyeCalMap.cx;rawGY=eyeCalMap.ay*eX+eyeCalMap.by*eY+eyeCalMap.cy;}else{rawGX=eX;rawGY=eY;}rawGX=Math.max(0,Math.min(1,rawGX));rawGY=Math.max(0,Math.min(1,rawGY));if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}else eyeValid=false;}else eyeValid=false;}}catch(_){}}requestAnimationFrame(track);}
-  requestAnimationFrame(track);return true;
-}
-function enablePointerFallback(){infoEl.textContent='MOVE MOUSE TO EXPLORE';const onMove=(cx,cy)=>{const rect=imgWrapper.getBoundingClientRect();const nx=(cx-rect.left)/rect.width,ny=(cy-rect.top)/rect.height;if(nx>=0&&nx<=1&&ny>=0&&ny<=1){rawGX=nx;rawGY=ny;if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}};document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));document.addEventListener('touchmove',e=>{e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});}
-
-/* ── image library ── */
-function showLib(){document.getElementById('libraryScreen').style.display='flex';renderLib();}
-function renderLib(){
-  const grid=document.getElementById('libGrid');grid.innerHTML='';
-  imageLibrary.forEach((img,i)=>{const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx?' selected':'');card.innerHTML=`<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');};grid.appendChild(card);});
-  const add=document.createElement('div');add.className='lib-add';add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);
-  const btn=document.getElementById('libBeginBtn');btn.disabled=imageLibrary.length===0;btn.style.opacity=imageLibrary.length?'1':'0.4';
-}
-document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
-
-/* ── mode selection ── */
-async function showModeScreen(){return new Promise(resolve=>{const scr=document.getElementById('modeScreen');scr.style.display='flex';const cards=scr.querySelectorAll('.mode-card');cards.forEach(c=>c.addEventListener('click',()=>{cards.forEach(x=>x.classList.remove('selected'));c.classList.add('selected');}));document.getElementById('modeBeginBtn').addEventListener('click',()=>{const sel=scr.querySelector('.mode-card.selected');activeMode=sel?sel.dataset.mode:'GAZE';if(activeMode==='FIRSTFIX'){firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();}if(activeMode==='SCANPATH')scanPathHistory=[];scr.style.display='none';resolve();},{once:true});});}
-
-/* ── mode pill ── */
-function setActiveMode(id){activeMode=id;const n=document.getElementById('modePillName');if(n)n.textContent=MODE_LABELS[id]||id;document.querySelectorAll('.pill-mode-row').forEach(r=>r.classList.toggle('active',r.dataset.mode===id));if(id==='FIRSTFIX'){firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();}if(id==='SCANPATH')scanPathHistory=[];annLayer.style.opacity=id==='GAZE'?'1':'0';gazeDot.style.display=id==='GAZE'?'':'none';}
-function initPill(){const coll=document.getElementById('modePillCollapsed'),exp=document.getElementById('modePillExpanded'),rows=document.getElementById('pillModeRows'),pill=document.getElementById('modePill');const ml=[{id:'GAZE',label:'01  GAZE POINT'},{id:'FIXATION',label:'02  FIXATION'},{id:'SACCADE',label:'03  SACCADE'},{id:'SCANPATH',label:'04  SCAN PATH'},{id:'HEATMAP',label:'05  HEATMAP'},{id:'FIRSTFIX',label:'06  FIRST FIXATION'}];for(const m of ml){const r=document.createElement('div');r.className='pill-mode-row'+(m.id===activeMode?' active':'');r.dataset.mode=m.id;r.textContent=m.label;r.addEventListener('click',()=>{setActiveMode(m.id);coll.style.display='flex';exp.style.display='none';});rows.appendChild(r);}coll.addEventListener('click',()=>{coll.style.display='none';exp.style.display='flex';});setActiveMode(activeMode);pill.style.display='block';}
-
-/* ── reset analysis ── */
-function resetAnalysis(){fixationHistory=[];currentFixation=null;scanPathHistory=[];saccadeHistory=[];saccadeActive=false;saccadeStart=null;heatmap=new Float32Array(W_HEAT*H_HEAT);firstFix=null;firstFixDone=false;firstFixModeTs=performance.now();window._gazeHistory=[];window._dotPts=null;for(const L of LAYERS)persistCtx[L].clearRect(0,0,persistCanvas[L].width,persistCanvas[L].height);annLayer.innerHTML='';buildDotPool();}
-
-/* ── name screen ── */
-async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput'),btn=document.getElementById('nameContinue');scr.style.display='flex';inp.focus();function proceed(){const v=inp.value.trim();if(!v){inp.focus();return;}currentUser=v;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
-
-/* ── boot ── */
-async function boot(){
-  initPersist();sizePersist();buildDotPool();
-  window.addEventListener('resize',sizePersist);
-  heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');
-  const ok=await startEyeTracking();
-  if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}
-  showLib();
-  await new Promise(resolve=>{document.getElementById('libBeginBtn').addEventListener('click',()=>{if(!imageLibrary.length)return;document.getElementById('libraryScreen').style.display='none';mainImg.src=imageLibrary[currentImageIdx].src;resolve();});});
-  await showModeScreen();
-  sessionStartTs=Date.now();
-  document.getElementById('recordBtn').style.display='block';
-  document.getElementById('dataBtn').style.display='block';
-  initPill();
+/* ══════════════════════════════════════════════════════════════════════
+   MAIN LOOP
+   ══════════════════════════════════════════════════════════════════════ */
+function mainLoop(ts) {
+  applyGaze(ts);
+  updateFixations(ts);
+  updateSaccades(ts);
+  updateHeatmap();
+  updateFirstFix();
+  drawFrame();
   requestAnimationFrame(mainLoop);
 }
 
-/* ── events ── */
-document.getElementById('recordBtn').addEventListener('click',recordSnapshot);
-document.getElementById('dataBtn').addEventListener('click',openData);
-document.getElementById('dataCloseBtn').addEventListener('click',()=>{document.getElementById('dataScreen').style.display='none';});
-document.getElementById('dataBtn').addEventListener('mouseenter',()=>{document.getElementById('dataBtn').style.color='#e01a00';document.getElementById('dataBtn').style.borderColor='#e01a00';});
-document.getElementById('dataBtn').addEventListener('mouseleave',()=>{document.getElementById('dataBtn').style.color='#111';document.getElementById('dataBtn').style.borderColor='#ddd';});
-document.querySelectorAll('.layer-btn').forEach(btn=>btn.addEventListener('click',()=>{const snap=snapshots[0];if(!snap)return;const idx=snapshots.findIndex((s,i)=>{const d=document.querySelectorAll('.d-thumb');return d[i]&&d[i].classList.contains('active');});renderDataLayer(snapshots[Math.max(0,idx)],btn.dataset.layer);}));
+/* ══════════════════════════════════════════════════════════════════════
+   AFFINE FIT
+   ══════════════════════════════════════════════════════════════════════ */
+function fitAffine(data) {
+  let A00=0,A01=0,A02=0,A11=0,A12=0,Bx0=0,Bx1=0,Bx2=0,By0=0,By1=0,By2=0;
+  const n = data.length;
+  for (const d of data) {
+    A00+=d.ox*d.ox; A01+=d.ox*d.oy; A02+=d.ox;
+    A11+=d.oy*d.oy; A12+=d.oy;
+    Bx0+=d.ox*d.sx; Bx1+=d.oy*d.sx; Bx2+=d.sx;
+    By0+=d.ox*d.sy; By1+=d.oy*d.sy; By2+=d.sy;
+  }
+  const M = [[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];
+  const inv = inv3(M); if (!inv) return null;
+  const [ax,bx,cx] = mv3(inv,[Bx0,Bx1,Bx2]);
+  const [ay,by,cy] = mv3(inv,[By0,By1,By2]);
+  return {ax,bx,cx,ay,by,cy};
+}
+function inv3(m) {
+  const [[a,b,c],[d,e,f],[g,h,k]] = m;
+  const det = a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);
+  if (Math.abs(det) < 1e-12) return null;
+  const s = 1/det;
+  return [[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],
+          [(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],
+          [(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];
+}
+function mv3(m,v) {
+  return [m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],
+          m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],
+          m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];
+}
 
-async function startApp(){await showNameScreen();await boot();}
+/* ══════════════════════════════════════════════════════════════════════
+   CALIBRATION
+   ══════════════════════════════════════════════════════════════════════ */
+function resizeCal() { calCanvas.width = window.innerWidth; calCanvas.height = window.innerHeight; }
+
+function drawCalIntro() {
+  const W = calCanvas.width, H = calCanvas.height;
+  calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H); calCtx.textAlign='center';
+  calCtx.fillStyle='#111'; calCtx.font='bold 22px Heebo'; calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);
+  calCtx.strokeStyle='#ddd'; calCtx.lineWidth=1; calCtx.beginPath(); calCtx.moveTo(W/2-220,H/2-36); calCtx.lineTo(W/2+220,H/2-36); calCtx.stroke();
+  calCtx.fillStyle='#666'; calCtx.font='14px Heebo'; calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
+  calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);
+  calCtx.fillStyle='#aaa'; calCtx.font='12px Heebo'; calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);
+}
+
+function drawCalDone() {
+  const W = calCanvas.width, H = calCanvas.height;
+  calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H); calCtx.textAlign='center';
+  calCtx.fillStyle='#111'; calCtx.font='bold 24px Heebo'; calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);
+  calCtx.fillStyle='#aaa'; calCtx.font='13px Heebo'; calCtx.fillText('Calibration complete',W/2,H/2+18);
+}
+
+function awaitDot(px, py, index) {
+  return new Promise(resolve => {
+    let progress = 0, prevTs = null;
+    const samples = [];
+    function frame(ts) {
+      const dt = prevTs ? Math.min((ts-prevTs)/1000, 0.05) : 0; prevTs = ts;
+      const s = eyeStab();
+      progress += s*CAL_FILL_RATE*dt; progress -= (1-s)*CAL_DRAIN_RATE*dt;
+      progress = Math.max(0, Math.min(1, progress));
+      if (s > 0.45 && eyeValid) samples.push({ox:curEyeOffX, oy:curEyeOffY});
+      const W = calCanvas.width, H = calCanvas.height;
+      calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H);
+      calCtx.textAlign='right'; calCtx.fillStyle='#aaa'; calCtx.font='14px Heebo';
+      calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`, W-28, 36);
+      calCtx.textAlign='center'; calCtx.fillStyle='#aaa'; calCtx.font='13px Heebo';
+      calCtx.fillText('LOOK AT DOT · HEAD STILL · EYES ONLY', W/2, H-26);
+      calCtx.beginPath(); calCtx.arc(px,py,22,0,Math.PI*2);
+      calCtx.strokeStyle='#ddd'; calCtx.lineWidth=1.5; calCtx.stroke();
+      if (progress > 0) {
+        calCtx.beginPath(); calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);
+        calCtx.strokeStyle=`rgba(224,26,0,${0.35+s*0.65})`; calCtx.lineWidth=2; calCtx.stroke();
+      }
+      const r = 3.5+s*2.5; calCtx.beginPath(); calCtx.arc(px,py,r,0,Math.PI*2);
+      calCtx.fillStyle=`rgba(224,26,0,${0.2+s*0.8})`; calCtx.fill();
+      if (progress >= 1) {
+        calCtx.beginPath(); calCtx.arc(px,py,22,0,Math.PI*2);
+        calCtx.strokeStyle='rgba(224,26,0,0.9)'; calCtx.lineWidth=2; calCtx.stroke();
+        const n = samples.length || 1;
+        setTimeout(() => resolve({
+          ox: samples.reduce((a,v)=>a+v.ox,0)/n,
+          oy: samples.reduce((a,v)=>a+v.oy,0)/n
+        }), 280);
+      } else requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  });
+}
+
+async function runCalibration() {
+  resizeCal(); window.addEventListener('resize', resizeCal); drawCalIntro();
+  calStartBtn.style.display = 'block';
+  await new Promise(r => calStartBtn.addEventListener('click', r, {once:true}));
+  calStartBtn.style.display = 'none';
+  const calData = [];
+  for (let i = 0; i < CAL_PTS.length; i++) {
+    const [nx,ny] = CAL_PTS[i];
+    const px = nx*window.innerWidth, py = ny*window.innerHeight;
+    if (i > 0) await new Promise(r => setTimeout(r, 320));
+    const {ox,oy} = await awaitDot(px, py, i);
+    calData.push({sx:nx, sy:ny, ox, oy});
+  }
+  if (calData.length >= 4) eyeCalMap = fitAffine(calData);
+  drawCalDone();
+  await new Promise(r => setTimeout(r, 900));
+  calOverlay.style.display = 'none';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   EYE TRACKING
+   ══════════════════════════════════════════════════════════════════════ */
+async function startEyeTracking() {
+  let fl;
+  try {
+    const fs = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+    fl = await FaceLandmarker.createFromOptions(fs, {
+      baseOptions:{ modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task', delegate:'GPU' },
+      outputFaceBlendshapes:false, runningMode:'VIDEO', numFaces:1
+    });
+  } catch(e) { console.warn('[eye]',e); return false; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});
+    webcamEl.srcObject = stream;
+    await new Promise(r => { webcamEl.onloadeddata = r; });
+  } catch(e) { console.warn('[eye] webcam',e); return false; }
+
+  let lastCamT = -1;
+  function track() {
+    if (webcamEl.readyState >= 2 && webcamEl.currentTime !== lastCamT) {
+      lastCamT = webcamEl.currentTime;
+      try {
+        const res = fl.detectForVideo(webcamEl, performance.now());
+        if (res.faceLandmarks?.length > 0) {
+          const lm = res.faceLandmarks[0];
+          const nose=lm[1], brow=lm[168], chin=lm[152], lChk=lm[234], rChk=lm[454];
+          const hxR = (nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8;
+          const hyR = (nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;
+          curOffX = 1-hxR; curOffY = hyR;
+          offXBuf.push(curOffX); if (offXBuf.length > BUF_MAX) offXBuf.shift();
+          offYBuf.push(curOffY); if (offYBuf.length > BUF_MAX) offYBuf.shift();
+          const lI=lm[468], rI=lm[473], lIn=lm[33], lO=lm[133], rIn=lm[362], rO=lm[263];
+          if (lI && rI && lIn && lO && rIn && rO) {
+            const lEW = Math.hypot(lO.x-lIn.x, lO.y-lIn.y);
+            const rEW = Math.hypot(rO.x-rIn.x, rO.y-rIn.y);
+            if (lEW > 0.01 && rEW > 0.01) {
+              let eX = ((lI.x-lIn.x)/lEW + (rI.x-rIn.x)/rEW) / 2;
+              let eY = ((lI.y-lIn.y)/lEW + (rI.y-rIn.y)/rEW) / 2;
+              eX = (eX-0.5)*2.5+0.5; eY = (eY-0.5)*2.5+0.5; eX = 1-eX;
+              curEyeOffX = eX; curEyeOffY = eY;
+              eyeOffXBuf.push(eX); if (eyeOffXBuf.length > BUF_MAX) eyeOffXBuf.shift();
+              eyeOffYBuf.push(eY); if (eyeOffYBuf.length > BUF_MAX) eyeOffYBuf.shift();
+              eyeValid = true;
+              if (eyeCalMap) {
+                rawGX = eyeCalMap.ax*eX + eyeCalMap.bx*eY + eyeCalMap.cx;
+                rawGY = eyeCalMap.ay*eX + eyeCalMap.by*eY + eyeCalMap.cy;
+              } else { rawGX = eX; rawGY = eY; }
+              rawGX = Math.max(0, Math.min(1, rawGX));
+              rawGY = Math.max(0, Math.min(1, rawGY));
+              if (!gazeOn) { gazeOn = true; infoEl.style.opacity = '0'; }
+            } else eyeValid = false;
+          } else eyeValid = false;
+        }
+      } catch(_) {}
+    }
+    requestAnimationFrame(track);
+  }
+  requestAnimationFrame(track);
+  return true;
+}
+
+function enablePointerFallback() {
+  infoEl.textContent = 'MOVE MOUSE TO EXPLORE';
+  const onMove = (cx,cy) => {
+    const rect = imgWrapper.getBoundingClientRect();
+    const nx = (cx-rect.left)/rect.width, ny = (cy-rect.top)/rect.height;
+    if (nx>=0&&nx<=1&&ny>=0&&ny<=1) { rawGX=nx; rawGY=ny; if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';} }
+  };
+  document.addEventListener('mousemove', e => onMove(e.clientX,e.clientY));
+  document.addEventListener('touchmove', e => { e.preventDefault(); onMove(e.touches[0].clientX,e.touches[0].clientY); }, {passive:false});
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   IMAGE LIBRARY
+   ══════════════════════════════════════════════════════════════════════ */
+function showLib() { document.getElementById('libraryScreen').style.display = 'flex'; renderLib(); }
+
+function renderLib() {
+  const grid = document.getElementById('libGrid'); grid.innerHTML = '';
+  imageLibrary.forEach((img,i) => {
+    const card = document.createElement('div');
+    card.className = 'lib-card' + (i===currentImageIdx?' selected':'');
+    card.innerHTML = `<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
+    card.onclick = () => { currentImageIdx=i; document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); };
+    grid.appendChild(card);
+  });
+  const add = document.createElement('div');
+  add.className = 'lib-add';
+  add.innerHTML = '<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
+  add.onclick = () => document.getElementById('libFileInput').click();
+  grid.appendChild(add);
+  const btn = document.getElementById('libBeginBtn');
+  btn.disabled = imageLibrary.length === 0;
+  btn.style.opacity = imageLibrary.length ? '1' : '0.4';
+}
+
+document.getElementById('libFileInput').addEventListener('change', e => {
+  Array.from(e.target.files).forEach(file => {
+    const r = new FileReader();
+    r.onload = ev => { imageLibrary.push({src:ev.target.result, name:file.name.replace(/\.[^.]+$/,'')}); renderLib(); };
+    r.readAsDataURL(file);
+  });
+  e.target.value = '';
+});
+
+/* ══════════════════════════════════════════════════════════════════════
+   NAME SCREEN
+   ══════════════════════════════════════════════════════════════════════ */
+async function showNameScreen() {
+  return new Promise(resolve => {
+    const scr = document.getElementById('nameScreen');
+    const inp = document.getElementById('nameInput');
+    const btn = document.getElementById('nameContinue');
+    scr.style.display = 'flex'; inp.focus();
+    function proceed() { const v=inp.value.trim(); if(!v){inp.focus();return;} currentUser=v; scr.style.display='none'; resolve(); }
+    btn.addEventListener('click', proceed);
+    inp.addEventListener('keydown', e => { if(e.key==='Enter') proceed(); });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DATA SCREEN — STATS
+   ══════════════════════════════════════════════════════════════════════ */
+function renderStats() {
+  const fixC     = fixationHistory.length;
+  const fixAvg   = fixC ? Math.round(fixationHistory.reduce((s,f)=>s+f.duration,0)/fixC) : 0;
+  const fixTotal = fixationHistory.reduce((s,f)=>s+f.duration, 0);
+  const sacC     = saccadeHistory.length;
+  const sacAmp   = sacC ? +(saccadeHistory.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1) : 0;
+  const ttff     = firstFix ? (firstFix.startTs - firstFixModeTs) / 1000 : null;
+  const elapsed  = sessionStartTs ? ((Date.now()-sessionStartTs)/1000).toFixed(1) : null;
+  document.getElementById('st-fix-count').textContent  = fixC  || '—';
+  document.getElementById('st-fix-avg').textContent    = fixAvg || '—';
+  document.getElementById('st-fix-total').textContent  = fixTotal || '—';
+  document.getElementById('st-sac-count').textContent  = sacC  || '—';
+  document.getElementById('st-sac-amp').textContent    = sacAmp || '—';
+  document.getElementById('st-scan-steps').textContent = scanPathHistory.length || '—';
+  document.getElementById('st-ttff').textContent       = ttff !== null ? ttff.toFixed(2) : '—';
+  document.getElementById('st-ff-x').textContent       = firstFix ? (firstFix.x*100).toFixed(1)+'%' : '—';
+  document.getElementById('st-ff-y').textContent       = firstFix ? (firstFix.y*100).toFixed(1)+'%' : '—';
+  document.getElementById('st-gaze-n').textContent     = gazeLog.length || '—';
+  document.getElementById('st-duration').textContent   = elapsed || '—';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DATA SCREEN — ANIMATION ENGINE
+   ══════════════════════════════════════════════════════════════════════ */
+function cancelAnimation() {
+  if (currentAnimation) { currentAnimation.cancel(); currentAnimation = null; }
+}
+
+function getDataCanvas() {
+  const dc = document.getElementById('dataCanvas');
+  const area = document.getElementById('dataImgArea');
+  dc.width = area.offsetWidth; dc.height = area.offsetHeight;
+  return dc;
+}
+
+// GAZE: replay gazeLog one point every 50ms, red dot r=4, accumulates
+function animateGaze(ctx, W, H, log) {
+  let tid = null, cancelled = false;
+  const pts = log.slice(); let i = 0;
+  function step() {
+    if (cancelled || i >= pts.length) return;
+    const p = pts[i++];
+    ctx.beginPath(); ctx.arc(p.x*W, p.y*H, 4, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(224,26,0,0.5)'; ctx.fill();
+    tid = setTimeout(step, 50);
+  }
+  step();
+  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
+}
+
+// FIXATION: one every 600ms, circle grows 0→final over 300ms, label after, previous stay
+function animateFixation(ctx, W, H, history) {
+  let tid = null, rafId = null, cancelled = false;
+  const fixes = history.slice(); let i = 0;
+  const drawn = [];
+
+  function redrawAll() {
+    for (const fix of drawn) {
+      const cx=fix.x*W, cy=fix.y*H, r=Math.min(8+fix.duration/80,44);
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='rgba(224,26,0,0.12)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle='rgba(224,26,0,0.85)'; ctx.lineWidth=2; ctx.stroke();
+      if (fix.duration > 300) {
+        ctx.fillStyle='rgba(224,26,0,0.9)'; ctx.font='bold 9px Heebo';
+        ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+        ctx.fillText(Math.round(fix.duration)+'ms', cx, cy+r+13);
+      }
+    }
+  }
+
+  function next() {
+    if (cancelled || i >= fixes.length) return;
+    const fix = fixes[i++];
+    const cx=fix.x*W, cy=fix.y*H, rFinal=Math.min(8+fix.duration/80,44);
+    const start = performance.now();
+    function grow(now) {
+      if (cancelled) return;
+      const t = Math.min(1, (now-start)/300);
+      ctx.clearRect(0,0,W,H); redrawAll();
+      const r = rFinal*t;
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='rgba(224,26,0,0.12)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle='rgba(224,26,0,0.85)'; ctx.lineWidth=2; ctx.stroke();
+      if (t < 1) { rafId = requestAnimationFrame(grow); }
+      else {
+        if (fix.duration > 300) {
+          ctx.fillStyle='rgba(224,26,0,0.9)'; ctx.font='bold 9px Heebo';
+          ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+          ctx.fillText(Math.round(fix.duration)+'ms', cx, cy+rFinal+13);
+        }
+        drawn.push(fix);
+        tid = setTimeout(next, 600);
+      }
+    }
+    rafId = requestAnimationFrame(grow);
+  }
+  next();
+  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
+}
+
+// SACCADE: one every 500ms, line draws over 200ms, arrowhead, previous stay
+function animateSaccade(ctx, W, H, history) {
+  let tid = null, rafId = null, cancelled = false;
+  const sacs = history.slice(); let i = 0;
+  const drawn = [];
+
+  function drawSacFull(sac) {
+    const fx=sac.fromX*W, fy=sac.fromY*H, tx=sac.toX*W, ty=sac.toY*H;
+    ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(tx,ty);
+    ctx.strokeStyle='rgba(224,26,0,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
+    const a=Math.atan2(ty-fy,tx-fx), l=9;
+    ctx.beginPath(); ctx.moveTo(tx,ty);
+    ctx.lineTo(tx-l*Math.cos(a-Math.PI/6), ty-l*Math.sin(a-Math.PI/6));
+    ctx.lineTo(tx-l*Math.cos(a+Math.PI/6), ty-l*Math.sin(a+Math.PI/6));
+    ctx.closePath(); ctx.fillStyle='rgba(224,26,0,0.8)'; ctx.fill();
+  }
+
+  function redrawAll() { for (const s of drawn) drawSacFull(s); }
+
+  function next() {
+    if (cancelled || i >= sacs.length) return;
+    const sac = sacs[i++];
+    const fx=sac.fromX*W, fy=sac.fromY*H, tx=sac.toX*W, ty=sac.toY*H;
+    const start = performance.now();
+    function anim(now) {
+      if (cancelled) return;
+      const t = Math.min(1, (now-start)/200);
+      ctx.clearRect(0,0,W,H); redrawAll();
+      const ex=fx+(tx-fx)*t, ey=fy+(ty-fy)*t;
+      ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(ex,ey);
+      ctx.strokeStyle='rgba(224,26,0,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
+      if (t < 1) { rafId = requestAnimationFrame(anim); }
+      else { drawSacFull(sac); drawn.push(sac); tid = setTimeout(next, 500); }
+    }
+    rafId = requestAnimationFrame(anim);
+  }
+  next();
+  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
+}
+
+// SCAN PATH: numbered circles + dashed lines, one step every 700ms
+function animateScanPath(ctx, W, H, history) {
+  let tid = null, cancelled = false;
+  const pts = history.slice(); let shown = 0;
+
+  function drawAll(n) {
+    ctx.clearRect(0,0,W,H);
+    if (n < 1) return;
+    if (n >= 2) {
+      ctx.save(); ctx.setLineDash([4,6]);
+      ctx.strokeStyle='rgba(224,26,0,0.6)'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      for (let j=0; j<n; j++) { const{x,y}=pts[j]; j===0?ctx.moveTo(x*W,y*H):ctx.lineTo(x*W,y*H); }
+      ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    }
+    for (let j=0; j<n; j++) {
+      const{x,y}=pts[j], cx=x*W, cy=y*H;
+      ctx.beginPath(); ctx.arc(cx,cy,11,0,Math.PI*2);
+      ctx.strokeStyle='rgba(224,26,0,1)'; ctx.lineWidth=2; ctx.stroke();
+      ctx.fillStyle='rgba(224,26,0,1)'; ctx.font='bold 9px Heebo';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(j+1, cx, cy); ctx.textBaseline='alphabetic';
+    }
+  }
+
+  function next() {
+    if (cancelled || shown >= pts.length) return;
+    shown++;
+    drawAll(shown);
+    tid = setTimeout(next, 700);
+  }
+  next();
+  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
+}
+
+// HEATMAP: accumulate gazeLog at 20x speed, contour style, ~3s total
+function animateHeatmap(ctx, W, H, log) {
+  let tid = null, cancelled = false;
+  const pts = log.slice(); let i = 0;
+  const hmW=200, hmH=112;
+  const hm = new Float32Array(hmW*hmH);
+  const sigma = 0.07*Math.max(hmW,hmH);
+  const r2 = Math.ceil(3*sigma);
+  const inv2s2 = 1/(2*sigma*sigma);
+
+  function addPt(p) {
+    const gx=p.x*hmW, gy=p.y*hmH;
+    const x0=Math.max(0,Math.floor(gx-r2)), x1=Math.min(hmW-1,Math.ceil(gx+r2));
+    const y0=Math.max(0,Math.floor(gy-r2)), y1=Math.min(hmH-1,Math.ceil(gy+r2));
+    for (let y=y0;y<=y1;y++) for (let x=x0;x<=x1;x++)
+      hm[y*hmW+x] += 0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
+  }
+
+  function render() {
+    let mx = 0; for (let j=0;j<hm.length;j++) if(hm[j]>mx) mx=hm[j];
+    if (mx < 0.01) return;
+    const tmp = document.createElement('canvas'); tmp.width=hmW; tmp.height=hmH;
+    const tc = tmp.getContext('2d'); const img = tc.createImageData(hmW,hmH); const d=img.data;
+    for (let j=0;j<hmW*hmH;j++) {
+      const val=hm[j]/mx; if(val<0.08) continue;
+      const x=j%hmW, y=Math.floor(j/hmW);
+      if(x<1||x>=hmW-1||y<1||y>=hmH-1) continue;
+      const nb=[hm[j-1],hm[j+1],hm[j-hmW],hm[j+hmW]].map(v=>v/mx);
+      let isCont=false;
+      for (const band of [0.2,0.4,0.6,0.8]) {
+        if((val>=band&&nb.some(n=>n<band))||(val<band&&nb.some(n=>n>=band))){isCont=true;break;}
+      }
+      if (isCont) { const iv=Math.min(1,val*1.3); d[j*4]=224; d[j*4+1]=26; d[j*4+2]=0; d[j*4+3]=Math.round(iv*210); }
+    }
+    tc.putImageData(img,0,0);
+    ctx.clearRect(0,0,W,H); ctx.drawImage(tmp,0,0,W,H);
+  }
+
+  const totalSteps = 60, interval = 50;
+  const perStep = Math.max(1, Math.ceil(pts.length/totalSteps));
+
+  function step() {
+    if (cancelled) return;
+    let c=0; while(i<pts.length && c<perStep){addPt(pts[i++]);c++;}
+    render();
+    if (i < pts.length) tid = setTimeout(step, interval);
+  }
+  step();
+  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
+}
+
+// FIRST FIXATION: 1s blank → red dot + expanding ring + label + pulse
+function animateFirstFix(ctx, W, H, fix, modeTs) {
+  let tid = null, rafId = null, cancelled = false;
+  if (!fix) {
+    ctx.fillStyle='rgba(150,150,150,0.7)'; ctx.font='300 11px Heebo';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('NO FIRST FIXATION DETECTED', W/2, H/2);
+    return { cancel: () => {} };
+  }
+  const cx=fix.x*W, cy=fix.y*H;
+  const offset = (fix.startTs - modeTs) / 1000;
+
+  tid = setTimeout(() => {
+    if (cancelled) return;
+    const startPhase = performance.now();
+    function phase2(now) {
+      if (cancelled) return;
+      const t = Math.min(1, (now-startPhase)/600);
+      ctx.clearRect(0,0,W,H);
+      const ringR = 20 + t*40;
+      ctx.beginPath(); ctx.arc(cx,cy,ringR,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(224,26,0,${(1-t)*0.5})`; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.globalAlpha = t;
+      ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
+      ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
+      ctx.globalAlpha = 1;
+      if (t > 0.5) {
+        ctx.globalAlpha = (t-0.5)*2;
+        ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+        ctx.fillStyle='rgba(224,26,0,1)';
+        ctx.font='bold 11px Heebo'; ctx.fillText('FIRST FIXATION', cx, cy-46);
+        ctx.font='300 9px Heebo';  ctx.fillText('+'+offset.toFixed(2)+'s', cx, cy-32);
+        ctx.globalAlpha = 1;
+      }
+      if (t < 1) { rafId = requestAnimationFrame(phase2); }
+      else {
+        const startPulse = performance.now();
+        function pulse(now) {
+          if (cancelled) return;
+          const pt = (now-startPulse)/1000;
+          const pr = 20 + Math.sin(pt*Math.PI*2)*5;
+          ctx.clearRect(0,0,W,H);
+          ctx.beginPath(); ctx.arc(cx,cy,pr,0,Math.PI*2);
+          ctx.strokeStyle='rgba(224,26,0,0.35)'; ctx.lineWidth=1.5; ctx.stroke();
+          ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
+          ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
+          ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+          ctx.fillStyle='rgba(224,26,0,1)';
+          ctx.font='bold 11px Heebo'; ctx.fillText('FIRST FIXATION', cx, cy-46);
+          ctx.font='300 9px Heebo';  ctx.fillText('+'+offset.toFixed(2)+'s', cx, cy-32);
+          rafId = requestAnimationFrame(pulse);
+        }
+        rafId = requestAnimationFrame(pulse);
+      }
+    }
+    rafId = requestAnimationFrame(phase2);
+  }, 1000);
+
+  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
+}
+
+function playLayer(layer) {
+  cancelAnimation();
+  const dc = getDataCanvas();
+  const ctx = dc.getContext('2d');
+  ctx.clearRect(0,0,dc.width,dc.height);
+  const W=dc.width, H=dc.height;
+  switch (layer) {
+    case 'GAZE':     currentAnimation = animateGaze(ctx,W,H,gazeLog); break;
+    case 'FIXATION': currentAnimation = animateFixation(ctx,W,H,fixationHistory); break;
+    case 'SACCADE':  currentAnimation = animateSaccade(ctx,W,H,saccadeHistory); break;
+    case 'SCANPATH': currentAnimation = animateScanPath(ctx,W,H,scanPathHistory); break;
+    case 'HEATMAP':  currentAnimation = animateHeatmap(ctx,W,H,gazeLog); break;
+    case 'FIRSTFIX': currentAnimation = animateFirstFix(ctx,W,H,firstFix,firstFixModeTs); break;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DATA SCREEN — OPEN / CLOSE
+   ══════════════════════════════════════════════════════════════════════ */
+function openData() {
+  const screen = document.getElementById('dataScreen');
+  screen.style.display = 'flex';
+  const list = document.getElementById('dataImgList'); list.innerHTML = '';
+  if (mainImg.src && mainImg.src !== window.location.href) {
+    const d = document.createElement('div'); d.className = 'd-thumb active';
+    d.innerHTML = `<img src="${mainImg.src}" alt=""/><div class="d-thumb-label">${imageLibrary[currentImageIdx]?.name||'image'}</div>`;
+    list.appendChild(d);
+  }
+  document.getElementById('dataImg').src = mainImg.src;
+  renderStats();
+  const activeBtn = document.querySelector('.layer-btn.active');
+  const layer = activeBtn ? activeBtn.dataset.layer : 'GAZE';
+  playLayer(layer);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   BOOT
+   ══════════════════════════════════════════════════════════════════════ */
+async function boot() {
+  dotCanvas.width = window.innerWidth; dotCanvas.height = window.innerHeight;
+  window.addEventListener('resize', () => { dotCanvas.width=window.innerWidth; dotCanvas.height=window.innerHeight; });
+
+  heatCanvas = document.createElement('canvas');
+  heatCanvas.width = W_HEAT; heatCanvas.height = H_HEAT;
+  heatCtx2 = heatCanvas.getContext('2d');
+
+  const ok = await startEyeTracking();
+  if (ok) await runCalibration();
+  else { calOverlay.style.display='none'; enablePointerFallback(); }
+
+  showLib();
+  await new Promise(resolve => {
+    document.getElementById('libBeginBtn').addEventListener('click', () => {
+      if (!imageLibrary.length) return;
+      document.getElementById('libraryScreen').style.display = 'none';
+      mainImg.src = imageLibrary[currentImageIdx].src;
+      resolve();
+    });
+  });
+
+  sessionStartTs  = Date.now();
+  firstFixModeTs  = performance.now();
+
+  document.getElementById('dataBtn').style.display = 'block';
+  annLayer.style.opacity = '0';
+
+  setInterval(() => {
+    if (!gazeOn) return;
+    gazeLog.push({ t:Date.now()-sessionStartTs, x:sGX, y:sGY });
+    if (gazeLog.length > 10000) gazeLog.shift();
+  }, 100);
+
+  requestAnimationFrame(mainLoop);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   EVENTS
+   ══════════════════════════════════════════════════════════════════════ */
+document.getElementById('dataBtn').addEventListener('click', openData);
+
+document.getElementById('dataCloseBtn').addEventListener('click', () => {
+  cancelAnimation();
+  document.getElementById('dataScreen').style.display = 'none';
+});
+
+document.getElementById('dataBtn').addEventListener('mouseenter', () => {
+  document.getElementById('dataBtn').style.color='#e01a00';
+  document.getElementById('dataBtn').style.borderColor='#e01a00';
+});
+document.getElementById('dataBtn').addEventListener('mouseleave', () => {
+  document.getElementById('dataBtn').style.color='#111';
+  document.getElementById('dataBtn').style.borderColor='#ddd';
+});
+
+document.querySelectorAll('.layer-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    dataActiveLayer = btn.dataset.layer;
+    playLayer(dataActiveLayer);
+  });
+});
+
+document.getElementById('playBtn').addEventListener('click', () => {
+  playLayer(dataActiveLayer || 'GAZE');
+});
+
+async function startApp() { await showNameScreen(); await boot(); }
 startApp();
 </script>
 </body>
