@@ -8,6 +8,60 @@
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none; font-family:'Heebo',sans-serif; }
+
+/* ── NAV ── */
+#mainNav {
+  position:fixed; top:0; left:0; right:0; height:52px;
+  background:#fff; border-bottom:1px solid #eee;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 32px; z-index:9000; cursor:default;
+}
+#navBrand { display:flex; align-items:center; gap:10px; }
+.nav-va { font-size:18px; font-weight:700; color:#e01a00; letter-spacing:0.04em; }
+.nav-title { font-size:10px; font-weight:700; letter-spacing:0.28em; color:#111; font-variant:small-caps; }
+#navLinks { display:flex; gap:28px; align-items:center; }
+.nav-link { font-size:10px; font-weight:700; letter-spacing:0.22em; color:#999; cursor:pointer; user-select:none; transition:color 0.15s; }
+.nav-link:hover { color:#111; }
+.nav-link.active { color:#e01a00; }
+
+/* ── HOME SCREEN ── */
+#homeScreen {
+  position:fixed; inset:0; z-index:8999;
+  background:#fff; display:flex; padding-top:52px;
+}
+#homeLeft {
+  width:50%; display:flex; flex-direction:column;
+  align-items:flex-start; justify-content:center; padding:0 64px;
+}
+.home-eyebrow { font-size:9px; font-weight:300; letter-spacing:0.5em; color:#bbb; margin-bottom:22px; }
+.home-heading { font-size:42px; font-weight:700; color:#111; line-height:1.1; margin-bottom:18px; }
+.home-subtitle { font-size:16px; font-weight:300; color:#666; max-width:380px; line-height:1.6; margin-bottom:40px; }
+#homeStartBtn {
+  background:#e01a00; color:#fff; border:2px solid #e01a00;
+  font-family:'Heebo',sans-serif; font-size:13px; font-weight:700;
+  letter-spacing:0.22em; padding:16px 52px; cursor:pointer;
+  transition:background 0.18s,border-color 0.18s; margin-bottom:28px;
+}
+#homeStartBtn:hover { background:#c01500; border-color:#c01500; }
+.home-badges { display:flex; gap:10px; flex-wrap:wrap; }
+.home-badge { font-size:10px; color:#999; border:1px solid #eee; padding:5px 14px; border-radius:100px; letter-spacing:0.05em; }
+
+#homeRight { width:50%; position:relative; overflow:hidden; background:#000; }
+#homeVideo { display:block; width:100%; height:100%; object-fit:cover; }
+#homeDotCanvas { position:absolute; inset:0; pointer-events:none; z-index:1; }
+#homeAnnLayer { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:2; }
+#homeAnnLayer .ann {
+  position:absolute; font-family:'Heebo',sans-serif; font-size:11px;
+  font-weight:700; color:#e01a00; letter-spacing:0.06em;
+  white-space:nowrap; pointer-events:none; opacity:0;
+}
+#homeDot {
+  position:fixed; width:22px; height:22px; border-radius:50%;
+  border:2px solid rgba(224,26,0,0.85); background:rgba(224,26,0,0.12);
+  transform:translate(-50%,-50%); pointer-events:none; z-index:9001; display:none;
+}
+
+/* ── MAIN APP ── */
 #imgWrapper { position:relative; width:100vw; height:100vh; overflow:hidden; }
 #mainImg { display:block; width:100%; height:100%; object-fit:contain; background:#000; }
 #dotCanvas { position:absolute; inset:0; pointer-events:none; z-index:5; }
@@ -81,6 +135,42 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 </head>
 <body>
 
+<!-- NAV -->
+<nav id="mainNav">
+  <div id="navBrand">
+    <span class="nav-va">VA</span>
+    <span class="nav-title">Visual Analysis</span>
+  </div>
+  <div id="navLinks">
+    <span class="nav-link active" id="navHomeLink">HOME</span>
+    <span class="nav-link" id="navSessionLink">SESSION</span>
+  </div>
+</nav>
+
+<!-- HOME SCREEN -->
+<div id="homeScreen">
+  <div id="homeLeft">
+    <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
+    <h1 class="home-heading">See where<br>attention goes.</h1>
+    <p class="home-subtitle">Real-time eye tracking analysis using iris detection and behavioral classification.</p>
+    <button id="homeStartBtn">START SESSION</button>
+    <div class="home-badges">
+      <span class="home-badge">6 Analysis Modes</span>
+      <span class="home-badge">Iris Detection</span>
+      <span class="home-badge">Real-time</span>
+    </div>
+  </div>
+  <div id="homeRight">
+    <video id="homeVideo" src="benjamin netanyahu.mp4" autoplay loop muted playsinline></video>
+    <canvas id="homeDotCanvas"></canvas>
+    <div id="homeAnnLayer"></div>
+  </div>
+</div>
+<div id="homeDot"></div>
+<canvas id="homeAnaC" style="display:none" width="160" height="90"></canvas>
+<canvas id="homePreC" style="display:none" width="160" height="90"></canvas>
+
+<!-- MAIN APP -->
 <div id="imgWrapper">
   <img id="mainImg" src="" alt="stimulus"/>
   <canvas id="dotCanvas"></canvas>
@@ -96,7 +186,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
   <button id="calStartBtn" class="va-btn va-btn-primary">BEGIN CALIBRATION</button>
 </div>
 
-<!-- image library -->
 <div id="libraryScreen" class="screen">
   <div class="screen-title">SELECT IMAGE</div>
   <div class="lib-grid" id="libGrid"></div>
@@ -106,7 +195,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 
 <div id="dataBtn">DATA</div>
 
-<!-- data screen -->
 <div id="dataScreen">
   <div id="dataHeader">
     <div class="data-title">SESSION DATA</div>
@@ -160,7 +248,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
   </div>
 </div>
 
-<!-- name screen -->
 <div id="nameScreen">
   <div class="ns-title">VISUAL ANALYSIS SYSTEM</div>
   <label for="nameInput">ENTER YOUR NAME</label>
@@ -171,6 +258,270 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:none;
 <script type="module">
 'use strict';
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOME SCREEN DEMO  (self-contained, no camera, mouse-only)
+   ══════════════════════════════════════════════════════════════════════ */
+const HOME_N_ANN        = 250;
+const HOME_DOT_STEP     = 2;
+const HOME_DOT_THRESH   = 10;
+const HOME_ANA_INTERVAL = 600;
+const HOME_REVEAL_FRAC  = 0.030;
+const HOME_MAX_BLUR     = 7;
+const HOME_GAZE_LERP    = 0.08;
+const HOME_BLUR_GROW    = 2.8;
+const HOME_BLUR_CLEAR   = 20.0;
+
+const homeScreen    = document.getElementById('homeScreen');
+const homeRight     = document.getElementById('homeRight');
+const homeVideo     = document.getElementById('homeVideo');
+const homeDotCanvas = document.getElementById('homeDotCanvas');
+const homeDotCtx    = homeDotCanvas.getContext('2d');
+const homeAnnLayer  = document.getElementById('homeAnnLayer');
+const homeDot       = document.getElementById('homeDot');
+const homeAnaC      = document.getElementById('homeAnaC');
+const homePreC      = document.getElementById('homePreC');
+const homeAnaCtx    = homeAnaC.getContext('2d', {willReadFrequently:true});
+const homePreCtx    = homePreC.getContext('2d', {willReadFrequently:true});
+const navHomeLink   = document.getElementById('navHomeLink');
+const navSessionLink = document.getElementById('navSessionLink');
+
+let homePool       = [];
+let homeRunning    = true;
+let homeRawGX      = 0.5, homeRawGY = 0.5;
+let homeSGX        = 0.5, homeSGY  = 0.5;
+let homePrevPx     = null;
+let homeLastAnaTs  = -9999;
+let homeLastGazeTs = 0;
+
+/* ── Sobel edge detection ── */
+function sobel(px, w, h) {
+  const g = new Float32Array(w*h);
+  const gx = new Float32Array(w*h);
+  const gy = new Float32Array(w*h);
+  const mg = new Float32Array(w*h);
+  for (let i=0; i<w*h; i++) { const o=i*4; g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2]; }
+  for (let y=1; y<h-1; y++) {
+    for (let x=1; x<w-1; x++) {
+      const i=y*w+x;
+      const tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];
+      gx[i]=(tr+2*mr+br)-(tl+2*ml+bl);
+      gy[i]=(bl+2*bc+br)-(tl+2*tc+tr);
+      mg[i]=Math.hypot(gx[i],gy[i]);
+    }
+  }
+  return {gx,gy,mg};
+}
+
+function rStats(px, w, h, nx0, ny0, nx1, ny1) {
+  const x0=Math.max(0,Math.floor(nx0*w)), y0=Math.max(0,Math.floor(ny0*h));
+  const x1=Math.min(w-1,Math.floor(nx1*w)), y1=Math.min(h-1,Math.floor(ny1*h));
+  let sL=0,sL2=0,sS=0,n=0;
+  for (let y=y0; y<=y1; y++) for (let x=x0; x<=x1; x++) {
+    const o=(y*w+x)*4, r=px[o]/255, gr=px[o+1]/255, b=px[o+2]/255;
+    const mx=Math.max(r,gr,b), mn=Math.min(r,gr,b), l=(mx+mn)*0.5;
+    const s=(mx===mn)?0:(mx-mn)/(1-Math.abs(2*l-1));
+    sL+=l; sL2+=l*l; sS+=s; n++;
+  }
+  if (!n) return {bright:128,contrast:0,sat:0};
+  const al=sL/n;
+  return {bright:Math.round(al*255), contrast:Math.round(Math.sqrt(Math.max(0,sL2/n-al*al))*255), sat:Math.round(sS/n*100)};
+}
+
+function rMotion(px, prev, w, h, nx0, ny0, nx1, ny1) {
+  if (!prev) return 0;
+  const x0=Math.max(0,Math.floor(nx0*w)), y0=Math.max(0,Math.floor(ny0*h));
+  const x1=Math.min(w-1,Math.floor(nx1*w)), y1=Math.min(h-1,Math.floor(ny1*h));
+  let d=0,n=0;
+  for (let y=y0; y<=y1; y++) for (let x=x0; x<=x1; x++) {
+    const o=(y*w+x)*4;
+    d+=Math.abs(px[o]-prev[o])+Math.abs(px[o+1]-prev[o+1])+Math.abs(px[o+2]-prev[o+2]); n+=3;
+  }
+  return n?d/n:0;
+}
+
+function makeLabel(dir, mag, st, mv) {
+  if (mv>38)          return 'CRITICAL / MOTION_FAST';
+  if (mv>16)          { const s=Math.min(99,Math.max(10,Math.round(99-mv*2.4))); return `${dir} / STAB_${s}%`; }
+  if (st.contrast>52) return `${dir} / CONTRAST_HIGH`;
+  if (st.bright>178)  return `DETAIL / BRIGHT_${st.bright}`;
+  if (st.bright<42)   return `DETAIL / DARK_${st.bright}`;
+  if (mag>210)        return `${dir} / SHARP_${Math.round(mag/3)}`;
+  if (st.sat>42)      return `${dir} / SAT_${st.sat}%`;
+  if (st.contrast>22) return `${dir} / CONTRAST_${st.contrast}`;
+  return `STABLE / EDGE_${Math.round(mag)}`;
+}
+
+function buildHomePool() {
+  homeAnnLayer.innerHTML = '';
+  homePool = [];
+  for (let i=0; i<HOME_N_ANN; i++) {
+    const el = document.createElement('span');
+    el.className = 'ann';
+    homeAnnLayer.appendChild(el);
+    homePool.push({el, x:0.5, y:0.5, revealed:false, blurLevel:0, active:false});
+  }
+}
+
+function sizeHomeCanvas() {
+  homeDotCanvas.width  = homeRight.offsetWidth;
+  homeDotCanvas.height = homeRight.offsetHeight;
+}
+
+function homeDrawDots(pts) {
+  const W=homeDotCanvas.width, H=homeDotCanvas.height;
+  if (!W||!H) return;
+  homeDotCtx.clearRect(0,0,W,H);
+  homeDotCtx.fillStyle='rgba(224,26,0,0.82)';
+  homeDotCtx.beginPath();
+  for (const p of pts) homeDotCtx.rect(p.nx*W-1, p.ny*H-1, 2, 2);
+  homeDotCtx.fill();
+}
+
+function homeAnalyze() {
+  if (homeVideo.readyState < 2) return;
+  const W=160, H=90;
+  homeAnaCtx.drawImage(homeVideo,0,0,W,H);
+  const id=homeAnaCtx.getImageData(0,0,W,H), px=id.data;
+  const {gx,gy,mg}=sobel(px,W,H);
+  const all=[];
+  for (let y=1; y<H-1; y+=HOME_DOT_STEP) for (let x=1; x<W-1; x+=HOME_DOT_STEP) {
+    const i=y*W+x; if (mg[i]>=HOME_DOT_THRESH) all.push({i,mag:mg[i]});
+  }
+  all.sort((a,b)=>b.mag-a.mag);
+  if (all.length>HOME_N_ANN) all.length=HOME_N_ANN;
+  const pts=[], m=0.06;
+  for (const {i,mag} of all) {
+    const bx=i%W, by=Math.floor(i/W), nx=bx/W, ny=by/H;
+    const st=rStats(px,W,H,nx-m,ny-m,nx+m,ny+m);
+    const mv=rMotion(px,homePrevPx,W,H,nx-m,ny-m,nx+m,ny+m);
+    const agx=Math.abs(gx[i]), agy=Math.abs(gy[i]);
+    const a=((Math.atan2(gy[i],gx[i])*180/Math.PI)%180+180)%180;
+    let dir;
+    if (agx>90&&agy>90) dir='CORNER';
+    else if (a<25||a>=155) dir='HORIZONTAL';
+    else if (a>=65&&a<115) dir='VERTICAL';
+    else dir='DIAGONAL';
+    pts.push({nx:Math.max(0.01,Math.min(0.99,nx)), ny:Math.max(0.01,Math.min(0.99,ny)), label:makeLabel(dir,mag,st,mv)});
+  }
+  homeDrawDots(pts);
+  const n=Math.min(pts.length,HOME_N_ANN);
+  for (let i=0; i<HOME_N_ANN; i++) {
+    const a=homePool[i];
+    if (i<n) {
+      const p=pts[i]; a.active=true;
+      if (!a.revealed) {
+        a.x=p.nx; a.y=p.ny; a.blurLevel=0;
+        a.el.style.left=(p.nx*100).toFixed(2)+'%';
+        a.el.style.top=(p.ny*100).toFixed(2)+'%';
+        a.el.style.transform=p.nx>0.62?'translate(calc(-100% - 12px),-50%)':'translate(12px,-50%)';
+      }
+      a.el.textContent=p.label;
+    } else {
+      a.active=false; a.revealed=false; a.blurLevel=0;
+      a.el.textContent=''; a.el.style.opacity='0'; a.el.style.filter='none';
+    }
+  }
+  homePreCtx.drawImage(homeVideo,0,0,W,H);
+  homePrevPx=homePreCtx.getImageData(0,0,W,H).data.slice();
+}
+
+function homeApplyGaze(ts) {
+  const dt=homeLastGazeTs?Math.min((ts-homeLastGazeTs)/1000,0.05):0;
+  homeLastGazeTs=ts;
+  homeSGX+=(homeRawGX-homeSGX)*HOME_GAZE_LERP;
+  homeSGY+=(homeRawGY-homeSGY)*HOME_GAZE_LERP;
+  const W=homeRight.offsetWidth, H=homeRight.offsetHeight;
+  if (!W||!H) return;
+  const gpx=homeSGX*W, gpy=homeSGY*H;
+  const revR=Math.min(W,H)*HOME_REVEAL_FRAC;
+  for (const a of homePool) {
+    if (!a.active||!a.el.textContent) continue;
+    const d=Math.hypot(a.x*W-gpx, a.y*H-gpy);
+    if (d<revR) {
+      if (!a.revealed){a.revealed=true; a.blurLevel=0;}
+      a.blurLevel=Math.max(0,a.blurLevel-HOME_BLUR_CLEAR*dt);
+      a.el.style.opacity='1'; a.el.style.filter='none';
+    } else if (a.revealed) {
+      a.blurLevel=Math.min(HOME_MAX_BLUR,a.blurLevel+HOME_BLUR_GROW*dt);
+      a.el.style.filter=`blur(${a.blurLevel.toFixed(2)}px)`;
+      if (a.blurLevel>=HOME_MAX_BLUR*0.98) {
+        a.revealed=false; a.blurLevel=0;
+        a.el.style.opacity='0'; a.el.style.filter='none';
+      }
+    }
+  }
+}
+
+function homeLoop(ts) {
+  if (!homeRunning) return;
+  homeApplyGaze(ts);
+  if (ts-homeLastAnaTs>HOME_ANA_INTERVAL){homeAnalyze(); homeLastAnaTs=ts;}
+  requestAnimationFrame(homeLoop);
+}
+
+/* ── Mouse / touch tracking for home screen ── */
+document.addEventListener('mousemove', e => {
+  if (!homeRunning) return;
+  homeDot.style.left=e.clientX+'px';
+  homeDot.style.top=e.clientY+'px';
+  const rect=homeRight.getBoundingClientRect();
+  homeRawGX=(e.clientX-rect.left)/rect.width;
+  homeRawGY=(e.clientY-rect.top)/rect.height;
+});
+document.addEventListener('touchmove', e => {
+  if (!homeRunning) return;
+  const t=e.touches[0];
+  homeDot.style.left=t.clientX+'px';
+  homeDot.style.top=t.clientY+'px';
+  const rect=homeRight.getBoundingClientRect();
+  homeRawGX=(t.clientX-rect.left)/rect.width;
+  homeRawGY=(t.clientY-rect.top)/rect.height;
+},{passive:true});
+
+/*
+  /* ══════════════════════════════════════════════════════════════════════
+   NAVIGATION
+   ══════════════════════════════════════════════════════════════════════ */
+let appStarted = false;
+
+function showHome() {
+  homeRunning = true;
+  homeScreen.style.display = 'flex';
+  homeDot.style.display = 'block';
+  navHomeLink.classList.add('active');
+  navSessionLink.classList.remove('active');
+  requestAnimationFrame(homeLoop);
+}
+
+function hideHome() {
+  homeRunning = false;
+  homeScreen.style.display = 'none';
+  homeDot.style.display = 'none';
+  navHomeLink.classList.remove('active');
+  navSessionLink.classList.add('active');
+}
+
+function goToSession() {
+  hideHome();
+  if (!appStarted) {
+    appStarted = true;
+    startApp();
+  }
+}
+
+document.getElementById('homeStartBtn').addEventListener('click', goToSession);
+navSessionLink.addEventListener('click', goToSession);
+navHomeLink.addEventListener('click', () => { if (appStarted) showHome(); });
+
+function bootHome() {
+  buildHomePool();
+  sizeHomeCanvas();
+  window.addEventListener('resize', sizeHomeCanvas);
+  homeVideo.addEventListener('loadedmetadata', sizeHomeCanvas);
+  homeDot.style.display = 'block';
+  requestAnimationFrame(homeLoop);
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    CONSTANTS
@@ -216,7 +567,6 @@ const calStartBtn = document.getElementById('calStartBtn');
 let currentUser = '';
 let imageLibrary = [], currentImageIdx = 0;
 
-// Analysis
 let fixationHistory  = [], currentFixation = null;
 let scanPathHistory  = [];
 let saccadeHistory   = [], saccadeActive = false, saccadeStart = null;
@@ -226,12 +576,10 @@ let firstFix         = null, firstFixDone = false, firstFixModeTs = 0;
 let sessionStartTs   = 0;
 let gazeLog          = [];
 
-// Gaze runtime
 let rawGX = 0.5, rawGY = 0.5;
 let sGX   = 0.5, sGY   = 0.5;
 let gazeOn = false, lastGazeTs = 0;
 
-// Tracking buffers
 let curOffX = 0.5, curOffY = 0.5;
 let curEyeOffX = 0.5, curEyeOffY = 0.5, eyeValid = false;
 const offXBuf = [], offYBuf = [];
@@ -240,12 +588,11 @@ let eyeCalMap = null;
 
 window._gazeHistory = [];
 
-// Data screen animation
 let currentAnimation = null;
 let dataActiveLayer  = 'GAZE';
 
 /* ══════════════════════════════════════════════════════════════════════
-   EYE STABILITY  (used by calibration)
+   EYE STABILITY
    ══════════════════════════════════════════════════════════════════════ */
 function eyeStab() {
   const N = Math.min(eyeOffXBuf.length, 20);
@@ -341,7 +688,7 @@ function updateFirstFix() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   MAIN DRAW FRAME  (live view: gaze dot only, no overlays)
+   MAIN DRAW FRAME
    ══════════════════════════════════════════════════════════════════════ */
 function drawFrame() {
   dotCtx.clearRect(0, 0, dotCanvas.width, dotCanvas.height);
@@ -647,7 +994,6 @@ function getDataCanvas() {
   return dc;
 }
 
-// GAZE: replay gazeLog one point every 50ms, red dot r=4, accumulates
 function animateGaze(ctx, W, H, log) {
   let tid = null, cancelled = false;
   const pts = log.slice(); let i = 0;
@@ -662,12 +1008,10 @@ function animateGaze(ctx, W, H, log) {
   return { cancel: () => { cancelled=true; clearTimeout(tid); } };
 }
 
-// FIXATION: one every 600ms, circle grows 0→final over 300ms, label after, previous stay
 function animateFixation(ctx, W, H, history) {
   let tid = null, rafId = null, cancelled = false;
   const fixes = history.slice(); let i = 0;
   const drawn = [];
-
   function redrawAll() {
     for (const fix of drawn) {
       const cx=fix.x*W, cy=fix.y*H, r=Math.min(8+fix.duration/80,44);
@@ -680,7 +1024,6 @@ function animateFixation(ctx, W, H, history) {
       }
     }
   }
-
   function next() {
     if (cancelled || i >= fixes.length) return;
     const fix = fixes[i++];
@@ -700,8 +1043,7 @@ function animateFixation(ctx, W, H, history) {
           ctx.textAlign='center'; ctx.textBaseline='alphabetic';
           ctx.fillText(Math.round(fix.duration)+'ms', cx, cy+rFinal+13);
         }
-        drawn.push(fix);
-        tid = setTimeout(next, 600);
+        drawn.push(fix); tid = setTimeout(next, 600);
       }
     }
     rafId = requestAnimationFrame(grow);
@@ -710,12 +1052,10 @@ function animateFixation(ctx, W, H, history) {
   return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
 }
 
-// SACCADE: one every 500ms, line draws over 200ms, arrowhead, previous stay
 function animateSaccade(ctx, W, H, history) {
   let tid = null, rafId = null, cancelled = false;
   const sacs = history.slice(); let i = 0;
   const drawn = [];
-
   function drawSacFull(sac) {
     const fx=sac.fromX*W, fy=sac.fromY*H, tx=sac.toX*W, ty=sac.toY*H;
     ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(tx,ty);
@@ -726,9 +1066,7 @@ function animateSaccade(ctx, W, H, history) {
     ctx.lineTo(tx-l*Math.cos(a+Math.PI/6), ty-l*Math.sin(a+Math.PI/6));
     ctx.closePath(); ctx.fillStyle='rgba(224,26,0,0.8)'; ctx.fill();
   }
-
   function redrawAll() { for (const s of drawn) drawSacFull(s); }
-
   function next() {
     if (cancelled || i >= sacs.length) return;
     const sac = sacs[i++];
@@ -750,11 +1088,9 @@ function animateSaccade(ctx, W, H, history) {
   return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
 }
 
-// SCAN PATH: numbered circles + dashed lines, one step every 700ms
 function animateScanPath(ctx, W, H, history) {
   let tid = null, cancelled = false;
   const pts = history.slice(); let shown = 0;
-
   function drawAll(n) {
     ctx.clearRect(0,0,W,H);
     if (n < 1) return;
@@ -774,18 +1110,14 @@ function animateScanPath(ctx, W, H, history) {
       ctx.fillText(j+1, cx, cy); ctx.textBaseline='alphabetic';
     }
   }
-
   function next() {
     if (cancelled || shown >= pts.length) return;
-    shown++;
-    drawAll(shown);
-    tid = setTimeout(next, 700);
+    shown++; drawAll(shown); tid = setTimeout(next, 700);
   }
   next();
   return { cancel: () => { cancelled=true; clearTimeout(tid); } };
 }
 
-// HEATMAP: accumulate gazeLog at 20x speed, contour style, ~3s total
 function animateHeatmap(ctx, W, H, log) {
   let tid = null, cancelled = false;
   const pts = log.slice(); let i = 0;
@@ -794,7 +1126,6 @@ function animateHeatmap(ctx, W, H, log) {
   const sigma = 0.07*Math.max(hmW,hmH);
   const r2 = Math.ceil(3*sigma);
   const inv2s2 = 1/(2*sigma*sigma);
-
   function addPt(p) {
     const gx=p.x*hmW, gy=p.y*hmH;
     const x0=Math.max(0,Math.floor(gx-r2)), x1=Math.min(hmW-1,Math.ceil(gx+r2));
@@ -802,7 +1133,6 @@ function animateHeatmap(ctx, W, H, log) {
     for (let y=y0;y<=y1;y++) for (let x=x0;x<=x1;x++)
       hm[y*hmW+x] += 0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
   }
-
   function render() {
     let mx = 0; for (let j=0;j<hm.length;j++) if(hm[j]>mx) mx=hm[j];
     if (mx < 0.01) return;
@@ -822,10 +1152,8 @@ function animateHeatmap(ctx, W, H, log) {
     tc.putImageData(img,0,0);
     ctx.clearRect(0,0,W,H); ctx.drawImage(tmp,0,0,W,H);
   }
-
   const totalSteps = 60, interval = 50;
   const perStep = Math.max(1, Math.ceil(pts.length/totalSteps));
-
   function step() {
     if (cancelled) return;
     let c=0; while(i<pts.length && c<perStep){addPt(pts[i++]);c++;}
@@ -836,7 +1164,6 @@ function animateHeatmap(ctx, W, H, log) {
   return { cancel: () => { cancelled=true; clearTimeout(tid); } };
 }
 
-// FIRST FIXATION: 1s blank → red dot + expanding ring + label + pulse
 function animateFirstFix(ctx, W, H, fix, modeTs) {
   let tid = null, rafId = null, cancelled = false;
   if (!fix) {
@@ -847,7 +1174,6 @@ function animateFirstFix(ctx, W, H, fix, modeTs) {
   }
   const cx=fix.x*W, cy=fix.y*H;
   const offset = (fix.startTs - modeTs) / 1000;
-
   tid = setTimeout(() => {
     if (cancelled) return;
     const startPhase = performance.now();
@@ -893,7 +1219,6 @@ function animateFirstFix(ctx, W, H, fix, modeTs) {
     }
     rafId = requestAnimationFrame(phase2);
   }, 1000);
-
   return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
 }
 
@@ -1008,7 +1333,8 @@ document.getElementById('playBtn').addEventListener('click', () => {
    START
    ══════════════════════════════════════════════════════════════════════ */
 async function startApp() { await showNameScreen(); await boot(); }
-startApp();
+
+bootHome();
 </script>
 </body>
 </html>
