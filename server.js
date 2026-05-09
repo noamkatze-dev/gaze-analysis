@@ -108,6 +108,7 @@ app.get('/api/sessions', (_req, res) => {
             gender:          data.gender          || null,
             location:        data.location        || null,
             viewDuration:    data.viewDuration     || null,
+            imageName:       data.imageName        || '',
             ts:              data.ts,
             sessionDuration: data.sessionDuration,
             fixationCount:   data.fixations ? data.fixations.length : 0,
