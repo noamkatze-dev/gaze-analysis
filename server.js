@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname)));
 app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 /* ── in-memory state ── */
-const sessions         = new Map(); // name → { x, y, ts, fixationCount, ... }
-const disconnectTimers = new Map(); // name → timer id
+const sessions         = new Map();
+const disconnectTimers = new Map();
 
 function broadcastSessions() {
   const msg = JSON.stringify({ type: 'sessions', data: Object.fromEntries(sessions) });
@@ -34,12 +34,10 @@ wss.on('connection', ws => {
       const msg = JSON.parse(raw.toString());
       if (msg.type === 'gaze' && typeof msg.name === 'string' && msg.name) {
         ws.username = msg.name;
-
         if (disconnectTimers.has(msg.name)) {
           clearTimeout(disconnectTimers.get(msg.name));
           disconnectTimers.delete(msg.name);
         }
-
         sessions.set(msg.name, {
           x:               +msg.x || 0,
           y:               +msg.y || 0,
@@ -65,7 +63,6 @@ wss.on('connection', ws => {
     disconnectTimers.set(name, timer);
   });
 
-  // Send current state to new connection
   ws.send(JSON.stringify({ type: 'sessions', data: Object.fromEntries(sessions) }));
 });
 
@@ -107,6 +104,10 @@ app.get('/api/sessions', (_req, res) => {
           return {
             filename:        f,
             user:            data.user,
+            age:             data.age             || null,
+            gender:          data.gender          || null,
+            location:        data.location        || null,
+            viewDuration:    data.viewDuration     || null,
             ts:              data.ts,
             sessionDuration: data.sessionDuration,
             fixationCount:   data.fixations ? data.fixations.length : 0,
