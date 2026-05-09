@@ -157,7 +157,6 @@ body { background:#fff; overflow:hidden; width:100vw; height:100vh; cursor:defau
 .d-thumb-img img { width:100%; height:100%; object-fit:cover; display:block; }
 .d-thumb-meta { padding:6px 8px; font-size:9px; line-height:1.4; }
 .d-thumb-name { font-weight:700; color:#111; letter-spacing:0.05em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.d-thumb-user { color:#e01a00; font-weight:700; letter-spacing:0.08em; }
 .d-thumb-time { color:#999; font-weight:300; letter-spacing:0.05em; margin-top:2px; }
 
 /* DATA CENTER - full-height image with floating toolbar */
@@ -1186,6 +1185,7 @@ function getDataCanvas(){
   return dc;
 }
 
+/* Static drawers */
 function drawGazeStatic(ctx,W,H,log){
   ctx.fillStyle='rgba(224,26,0,0.5)';
   for(const p of log){ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fill();}
@@ -1222,6 +1222,7 @@ function drawScanPathStatic(ctx,W,H,pts){
   });
 }
 
+/* Marching-squares heatmap */
 function buildHeatmapField(log){
   const hmW=200,hmH=112,hm=new Float32Array(hmW*hmH);
   const sigma=0.07*Math.max(hmW,hmH),r2=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
@@ -1286,6 +1287,7 @@ function drawFirstFixStatic(ctx,W,H,fix,modeTs){
   ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
 }
 
+/* Animated layers */
 function animateGaze(ctx,W,H,log){
   let tid=null,cancelled=false;const pts=log.slice();let i=0;
   function step(){if(cancelled||i>=pts.length)return;const p=pts[i++];ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.5)';ctx.fill();tid=setTimeout(step,50);}
@@ -1338,6 +1340,7 @@ function animateFirstFix(ctx,W,H,fix,modeTs){
   return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
 }
 
+/* Dispatch */
 function drawStaticLayer(ctx,W,H,layer,data){
   ctx.clearRect(0,0,W,H);
   switch(layer){
@@ -1392,7 +1395,8 @@ function renderImgList(){
     if(s.user!==currentUser)return;
     const t=document.createElement('div');
     t.className='d-thumb'+(i===activeSessionIdx?' active':'');
-    t.innerHTML=`<div class="d-thumb-img"><img src="${s.imageSrc}" alt=""/></div><div class="d-thumb-meta"><div class="d-thumb-user">${s.user}</div><div class="d-thumb-name">${s.imageName}</div><div class="d-thumb-time">${fmtTime(s.timestamp)}</div></div>`;
+    const durLabel=s.viewDuration?(s.viewDuration/1000).toFixed(1)+'s':fmtTime(s.timestamp);
+    t.innerHTML=`<div class="d-thumb-img"><img src="${s.imageSrc}" alt=""/></div><div class="d-thumb-meta"><div class="d-thumb-name">${s.imageName}</div><div class="d-thumb-time">${durLabel}</div></div>`;
     t.onclick=()=>{
       activeSessionIdx=i;
       document.getElementById('dataImg').src=s.imageSrc;
@@ -1409,16 +1413,16 @@ function renderCompare(){
   const grid=document.getElementById('compareGrid');
   const empty=document.getElementById('compareEmpty');
   grid.innerHTML='';
-  const mySessions=sessions.filter(s=>s.user===currentUser);
-  if(mySessions.length===0){empty.style.display='block';grid.style.display='none';return;}
+  if(sessions.length===0){empty.style.display='block';grid.style.display='none';return;}
   empty.style.display='none';grid.style.display='grid';
-  const cols=mySessions.length===1?1:mySessions.length<=4?2:3;
+  const cols=sessions.length===1?1:sessions.length<=4?2:3;
   grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;
-  mySessions.forEach(s=>{
+  sessions.forEach(s=>{
     const locStr=s.location?[s.location.city,s.location.country].filter(Boolean).join(', '):'';
-    const demoStr=[s.age?s.age+'y':'',s.gender||'',locStr,s.viewDuration?(s.viewDuration/1000).toFixed(0)+'s view':''].filter(Boolean).join(' · ');
+    const demoLine=[s.age?s.age+'y':'',s.gender||'',locStr].filter(Boolean).join(' · ');
+    const durStr=s.viewDuration?(s.viewDuration/1000).toFixed(1)+'s':'';
     const cell=document.createElement('div');cell.className='compare-cell';
-    cell.innerHTML=`<div class="compare-cell-head"><span class="compare-cell-user">${s.user}</span><span class="compare-cell-meta">${s.imageName} · ${fmtTime(s.timestamp)}</span></div><div class="compare-cell-canvas-wrap">${dataImgMode==='WITH'?`<img src="${s.imageSrc}" alt=""/>`:''}<canvas></canvas></div>${demoStr?`<div class="compare-cell-footer">${demoStr}</div>`:''}`;
+    cell.innerHTML=`<div class="compare-cell-head"><div><span class="compare-cell-user">${s.user}</span>${demoLine?`<div style="font-size:9px;color:#999;letter-spacing:0.06em;margin-top:2px;">${demoLine}</div>`:''}</div><span class="compare-cell-meta">${s.imageName}${durStr?' · '+durStr:''}</span></div><div class="compare-cell-canvas-wrap">${dataImgMode==='WITH'?`<img src="${s.imageSrc}" alt=""/>`:''}<canvas></canvas></div>`;
     grid.appendChild(cell);
     requestAnimationFrame(()=>{
       const wrap=cell.querySelector('.compare-cell-canvas-wrap');
@@ -1479,95 +1483,94 @@ async function boot(){
 
   setInterval(()=>{
     if(!gazeOn)return;
-    gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});
-    if(gazeLog.length>10000)gazeLog.shift();
-  },100);
+          gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});
+      if(gazeLog.length>10000)gazeLog.shift();
+    },100);
 
-  requestAnimationFrame(mainLoop);
-  loadNextImage
-  ();
-}
+    requestAnimationFrame(mainLoop);
+    loadNextImage();
+  }
 
-/* ═══════════════════════════════════════════════════════
-   EVENTS
-   ═══════════════════════════════════════════════════════ */
-document.getElementById('doneBtn').addEventListener('click',()=>{
-  const viewDuration=performance.now()-imageStartTs;
-  const snap={
-    id:Date.now()+'-'+Math.random().toString(36).slice(2,7),
-    user:currentUser,age:currentUserAge,gender:currentUserGender,
-    location:userLocation?{...userLocation}:null,
-    viewDuration,
-    imageSrc:currentImageSrc,imageName:currentImageName,
-    timestamp:Date.now(),
-    gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),
-    saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),
-    firstFix:firstFix?{...firstFix}:null,firstFixModeTs
-  };
-  sessions.push(snap);
-  activeSessionIdx=sessions.length-1;
-  queueIdx++;
-  loadNextImage();
-});
-
-document.getElementById('dataBtn').addEventListener('click',openData);
-
-document.getElementById('dataCloseBtn').addEventListener('click',()=>{
-  cancelAnimation();document.getElementById('dataScreen').style.display='none';
-});
-
-document.getElementById('statsToggleBtn').addEventListener('click',()=>{
-  const stats=document.getElementById('dataStats');
-  const btn=document.getElementById('statsToggleBtn');
-  stats.classList.toggle('open');
-  btn.classList.toggle('active',stats.classList.contains('open'));
-});
-
-document.querySelectorAll('.layer-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');dataActiveLayer=btn.dataset.layer;
-    if(dataView==='COMPARE')renderCompare();else playLayer(dataActiveLayer);
+  /* ═══════════════════════════════════════════════════════
+     EVENTS
+     ═══════════════════════════════════════════════════════ */
+  document.getElementById('doneBtn').addEventListener('click',()=>{
+    const viewDuration=performance.now()-imageStartTs;
+    const snap={
+      id:Date.now()+'-'+Math.random().toString(36).slice(2,7),
+      user:currentUser,age:currentUserAge,gender:currentUserGender,
+      location:userLocation?{...userLocation}:null,
+      viewDuration,
+      imageSrc:currentImageSrc,imageName:currentImageName,
+      timestamp:Date.now(),
+      gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),
+      saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),
+      firstFix:firstFix?{...firstFix}:null,firstFixModeTs
+    };
+    sessions.push(snap);
+    activeSessionIdx=sessions.length-1;
+    queueIdx++;
+    loadNextImage();
   });
-});
 
-document.querySelectorAll('.mode-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');dataMode=btn.dataset.mode;
-    if(dataView==='SINGLE')playLayer(dataActiveLayer);
+  document.getElementById('dataBtn').addEventListener('click',openData);
+
+  document.getElementById('dataCloseBtn').addEventListener('click',()=>{
+    cancelAnimation();document.getElementById('dataScreen').style.display='none';
   });
-});
 
-document.querySelectorAll('.img-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.img-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');dataImgMode=btn.dataset.img;
-    applyImgMode();if(dataView==='COMPARE')renderCompare();
+  document.getElementById('statsToggleBtn').addEventListener('click',()=>{
+    const stats=document.getElementById('dataStats');
+    const btn=document.getElementById('statsToggleBtn');
+    stats.classList.toggle('open');
+    btn.classList.toggle('active',stats.classList.contains('open'));
   });
-});
 
-document.getElementById('playBtn').addEventListener('click',()=>{
-  if(dataView==='COMPARE')renderCompare();else playLayer(dataActiveLayer||'GAZE');
-});
+  document.querySelectorAll('.layer-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');dataActiveLayer=btn.dataset.layer;
+      if(dataView==='COMPARE')renderCompare();else playLayer(dataActiveLayer);
+    });
+  });
 
-document.getElementById('viewSingleBtn').addEventListener('click',()=>setView('SINGLE'));
-document.getElementById('viewCompareBtn').addEventListener('click',()=>setView('COMPARE'));
+  document.querySelectorAll('.mode-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');dataMode=btn.dataset.mode;
+      if(dataView==='SINGLE')playLayer(dataActiveLayer);
+    });
+  });
 
-document.getElementById('scsDataBtn').addEventListener('click',()=>{
-  document.getElementById('sessionCompleteScreen').style.display='none';
-  openData();
-});
-document.getElementById('scsHomeBtn').addEventListener('click',()=>{
-  document.getElementById('sessionCompleteScreen').style.display='none';
-  showHome();
-});
+  document.querySelectorAll('.img-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.img-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');dataImgMode=btn.dataset.img;
+      applyImgMode();if(dataView==='COMPARE')renderCompare();
+    });
+  });
 
-/* ═══════════════════════════════════════════════════════
-   START
-   ═══════════════════════════════════════════════════════ */
-async function startApp(){await showNameScreen();await boot();}
-bootHome();
-</script>
-</body>
-</html>
+  document.getElementById('playBtn').addEventListener('click',()=>{
+    if(dataView==='COMPARE')renderCompare();else playLayer(dataActiveLayer||'GAZE');
+  });
+
+  document.getElementById('viewSingleBtn').addEventListener('click',()=>setView('SINGLE'));
+  document.getElementById('viewCompareBtn').addEventListener('click',()=>setView('COMPARE'));
+
+  document.getElementById('scsDataBtn').addEventListener('click',()=>{
+    document.getElementById('sessionCompleteScreen').style.display='none';
+    openData();
+  });
+  document.getElementById('scsHomeBtn').addEventListener('click',()=>{
+    document.getElementById('sessionCompleteScreen').style.display='none';
+    showHome();
+  });
+
+  /* ═══════════════════════════════════════════════════════
+     START
+     ═══════════════════════════════════════════════════════ */
+  async function startApp(){await showNameScreen();await boot();}
+  bootHome();
+  </script>
+  </body>
+  </html>
