@@ -18,24 +18,93 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .nav-link:hover{color:#111;}
 .nav-link.active{color:#e01a00;}
 
-/* HOME — full-screen video */
-#homeScreen{position:fixed;inset:0;z-index:8999;background:#000;}
-#homeVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-#homeDotCanvas{position:absolute;inset:0;pointer-events:none;z-index:1;}
-#homeOverlay{
-  position:absolute;inset:0;z-index:3;
-  background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,0.55) 100%);
+/* ═══════════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════════ */
+#homeScreen{
+  position:fixed;inset:0;z-index:8999;background:#000;
+  overflow-y:auto;overflow-x:hidden;
+}
+#homeVideo{position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;}
+#homeDotCanvas{position:fixed;inset:0;pointer-events:none;z-index:1;}
+
+/* Hero overlay — sits on top of the video */
+#homeHero{
+  position:fixed;inset:0;z-index:3;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.65) 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding-bottom:90px;pointer-events:none;
+  padding-bottom:80px;pointer-events:none;
 }
 .home-content{text-align:center;pointer-events:all;}
 .home-eyebrow{font-size:9px;font-weight:300;letter-spacing:0.5em;color:rgba(255,255,255,0.65);margin-bottom:18px;}
 .home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);}
 .home-subtitle{font-size:15px;font-weight:300;color:rgba(255,255,255,0.82);max-width:420px;line-height:1.6;margin:0 auto 36px;}
-#homeStartBtn{background:#e01a00;color:#fff;border:2px solid #e01a00;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:16px 52px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:28px;}
+#homeStartBtn{background:#e01a00;color:#fff;border:2px solid #e01a00;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:16px 52px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:28px;display:block;}
 #homeStartBtn:hover{background:#c01500;border-color:#c01500;}
-.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
 .home-badge{font-size:10px;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;}
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;gap:6px;}
+.home-scroll-hint::after{content:'↓';font-size:14px;}
+
+/* Info sections below the hero */
+#homeInfo{
+  position:relative;z-index:4;
+  background:#fff;
+  pointer-events:all;
+}
+
+/* HOW IT WORKS */
+.hi-section{padding:72px 48px;}
+.hi-section+.hi-section{border-top:1px solid #eee;}
+.hi-section-dark{background:#0a0a0a;}
+.hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#e01a00;margin-bottom:20px;}
+.hi-label-light{color:rgba(224,26,0,0.8);}
+.hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;}
+.hi-title-light{color:#fff;}
+.hi-sub{font-size:13px;font-weight:300;color:#888;max-width:480px;line-height:1.7;margin-bottom:40px;}
+.hi-sub-light{color:rgba(255,255,255,0.55);}
+
+.steps-row{display:flex;gap:0;align-items:stretch;max-width:860px;}
+.step-item{flex:1;padding:24px 28px;border-left:2px solid #eee;position:relative;}
+.step-item:first-child{border-left:none;padding-left:0;}
+.step-num{font-size:9px;font-weight:700;letter-spacing:0.3em;color:#e01a00;margin-bottom:10px;}
+.step-icon{font-size:28px;margin-bottom:12px;line-height:1;}
+.step-title{font-size:13px;font-weight:700;letter-spacing:0.1em;color:#111;margin-bottom:6px;}
+.step-desc{font-size:11px;font-weight:300;color:#888;line-height:1.6;}
+
+/* HOW-TO steps */
+.howto-list{list-style:none;max-width:560px;}
+.howto-list li{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f0f0f0;}
+.howto-list li:last-child{border-bottom:none;}
+.howto-n{font-size:11px;font-weight:700;color:#e01a00;letter-spacing:0.1em;min-width:22px;}
+.howto-text{font-size:12px;font-weight:300;color:#444;line-height:1.6;}
+.howto-text strong{font-weight:700;color:#111;}
+
+/* MODE CARDS GRID */
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;max-width:900px;}
+.mode-card{background:#fff;padding:24px 20px 20px;}
+.mode-card-name{font-size:9px;font-weight:700;letter-spacing:0.35em;color:#e01a00;margin-bottom:8px;}
+.mode-card-desc{font-size:10px;font-weight:300;color:#888;line-height:1.6;margin-top:10px;}
+.mode-preview{width:100%;height:80px;display:block;background:#f7f7f7;border:1px solid #eee;}
+
+/* USER META FORM */
+#nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
+.ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:48px;}
+.ns-form{display:flex;flex-direction:column;align-items:center;gap:0;width:100%;max-width:340px;}
+.ns-field{width:100%;margin-bottom:28px;}
+.ns-field label{display:block;font-size:10px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:12px;}
+.ns-field input,
+.ns-field select{
+  background:transparent;border:none;border-bottom:2px solid #ddd;color:#111;
+  font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.1em;
+  padding:10px 6px;width:100%;caret-color:#e01a00;transition:border-color 0.15s;
+  -webkit-appearance:none;
+}
+.ns-field input:focus,
+.ns-field select:focus{border-bottom-color:#e01a00;outline:none;}
+.ns-field select option{font-size:14px;}
+.ns-row{display:flex;gap:24px;width:100%;}
+.ns-row .ns-field{flex:1;margin-bottom:28px;}
 
 /* MAIN APP */
 #imgWrapper{position:relative;width:100vw;height:100vh;overflow:hidden;}
@@ -44,6 +113,15 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
 #gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
 #info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(0,0,0,0.35);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
+
+/* FINISH SESSION BUTTON */
+#finishBtn{
+  position:fixed;bottom:16px;right:16px;
+  font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;
+  color:#fff;background:#e01a00;border:none;padding:12px 22px;
+  cursor:pointer;z-index:60;display:none;transition:background 0.15s;
+}
+#finishBtn:hover{background:#c01500;}
 
 .va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.22em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;}
 .va-btn-primary{background:#e01a00;color:#fff;border:2px solid #e01a00;font-size:13px;font-weight:700;padding:16px 52px;}
@@ -73,68 +151,142 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #dataBtn{position:fixed;bottom:16px;left:16px;font-size:10px;font-weight:700;letter-spacing:0.18em;color:#111;cursor:pointer;z-index:60;transition:color 0.15s,border-color 0.15s;user-select:none;background:#fff;border:1.5px solid #ddd;padding:8px 14px;display:none;}
 #dataBtn:hover{color:#e01a00;border-color:#e01a00;}
 
-/* DATA SCREEN */
-#dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#fff;flex-direction:column;overflow:hidden;padding-top:52px;}
-#dataHeader{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #eee;flex-shrink:0;}
-#dataHeader .data-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
+/* ═══════════════════════════════════════════
+   DATA SCREEN — FULL CANVAS LAYOUT
+═══════════════════════════════════════════ */
+#dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
+#dataHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;}
+#dataHeader .data-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
 .data-header-right{display:flex;align-items:center;gap:8px;}
-.view-tab{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;padding:7px 16px;border:1.5px solid #ddd;background:#fff;color:#999;cursor:pointer;transition:all 0.15s;}
-.view-tab.active{background:#fff8f8;color:#e01a00;border-color:#e01a00;}
+.view-tab{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;padding:7px 16px;border:1.5px solid #333;background:transparent;color:#666;cursor:pointer;transition:all 0.15s;}
+.view-tab.active{background:rgba(224,26,0,0.15);color:#e01a00;border-color:#e01a00;}
 .view-tab:hover{color:#e01a00;border-color:#e01a00;}
 
-#dataBody{display:flex;flex:1;overflow:hidden;}
-#compareView{display:none;flex:1;overflow:auto;padding:20px;background:#fafafa;}
-#compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
-.compare-panel{background:#fff;border:1px solid #eee;overflow:hidden;}
-.compare-panel-header{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid #f0f0f0;}
-.cp-user{font-size:11px;font-weight:700;letter-spacing:0.1em;color:#111;}
-.cp-time{font-size:9px;font-weight:300;color:#bbb;}
-.compare-canvas-wrap{position:relative;aspect-ratio:4/3;background:#111;overflow:hidden;}
-.cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
-.cp-canvas{position:absolute;inset:0;pointer-events:none;}
-.cp-stats{font-size:9px;font-weight:300;color:#aaa;padding:7px 12px;letter-spacing:0.06em;}
+/* DATA BODY: left sidebar + full canvas center */
+#dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
 
-#dataImgList{width:180px;flex-shrink:0;border-right:1px solid #eee;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;}
-.d-thumb{border:1.5px solid #eee;cursor:pointer;overflow:hidden;aspect-ratio:4/3;position:relative;transition:border-color 0.15s;}
-.d-thumb:hover{border-color:#999;}
+/* ── LEFT SIDEBAR: per-user gallery ── */
+#dataImgList{
+  width:200px;flex-shrink:0;
+  background:#0d0d0d;border-right:1px solid #222;
+  overflow-y:auto;padding:0;
+  display:flex;flex-direction:column;
+}
+.user-group{border-bottom:1px solid #1a1a1a;}
+.user-group-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px 8px;cursor:pointer;user-select:none;
+  transition:background 0.12s;
+}
+.user-group-header:hover{background:#161616;}
+.user-group-name{
+  font-size:9px;font-weight:700;letter-spacing:0.3em;
+  color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;
+}
+.user-group-meta{font-size:8px;font-weight:300;letter-spacing:0.1em;color:#555;margin-top:2px;}
+.user-group-count{
+  font-size:8px;font-weight:700;letter-spacing:0.1em;
+  color:#e01a00;background:rgba(224,26,0,0.12);
+  padding:2px 7px;border-radius:100px;flex-shrink:0;
+}
+.user-group-thumbs{padding:6px 8px 10px;display:flex;flex-direction:column;gap:6px;}
+.user-group.collapsed .user-group-thumbs{display:none;}
+
+.d-thumb{
+  border:1.5px solid #222;cursor:pointer;overflow:hidden;
+  aspect-ratio:4/3;position:relative;transition:border-color 0.15s;
+  background:#111;
+}
+.d-thumb:hover{border-color:#555;}
 .d-thumb.active{border-color:#e01a00;}
 .d-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.d-thumb-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);font-size:9px;font-weight:300;letter-spacing:0.06em;color:#fff;padding:3px 6px;}
+.d-thumb-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,0.75);
+  font-size:8px;font-weight:300;letter-spacing:0.05em;color:#ccc;
+  padding:3px 6px;
+}
+.d-thumb-fix-badge{
+  position:absolute;top:5px;right:5px;
+  font-size:8px;font-weight:700;color:#fff;
+  background:rgba(224,26,0,0.85);padding:2px 5px;
+  border-radius:3px;letter-spacing:0.05em;
+}
 
-#dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #eee;}
-
-/* TOOLBAR */
-#dataToolbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:8px 14px;background:#fff;border-bottom:1px solid #eee;flex-shrink:0;}
-.toolbar-spacer{flex:1;min-width:8px;}
-.layer-btn{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#aaa;background:#fff;border:1.5px solid #eee;padding:7px 10px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;}
-.layer-btn:hover{color:#e01a00;background:#fff8f8;border-color:#e01a00;}
-.layer-btn.active{color:#e01a00;background:#fff8f8;border-color:#e01a00;}
-.toggle-group{display:flex;}
-.toggle-btn{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 11px;border:1.5px solid #ddd;background:#fff;color:#bbb;cursor:pointer;transition:all 0.15s;}
-.toggle-btn:first-child{border-right:none;}
-.toggle-btn:hover{color:#e01a00;border-color:#e01a00;background:#fff8f8;}
-.toggle-btn.active{color:#e01a00;border-color:#e01a00;background:#fff8f8;}
-#playBtn{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#fff;background:#e01a00;border:1.5px solid #e01a00;padding:7px 14px;cursor:pointer;transition:background 0.15s;flex-shrink:0;}
-#playBtn:hover{background:#c01500;border-color:#c01500;}
+/* ── CANVAS CENTER: full image + overlay toolbar ── */
+#dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 
 #dataImgArea{position:relative;flex:1;overflow:hidden;background:#111;}
-#dataImg{width:100%;height:100%;object-fit:contain;display:block;}
-#dataCanvas{position:absolute;inset:0;pointer-events:none;}
+#dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+#dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
 
-#dataStats{width:220px;flex-shrink:0;overflow-y:auto;padding:18px 14px;}
-.stat-group{margin-bottom:14px;padding-bottom:14px;}
-.stat-group+.stat-group{border-top:1px solid #f0f0f0;padding-top:14px;}
-.stat-label{font-size:8px;font-weight:300;letter-spacing:0.35em;color:#bbb;margin-bottom:10px;}
-.stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #f5f5f5;}
-.stat-name{font-size:10px;font-weight:300;color:#999;}
-.stat-val{font-size:13px;font-weight:700;color:#111;}
-.stat-unit{font-size:9px;font-weight:300;color:#bbb;margin-left:2px;}
+/* Floating toolbar over canvas */
+#dataToolbar{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  display:flex;flex-wrap:nowrap;align-items:center;gap:4px;
+  background:rgba(0,0,0,0.72);
+  backdrop-filter:blur(8px);
+  padding:8px 12px;z-index:10;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.toolbar-spacer{flex:1;min-width:8px;}
+.layer-btn{
+  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;
+  color:#666;background:transparent;border:1.5px solid #333;
+  padding:6px 9px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;
+  white-space:nowrap;
+}
+.layer-btn:hover{color:#e01a00;background:rgba(224,26,0,0.1);border-color:#e01a00;}
+.layer-btn.active{color:#e01a00;background:rgba(224,26,0,0.15);border-color:#e01a00;}
+.toggle-group{display:flex;}
+.toggle-btn{
+  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;
+  padding:6px 10px;border:1.5px solid #333;background:transparent;color:#555;
+  cursor:pointer;transition:all 0.15s;white-space:nowrap;
+}
+.toggle-btn:first-child{border-right:none;}
+.toggle-btn:hover{color:#e01a00;border-color:#e01a00;background:rgba(224,26,0,0.1);}
+.toggle-btn.active{color:#e01a00;border-color:#e01a00;background:rgba(224,26,0,0.15);}
+#playBtn{
+  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;
+  color:#fff;background:#e01a00;border:1.5px solid #e01a00;
+  padding:6px 12px;cursor:pointer;transition:background 0.15s;flex-shrink:0;
+}
+#playBtn:hover{background:#c01500;border-color:#c01500;}
 
-#nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;}
-.ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:72px;}
-#nameScreen label{display:block;font-size:10px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:18px;}
-#nameInput{background:transparent;border:none;border-bottom:2px solid #111;color:#111;font-family:'Heebo',sans-serif;font-size:18px;letter-spacing:0.15em;padding:10px 6px;text-align:center;width:280px;caret-color:#e01a00;}
-#nameInput:focus{border-bottom-color:#e01a00;outline:none;}
+/* Floating stats panel */
+#dataStats{
+  position:absolute;right:12px;top:60px;
+  width:190px;background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.08);
+  overflow-y:auto;max-height:calc(100% - 80px);
+  padding:14px 12px;z-index:10;
+}
+.stat-group{margin-bottom:12px;padding-bottom:12px;}
+.stat-group+.stat-group{border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;}
+.stat-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:#555;margin-bottom:8px;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.04);}
+.stat-name{font-size:9px;font-weight:300;color:#666;}
+.stat-val{font-size:12px;font-weight:700;color:#fff;}
+.stat-unit{font-size:8px;font-weight:300;color:#555;margin-left:2px;}
+
+/* COMPARE VIEW */
+#compareView{display:none;flex:1;overflow:auto;padding:20px;background:#0a0a0a;}
+#compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+.compare-panel{background:#111;border:1px solid #222;overflow:hidden;}
+.compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:4px;}
+.cp-user{font-size:11px;font-weight:700;letter-spacing:0.1em;color:#fff;}
+.cp-meta{font-size:8px;font-weight:300;color:#555;line-height:1.5;}
+.cp-time{font-size:9px;font-weight:300;color:#555;}
+.compare-canvas-wrap{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden;}
+.cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+.cp-canvas{position:absolute;inset:0;pointer-events:none;}
+.cp-stats{font-size:9px;font-weight:300;color:#555;padding:7px 12px;letter-spacing:0.06em;border-top:1px solid #1a1a1a;}
+
+/* ═══════════════════════════════════════════
+   CALIBRATION
+═══════════════════════════════════════════ */
 </style>
 </head>
 <body>
@@ -150,10 +302,13 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </nav>
 
+<!-- ═══════════ HOME ═══════════ -->
 <div id="homeScreen">
   <video id="homeVideo" src="benjamin netanyahu.mp4" autoplay loop muted playsinline></video>
   <canvas id="homeDotCanvas"></canvas>
-  <div id="homeOverlay">
+
+  <!-- Hero — fixed overlay on video -->
+  <div id="homeHero">
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
       <h1 class="home-heading">See where<br>attention goes.</h1>
@@ -163,12 +318,79 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">6 Analysis Modes</span>
         <span class="home-badge">Iris Detection</span>
         <span class="home-badge">Real-time</span>
+        <span class="home-badge">Multi-user Compare</span>
       </div>
+      <div class="home-scroll-hint">SCROLL TO LEARN MORE</div>
     </div>
   </div>
-</div>
+
+  <!-- Info content below the hero -->
+  <div id="homeInfo">
+
+    <!-- HOW IT WORKS -->
+    <div class="hi-section">
+      <div class="hi-label">HOW IT WORKS</div>
+      <h2 class="hi-title">From eyes to insights<br>in three steps.</h2>
+      <p class="hi-sub">The system uses your webcam to track the position of your iris in real-time, maps gaze to screen coordinates, then classifies eye movements into research-grade metrics.</p>
+      <div class="steps-row">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <div class="step-icon">👁</div>
+          <div class="step-title">EYE TRACKING</div>
+          <div class="step-desc">MediaPipe detects 478 facial landmarks per frame, isolating the iris center in both eyes for sub-pixel gaze estimation.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <div class="step-icon">⊕</div>
+          <div class="step-title">CALIBRATION</div>
+          <div class="step-desc">A 9-point affine calibration maps your unique eye movement range to screen coordinates. Keep your head still and move only your eyes.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <div class="step-icon">◈</div>
+          <div class="step-title">GAZE ANALYSIS</div>
+          <div class="step-desc">Gaze samples are classified in real-time into fixations, saccades, scan paths, and heatmaps using I-DT and I-VT algorithms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 ANALYSIS MODES -->
+    <div class="hi-section" style="background:#f7f7f7;">
+      <div class="hi-label">ANALYSIS MODES</div>
+      <h2 class="hi-title">Six ways to read<br>visual attention.</h2>
+      <p class="hi-sub">Switch between modes in real-time to explore different aspects of how a viewer scans an image.</p>
+      <div class="modes-grid" id="modesGrid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="hi-section">
+      <div class="hi-label">QUICK START</div>
+      <h2 class="hi-title">Up and running<br>in under a minute.</h2>
+      <ol class="howto-list">
+        <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts — only your face is used, nothing is recorded or stored externally.</span></li>
+        <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> — name, age, and gender. These are stored with your session data for comparison across participants.</span></li>
+        <li><span class="howto-n">03</span><span class="howto-text"><strong>Complete the 9-point calibration.</strong> Keep your head completely still and move only your eyes to each red dot. Hold each dot until the ring fills.</span></li>
+        <li><span class="howto-n">04</span><span class="howto-text"><strong>Select an image</strong> from the library or upload your own stimulus image.</span></li>
+        <li><span class="howto-n">05</span><span class="howto-text"><strong>View the image naturally.</strong> Your gaze is recorded automatically at 10 samples/second. When done, press <strong>FINISH SESSION</strong>.</span></li>
+        <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> — click DATA to see fixations, saccades, heatmaps, scan path, and first fixation. Compare across users in the COMPARE tab.</span></li>
+      </ol>
+    </div>
+
+    <!-- DARK CTA -->
+    <div class="hi-section hi-section-dark" style="text-align:center;">
+      <div class="hi-label hi-label-light">READY?</div>
+      <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
+      <button id="homeStartBtn2" style="background:#e01a00;color:#fff;border:2px solid #e01a00;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:16px 52px;cursor:pointer;transition:background 0.18s;">START SESSION</button>
+    </div>
+
+  </div><!-- /#homeInfo -->
+</div><!-- /#homeScreen -->
+
 <canvas id="homeAnaC" style="display:none" width="160" height="90"></canvas>
 
+<!-- MAIN SESSION -->
 <div id="imgWrapper">
   <img id="mainImg" src="" alt="stimulus"/>
   <canvas id="dotCanvas"></canvas>
@@ -177,6 +399,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
 <div id="gazeDot"></div>
 <div id="info">ALLOW CAMERA ACCESS</div>
+<button id="finishBtn">■ FINISH SESSION</button>
 
 <div id="calOverlay">
   <canvas id="calCanvas"></canvas>
@@ -192,6 +415,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
 <div id="dataBtn">DATA</div>
 
+<!-- DATA SCREEN -->
 <div id="dataScreen">
   <div id="dataHeader">
     <div class="data-title">SESSION DATA</div>
@@ -202,70 +426,106 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
     </div>
   </div>
   <div id="dataBody">
+    <!-- Per-user gallery sidebar -->
     <div id="dataImgList"></div>
+
+    <!-- Full-canvas center -->
     <div id="dataCenter">
-      <div id="dataToolbar">
-        <button class="layer-btn active" data-layer="GAZE">GAZE</button>
-        <button class="layer-btn" data-layer="FIXATION">FIXATION</button>
-        <button class="layer-btn" data-layer="SACCADE">SACCADE</button>
-        <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
-        <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
-        <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
-        <span class="toolbar-spacer"></span>
-        <button id="playBtn">▶ REPLAY</button>
-        <div class="toggle-group">
-          <button class="toggle-btn active" id="animatedBtn">▶ ANIMATED</button>
-          <button class="toggle-btn" id="staticBtn">■ STATIC</button>
-        </div>
-        <div class="toggle-group">
-          <button class="toggle-btn active" id="withImgBtn">⬜ WITH IMAGE</button>
-          <button class="toggle-btn" id="withoutImgBtn">◼ WITHOUT</button>
-        </div>
-      </div>
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
-      </div>
-    </div>
-    <div id="dataStats">
-      <div class="stat-group">
-        <div class="stat-label">FIXATION</div>
-        <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-fix-count">—</span></span></div>
-        <div class="stat-row"><span class="stat-name">Avg duration</span><span><span class="stat-val" id="st-fix-avg">—</span><span class="stat-unit">ms</span></span></div>
-        <div class="stat-row"><span class="stat-name">Total dwell</span><span><span class="stat-val" id="st-fix-total">—</span><span class="stat-unit">ms</span></span></div>
-      </div>
-      <div class="stat-group">
-        <div class="stat-label">SACCADE</div>
-        <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-sac-count">—</span></span></div>
-        <div class="stat-row"><span class="stat-name">Avg amplitude</span><span><span class="stat-val" id="st-sac-amp">—</span><span class="stat-unit">%</span></span></div>
-      </div>
-      <div class="stat-group">
-        <div class="stat-label">SCAN PATH</div>
-        <div class="stat-row"><span class="stat-name">Fixation steps</span><span><span class="stat-val" id="st-scan-steps">—</span></span></div>
-      </div>
-      <div class="stat-group">
-        <div class="stat-label">FIRST FIXATION</div>
-        <div class="stat-row"><span class="stat-name">Time to first fix</span><span><span class="stat-val" id="st-ttff">—</span><span class="stat-unit">s</span></span></div>
-        <div class="stat-row"><span class="stat-name">Position X</span><span><span class="stat-val" id="st-ff-x">—</span></span></div>
-        <div class="stat-row"><span class="stat-name">Position Y</span><span><span class="stat-val" id="st-ff-y">—</span></span></div>
-      </div>
-      <div class="stat-group">
-        <div class="stat-label">SESSION</div>
-        <div class="stat-row"><span class="stat-name">Gaze samples</span><span><span class="stat-val" id="st-gaze-n">—</span></span></div>
-        <div class="stat-row"><span class="stat-name">Duration</span><span><span class="stat-val" id="st-duration">—</span><span class="stat-unit">s</span></span></div>
+
+        <!-- Floating toolbar -->
+        <div id="dataToolbar">
+          <button class="layer-btn active" data-layer="GAZE">GAZE</button>
+          <button class="layer-btn" data-layer="FIXATION">FIXATION</button>
+          <button class="layer-btn" data-layer="SACCADE">SACCADE</button>
+          <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
+          <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
+          <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
+          <span class="toolbar-spacer"></span>
+          <button id="playBtn">▶ REPLAY</button>
+          <div class="toggle-group">
+            <button class="toggle-btn active" id="animatedBtn">▶ ANIM</button>
+            <button class="toggle-btn" id="staticBtn">■ STATIC</button>
+          </div>
+          <div class="toggle-group">
+            <button class="toggle-btn active" id="withImgBtn">⬜ IMG</button>
+            <button class="toggle-btn" id="withoutImgBtn">◼ OFF</button>
+          </div>
+        </div>
+
+        <!-- Floating stats -->
+        <div id="dataStats">
+          <div class="stat-group">
+            <div class="stat-label">FIXATION</div>
+            <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-fix-count">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Avg dur</span><span><span class="stat-val" id="st-fix-avg">—</span><span class="stat-unit">ms</span></span></div>
+            <div class="stat-row"><span class="stat-name">Total dwell</span><span><span class="stat-val" id="st-fix-total">—</span><span class="stat-unit">ms</span></span></div>
+          </div>
+          <div class="stat-group">
+            <div class="stat-label">SACCADE</div>
+            <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-sac-count">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Avg amp</span><span><span class="stat-val" id="st-sac-amp">—</span><span class="stat-unit">%</span></span></div>
+          </div>
+          <div class="stat-group">
+            <div class="stat-label">SCAN PATH</div>
+            <div class="stat-row"><span class="stat-name">Steps</span><span><span class="stat-val" id="st-scan-steps">—</span></span></div>
+          </div>
+          <div class="stat-group">
+            <div class="stat-label">FIRST FIXATION</div>
+            <div class="stat-row"><span class="stat-name">TTFF</span><span><span class="stat-val" id="st-ttff">—</span><span class="stat-unit">s</span></span></div>
+            <div class="stat-row"><span class="stat-name">X</span><span><span class="stat-val" id="st-ff-x">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Y</span><span><span class="stat-val" id="st-ff-y">—</span></span></div>
+          </div>
+          <div class="stat-group">
+            <div class="stat-label">SESSION</div>
+            <div class="stat-row"><span class="stat-name">Samples</span><span><span class="stat-val" id="st-gaze-n">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Duration</span><span><span class="stat-val" id="st-duration">—</span><span class="stat-unit">s</span></span></div>
+            <div class="stat-row"><span class="stat-name">Location</span><span><span class="stat-val" id="st-location" style="font-size:9px;">—</span></span></div>
+          </div>
+          <div class="stat-group" id="st-user-group">
+            <div class="stat-label">PARTICIPANT</div>
+            <div class="stat-row"><span class="stat-name">Name</span><span><span class="stat-val" id="st-user-name" style="font-size:9px;">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Age</span><span><span class="stat-val" id="st-user-age">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Gender</span><span><span class="stat-val" id="st-user-gender" style="font-size:9px;">—</span></span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
   <div id="compareView">
     <div id="compareGrid"></div>
   </div>
 </div>
 
+<!-- NAME / USER META SCREEN -->
 <div id="nameScreen">
   <div class="ns-title">VISUAL ANALYSIS SYSTEM</div>
-  <label for="nameInput">ENTER YOUR NAME</label>
-  <input id="nameInput" type="text" autocomplete="off" spellcheck="false"/>
-  <button id="nameContinue" class="va-btn va-btn-primary" style="margin-top:44px;">CONTINUE</button>
+  <div class="ns-form">
+    <div class="ns-field">
+      <label for="nameInput">FULL NAME</label>
+      <input id="nameInput" type="text" autocomplete="off" spellcheck="false" placeholder="Enter your name"/>
+    </div>
+    <div class="ns-row">
+      <div class="ns-field">
+        <label for="ageInput">AGE</label>
+        <input id="ageInput" type="number" min="1" max="120" placeholder="e.g. 28"/>
+      </div>
+      <div class="ns-field">
+        <label for="genderInput">GENDER</label>
+        <select id="genderInput">
+          <option value="" disabled selected>Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Non-binary">Non-binary</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+      </div>
+    </div>
+    <button id="nameContinue" class="va-btn va-btn-primary" style="margin-top:12px;">CONTINUE</button>
+  </div>
 </div>
 
 <script type="module">
@@ -351,6 +611,66 @@ function homeLoop(ts) {
   requestAnimationFrame(homeLoop);
 }
 
+/* ── Mode preview mini-canvases (drawn after static functions are defined) ── */
+function buildModePreviews() {
+  const modes = [
+    { key:'GAZE',     name:'GAZE',          desc:'Shows where on the image the viewer\'s eyes landed, sample by sample.' },
+    { key:'FIXATION', name:'FIXATION',       desc:'Circles proportional to dwell time mark where attention was held.' },
+    { key:'SACCADE',  name:'SACCADE',        desc:'Arrows trace rapid eye jumps between regions of interest.' },
+    { key:'SCANPATH', name:'SCAN PATH',      desc:'Numbered sequence reveals the order in which areas were visited.' },
+    { key:'HEATMAP',  name:'HEATMAP',        desc:'Contour lines show density of gaze — highest attention at the center.' },
+    { key:'FIRSTFIX', name:'FIRST FIXATION', desc:'Pinpoints the very first area that captured attention after image onset.' },
+  ];
+
+  // synthetic data for previews
+  const gazeLog = [
+    {x:0.35,y:0.4},{x:0.37,y:0.42},{x:0.5,y:0.35},{x:0.52,y:0.33},
+    {x:0.65,y:0.55},{x:0.67,y:0.57},{x:0.4,y:0.65},{x:0.42,y:0.63},
+    {x:0.55,y:0.45},{x:0.3,y:0.5},{x:0.7,y:0.3},{x:0.6,y:0.7}
+  ];
+  const fixHist = [
+    {x:0.35,y:0.4,duration:320},{x:0.5,y:0.33,duration:580},
+    {x:0.65,y:0.55,duration:240},{x:0.4,y:0.65,duration:460}
+  ];
+  const sacHist = [
+    {fromX:0.35,fromY:0.4,toX:0.5,toY:0.33},
+    {fromX:0.5,fromY:0.33,toX:0.65,toY:0.55},
+    {fromX:0.65,fromY:0.55,toX:0.4,toY:0.65}
+  ];
+  const scanHist = fixHist.slice();
+  const firstFix = {x:0.35,y:0.4,startTs:100};
+
+  const grid = document.getElementById('modesGrid');
+  grid.innerHTML = '';
+
+  for (const m of modes) {
+    const card = document.createElement('div');
+    card.className = 'mode-card';
+    const canvas = document.createElement('canvas');
+    canvas.className = 'mode-preview';
+    canvas.width = 320; canvas.height = 160;
+    card.innerHTML = `<div class="mode-card-name">${m.name}</div>`;
+    card.appendChild(canvas);
+    const desc = document.createElement('div');
+    desc.className = 'mode-card-desc';
+    desc.textContent = m.desc;
+    card.appendChild(desc);
+    grid.appendChild(card);
+
+    const ctx = canvas.getContext('2d');
+    const W=320, H=160;
+    ctx.fillStyle='#f7f7f7'; ctx.fillRect(0,0,W,H);
+    switch(m.key) {
+      case 'GAZE':     staticGaze(ctx,W,H,gazeLog); break;
+      case 'FIXATION': staticFixation(ctx,W,H,fixHist); break;
+      case 'SACCADE':  staticSaccade(ctx,W,H,sacHist); break;
+      case 'SCANPATH': staticScanPath(ctx,W,H,scanHist); break;
+      case 'HEATMAP':  staticHeatmap(ctx,W,H,gazeLog); break;
+      case 'FIRSTFIX': staticFirstFix(ctx,W,H,firstFix,0); break;
+    }
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    NAVIGATION
    ══════════════════════════════════════════════════════════════════════ */
@@ -377,6 +697,7 @@ function goToSession() {
 }
 
 document.getElementById('homeStartBtn').addEventListener('click', goToSession);
+document.getElementById('homeStartBtn2').addEventListener('click', goToSession);
 navSessionLink.addEventListener('click', goToSession);
 navHomeLink.addEventListener('click', () => { if (appStarted) showHome(); });
 
@@ -385,6 +706,19 @@ function bootHome() {
   window.addEventListener('resize', sizeHomeCanvas);
   homeVideo.addEventListener('loadedmetadata', sizeHomeCanvas);
   requestAnimationFrame(homeLoop);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   GEOLOCATION
+   ══════════════════════════════════════════════════════════════════════ */
+let userLocation = '';
+
+async function fetchLocation() {
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    userLocation = [d.city, d.country_name].filter(Boolean).join(', ');
+  } catch(_) { userLocation = 'Unknown'; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -427,7 +761,9 @@ const calStartBtn = document.getElementById('calStartBtn');
 /* ══════════════════════════════════════════════════════════════════════
    STATE
    ══════════════════════════════════════════════════════════════════════ */
-let currentUser = '';
+let currentUser   = '';
+let currentAge    = '';
+let currentGender = '';
 let imageLibrary = [], currentImageIdx = 0;
 
 let fixationHistory  = [], currentFixation = null;
@@ -804,15 +1140,25 @@ document.getElementById('libFileInput').addEventListener('change', e => {
 });
 
 /* ══════════════════════════════════════════════════════════════════════
-   NAME SCREEN
+   NAME / USER META SCREEN
    ══════════════════════════════════════════════════════════════════════ */
 async function showNameScreen() {
   return new Promise(resolve => {
     const scr = document.getElementById('nameScreen');
     const inp = document.getElementById('nameInput');
+    const ageInp = document.getElementById('ageInput');
+    const genderInp = document.getElementById('genderInput');
     const btn = document.getElementById('nameContinue');
     scr.style.display = 'flex'; inp.focus();
-    function proceed() { const v=inp.value.trim(); if(!v){inp.focus();return;} currentUser=v; scr.style.display='none'; resolve(); }
+    function proceed() {
+      const v = inp.value.trim();
+      if (!v) { inp.focus(); return; }
+      currentUser   = v;
+      currentAge    = ageInp.value.trim();
+      currentGender = genderInp.value;
+      scr.style.display = 'none';
+      resolve();
+    }
     btn.addEventListener('click', proceed);
     inp.addEventListener('keydown', e => { if(e.key==='Enter') proceed(); });
   });
@@ -831,7 +1177,7 @@ function renderStatsForSession(sess) {
   const sacC = sh.length;
   const sacAmp = sacC ? +(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1) : 0;
   const ttff = ff ? ((ff.startTs - ft) / 1000) : null;
-  const elapsed = st ? ((Date.now()-st)/1000).toFixed(1) : null;
+  const dur = sess.sessionDuration ? (sess.sessionDuration/1000).toFixed(1) : (st ? ((Date.now()-st)/1000).toFixed(1) : null);
   document.getElementById('st-fix-count').textContent  = fixC  || '—';
   document.getElementById('st-fix-avg').textContent    = fixAvg || '—';
   document.getElementById('st-fix-total').textContent  = fixTotal || '—';
@@ -842,11 +1188,15 @@ function renderStatsForSession(sess) {
   document.getElementById('st-ff-x').textContent       = ff ? (ff.x*100).toFixed(1)+'%' : '—';
   document.getElementById('st-ff-y').textContent       = ff ? (ff.y*100).toFixed(1)+'%' : '—';
   document.getElementById('st-gaze-n').textContent     = gl.length || '—';
-  document.getElementById('st-duration').textContent   = elapsed || '—';
+  document.getElementById('st-duration').textContent   = dur || '—';
+  document.getElementById('st-location').textContent   = sess.location || '—';
+  document.getElementById('st-user-name').textContent  = sess.user || '—';
+  document.getElementById('st-user-age').textContent   = sess.age || '—';
+  document.getElementById('st-user-gender').textContent= sess.gender || '—';
 }
 
 function renderStats() {
-  const sess = viewSession || { fixationHistory, saccadeHistory, scanPathHistory, firstFix, firstFixModeTs, gazeLog, sessionStartTs };
+  const sess = viewSession || { fixationHistory, saccadeHistory, scanPathHistory, firstFix, firstFixModeTs, gazeLog, sessionStartTs, location:userLocation, user:currentUser, age:currentAge, gender:currentGender };
   renderStatsForSession(sess);
 }
 
@@ -894,7 +1244,7 @@ function drawMarchingSquares(ctx, W, H, hm, hmW, hmH) {
   const levels = [0.15,0.3,0.45,0.6,0.75,0.9];
   for (const level of levels) {
     ctx.strokeStyle = `rgba(224,26,0,${Math.min(1,(0.4+level*0.65)).toFixed(2)})`;
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2.5; /* ← thicker heatmap lines */
     ctx.beginPath();
     for (let cy=0; cy<hmH-1; cy++) {
       for (let cx=0; cx<hmW-1; cx++) {
@@ -987,7 +1337,7 @@ function staticFirstFix(ctx, W, H, fix, modeTs) {
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2); return;
   }
-  const cx=fix.x*W,cy=fix.y*H,offset=(fix.startTs-modeTs)/1000;
+  const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;
   ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
   ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
   ctx.textAlign='center'; ctx.textBaseline='alphabetic';
@@ -1258,16 +1608,23 @@ function renderCompareView() {
     const cell = document.createElement('div');
     cell.className = 'compare-panel';
     const ts = new Date(sess.timestamp).toLocaleTimeString();
+    const dur = sess.sessionDuration ? (sess.sessionDuration/1000).toFixed(1)+'s' : '—';
     cell.innerHTML = `
       <div class="compare-panel-header">
-        <span class="cp-user">${sess.user}</span>
-        <span class="cp-time">${sess.imageName} · ${ts}</span>
+        <div>
+          <div class="cp-user">${sess.user}</div>
+          <div class="cp-meta">${sess.age ? sess.age+' yrs' : ''}${sess.age && sess.gender ? ' · ' : ''}${sess.gender || ''}${sess.location ? ' · '+sess.location : ''}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="cp-time">${sess.imageName}</div>
+          <div class="cp-time">${ts} · ${dur}</div>
+        </div>
       </div>
       <div class="compare-canvas-wrap">
         <img class="cp-img" src="${sess.imageSrc}">
         <canvas class="cp-canvas"></canvas>
       </div>
-      <div class="cp-stats">${sess.fixationHistory.length} fixations · ${sess.saccadeHistory.length} saccades · ${sess.gazeLog.length} samples</div>
+      <div class="cp-stats">${sess.fixationHistory.length} fix · ${sess.saccadeHistory.length} sac · ${sess.gazeLog.length} samples</div>
     `;
     grid.appendChild(cell);
     const wrap = cell.querySelector('.compare-canvas-wrap');
@@ -1290,14 +1647,18 @@ function renderCompareView() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   DATA SCREEN — OPEN / HISTORY
+   DATA SCREEN — PER-USER GALLERY
    ══════════════════════════════════════════════════════════════════════ */
 function captureSession() {
   return {
     user: currentUser || 'Unknown',
+    age: currentAge,
+    gender: currentGender,
+    location: userLocation,
     imageSrc: mainImg.src,
     imageName: imageLibrary[currentImageIdx]?.name || 'image',
     timestamp: Date.now(),
+    sessionDuration: sessionStartTs ? Date.now() - sessionStartTs : 0,
     gazeLog: gazeLog.slice(),
     fixationHistory: fixationHistory.slice(),
     saccadeHistory: saccadeHistory.slice(),
@@ -1311,21 +1672,58 @@ function captureSession() {
 function renderHistoryList() {
   const list = document.getElementById('dataImgList');
   list.innerHTML = '';
-  allSessions.forEach((sess, idx) => {
-    const d = document.createElement('div');
-    d.className = 'd-thumb' + (sess === viewSession ? ' active' : '');
-    const ts = new Date(sess.timestamp).toLocaleTimeString();
-    d.innerHTML = `<img src="${sess.imageSrc}" alt=""/><div class="d-thumb-label">${sess.user} · ${ts}</div>`;
-    d.onclick = () => {
-      viewSession = sess;
-      document.querySelectorAll('.d-thumb').forEach(el => el.classList.remove('active'));
-      d.classList.add('active');
-      document.getElementById('dataImg').src = sess.imageSrc;
-      renderStats();
-      playLayer(dataActiveLayer || 'GAZE');
-    };
-    list.appendChild(d);
-  });
+
+  // Group sessions by user
+  const byUser = new Map();
+  for (const sess of allSessions) {
+    if (!byUser.has(sess.user)) byUser.set(sess.user, []);
+    byUser.get(sess.user).push(sess);
+  }
+
+  for (const [userName, sessions] of byUser) {
+    const group = document.createElement('div');
+    group.className = 'user-group';
+
+    const header = document.createElement('div');
+    header.className = 'user-group-header';
+    const meta = sessions[0];
+    const metaStr = [meta.age ? meta.age+'y' : '', meta.gender || ''].filter(Boolean).join(' · ');
+    header.innerHTML = `
+      <div>
+        <div class="user-group-name">${userName}</div>
+        ${metaStr ? `<div class="user-group-meta">${metaStr}</div>` : ''}
+      </div>
+      <span class="user-group-count">${sessions.length}</span>
+    `;
+    header.addEventListener('click', () => group.classList.toggle('collapsed'));
+
+    const thumbs = document.createElement('div');
+    thumbs.className = 'user-group-thumbs';
+
+    for (const sess of sessions) {
+      const d = document.createElement('div');
+      d.className = 'd-thumb' + (sess === viewSession ? ' active' : '');
+      const ts = new Date(sess.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      d.innerHTML = `
+        <img src="${sess.imageSrc}" alt=""/>
+        <div class="d-thumb-label">${sess.imageName} · ${ts}</div>
+        <div class="d-thumb-fix-badge">${sess.fixationHistory.length}F</div>
+      `;
+      d.onclick = () => {
+        viewSession = sess;
+        document.querySelectorAll('.d-thumb').forEach(el => el.classList.remove('active'));
+        d.classList.add('active');
+        document.getElementById('dataImg').src = sess.imageSrc;
+        renderStats();
+        playLayer(dataActiveLayer || 'GAZE');
+      };
+      thumbs.appendChild(d);
+    }
+
+    group.appendChild(header);
+    group.appendChild(thumbs);
+    list.appendChild(group);
+  }
 }
 
 function openData() {
@@ -1341,13 +1739,7 @@ function openData() {
   document.getElementById('compareViewBtn').classList.remove('active');
   renderHistoryList();
   document.getElementById('dataImg').src = snap.imageSrc;
-  if (showImg) {
-    document.getElementById('dataImg').style.opacity = '1';
-    document.getElementById('dataImgArea').style.background = '#111';
-  } else {
-    document.getElementById('dataImg').style.opacity = '0';
-    document.getElementById('dataImgArea').style.background = '#fff';
-  }
+  document.getElementById('dataImg').style.opacity = showImg ? '1' : '0';
   renderStats();
   const activeBtn = document.querySelector('.layer-btn.active');
   playLayer(activeBtn ? activeBtn.dataset.layer : 'GAZE');
@@ -1381,6 +1773,7 @@ async function boot() {
   sessionStartTs  = Date.now();
   firstFixModeTs  = performance.now();
   document.getElementById('dataBtn').style.display = 'block';
+  document.getElementById('finishBtn').style.display = 'block';
   annLayer.style.opacity = '0';
 
   setInterval(() => {
@@ -1395,6 +1788,7 @@ async function boot() {
 /* ══════════════════════════════════════════════════════════════════════
    EVENTS
    ══════════════════════════════════════════════════════════════════════ */
+document.getElementById('finishBtn').addEventListener('click', openData);
 document.getElementById('dataBtn').addEventListener('click', openData);
 
 document.getElementById('dataCloseBtn').addEventListener('click', () => {
@@ -1438,7 +1832,6 @@ document.getElementById('withImgBtn').addEventListener('click', () => {
   document.getElementById('withImgBtn').classList.add('active');
   document.getElementById('withoutImgBtn').classList.remove('active');
   document.getElementById('dataImg').style.opacity = '1';
-  document.getElementById('dataImgArea').style.background = '#111';
 });
 
 document.getElementById('withoutImgBtn').addEventListener('click', () => {
@@ -1446,7 +1839,6 @@ document.getElementById('withoutImgBtn').addEventListener('click', () => {
   document.getElementById('withoutImgBtn').classList.add('active');
   document.getElementById('withImgBtn').classList.remove('active');
   document.getElementById('dataImg').style.opacity = '0';
-  document.getElementById('dataImgArea').style.background = '#fff';
 });
 
 document.querySelectorAll('.layer-btn').forEach(btn => {
@@ -1465,9 +1857,16 @@ document.getElementById('playBtn').addEventListener('click', () => {
 /* ══════════════════════════════════════════════════════════════════════
    START
    ══════════════════════════════════════════════════════════════════════ */
-async function startApp() { await showNameScreen(); await boot(); }
+async function startApp() {
+  fetchLocation(); // non-blocking
+  await showNameScreen();
+  await boot();
+}
 
 bootHome();
+
+// Build mode previews after all static functions are defined
+setTimeout(buildModePreviews, 100);
 </script>
 </body>
 </html>
