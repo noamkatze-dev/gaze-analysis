@@ -9,137 +9,98 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-family:'Heebo',sans-serif;}
 
+/* ═══ NAV ═══ */
 #mainNav{position:fixed;top:0;left:0;right:0;height:52px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:9000;cursor:default;}
 #navBrand{display:flex;align-items:center;gap:10px;}
-.nav-va{font-size:18px;font-weight:700;color:#e01a00;letter-spacing:0.04em;}
+.nav-va{font-size:18px;font-weight:700;color:#111;letter-spacing:0.04em;}
 .nav-title{font-size:10px;font-weight:700;letter-spacing:0.28em;color:#111;font-variant:small-caps;}
 #navLinks{display:flex;gap:28px;align-items:center;}
 .nav-link{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#999;cursor:pointer;user-select:none;transition:color 0.15s;}
-.nav-link:hover{color:#111;}
-.nav-link.active{color:#e01a00;}
+.nav-link:hover,.nav-link.active{color:#111;}
 
-/* ═══════════════════════════════════════════
-   HOME SCREEN
-═══════════════════════════════════════════ */
-#homeScreen{
-  position:fixed;inset:0;z-index:8999;background:#000;
-  overflow-y:auto;overflow-x:hidden;
-}
+/* ═══ HOME ═══ */
+#homeScreen{position:fixed;inset:0;z-index:8999;background:#000;overflow-y:auto;overflow-x:hidden;}
 #homeVideo{position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;}
 #homeDotCanvas{position:fixed;inset:0;pointer-events:none;z-index:1;}
 
-/* Hero overlay — sits on top of the video */
 #homeHero{
   position:fixed;inset:0;z-index:3;
-  background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.65) 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding-bottom:80px;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:none;
 }
-.home-content{text-align:center;pointer-events:all;}
-.home-eyebrow{font-size:9px;font-weight:300;letter-spacing:0.5em;color:rgba(255,255,255,0.65);margin-bottom:18px;}
-.home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);}
-.home-subtitle{font-size:15px;font-weight:300;color:rgba(255,255,255,0.82);max-width:420px;line-height:1.6;margin:0 auto 36px;}
-#homeStartBtn{background:#e01a00;color:#fff;border:2px solid #e01a00;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:16px 52px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:28px;display:block;}
-#homeStartBtn:hover{background:#c01500;border-color:#c01500;}
-.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
-.home-badge{font-size:10px;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;}
-.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;gap:6px;}
-.home-scroll-hint::after{content:'↓';font-size:14px;}
-
-/* Info sections below the hero */
-#homeInfo{
-  position:relative;z-index:4;
-  background:#fff;
-  pointer-events:all;
+.home-content{text-align:center;pointer-events:all;display:flex;flex-direction:column;align-items:center;}
+.home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#000;margin-bottom:18px;text-transform:uppercase;}
+.home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);text-transform:uppercase;}
+.home-subtitle{font-size:14px;font-weight:400;color:#000;max-width:420px;line-height:1.6;margin:0 auto 36px;}
+#homeStartBtn{
+  background:#000;color:#fff;border:2px solid #000;
+  font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;
+  padding:14px 48px;cursor:pointer;transition:background 0.18s,border-color 0.18s;
+  margin-bottom:28px;border-radius:100px;
 }
+#homeStartBtn:hover{background:#333;border-color:#333;}
+.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.home-badge{font-size:10px;color:#000;border:1px solid rgba(0,0,0,0.35);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;background:rgba(255,255,255,0.6);}
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#000;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.home-scroll-hint-arrow{font-size:14px;color:#000;}
 
-/* HOW IT WORKS */
-.hi-section{padding:72px 48px;}
+/* INFO SECTIONS */
+#homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
+.hi-section{padding:72px 64px;}
 .hi-section+.hi-section{border-top:1px solid #eee;}
 .hi-section-dark{background:#0a0a0a;}
-.hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#e01a00;margin-bottom:20px;}
-.hi-label-light{color:rgba(224,26,0,0.8);}
+.hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#111;margin-bottom:20px;text-transform:uppercase;}
+.hi-label-light{color:rgba(255,255,255,0.5);}
 .hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;}
 .hi-title-light{color:#fff;}
 .hi-sub{font-size:13px;font-weight:300;color:#888;max-width:480px;line-height:1.7;margin-bottom:40px;}
-.hi-sub-light{color:rgba(255,255,255,0.55);}
+.hi-sub-light{color:rgba(255,255,255,0.5);}
 
-.steps-row{display:flex;gap:0;align-items:stretch;max-width:860px;}
-.step-item{flex:1;padding:24px 28px;border-left:2px solid #eee;position:relative;}
+/* HOW IT WORKS — 3 columns full width */
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;}
+.step-item{padding:32px 36px;border-left:1px solid #eee;}
 .step-item:first-child{border-left:none;padding-left:0;}
-.step-num{font-size:9px;font-weight:700;letter-spacing:0.3em;color:#e01a00;margin-bottom:10px;}
+.step-num{font-size:9px;font-weight:700;letter-spacing:0.3em;color:#bbb;margin-bottom:10px;}
 .step-icon{font-size:28px;margin-bottom:12px;line-height:1;}
-.step-title{font-size:13px;font-weight:700;letter-spacing:0.1em;color:#111;margin-bottom:6px;}
-.step-desc{font-size:11px;font-weight:300;color:#888;line-height:1.6;}
+.step-title{font-size:12px;font-weight:700;letter-spacing:0.18em;color:#111;margin-bottom:8px;text-transform:uppercase;}
+.step-desc{font-size:12px;font-weight:300;color:#888;line-height:1.7;}
 
-/* HOW-TO steps */
-.howto-list{list-style:none;max-width:560px;}
-.howto-list li{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f0f0f0;}
-.howto-list li:last-child{border-bottom:none;}
-.howto-n{font-size:11px;font-weight:700;color:#e01a00;letter-spacing:0.1em;min-width:22px;}
-.howto-text{font-size:12px;font-weight:300;color:#444;line-height:1.6;}
+/* HOW-TO — full width numbered list */
+.howto-list{list-style:none;width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.howto-list li{display:flex;flex-direction:column;gap:8px;padding:28px 32px;border-left:1px solid #eee;}
+.howto-list li:first-child{border-left:none;}
+.howto-list li:nth-child(4),.howto-list li:nth-child(5),.howto-list li:nth-child(6){border-top:1px solid #eee;}
+.howto-n{font-size:10px;font-weight:700;color:#111;letter-spacing:0.2em;}
+.howto-text{font-size:12px;font-weight:300;color:#666;line-height:1.65;}
 .howto-text strong{font-weight:700;color:#111;}
 
-/* MODE CARDS GRID */
-.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;max-width:900px;}
+/* MODE CARDS */
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;width:100%;}
 .mode-card{background:#fff;padding:24px 20px 20px;}
-.mode-card-name{font-size:9px;font-weight:700;letter-spacing:0.35em;color:#e01a00;margin-bottom:8px;}
-.mode-card-desc{font-size:10px;font-weight:300;color:#888;line-height:1.6;margin-top:10px;}
-.mode-preview{width:100%;height:80px;display:block;background:#f7f7f7;border:1px solid #eee;}
+.mode-card-name{font-size:9px;font-weight:700;letter-spacing:0.35em;color:#111;margin-bottom:8px;text-transform:uppercase;}
+.mode-card-desc{font-size:11px;font-weight:300;color:#888;line-height:1.6;margin-top:10px;}
+.mode-preview-wrap{width:100%;aspect-ratio:2/1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f7f7f7;border:1px solid #eee;}
+.mode-preview{display:block;width:100%;height:100%;}
 
-/* USER META FORM */
-#nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
-.ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:48px;}
-.ns-form{display:flex;flex-direction:column;align-items:center;gap:0;width:100%;max-width:340px;}
-.ns-field{width:100%;margin-bottom:28px;}
-.ns-field label{display:block;font-size:10px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:12px;}
-.ns-field input,
-.ns-field select{
-  background:transparent;border:none;border-bottom:2px solid #ddd;color:#111;
-  font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.1em;
-  padding:10px 6px;width:100%;caret-color:#e01a00;transition:border-color 0.15s;
-  -webkit-appearance:none;
-}
-.ns-field input:focus,
-.ns-field select:focus{border-bottom-color:#e01a00;outline:none;}
-.ns-field select option{font-size:14px;}
-.ns-row{display:flex;gap:24px;width:100%;}
-.ns-row .ns-field{flex:1;margin-bottom:28px;}
-
-/* MAIN APP */
-#imgWrapper{position:relative;width:100vw;height:100vh;overflow:hidden;}
-#mainImg{display:block;width:100%;height:100%;object-fit:contain;background:#000;}
-#dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
-#annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
-#gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
-#info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(0,0,0,0.35);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
-
-/* FINISH SESSION BUTTON */
-#finishBtn{
-  position:fixed;bottom:16px;right:16px;
-  font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;
-  color:#fff;background:#e01a00;border:none;padding:12px 22px;
-  cursor:pointer;z-index:60;display:none;transition:background 0.15s;
-}
-#finishBtn:hover{background:#c01500;}
-
-.va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.22em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;}
-.va-btn-primary{background:#e01a00;color:#fff;border:2px solid #e01a00;font-size:13px;font-weight:700;padding:16px 52px;}
-.va-btn-primary:hover{background:#c01500;border-color:#c01500;}
-.va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:10px 28px;}
+/* BUTTONS — global */
+.va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.18em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;border-radius:100px;}
+.va-btn-primary{background:#111;color:#fff;border:2px solid #111;font-size:13px;font-weight:700;padding:14px 48px;}
+.va-btn-primary:hover{background:#333;border-color:#333;}
+.va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:9px 24px;}
 .va-btn-secondary:hover{background:#111;color:#fff;}
 
+/* CAL */
 #calOverlay{position:fixed;inset:0;z-index:1000;background:#fff;}
 #calCanvas{position:absolute;inset:0;width:100%;height:100%;}
 #calStartBtn{position:absolute;top:58%;left:50%;transform:translateX(-50%);display:none;z-index:1001;}
 
+/* LIBRARY */
 .screen{display:none;position:fixed;inset:0;z-index:1100;background:#fff;flex-direction:column;align-items:center;justify-content:center;}
 .screen-title{font-size:9px;font-weight:300;letter-spacing:0.6em;color:#bbb;margin-bottom:36px;}
-
 .lib-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;width:90vw;margin-bottom:36px;max-height:52vh;overflow-y:auto;}
 .lib-card{aspect-ratio:4/3;border:1.5px solid #e0e0e0;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s;}
 .lib-card:hover{border-color:#999;}
-.lib-card.selected{border-color:#e01a00;}
+.lib-card.selected{border-color:#111;}
 .lib-card img{width:100%;height:100%;object-fit:cover;display:block;}
 .lib-num{position:absolute;top:6px;left:8px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8);letter-spacing:0.1em;}
 .lib-add{aspect-ratio:4/3;border:1.5px dashed #ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:border-color 0.15s;}
@@ -148,124 +109,131 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-add-label{font-size:9px;font-weight:300;letter-spacing:0.2em;color:#ccc;}
 #libFileInput{display:none;}
 
-#dataBtn{position:fixed;bottom:16px;left:16px;font-size:10px;font-weight:700;letter-spacing:0.18em;color:#111;cursor:pointer;z-index:60;transition:color 0.15s,border-color 0.15s;user-select:none;background:#fff;border:1.5px solid #ddd;padding:8px 14px;display:none;}
-#dataBtn:hover{color:#e01a00;border-color:#e01a00;}
+/* MAIN SESSION — image fills full screen */
+#imgWrapper{position:fixed;inset:0;overflow:hidden;}
+#mainImg{display:block;width:100%;height:100%;object-fit:cover;}
+#dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
+#annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
+#gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
+#info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
 
-/* ═══════════════════════════════════════════
-   DATA SCREEN — FULL CANVAS LAYOUT
-═══════════════════════════════════════════ */
+/* FINISH SESSION BUTTON */
+#finishBtn{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;
+  color:#fff;background:#111;border:2px solid #fff;
+  padding:13px 36px;cursor:pointer;z-index:60;display:none;
+  transition:background 0.15s,color 0.15s;border-radius:100px;
+  backdrop-filter:blur(4px);
+}
+#finishBtn:hover{background:#fff;color:#111;}
+
+/* ═══ DATA SCREEN ═══ */
 #dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
-#dataHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;}
+#dataHeader{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;
+}
 #dataHeader .data-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
 .data-header-right{display:flex;align-items:center;gap:8px;}
-.view-tab{font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;padding:7px 16px;border:1.5px solid #333;background:transparent;color:#666;cursor:pointer;transition:all 0.15s;}
-.view-tab.active{background:rgba(224,26,0,0.15);color:#e01a00;border-color:#e01a00;}
-.view-tab:hover{color:#e01a00;border-color:#e01a00;}
+.view-tab{
+  font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;
+  padding:7px 16px;border:1.5px solid #333;background:transparent;color:#666;
+  cursor:pointer;transition:all 0.15s;border-radius:100px;
+}
+.view-tab.active{background:rgba(255,255,255,0.1);color:#fff;border-color:#fff;}
+.view-tab:hover{color:#fff;border-color:#fff;}
 
-/* DATA BODY: left sidebar + full canvas center */
+/* DATA BODY */
 #dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
 
-/* ── LEFT SIDEBAR: per-user gallery ── */
-#dataImgList{
-  width:200px;flex-shrink:0;
-  background:#0d0d0d;border-right:1px solid #222;
-  overflow-y:auto;padding:0;
-  display:flex;flex-direction:column;
+/* LEFT: per-user gallery */
+#dataGallery{
+  width:220px;flex-shrink:0;background:#0a0a0a;border-right:1px solid #1e1e1e;
+  overflow-y:auto;display:flex;flex-direction:column;
 }
-.user-group{border-bottom:1px solid #1a1a1a;}
-.user-group-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 12px 8px;cursor:pointer;user-select:none;
+.user-section{border-bottom:1px solid #1a1a1a;}
+.user-section-header{
+  padding:14px 14px 10px;cursor:pointer;user-select:none;
   transition:background 0.12s;
 }
-.user-group-header:hover{background:#161616;}
-.user-group-name{
-  font-size:9px;font-weight:700;letter-spacing:0.3em;
-  color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;
+.user-section-header:hover{background:#111;}
+.user-section-name{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#fff;text-transform:uppercase;margin-bottom:3px;}
+.user-section-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;}
+.user-section-count{
+  display:inline-block;font-size:8px;font-weight:700;letter-spacing:0.1em;
+  color:#fff;background:#333;padding:2px 7px;border-radius:100px;margin-top:4px;
 }
-.user-group-meta{font-size:8px;font-weight:300;letter-spacing:0.1em;color:#555;margin-top:2px;}
-.user-group-count{
-  font-size:8px;font-weight:700;letter-spacing:0.1em;
-  color:#e01a00;background:rgba(224,26,0,0.12);
-  padding:2px 7px;border-radius:100px;flex-shrink:0;
-}
-.user-group-thumbs{padding:6px 8px 10px;display:flex;flex-direction:column;gap:6px;}
-.user-group.collapsed .user-group-thumbs{display:none;}
+.user-section-images{padding:8px 10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.user-section.collapsed .user-section-images{display:none;}
 
-.d-thumb{
-  border:1.5px solid #222;cursor:pointer;overflow:hidden;
-  aspect-ratio:4/3;position:relative;transition:border-color 0.15s;
-  background:#111;
+.gallery-thumb{
+  aspect-ratio:4/3;border:1.5px solid #222;cursor:pointer;overflow:hidden;
+  position:relative;transition:border-color 0.15s;background:#111;border-radius:2px;
 }
-.d-thumb:hover{border-color:#555;}
-.d-thumb.active{border-color:#e01a00;}
-.d-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.d-thumb-label{
+.gallery-thumb:hover{border-color:#555;}
+.gallery-thumb.active{border-color:#fff;}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-thumb-label{
   position:absolute;bottom:0;left:0;right:0;
-  background:rgba(0,0,0,0.75);
-  font-size:8px;font-weight:300;letter-spacing:0.05em;color:#ccc;
-  padding:3px 6px;
+  background:rgba(0,0,0,0.8);font-size:7px;font-weight:300;
+  letter-spacing:0.04em;color:#aaa;padding:3px 5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.d-thumb-fix-badge{
-  position:absolute;top:5px;right:5px;
-  font-size:8px;font-weight:700;color:#fff;
-  background:rgba(224,26,0,0.85);padding:2px 5px;
-  border-radius:3px;letter-spacing:0.05em;
+.gallery-thumb-badge{
+  position:absolute;top:4px;right:4px;font-size:7px;font-weight:700;
+  color:#fff;background:rgba(0,0,0,0.7);padding:2px 4px;border-radius:2px;
 }
 
-/* ── CANVAS CENTER: full image + overlay toolbar ── */
+/* CENTER: full-screen canvas */
 #dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
-
-#dataImgArea{position:relative;flex:1;overflow:hidden;background:#111;}
-#dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+#dataImgArea{position:relative;flex:1;overflow:hidden;background:#000;}
+#dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
 
-/* Floating toolbar over canvas */
+/* Floating toolbar */
 #dataToolbar{
-  position:absolute;top:12px;left:50%;transform:translateX(-50%);
-  display:flex;flex-wrap:nowrap;align-items:center;gap:4px;
-  background:rgba(0,0,0,0.72);
-  backdrop-filter:blur(8px);
-  padding:8px 12px;z-index:10;
-  border:1px solid rgba(255,255,255,0.08);
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  display:flex;flex-wrap:nowrap;align-items:center;gap:5px;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);
+  padding:8px 14px;z-index:10;border:1px solid rgba(255,255,255,0.1);
+  border-radius:100px;
 }
-.toolbar-spacer{flex:1;min-width:8px;}
 .layer-btn{
-  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;
-  color:#666;background:transparent;border:1.5px solid #333;
-  padding:6px 9px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;
-  white-space:nowrap;
+  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;
+  color:#666;background:transparent;border:1.5px solid transparent;
+  padding:6px 10px;cursor:pointer;transition:color 0.15s,border-color 0.15s;
+  white-space:nowrap;border-radius:100px;
 }
-.layer-btn:hover{color:#e01a00;background:rgba(224,26,0,0.1);border-color:#e01a00;}
-.layer-btn.active{color:#e01a00;background:rgba(224,26,0,0.15);border-color:#e01a00;}
-.toggle-group{display:flex;}
+.layer-btn:hover{color:#fff;}
+.layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);}
+.toolbar-sep{width:1px;height:18px;background:#333;flex-shrink:0;}
+.toggle-group{display:flex;gap:4px;}
 .toggle-btn{
   font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;
-  padding:6px 10px;border:1.5px solid #333;background:transparent;color:#555;
-  cursor:pointer;transition:all 0.15s;white-space:nowrap;
+  padding:6px 10px;border:1.5px solid transparent;background:transparent;color:#555;
+  cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:100px;
 }
-.toggle-btn:first-child{border-right:none;}
-.toggle-btn:hover{color:#e01a00;border-color:#e01a00;background:rgba(224,26,0,0.1);}
-.toggle-btn.active{color:#e01a00;border-color:#e01a00;background:rgba(224,26,0,0.15);}
+.toggle-btn:hover{color:#fff;}
+.toggle-btn.active{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);}
 #playBtn{
   font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;
-  color:#fff;background:#e01a00;border:1.5px solid #e01a00;
-  padding:6px 12px;cursor:pointer;transition:background 0.15s;flex-shrink:0;
+  color:#fff;background:#111;border:1.5px solid #444;
+  padding:6px 14px;cursor:pointer;transition:background 0.15s;flex-shrink:0;border-radius:100px;
 }
-#playBtn:hover{background:#c01500;border-color:#c01500;}
+#playBtn:hover{background:#222;}
 
-/* Floating stats panel */
+/* Floating stats */
 #dataStats{
-  position:absolute;right:12px;top:60px;
-  width:190px;background:rgba(0,0,0,0.75);
-  backdrop-filter:blur(8px);
+  position:absolute;right:14px;top:60px;
+  width:180px;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,0.08);
   overflow-y:auto;max-height:calc(100% - 80px);
-  padding:14px 12px;z-index:10;
+  padding:14px 12px;z-index:10;border-radius:4px;
 }
 .stat-group{margin-bottom:12px;padding-bottom:12px;}
 .stat-group+.stat-group{border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;}
-.stat-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:#555;margin-bottom:8px;}
+.stat-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:#555;margin-bottom:8px;text-transform:uppercase;}
 .stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.04);}
 .stat-name{font-size:9px;font-weight:300;color:#666;}
 .stat-val{font-size:12px;font-weight:700;color:#fff;}
@@ -274,19 +242,32 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 /* COMPARE VIEW */
 #compareView{display:none;flex:1;overflow:auto;padding:20px;background:#0a0a0a;}
 #compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
-.compare-panel{background:#111;border:1px solid #222;overflow:hidden;}
+.compare-panel{background:#111;border:1px solid #222;overflow:hidden;border-radius:2px;}
 .compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:4px;}
 .cp-user{font-size:11px;font-weight:700;letter-spacing:0.1em;color:#fff;}
 .cp-meta{font-size:8px;font-weight:300;color:#555;line-height:1.5;}
 .cp-time{font-size:9px;font-weight:300;color:#555;}
 .compare-canvas-wrap{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden;}
-.cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+.cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cp-canvas{position:absolute;inset:0;pointer-events:none;}
 .cp-stats{font-size:9px;font-weight:300;color:#555;padding:7px 12px;letter-spacing:0.06em;border-top:1px solid #1a1a1a;}
 
-/* ═══════════════════════════════════════════
-   CALIBRATION
-═══════════════════════════════════════════ */
+/* NAME SCREEN */
+#nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
+.ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:52px;}
+.ns-form{display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;}
+.ns-field{width:100%;margin-bottom:30px;}
+.ns-field label{display:block;font-size:9px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:12px;text-transform:uppercase;}
+.ns-field input,.ns-field select{
+  background:transparent;border:none;border-bottom:1.5px solid #ddd;color:#111;
+  font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.08em;
+  padding:10px 4px;width:100%;caret-color:#111;transition:border-color 0.15s;
+  -webkit-appearance:none;border-radius:0;
+}
+.ns-field input:focus,.ns-field select:focus{border-bottom-color:#111;outline:none;}
+.ns-field input::placeholder{color:#ccc;font-size:14px;}
+.ns-row{display:flex;gap:24px;width:100%;}
+.ns-row .ns-field{flex:1;}
 </style>
 </head>
 <body>
@@ -302,16 +283,15 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </nav>
 
-<!-- ═══════════ HOME ═══════════ -->
+<!-- ═══ HOME ═══ -->
 <div id="homeScreen">
   <video id="homeVideo" src="benjamin netanyahu.mp4" autoplay loop muted playsinline></video>
   <canvas id="homeDotCanvas"></canvas>
 
-  <!-- Hero — fixed overlay on video -->
   <div id="homeHero">
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
-      <h1 class="home-heading">See where<br>attention goes.</h1>
+      <h1 class="home-heading">SEE WHERE<br>ATTENTION GOES.</h1>
       <p class="home-subtitle">Real-time eye tracking analysis using iris detection and behavioral classification.</p>
       <button id="homeStartBtn">START SESSION</button>
       <div class="home-badges">
@@ -320,18 +300,20 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">Real-time</span>
         <span class="home-badge">Multi-user Compare</span>
       </div>
-      <div class="home-scroll-hint">SCROLL TO LEARN MORE</div>
+      <div class="home-scroll-hint">
+        SCROLL TO LEARN MORE
+        <span class="home-scroll-hint-arrow">↓</span>
+      </div>
     </div>
   </div>
 
-  <!-- Info content below the hero -->
   <div id="homeInfo">
 
     <!-- HOW IT WORKS -->
     <div class="hi-section">
       <div class="hi-label">HOW IT WORKS</div>
       <h2 class="hi-title">From eyes to insights<br>in three steps.</h2>
-      <p class="hi-sub">The system uses your webcam to track the position of your iris in real-time, maps gaze to screen coordinates, then classifies eye movements into research-grade metrics.</p>
+      <p class="hi-sub">The system uses your webcam to detect iris position in real-time, maps gaze to screen coordinates via affine calibration, then classifies movements into research-grade metrics.</p>
       <div class="steps-row">
         <div class="step-item">
           <div class="step-num">01</div>
@@ -343,7 +325,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
           <div class="step-num">02</div>
           <div class="step-icon">⊕</div>
           <div class="step-title">CALIBRATION</div>
-          <div class="step-desc">A 9-point affine calibration maps your unique eye movement range to screen coordinates. Keep your head still and move only your eyes.</div>
+          <div class="step-desc">A 9-point affine calibration maps your unique eye movement range to screen coordinates. Keep your head still — move only your eyes.</div>
         </div>
         <div class="step-item">
           <div class="step-num">03</div>
@@ -354,44 +336,41 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       </div>
     </div>
 
-    <!-- 6 ANALYSIS MODES -->
+    <!-- 6 MODES -->
     <div class="hi-section" style="background:#f7f7f7;">
       <div class="hi-label">ANALYSIS MODES</div>
       <h2 class="hi-title">Six ways to read<br>visual attention.</h2>
-      <p class="hi-sub">Switch between modes in real-time to explore different aspects of how a viewer scans an image.</p>
-      <div class="modes-grid" id="modesGrid">
-        <!-- cards injected by JS -->
-      </div>
+      <p class="hi-sub">Switch between modes in real-time to explore different dimensions of how a viewer scans an image.</p>
+      <div class="modes-grid" id="modesGrid"></div>
     </div>
 
     <!-- HOW TO USE -->
     <div class="hi-section">
       <div class="hi-label">QUICK START</div>
-      <h2 class="hi-title">Up and running<br>in under a minute.</h2>
+      <h2 class="hi-title" style="margin-bottom:36px;">Up and running<br>in under a minute.</h2>
       <ol class="howto-list">
-        <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts — only your face is used, nothing is recorded or stored externally.</span></li>
-        <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> — name, age, and gender. These are stored with your session data for comparison across participants.</span></li>
-        <li><span class="howto-n">03</span><span class="howto-text"><strong>Complete the 9-point calibration.</strong> Keep your head completely still and move only your eyes to each red dot. Hold each dot until the ring fills.</span></li>
-        <li><span class="howto-n">04</span><span class="howto-text"><strong>Select an image</strong> from the library or upload your own stimulus image.</span></li>
-        <li><span class="howto-n">05</span><span class="howto-text"><strong>View the image naturally.</strong> Your gaze is recorded automatically at 10 samples/second. When done, press <strong>FINISH SESSION</strong>.</span></li>
-        <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> — click DATA to see fixations, saccades, heatmaps, scan path, and first fixation. Compare across users in the COMPARE tab.</span></li>
+        <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts. Only your face is used — nothing is stored externally.</span></li>
+        <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> — name, age, and gender. These are stored with your session for group comparison.</span></li>
+        <li><span class="howto-n">03</span><span class="howto-text"><strong>Complete the 9-point calibration.</strong> Keep your head completely still and move only your eyes to each dot. Hold until the ring fills.</span></li>
+        <li><span class="howto-n">04</span><span class="howto-text"><strong>Select an image</strong> from the library, or upload your own stimulus image.</span></li>
+        <li><span class="howto-n">05</span><span class="howto-text"><strong>View the image naturally.</strong> Your gaze is recorded automatically. When done, press FINISH SESSION.</span></li>
+        <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> — fixations, saccades, heatmaps, scan path, and first fixation. Compare with others in the COMPARE tab.</span></li>
       </ol>
     </div>
 
     <!-- DARK CTA -->
-    <div class="hi-section hi-section-dark" style="text-align:center;">
+    <div class="hi-section hi-section-dark" style="text-align:center;padding:80px 48px;">
       <div class="hi-label hi-label-light">READY?</div>
       <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
-      <button id="homeStartBtn2" style="background:#e01a00;color:#fff;border:2px solid #e01a00;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:16px 52px;cursor:pointer;transition:background 0.18s;">START SESSION</button>
+      <button id="homeStartBtn2" style="background:#fff;color:#111;border:2px solid #fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;transition:background 0.18s;border-radius:100px;">START SESSION</button>
     </div>
-
-  </div><!-- /#homeInfo -->
-</div><!-- /#homeScreen -->
+  </div>
+</div>
 
 <canvas id="homeAnaC" style="display:none" width="160" height="90"></canvas>
 
 <!-- MAIN SESSION -->
-<div id="imgWrapper">
+<div id="imgWrapper" style="display:none;">
   <img id="mainImg" src="" alt="stimulus"/>
   <canvas id="dotCanvas"></canvas>
   <div id="annLayer"></div>
@@ -399,7 +378,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
 <div id="gazeDot"></div>
 <div id="info">ALLOW CAMERA ACCESS</div>
-<button id="finishBtn">■ FINISH SESSION</button>
+<button id="finishBtn">FINISH SESSION</button>
 
 <div id="calOverlay">
   <canvas id="calCanvas"></canvas>
@@ -413,8 +392,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <button id="libBeginBtn" class="va-btn va-btn-primary" disabled style="opacity:0.4">BEGIN SESSION</button>
 </div>
 
-<div id="dataBtn">DATA</div>
-
 <!-- DATA SCREEN -->
 <div id="dataScreen">
   <div id="dataHeader">
@@ -426,10 +403,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
     </div>
   </div>
   <div id="dataBody">
-    <!-- Per-user gallery sidebar -->
-    <div id="dataImgList"></div>
 
-    <!-- Full-canvas center -->
+    <!-- Per-user gallery -->
+    <div id="dataGallery"></div>
+
+    <!-- Full-screen canvas -->
     <div id="dataCenter">
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
@@ -443,15 +421,15 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
           <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
           <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
           <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
-          <span class="toolbar-spacer"></span>
-          <button id="playBtn">▶ REPLAY</button>
+          <span class="toolbar-sep"></span>
+          <button id="playBtn">REPLAY</button>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="animatedBtn">▶ ANIM</button>
-            <button class="toggle-btn" id="staticBtn">■ STATIC</button>
+            <button class="toggle-btn active" id="animatedBtn">ANIMATED</button>
+            <button class="toggle-btn" id="staticBtn">STATIC</button>
           </div>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="withImgBtn">⬜ IMG</button>
-            <button class="toggle-btn" id="withoutImgBtn">◼ OFF</button>
+            <button class="toggle-btn active" id="withImgBtn">WITH IMAGE</button>
+            <button class="toggle-btn" id="withoutImgBtn">WITHOUT</button>
           </div>
         </div>
 
@@ -482,9 +460,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
             <div class="stat-label">SESSION</div>
             <div class="stat-row"><span class="stat-name">Samples</span><span><span class="stat-val" id="st-gaze-n">—</span></span></div>
             <div class="stat-row"><span class="stat-name">Duration</span><span><span class="stat-val" id="st-duration">—</span><span class="stat-unit">s</span></span></div>
-            <div class="stat-row"><span class="stat-name">Location</span><span><span class="stat-val" id="st-location" style="font-size:9px;">—</span></span></div>
+            <div class="stat-row"><span class="stat-name">Location</span><span><span class="stat-val" id="st-location" style="font-size:9px;max-width:90px;text-align:right;">—</span></span></div>
           </div>
-          <div class="stat-group" id="st-user-group">
+          <div class="stat-group">
             <div class="stat-label">PARTICIPANT</div>
             <div class="stat-row"><span class="stat-name">Name</span><span><span class="stat-val" id="st-user-name" style="font-size:9px;">—</span></span></div>
             <div class="stat-row"><span class="stat-name">Age</span><span><span class="stat-val" id="st-user-age">—</span></span></div>
@@ -500,18 +478,18 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </div>
 
-<!-- NAME / USER META SCREEN -->
+<!-- NAME SCREEN -->
 <div id="nameScreen">
   <div class="ns-title">VISUAL ANALYSIS SYSTEM</div>
   <div class="ns-form">
     <div class="ns-field">
       <label for="nameInput">FULL NAME</label>
-      <input id="nameInput" type="text" autocomplete="off" spellcheck="false" placeholder="Enter your name"/>
+      <input id="nameInput" type="text" autocomplete="off" spellcheck="false" placeholder="Your name"/>
     </div>
     <div class="ns-row">
       <div class="ns-field">
         <label for="ageInput">AGE</label>
-        <input id="ageInput" type="number" min="1" max="120" placeholder="e.g. 28"/>
+        <input id="ageInput" type="number" min="1" max="120" placeholder="—"/>
       </div>
       <div class="ns-field">
         <label for="genderInput">GENDER</label>
@@ -519,12 +497,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
           <option value="" disabled selected>Select</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Non-binary">Non-binary</option>
-          <option value="Prefer not to say">Prefer not to say</option>
+          <option value="Other">Other</option>
         </select>
       </div>
     </div>
-    <button id="nameContinue" class="va-btn va-btn-primary" style="margin-top:12px;">CONTINUE</button>
+    <button id="nameContinue" class="va-btn va-btn-primary">CONTINUE</button>
   </div>
 </div>
 
@@ -540,135 +517,52 @@ const HOME_DOT_STEP     = 2;
 const HOME_DOT_THRESH   = 10;
 const HOME_ANA_INTERVAL = 600;
 
-const homeScreen    = document.getElementById('homeScreen');
-const homeVideo     = document.getElementById('homeVideo');
-const homeDotCanvas = document.getElementById('homeDotCanvas');
-const homeDotCtx    = homeDotCanvas.getContext('2d');
-const homeAnaC      = document.getElementById('homeAnaC');
-const homeAnaCtx    = homeAnaC.getContext('2d', {willReadFrequently:true});
-const navHomeLink   = document.getElementById('navHomeLink');
+const homeScreen     = document.getElementById('homeScreen');
+const homeVideo      = document.getElementById('homeVideo');
+const homeDotCanvas  = document.getElementById('homeDotCanvas');
+const homeDotCtx     = homeDotCanvas.getContext('2d');
+const homeAnaC       = document.getElementById('homeAnaC');
+const homeAnaCtx     = homeAnaC.getContext('2d', {willReadFrequently:true});
+const navHomeLink    = document.getElementById('navHomeLink');
 const navSessionLink = document.getElementById('navSessionLink');
 
-let homeRunning    = true;
-let homeLastAnaTs  = -9999;
+let homeRunning   = true;
+let homeLastAnaTs = -9999;
 
 function sobel(px, w, h) {
-  const g = new Float32Array(w*h);
-  const gx = new Float32Array(w*h);
-  const gy = new Float32Array(w*h);
-  const mg = new Float32Array(w*h);
-  for (let i=0; i<w*h; i++) { const o=i*4; g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2]; }
-  for (let y=1; y<h-1; y++) {
-    for (let x=1; x<w-1; x++) {
-      const i=y*w+x;
-      const tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];
-      gx[i]=(tr+2*mr+br)-(tl+2*ml+bl);
-      gy[i]=(bl+2*bc+br)-(tl+2*tc+tr);
-      mg[i]=Math.hypot(gx[i],gy[i]);
-    }
+  const g=new Float32Array(w*h),gx=new Float32Array(w*h),gy=new Float32Array(w*h),mg=new Float32Array(w*h);
+  for(let i=0;i<w*h;i++){const o=i*4;g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2];}
+  for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
+    const i=y*w+x,tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];
+    gx[i]=(tr+2*mr+br)-(tl+2*ml+bl);gy[i]=(bl+2*bc+br)-(tl+2*tc+tr);mg[i]=Math.hypot(gx[i],gy[i]);
   }
   return {gx,gy,mg};
 }
 
-function sizeHomeCanvas() {
-  homeDotCanvas.width  = window.innerWidth;
-  homeDotCanvas.height = window.innerHeight;
-}
+function sizeHomeCanvas(){homeDotCanvas.width=window.innerWidth;homeDotCanvas.height=window.innerHeight;}
 
-function homeDrawDots(pts) {
-  const W=homeDotCanvas.width, H=homeDotCanvas.height;
-  if (!W||!H) return;
-  homeDotCtx.clearRect(0,0,W,H);
-  homeDotCtx.fillStyle='rgba(224,26,0,0.82)';
-  homeDotCtx.beginPath();
-  for (const p of pts) homeDotCtx.rect(p.nx*W-1.5, p.ny*H-1.5, 3, 3);
+function homeDrawDots(pts){
+  const W=homeDotCanvas.width,H=homeDotCanvas.height;if(!W||!H)return;
+  homeDotCtx.clearRect(0,0,W,H);homeDotCtx.fillStyle='rgba(224,26,0,0.82)';homeDotCtx.beginPath();
+  for(const p of pts)homeDotCtx.rect(p.nx*W-1.5,p.ny*H-1.5,3,3);
   homeDotCtx.fill();
 }
 
-function homeAnalyze() {
-  if (homeVideo.readyState < 2) return;
-  const W=160, H=90;
-  homeAnaCtx.drawImage(homeVideo,0,0,W,H);
-  const id=homeAnaCtx.getImageData(0,0,W,H), px=id.data;
-  const {mg}=sobel(px,W,H);
-  const all=[];
-  for (let y=1; y<H-1; y+=HOME_DOT_STEP)
-    for (let x=1; x<W-1; x+=HOME_DOT_STEP) {
-      const i=y*W+x; if (mg[i]>=HOME_DOT_THRESH) all.push({i,mag:mg[i]});
-    }
-  all.sort((a,b)=>b.mag-a.mag);
-  if (all.length>HOME_N_ANN) all.length=HOME_N_ANN;
-  const pts=all.map(({i})=>({
-    nx:Math.max(0.01,Math.min(0.99,(i%W)/W)),
-    ny:Math.max(0.01,Math.min(0.99,Math.floor(i/W)/H))
-  }));
-  homeDrawDots(pts);
-}
-
-function homeLoop(ts) {
-  if (!homeRunning) return;
-  if (ts-homeLastAnaTs>HOME_ANA_INTERVAL){homeAnalyze();homeLastAnaTs=ts;}
-  requestAnimationFrame(homeLoop);
-}
-
-/* ── Mode preview mini-canvases (drawn after static functions are defined) ── */
-function buildModePreviews() {
-  const modes = [
-    { key:'GAZE',     name:'GAZE',          desc:'Shows where on the image the viewer\'s eyes landed, sample by sample.' },
-    { key:'FIXATION', name:'FIXATION',       desc:'Circles proportional to dwell time mark where attention was held.' },
-    { key:'SACCADE',  name:'SACCADE',        desc:'Arrows trace rapid eye jumps between regions of interest.' },
-    { key:'SCANPATH', name:'SCAN PATH',      desc:'Numbered sequence reveals the order in which areas were visited.' },
-    { key:'HEATMAP',  name:'HEATMAP',        desc:'Contour lines show density of gaze — highest attention at the center.' },
-    { key:'FIRSTFIX', name:'FIRST FIXATION', desc:'Pinpoints the very first area that captured attention after image onset.' },
-  ];
-
-  // synthetic data for previews
-  const gazeLog = [
-    {x:0.35,y:0.4},{x:0.37,y:0.42},{x:0.5,y:0.35},{x:0.52,y:0.33},
-    {x:0.65,y:0.55},{x:0.67,y:0.57},{x:0.4,y:0.65},{x:0.42,y:0.63},
-    {x:0.55,y:0.45},{x:0.3,y:0.5},{x:0.7,y:0.3},{x:0.6,y:0.7}
-  ];
-  const fixHist = [
-    {x:0.35,y:0.4,duration:320},{x:0.5,y:0.33,duration:580},
-    {x:0.65,y:0.55,duration:240},{x:0.4,y:0.65,duration:460}
-  ];
-  const sacHist = [
-    {fromX:0.35,fromY:0.4,toX:0.5,toY:0.33},
-    {fromX:0.5,fromY:0.33,toX:0.65,toY:0.55},
-    {fromX:0.65,fromY:0.55,toX:0.4,toY:0.65}
-  ];
-  const scanHist = fixHist.slice();
-  const firstFix = {x:0.35,y:0.4,startTs:100};
-
-  const grid = document.getElementById('modesGrid');
-  grid.innerHTML = '';
-
-  for (const m of modes) {
-    const card = document.createElement('div');
-    card.className = 'mode-card';
-    const canvas = document.createElement('canvas');
-    canvas.className = 'mode-preview';
-    canvas.width = 320; canvas.height = 160;
-    card.innerHTML = `<div class="mode-card-name">${m.name}</div>`;
-    card.appendChild(canvas);
-    const desc = document.createElement('div');
-    desc.className = 'mode-card-desc';
-    desc.textContent = m.desc;
-    card.appendChild(desc);
-    grid.appendChild(card);
-
-    const ctx = canvas.getContext('2d');
-    const W=320, H=160;
-    ctx.fillStyle='#f7f7f7'; ctx.fillRect(0,0,W,H);
-    switch(m.key) {
-      case 'GAZE':     staticGaze(ctx,W,H,gazeLog); break;
-      case 'FIXATION': staticFixation(ctx,W,H,fixHist); break;
-      case 'SACCADE':  staticSaccade(ctx,W,H,sacHist); break;
-      case 'SCANPATH': staticScanPath(ctx,W,H,scanHist); break;
-      case 'HEATMAP':  staticHeatmap(ctx,W,H,gazeLog); break;
-      case 'FIRSTFIX': staticFirstFix(ctx,W,H,firstFix,0); break;
-    }
+function homeAnalyze(){
+  if(homeVideo.readyState<2)return;
+  const W=160,H=90;homeAnaCtx.drawImage(homeVideo,0,0,W,H);
+  const id=homeAnaCtx.getImageData(0,0,W,H),px=id.data,{mg}=sobel(px,W,H),all=[];
+  for(let y=1;y<H-1;y+=HOME_DOT_STEP)for(let x=1;x<W-1;x+=HOME_DOT_STEP){
+    const i=y*W+x;if(mg[i]>=HOME_DOT_THRESH)all.push({i,mag:mg[i]});
   }
+  all.sort((a,b)=>b.mag-a.mag);if(all.length>HOME_N_ANN)all.length=HOME_N_ANN;
+  homeDrawDots(all.map(({i})=>({nx:Math.max(0.01,Math.min(0.99,(i%W)/W)),ny:Math.max(0.01,Math.min(0.99,Math.floor(i/W)/H))})));
+}
+
+function homeLoop(ts){
+  if(!homeRunning)return;
+  if(ts-homeLastAnaTs>HOME_ANA_INTERVAL){homeAnalyze();homeLastAnaTs=ts;}
+  requestAnimationFrame(homeLoop);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -676,168 +570,97 @@ function buildModePreviews() {
    ══════════════════════════════════════════════════════════════════════ */
 let appStarted = false;
 
-function showHome() {
-  homeRunning = true;
-  homeScreen.style.display = 'block';
-  navHomeLink.classList.add('active');
-  navSessionLink.classList.remove('active');
-  requestAnimationFrame(homeLoop);
-}
+function showHome(){homeRunning=true;homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');requestAnimationFrame(homeLoop);}
+function hideHome(){homeRunning=false;homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
+function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
-function hideHome() {
-  homeRunning = false;
-  homeScreen.style.display = 'none';
-  navHomeLink.classList.remove('active');
-  navSessionLink.classList.add('active');
-}
+document.getElementById('homeStartBtn').addEventListener('click',goToSession);
+document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
+navSessionLink.addEventListener('click',goToSession);
+navHomeLink.addEventListener('click',()=>{if(appStarted)showHome();});
 
-function goToSession() {
-  hideHome();
-  if (!appStarted) { appStarted = true; startApp(); }
-}
-
-document.getElementById('homeStartBtn').addEventListener('click', goToSession);
-document.getElementById('homeStartBtn2').addEventListener('click', goToSession);
-navSessionLink.addEventListener('click', goToSession);
-navHomeLink.addEventListener('click', () => { if (appStarted) showHome(); });
-
-function bootHome() {
+function bootHome(){
   sizeHomeCanvas();
-  window.addEventListener('resize', sizeHomeCanvas);
-  homeVideo.addEventListener('loadedmetadata', sizeHomeCanvas);
+  window.addEventListener('resize',sizeHomeCanvas);
+  homeVideo.addEventListener('loadedmetadata',sizeHomeCanvas);
   requestAnimationFrame(homeLoop);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    GEOLOCATION
    ══════════════════════════════════════════════════════════════════════ */
-let userLocation = '';
-
-async function fetchLocation() {
-  try {
-    const r = await fetch('https://ipapi.co/json/');
-    const d = await r.json();
-    userLocation = [d.city, d.country_name].filter(Boolean).join(', ');
-  } catch(_) { userLocation = 'Unknown'; }
+let userLocation='';
+async function fetchLocation(){
+  try{const r=await fetch('https://ipapi.co/json/');const d=await r.json();userLocation=[d.city,d.country_name].filter(Boolean).join(', ');}
+  catch(_){userLocation='Unknown';}
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    CONSTANTS
    ══════════════════════════════════════════════════════════════════════ */
-const FIX_DISPERSION   = 0.04;
-const FIX_MIN_DURATION = 150;
-const SAC_VELOCITY     = 0.8;
-const SAC_MIN_AMP      = 0.03;
-const W_HEAT = 200, H_HEAT = 112;
-const HEAT_SIGMA  = 0.07;
-const HEAT_WEIGHT = 0.18;
-const HEAT_DECAY  = 0.9975;
-const GAZE_LERP   = 0.08;
-const CAL_PTS = [
-  [0.1,0.1],[0.5,0.1],[0.9,0.1],
-  [0.9,0.5],[0.5,0.5],[0.1,0.5],
-  [0.1,0.9],[0.5,0.9],[0.9,0.9]
-];
-const CAL_VAR_THRESH = 0.0012;
-const CAL_FILL_RATE  = 0.6;
-const CAL_DRAIN_RATE = 0.8;
-const BUF_MAX = 30;
+const FIX_DISPERSION=0.04,FIX_MIN_DURATION=150,SAC_VELOCITY=0.8,SAC_MIN_AMP=0.03;
+const W_HEAT=200,H_HEAT=112,HEAT_SIGMA=0.07,HEAT_WEIGHT=0.18,HEAT_DECAY=0.9975,GAZE_LERP=0.08;
+const CAL_PTS=[[0.1,0.1],[0.5,0.1],[0.9,0.1],[0.9,0.5],[0.5,0.5],[0.1,0.5],[0.1,0.9],[0.5,0.9],[0.9,0.9]];
+const CAL_VAR_THRESH=0.0012,CAL_FILL_RATE=0.6,CAL_DRAIN_RATE=0.8,BUF_MAX=30;
 
 /* ══════════════════════════════════════════════════════════════════════
    DOM
    ══════════════════════════════════════════════════════════════════════ */
-const mainImg    = document.getElementById('mainImg');
-const imgWrapper = document.getElementById('imgWrapper');
-const dotCanvas  = document.getElementById('dotCanvas');
-const dotCtx     = dotCanvas.getContext('2d');
-const annLayer   = document.getElementById('annLayer');
-const gazeDot    = document.getElementById('gazeDot');
-const infoEl     = document.getElementById('info');
-const calOverlay = document.getElementById('calOverlay');
-const calCanvas  = document.getElementById('calCanvas');
-const calCtx     = calCanvas.getContext('2d');
-const calStartBtn = document.getElementById('calStartBtn');
+const mainImg=document.getElementById('mainImg'),imgWrapper=document.getElementById('imgWrapper');
+const dotCanvas=document.getElementById('dotCanvas'),dotCtx=dotCanvas.getContext('2d');
+const annLayer=document.getElementById('annLayer'),gazeDot=document.getElementById('gazeDot');
+const infoEl=document.getElementById('info'),calOverlay=document.getElementById('calOverlay');
+const calCanvas=document.getElementById('calCanvas'),calCtx=calCanvas.getContext('2d');
+const calStartBtn=document.getElementById('calStartBtn');
 
 /* ══════════════════════════════════════════════════════════════════════
    STATE
    ══════════════════════════════════════════════════════════════════════ */
-let currentUser   = '';
-let currentAge    = '';
-let currentGender = '';
-let imageLibrary = [], currentImageIdx = 0;
-
-let fixationHistory  = [], currentFixation = null;
-let scanPathHistory  = [];
-let saccadeHistory   = [], saccadeActive = false, saccadeStart = null;
-let heatmap          = new Float32Array(W_HEAT * H_HEAT);
-let heatCanvas, heatCtx2;
-let firstFix         = null, firstFixDone = false, firstFixModeTs = 0;
-let sessionStartTs   = 0;
-let gazeLog          = [];
-
-let rawGX = 0.5, rawGY = 0.5;
-let sGX   = 0.5, sGY   = 0.5;
-let gazeOn = false, lastGazeTs = 0;
-
-let curOffX = 0.5, curOffY = 0.5;
-let curEyeOffX = 0.5, curEyeOffY = 0.5, eyeValid = false;
-const offXBuf = [], offYBuf = [];
-const eyeOffXBuf = [], eyeOffYBuf = [];
-let eyeCalMap = null;
-
-window._gazeHistory = [];
-
-let currentAnimation = null;
-let dataActiveLayer  = 'GAZE';
-let playMode         = 'ANIMATED';
-let showImg          = true;
-let dataView         = 'SESSION';
-let viewSession      = null;
-const allSessions    = [];
+let currentUser='',currentAge='',currentGender='';
+let imageLibrary=[],currentImageIdx=0;
+let fixationHistory=[],currentFixation=null,scanPathHistory=[],saccadeHistory=[],saccadeActive=false,saccadeStart=null;
+let heatmap=new Float32Array(W_HEAT*H_HEAT),heatCanvas,heatCtx2;
+let firstFix=null,firstFixDone=false,firstFixModeTs=0,sessionStartTs=0,gazeLog=[];
+let rawGX=0.5,rawGY=0.5,sGX=0.5,sGY=0.5,gazeOn=false,lastGazeTs=0;
+let curOffX=0.5,curOffY=0.5,curEyeOffX=0.5,curEyeOffY=0.5,eyeValid=false;
+const offXBuf=[],offYBuf=[],eyeOffXBuf=[],eyeOffYBuf=[];
+let eyeCalMap=null;
+window._gazeHistory=[];
+let currentAnimation=null,dataActiveLayer='GAZE',playMode='ANIMATED',showImg=true,viewSession=null;
+const allSessions=[];
 
 /* ══════════════════════════════════════════════════════════════════════
    EYE STABILITY
    ══════════════════════════════════════════════════════════════════════ */
-function eyeStab() {
-  const N = Math.min(eyeOffXBuf.length, 20);
-  if (N < 8) return 0;
-  const xs = eyeOffXBuf.slice(-N), ys = eyeOffYBuf.slice(-N);
-  const mx = xs.reduce((a,b)=>a+b,0)/N, my = ys.reduce((a,b)=>a+b,0)/N;
-  const vx = xs.reduce((a,b)=>a+(b-mx)**2,0)/N;
-  const vy = ys.reduce((a,b)=>a+(b-my)**2,0)/N;
-  return Math.max(0, Math.min(1, 1-(vx+vy)/CAL_VAR_THRESH));
+function eyeStab(){
+  const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;
+  const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N);
+  const mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N;
+  const vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;
+  return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    ANALYSIS — FIXATION I-DT
    ══════════════════════════════════════════════════════════════════════ */
-function updateFixations(ts) {
-  const gh = window._gazeHistory;
-  if (gh.length < 2) return;
-  const win = gh.filter(p => p.ts > ts - 600);
-  if (win.length < 2) return;
-  const xs = win.map(p => p.x), ys = win.map(p => p.y);
-  const disp = (Math.max(...xs)-Math.min(...xs)) + (Math.max(...ys)-Math.min(...ys));
-  if (disp < FIX_DISPERSION) {
-    const cx = xs.reduce((a,b)=>a+b,0)/xs.length;
-    const cy = ys.reduce((a,b)=>a+b,0)/ys.length;
-    if (!currentFixation) {
-      currentFixation = { startTs:ts, cx, cy };
-    } else {
-      currentFixation.cx = cx; currentFixation.cy = cy;
-      currentFixation.duration = ts - currentFixation.startTs;
-    }
-  } else {
-    if (currentFixation) {
-      const dur = ts - currentFixation.startTs;
-      if (dur >= FIX_MIN_DURATION) {
-        const fe = { x:currentFixation.cx, y:currentFixation.cy, startTs:currentFixation.startTs, endTs:ts, duration:dur };
-        fixationHistory.push(fe);
-        if (fixationHistory.length > 100) fixationHistory.shift();
-        scanPathHistory.push(fe);
-        if (scanPathHistory.length > 50) scanPathHistory.shift();
+function updateFixations(ts){
+  const gh=window._gazeHistory;if(gh.length<2)return;
+  const win=gh.filter(p=>p.ts>ts-600);if(win.length<2)return;
+  const xs=win.map(p=>p.x),ys=win.map(p=>p.y);
+  const disp=(Math.max(...xs)-Math.min(...xs))+(Math.max(...ys)-Math.min(...ys));
+  if(disp<FIX_DISPERSION){
+    const cx=xs.reduce((a,b)=>a+b,0)/xs.length,cy=ys.reduce((a,b)=>a+b,0)/ys.length;
+    if(!currentFixation){currentFixation={startTs:ts,cx,cy};}
+    else{currentFixation.cx=cx;currentFixation.cy=cy;currentFixation.duration=ts-currentFixation.startTs;}
+  }else{
+    if(currentFixation){
+      const dur=ts-currentFixation.startTs;
+      if(dur>=FIX_MIN_DURATION){
+        const fe={x:currentFixation.cx,y:currentFixation.cy,startTs:currentFixation.startTs,endTs:ts,duration:dur};
+        fixationHistory.push(fe);if(fixationHistory.length>100)fixationHistory.shift();
+        scanPathHistory.push(fe);if(scanPathHistory.length>50)scanPathHistory.shift();
       }
-      currentFixation = null;
+      currentFixation=null;
     }
   }
 }
@@ -845,23 +668,16 @@ function updateFixations(ts) {
 /* ══════════════════════════════════════════════════════════════════════
    ANALYSIS — SACCADE I-VT
    ══════════════════════════════════════════════════════════════════════ */
-function updateSaccades(ts) {
-  const gh = window._gazeHistory;
-  if (gh.length < 2) return;
-  const last = gh[gh.length-1], prev = gh[gh.length-2];
-  const dt = (last.ts - prev.ts) / 1000;
-  if (dt <= 0) return;
-  const vel = Math.hypot(last.x-prev.x, last.y-prev.y) / dt;
-  if (vel >= SAC_VELOCITY) {
-    if (!saccadeActive) { saccadeActive = true; saccadeStart = {x:prev.x, y:prev.y, ts:prev.ts}; }
-  } else {
-    if (saccadeActive && saccadeStart) {
-      const amp = Math.hypot(last.x-saccadeStart.x, last.y-saccadeStart.y);
-      if (amp >= SAC_MIN_AMP) {
-        saccadeHistory.push({ fromX:saccadeStart.x, fromY:saccadeStart.y, toX:last.x, toY:last.y, startTs:saccadeStart.ts, endTs:ts, duration:ts-saccadeStart.ts });
-        if (saccadeHistory.length > 100) saccadeHistory.shift();
-      }
-      saccadeActive = false; saccadeStart = null;
+function updateSaccades(ts){
+  const gh=window._gazeHistory;if(gh.length<2)return;
+  const last=gh[gh.length-1],prev=gh[gh.length-2],dt=(last.ts-prev.ts)/1000;if(dt<=0)return;
+  const vel=Math.hypot(last.x-prev.x,last.y-prev.y)/dt;
+  if(vel>=SAC_VELOCITY){if(!saccadeActive){saccadeActive=true;saccadeStart={x:prev.x,y:prev.y,ts:prev.ts};}}
+  else{
+    if(saccadeActive&&saccadeStart){
+      const amp=Math.hypot(last.x-saccadeStart.x,last.y-saccadeStart.y);
+      if(amp>=SAC_MIN_AMP){saccadeHistory.push({fromX:saccadeStart.x,fromY:saccadeStart.y,toX:last.x,toY:last.y,startTs:saccadeStart.ts,endTs:ts,duration:ts-saccadeStart.ts});if(saccadeHistory.length>100)saccadeHistory.shift();}
+      saccadeActive=false;saccadeStart=null;
     }
   }
 }
@@ -869,399 +685,242 @@ function updateSaccades(ts) {
 /* ══════════════════════════════════════════════════════════════════════
    ANALYSIS — HEATMAP
    ══════════════════════════════════════════════════════════════════════ */
-function updateHeatmap() {
-  for (let i = 0; i < heatmap.length; i++) heatmap[i] *= HEAT_DECAY;
-  const gx = sGX*W_HEAT, gy = sGY*H_HEAT;
-  const sigma = HEAT_SIGMA * Math.max(W_HEAT, H_HEAT);
-  const r = Math.ceil(3*sigma);
-  const x0 = Math.max(0, Math.floor(gx-r)), x1 = Math.min(W_HEAT-1, Math.ceil(gx+r));
-  const y0 = Math.max(0, Math.floor(gy-r)), y1 = Math.min(H_HEAT-1, Math.ceil(gy+r));
-  const inv2s2 = 1/(2*sigma*sigma);
-  for (let y = y0; y <= y1; y++)
-    for (let x = x0; x <= x1; x++)
-      heatmap[y*W_HEAT+x] += HEAT_WEIGHT * Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
+function updateHeatmap(){
+  for(let i=0;i<heatmap.length;i++)heatmap[i]*=HEAT_DECAY;
+  const gx=sGX*W_HEAT,gy=sGY*H_HEAT,sigma=HEAT_SIGMA*Math.max(W_HEAT,H_HEAT),r=Math.ceil(3*sigma);
+  const x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(W_HEAT-1,Math.ceil(gx+r));
+  const y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(H_HEAT-1,Math.ceil(gy+r));
+  const inv2s2=1/(2*sigma*sigma);
+  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)heatmap[y*W_HEAT+x]+=HEAT_WEIGHT*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — FIRST FIXATION
-   ══════════════════════════════════════════════════════════════════════ */
-function updateFirstFix() {
-  if (firstFixDone) return;
-  const recent = fixationHistory.filter(f => f.startTs >= firstFixModeTs);
-  if (recent.length > 0) { firstFix = recent[0]; firstFixDone = true; }
+function updateFirstFix(){if(firstFixDone)return;const recent=fixationHistory.filter(f=>f.startTs>=firstFixModeTs);if(recent.length>0){firstFix=recent[0];firstFixDone=true;}}
+function drawFrame(){dotCtx.clearRect(0,0,dotCanvas.width,dotCanvas.height);}
+
+function applyGaze(ts){
+  lastGazeTs=ts;sGX+=(rawGX-sGX)*GAZE_LERP;sGY+=(rawGY-sGY)*GAZE_LERP;
+  const W=imgWrapper.offsetWidth,H=imgWrapper.offsetHeight;if(!W||!H)return;
+  const rect=imgWrapper.getBoundingClientRect();
+  gazeDot.style.left=(rect.left+sGX*W)+'px';gazeDot.style.top=(rect.top+sGY*H)+'px';
+  window._gazeHistory.push({x:sGX,y:sGY,ts});if(window._gazeHistory.length>90)window._gazeHistory.shift();
 }
 
-function drawFrame() {
-  dotCtx.clearRect(0, 0, dotCanvas.width, dotCanvas.height);
-}
-
-function applyGaze(ts) {
-  lastGazeTs = ts;
-  sGX += (rawGX - sGX) * GAZE_LERP;
-  sGY += (rawGY - sGY) * GAZE_LERP;
-  const W = imgWrapper.offsetWidth, H = imgWrapper.offsetHeight;
-  if (!W || !H) return;
-  const rect = imgWrapper.getBoundingClientRect();
-  gazeDot.style.left = (rect.left + sGX*W) + 'px';
-  gazeDot.style.top  = (rect.top  + sGY*H) + 'px';
-  window._gazeHistory.push({x:sGX, y:sGY, ts});
-  if (window._gazeHistory.length > 90) window._gazeHistory.shift();
-}
-
-function mainLoop(ts) {
-  applyGaze(ts);
-  updateFixations(ts);
-  updateSaccades(ts);
-  updateHeatmap();
-  updateFirstFix();
-  drawFrame();
-  requestAnimationFrame(mainLoop);
-}
+function mainLoop(ts){applyGaze(ts);updateFixations(ts);updateSaccades(ts);updateHeatmap();updateFirstFix();drawFrame();requestAnimationFrame(mainLoop);}
 
 /* ══════════════════════════════════════════════════════════════════════
    AFFINE FIT
    ══════════════════════════════════════════════════════════════════════ */
-function fitAffine(data) {
+function fitAffine(data){
   let A00=0,A01=0,A02=0,A11=0,A12=0,Bx0=0,Bx1=0,Bx2=0,By0=0,By1=0,By2=0;
-  const n = data.length;
-  for (const d of data) {
-    A00+=d.ox*d.ox; A01+=d.ox*d.oy; A02+=d.ox;
-    A11+=d.oy*d.oy; A12+=d.oy;
-    Bx0+=d.ox*d.sx; Bx1+=d.oy*d.sx; Bx2+=d.sx;
-    By0+=d.ox*d.sy; By1+=d.oy*d.sy; By2+=d.sy;
-  }
-  const M = [[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];
-  const inv = inv3(M); if (!inv) return null;
-  const [ax,bx,cx] = mv3(inv,[Bx0,Bx1,Bx2]);
-  const [ay,by,cy] = mv3(inv,[By0,By1,By2]);
+  const n=data.length;
+  for(const d of data){A00+=d.ox*d.ox;A01+=d.ox*d.oy;A02+=d.ox;A11+=d.oy*d.oy;A12+=d.oy;Bx0+=d.ox*d.sx;Bx1+=d.oy*d.sx;Bx2+=d.sx;By0+=d.ox*d.sy;By1+=d.oy*d.sy;By2+=d.sy;}
+  const M=[[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];
+  const inv=inv3(M);if(!inv)return null;
+  const [ax,bx,cx]=mv3(inv,[Bx0,Bx1,Bx2]);const [ay,by,cy]=mv3(inv,[By0,By1,By2]);
   return {ax,bx,cx,ay,by,cy};
 }
-function inv3(m) {
-  const [[a,b,c],[d,e,f],[g,h,k]] = m;
-  const det = a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);
-  if (Math.abs(det) < 1e-12) return null;
-  const s = 1/det;
-  return [[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],
-          [(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],
-          [(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];
+function inv3(m){
+  const[[a,b,c],[d,e,f],[g,h,k]]=m;
+  const det=a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);if(Math.abs(det)<1e-12)return null;
+  const s=1/det;
+  return[[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],[(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],[(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];
 }
-function mv3(m,v) {
-  return [m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],
-          m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],
-          m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];
-}
+function mv3(m,v){return[m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];}
 
 /* ══════════════════════════════════════════════════════════════════════
    CALIBRATION
    ══════════════════════════════════════════════════════════════════════ */
-function resizeCal() { calCanvas.width = window.innerWidth; calCanvas.height = window.innerHeight; }
-
-function drawCalIntro() {
-  const W = calCanvas.width, H = calCanvas.height;
-  calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H); calCtx.textAlign='center';
-  calCtx.fillStyle='#111'; calCtx.font='bold 22px Heebo'; calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);
-  calCtx.strokeStyle='#ddd'; calCtx.lineWidth=1; calCtx.beginPath(); calCtx.moveTo(W/2-220,H/2-36); calCtx.lineTo(W/2+220,H/2-36); calCtx.stroke();
-  calCtx.fillStyle='#666'; calCtx.font='14px Heebo'; calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
+function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
+function drawCalIntro(){
+  const W=calCanvas.width,H=calCanvas.height;
+  calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
+  calCtx.fillStyle='#111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);
+  calCtx.strokeStyle='#ddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();
+  calCtx.fillStyle='#666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
   calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);
-  calCtx.fillStyle='#aaa'; calCtx.font='12px Heebo'; calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);
+  calCtx.fillStyle='#aaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);
 }
-
-function drawCalDone() {
-  const W = calCanvas.width, H = calCanvas.height;
-  calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H); calCtx.textAlign='center';
-  calCtx.fillStyle='#111'; calCtx.font='bold 24px Heebo'; calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);
-  calCtx.fillStyle='#aaa'; calCtx.font='13px Heebo'; calCtx.fillText('Calibration complete',W/2,H/2+18);
+function drawCalDone(){
+  const W=calCanvas.width,H=calCanvas.height;
+  calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
+  calCtx.fillStyle='#111';calCtx.font='bold 24px Heebo';calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);
+  calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);
 }
-
-function awaitDot(px, py, index) {
-  return new Promise(resolve => {
-    let progress = 0, prevTs = null;
-    const samples = [];
-    function frame(ts) {
-      const dt = prevTs ? Math.min((ts-prevTs)/1000, 0.05) : 0; prevTs = ts;
-      const s = eyeStab();
-      progress += s*CAL_FILL_RATE*dt; progress -= (1-s)*CAL_DRAIN_RATE*dt;
-      progress = Math.max(0, Math.min(1, progress));
-      if (s > 0.45 && eyeValid) samples.push({ox:curEyeOffX, oy:curEyeOffY});
-      const W = calCanvas.width, H = calCanvas.height;
-      calCtx.fillStyle='#fff'; calCtx.fillRect(0,0,W,H);
-      calCtx.textAlign='right'; calCtx.fillStyle='#aaa'; calCtx.font='14px Heebo';
-      calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`, W-28, 36);
-      calCtx.textAlign='center'; calCtx.fillStyle='#aaa'; calCtx.font='13px Heebo';
-      calCtx.fillText('LOOK AT DOT · HEAD STILL · EYES ONLY', W/2, H-26);
-      calCtx.beginPath(); calCtx.arc(px,py,22,0,Math.PI*2);
-      calCtx.strokeStyle='#ddd'; calCtx.lineWidth=1.5; calCtx.stroke();
-      if (progress > 0) {
-        calCtx.beginPath(); calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);
-        calCtx.strokeStyle=`rgba(224,26,0,${0.35+s*0.65})`; calCtx.lineWidth=2; calCtx.stroke();
-      }
-      const r = 3.5+s*2.5; calCtx.beginPath(); calCtx.arc(px,py,r,0,Math.PI*2);
-      calCtx.fillStyle=`rgba(224,26,0,${0.2+s*0.8})`; calCtx.fill();
-      if (progress >= 1) {
-        calCtx.beginPath(); calCtx.arc(px,py,22,0,Math.PI*2);
-        calCtx.strokeStyle='rgba(224,26,0,0.9)'; calCtx.lineWidth=2; calCtx.stroke();
-        const n = samples.length || 1;
-        setTimeout(() => resolve({
-          ox: samples.reduce((a,v)=>a+v.ox,0)/n,
-          oy: samples.reduce((a,v)=>a+v.oy,0)/n
-        }), 280);
-      } else requestAnimationFrame(frame);
+function awaitDot(px,py,index){
+  return new Promise(resolve=>{
+    let progress=0,prevTs=null;const samples=[];
+    function frame(ts){
+      const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;
+      const s=eyeStab();
+      progress+=s*CAL_FILL_RATE*dt;progress-=(1-s)*CAL_DRAIN_RATE*dt;progress=Math.max(0,Math.min(1,progress));
+      if(s>0.45&&eyeValid)samples.push({ox:curEyeOffX,oy:curEyeOffY});
+      const W=calCanvas.width,H=calCanvas.height;
+      calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);
+      calCtx.textAlign='right';calCtx.fillStyle='#aaa';calCtx.font='14px Heebo';calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`,W-28,36);
+      calCtx.textAlign='center';calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('LOOK AT DOT · HEAD STILL · EYES ONLY',W/2,H-26);
+      calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1.5;calCtx.stroke();
+      if(progress>0){calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);calCtx.strokeStyle=`rgba(224,26,0,${0.35+s*0.65})`;calCtx.lineWidth=2;calCtx.stroke();}
+      const r=3.5+s*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);calCtx.fillStyle=`rgba(224,26,0,${0.2+s*0.8})`;calCtx.fill();
+      if(progress>=1){calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='rgba(224,26,0,0.9)';calCtx.lineWidth=2;calCtx.stroke();const n=samples.length||1;setTimeout(()=>resolve({ox:samples.reduce((a,v)=>a+v.ox,0)/n,oy:samples.reduce((a,v)=>a+v.oy,0)/n}),280);}
+      else requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
   });
 }
-
-async function runCalibration() {
-  resizeCal(); window.addEventListener('resize', resizeCal); drawCalIntro();
-  calStartBtn.style.display = 'block';
-  await new Promise(r => calStartBtn.addEventListener('click', r, {once:true}));
-  calStartBtn.style.display = 'none';
-  const calData = [];
-  for (let i = 0; i < CAL_PTS.length; i++) {
-    const [nx,ny] = CAL_PTS[i];
-    const px = nx*window.innerWidth, py = ny*window.innerHeight;
-    if (i > 0) await new Promise(r => setTimeout(r, 320));
-    const {ox,oy} = await awaitDot(px, py, i);
-    calData.push({sx:nx, sy:ny, ox, oy});
+async function runCalibration(){
+  resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();
+  calStartBtn.style.display='block';
+  await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));
+  calStartBtn.style.display='none';
+  const calData=[];
+  for(let i=0;i<CAL_PTS.length;i++){
+    const[nx,ny]=CAL_PTS[i],px=nx*window.innerWidth,py=ny*window.innerHeight;
+    if(i>0)await new Promise(r=>setTimeout(r,320));
+    const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});
   }
-  if (calData.length >= 4) eyeCalMap = fitAffine(calData);
-  drawCalDone();
-  await new Promise(r => setTimeout(r, 900));
-  calOverlay.style.display = 'none';
+  if(calData.length>=4)eyeCalMap=fitAffine(calData);
+  drawCalDone();await new Promise(r=>setTimeout(r,900));calOverlay.style.display='none';
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    EYE TRACKING
    ══════════════════════════════════════════════════════════════════════ */
-async function startEyeTracking() {
+async function startEyeTracking(){
   let fl;
-  try {
-    const fs = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
-    fl = await FaceLandmarker.createFromOptions(fs, {
-      baseOptions:{ modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task', delegate:'GPU' },
-      outputFaceBlendshapes:false, runningMode:'VIDEO', numFaces:1
-    });
-  } catch(e) { console.warn('[eye]',e); return false; }
-  try {
-    const webcamEl = document.createElement('video');
-    webcamEl.style.cssText = 'position:fixed;bottom:8px;right:8px;width:1px;height:1px;opacity:0;';
-    webcamEl.autoplay = true; webcamEl.muted = true; webcamEl.playsInline = true;
+  try{const fs=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');fl=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1});}
+  catch(e){console.warn('[eye]',e);return false;}
+  try{
+    const webcamEl=document.createElement('video');
+    webcamEl.style.cssText='position:fixed;bottom:8px;right:8px;width:1px;height:1px;opacity:0;';
+    webcamEl.autoplay=true;webcamEl.muted=true;webcamEl.playsInline=true;
     document.body.appendChild(webcamEl);
-    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});
-    webcamEl.srcObject = stream;
-    await new Promise(r => { webcamEl.onloadeddata = r; });
-    let lastCamT = -1;
-    function track() {
-      if (webcamEl.readyState >= 2 && webcamEl.currentTime !== lastCamT) {
-        lastCamT = webcamEl.currentTime;
-        try {
-          const res = fl.detectForVideo(webcamEl, performance.now());
-          if (res.faceLandmarks?.length > 0) {
-            const lm = res.faceLandmarks[0];
-            const nose=lm[1], brow=lm[168], chin=lm[152], lChk=lm[234], rChk=lm[454];
-            const hxR = (nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8;
-            const hyR = (nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;
-            curOffX = 1-hxR; curOffY = hyR;
-            offXBuf.push(curOffX); if (offXBuf.length > BUF_MAX) offXBuf.shift();
-            offYBuf.push(curOffY); if (offYBuf.length > BUF_MAX) offYBuf.shift();
-            const lI=lm[468], rI=lm[473], lIn=lm[33], lO=lm[133], rIn=lm[362], rO=lm[263];
-            if (lI && rI && lIn && lO && rIn && rO) {
-              const lEW = Math.hypot(lO.x-lIn.x, lO.y-lIn.y);
-              const rEW = Math.hypot(rO.x-rIn.x, rO.y-rIn.y);
-              if (lEW > 0.01 && rEW > 0.01) {
-                let eX = ((lI.x-lIn.x)/lEW + (rI.x-rIn.x)/rEW) / 2;
-                let eY = ((lI.y-lIn.y)/lEW + (rI.y-rIn.y)/rEW) / 2;
-                eX = (eX-0.5)*2.5+0.5; eY = (eY-0.5)*2.5+0.5; eX = 1-eX;
-                curEyeOffX = eX; curEyeOffY = eY;
-                eyeOffXBuf.push(eX); if (eyeOffXBuf.length > BUF_MAX) eyeOffXBuf.shift();
-                eyeOffYBuf.push(eY); if (eyeOffYBuf.length > BUF_MAX) eyeOffYBuf.shift();
-                eyeValid = true;
-                if (eyeCalMap) {
-                  rawGX = eyeCalMap.ax*eX + eyeCalMap.bx*eY + eyeCalMap.cx;
-                  rawGY = eyeCalMap.ay*eX + eyeCalMap.by*eY + eyeCalMap.cy;
-                } else { rawGX = eX; rawGY = eY; }
-                rawGX = Math.max(0, Math.min(1, rawGX));
-                rawGY = Math.max(0, Math.min(1, rawGY));
-                if (!gazeOn) { gazeOn = true; infoEl.style.opacity = '0'; }
-              } else eyeValid = false;
-            } else eyeValid = false;
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});
+    webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});
+    let lastCamT=-1;
+    function track(){
+      if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){
+        lastCamT=webcamEl.currentTime;
+        try{
+          const res=fl.detectForVideo(webcamEl,performance.now());
+          if(res.faceLandmarks?.length>0){
+            const lm=res.faceLandmarks[0];
+            const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];
+            const hxR=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8,hyR=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;
+            curOffX=1-hxR;curOffY=hyR;offXBuf.push(curOffX);if(offXBuf.length>BUF_MAX)offXBuf.shift();offYBuf.push(curOffY);if(offYBuf.length>BUF_MAX)offYBuf.shift();
+            const lI=lm[468],rI=lm[473],lIn=lm[33],lO=lm[133],rIn=lm[362],rO=lm[263];
+            if(lI&&rI&&lIn&&lO&&rIn&&rO){
+              const lEW=Math.hypot(lO.x-lIn.x,lO.y-lIn.y),rEW=Math.hypot(rO.x-rIn.x,rO.y-rIn.y);
+              if(lEW>0.01&&rEW>0.01){
+                let eX=((lI.x-lIn.x)/lEW+(rI.x-rIn.x)/rEW)/2,eY=((lI.y-lIn.y)/lEW+(rI.y-rIn.y)/rEW)/2;
+                eX=(eX-0.5)*2.5+0.5;eY=(eY-0.5)*2.5+0.5;eX=1-eX;
+                curEyeOffX=eX;curEyeOffY=eY;eyeOffXBuf.push(eX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();eyeOffYBuf.push(eY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();
+                eyeValid=true;
+                if(eyeCalMap){rawGX=eyeCalMap.ax*eX+eyeCalMap.bx*eY+eyeCalMap.cx;rawGY=eyeCalMap.ay*eX+eyeCalMap.by*eY+eyeCalMap.cy;}else{rawGX=eX;rawGY=eY;}
+                rawGX=Math.max(0,Math.min(1,rawGX));rawGY=Math.max(0,Math.min(1,rawGY));
+                if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}
+              }else eyeValid=false;
+            }else eyeValid=false;
           }
-        } catch(_) {}
+        }catch(_){}
       }
       requestAnimationFrame(track);
     }
     requestAnimationFrame(track);
-  } catch(e) { console.warn('[eye] webcam',e); return false; }
+  }catch(e){console.warn('[eye] webcam',e);return false;}
   return true;
 }
 
-function enablePointerFallback() {
-  infoEl.textContent = 'MOVE MOUSE TO EXPLORE';
-  const onMove = (cx,cy) => {
-    const rect = imgWrapper.getBoundingClientRect();
-    const nx = (cx-rect.left)/rect.width, ny = (cy-rect.top)/rect.height;
-    if (nx>=0&&nx<=1&&ny>=0&&ny<=1) { rawGX=nx; rawGY=ny; if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';} }
+function enablePointerFallback(){
+  infoEl.textContent='MOVE MOUSE TO EXPLORE';
+  const onMove=(cx,cy)=>{
+    const rect=imgWrapper.getBoundingClientRect();
+    const nx=(cx-rect.left)/rect.width,ny=(cy-rect.top)/rect.height;
+    if(nx>=0&&nx<=1&&ny>=0&&ny<=1){rawGX=nx;rawGY=ny;if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}
   };
-  document.addEventListener('mousemove', e => onMove(e.clientX,e.clientY));
-  document.addEventListener('touchmove', e => { e.preventDefault(); onMove(e.touches[0].clientX,e.touches[0].clientY); }, {passive:false});
+  document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
+  document.addEventListener('touchmove',e=>{e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    IMAGE LIBRARY
    ══════════════════════════════════════════════════════════════════════ */
-function showLib() { document.getElementById('libraryScreen').style.display = 'flex'; renderLib(); }
-
-function renderLib() {
-  const grid = document.getElementById('libGrid'); grid.innerHTML = '';
-  imageLibrary.forEach((img,i) => {
-    const card = document.createElement('div');
-    card.className = 'lib-card' + (i===currentImageIdx?' selected':'');
-    card.innerHTML = `<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
-    card.onclick = () => { currentImageIdx=i; document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); };
+function showLib(){document.getElementById('libraryScreen').style.display='flex';renderLib();}
+function renderLib(){
+  const grid=document.getElementById('libGrid');grid.innerHTML='';
+  imageLibrary.forEach((img,i)=>{
+    const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx?' selected':'');
+    card.innerHTML=`<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
+    card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');};
     grid.appendChild(card);
   });
-  const add = document.createElement('div');
-  add.className = 'lib-add';
-  add.innerHTML = '<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
-  add.onclick = () => document.getElementById('libFileInput').click();
-  grid.appendChild(add);
-  const btn = document.getElementById('libBeginBtn');
-  btn.disabled = imageLibrary.length === 0;
-  btn.style.opacity = imageLibrary.length ? '1' : '0.4';
+  const add=document.createElement('div');add.className='lib-add';
+  add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
+  add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);
+  const btn=document.getElementById('libBeginBtn');btn.disabled=imageLibrary.length===0;btn.style.opacity=imageLibrary.length?'1':'0.4';
 }
-
-document.getElementById('libFileInput').addEventListener('change', e => {
-  Array.from(e.target.files).forEach(file => {
-    const r = new FileReader();
-    r.onload = ev => { imageLibrary.push({src:ev.target.result, name:file.name.replace(/\.[^.]+$/,'')}); renderLib(); };
-    r.readAsDataURL(file);
-  });
-  e.target.value = '';
+document.getElementById('libFileInput').addEventListener('change',e=>{
+  Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});
+  e.target.value='';
 });
 
 /* ══════════════════════════════════════════════════════════════════════
-   NAME / USER META SCREEN
+   NAME SCREEN
    ══════════════════════════════════════════════════════════════════════ */
-async function showNameScreen() {
-  return new Promise(resolve => {
-    const scr = document.getElementById('nameScreen');
-    const inp = document.getElementById('nameInput');
-    const ageInp = document.getElementById('ageInput');
-    const genderInp = document.getElementById('genderInput');
-    const btn = document.getElementById('nameContinue');
-    scr.style.display = 'flex'; inp.focus();
-    function proceed() {
-      const v = inp.value.trim();
-      if (!v) { inp.focus(); return; }
-      currentUser   = v;
-      currentAge    = ageInp.value.trim();
-      currentGender = genderInp.value;
-      scr.style.display = 'none';
-      resolve();
-    }
-    btn.addEventListener('click', proceed);
-    inp.addEventListener('keydown', e => { if(e.key==='Enter') proceed(); });
+async function showNameScreen(){
+  return new Promise(resolve=>{
+    const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');
+    const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');
+    const btn=document.getElementById('nameContinue');
+    scr.style.display='flex';inp.focus();
+    function proceed(){const v=inp.value.trim();if(!v){inp.focus();return;}currentUser=v;currentAge=ageInp.value.trim();currentGender=genderInp.value;scr.style.display='none';resolve();}
+    btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});
   });
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    STATS
    ══════════════════════════════════════════════════════════════════════ */
-function renderStatsForSession(sess) {
-  const fh = sess.fixationHistory||[], sh = sess.saccadeHistory||[];
-  const sp = sess.scanPathHistory||[], ff = sess.firstFix;
-  const ft = sess.firstFixModeTs, gl = sess.gazeLog||[], st = sess.sessionStartTs;
-  const fixC = fh.length;
-  const fixAvg = fixC ? Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC) : 0;
-  const fixTotal = fh.reduce((s,f)=>s+f.duration, 0);
-  const sacC = sh.length;
-  const sacAmp = sacC ? +(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1) : 0;
-  const ttff = ff ? ((ff.startTs - ft) / 1000) : null;
-  const dur = sess.sessionDuration ? (sess.sessionDuration/1000).toFixed(1) : (st ? ((Date.now()-st)/1000).toFixed(1) : null);
-  document.getElementById('st-fix-count').textContent  = fixC  || '—';
-  document.getElementById('st-fix-avg').textContent    = fixAvg || '—';
-  document.getElementById('st-fix-total').textContent  = fixTotal || '—';
-  document.getElementById('st-sac-count').textContent  = sacC  || '—';
-  document.getElementById('st-sac-amp').textContent    = sacAmp || '—';
-  document.getElementById('st-scan-steps').textContent = sp.length || '—';
-  document.getElementById('st-ttff').textContent       = ttff !== null ? ttff.toFixed(2) : '—';
-  document.getElementById('st-ff-x').textContent       = ff ? (ff.x*100).toFixed(1)+'%' : '—';
-  document.getElementById('st-ff-y').textContent       = ff ? (ff.y*100).toFixed(1)+'%' : '—';
-  document.getElementById('st-gaze-n').textContent     = gl.length || '—';
-  document.getElementById('st-duration').textContent   = dur || '—';
-  document.getElementById('st-location').textContent   = sess.location || '—';
-  document.getElementById('st-user-name').textContent  = sess.user || '—';
-  document.getElementById('st-user-age').textContent   = sess.age || '—';
-  document.getElementById('st-user-gender').textContent= sess.gender || '—';
+function renderStatsForSession(sess){
+  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix;
+  const ft=sess.firstFixModeTs,gl=sess.gazeLog||[],st=sess.sessionStartTs;
+  const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0;
+  const fixTotal=fh.reduce((s,f)=>s+f.duration,0),sacC=sh.length;
+  const sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;
+  const ttff=ff?((ff.startTs-ft)/1000):null;
+  const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1):(st?((Date.now()-st)/1000).toFixed(1):null);
+  document.getElementById('st-fix-count').textContent=fixC||'—';document.getElementById('st-fix-avg').textContent=fixAvg||'—';document.getElementById('st-fix-total').textContent=fixTotal||'—';
+  document.getElementById('st-sac-count').textContent=sacC||'—';document.getElementById('st-sac-amp').textContent=sacAmp||'—';document.getElementById('st-scan-steps').textContent=sp.length||'—';
+  document.getElementById('st-ttff').textContent=ttff!==null?ttff.toFixed(2):'—';document.getElementById('st-ff-x').textContent=ff?(ff.x*100).toFixed(1)+'%':'—';document.getElementById('st-ff-y').textContent=ff?(ff.y*100).toFixed(1)+'%':'—';
+  document.getElementById('st-gaze-n').textContent=gl.length||'—';document.getElementById('st-duration').textContent=dur||'—';
+  document.getElementById('st-location').textContent=sess.location||'—';
+  document.getElementById('st-user-name').textContent=sess.user||'—';document.getElementById('st-user-age').textContent=sess.age||'—';document.getElementById('st-user-gender').textContent=sess.gender||'—';
 }
-
-function renderStats() {
-  const sess = viewSession || { fixationHistory, saccadeHistory, scanPathHistory, firstFix, firstFixModeTs, gazeLog, sessionStartTs, location:userLocation, user:currentUser, age:currentAge, gender:currentGender };
+function renderStats(){
+  const sess=viewSession||{fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs,gazeLog,sessionStartTs,location:userLocation,user:currentUser,age:currentAge,gender:currentGender};
   renderStatsForSession(sess);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    MARCHING SQUARES HEATMAP
    ══════════════════════════════════════════════════════════════════════ */
-function buildHeatmapFromLog(log, hmW, hmH) {
-  const hm = new Float32Array(hmW * hmH);
-  const sigma = 0.07 * Math.max(hmW, hmH);
-  const r = Math.ceil(3*sigma), inv2s2 = 1/(2*sigma*sigma);
-  for (const p of log) {
-    const gx=p.x*hmW, gy=p.y*hmH;
-    const x0=Math.max(0,Math.floor(gx-r)), x1=Math.min(hmW-1,Math.ceil(gx+r));
-    const y0=Math.max(0,Math.floor(gy-r)), y1=Math.min(hmH-1,Math.ceil(gy+r));
-    for (let y=y0;y<=y1;y++) for (let x=x0;x<=x1;x++)
-      hm[y*hmW+x] += 0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
-  }
+function buildHeatmapFromLog(log,hmW,hmH){
+  const hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
+  for(const p of log){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
   return hm;
 }
-
-function getMSSegs(idx, T, R, B, L) {
-  switch(idx) {
-    case 1:  return [[L,B]];
-    case 2:  return [[R,B]];
-    case 3:  return [[L,R]];
-    case 4:  return [[T,R]];
-    case 5:  return [[T,R],[L,B]];
-    case 6:  return [[T,B]];
-    case 7:  return [[T,L]];
-    case 8:  return [[T,L]];
-    case 9:  return [[T,B]];
-    case 10: return [[L,T],[R,B]];
-    case 11: return [[T,R]];
-    case 12: return [[L,R]];
-    case 13: return [[R,B]];
-    case 14: return [[L,B]];
-    default: return [];
-  }
-}
-
-function drawMarchingSquares(ctx, W, H, hm, hmW, hmH) {
-  let maxVal = 0;
-  for (let i=0; i<hm.length; i++) if (hm[i]>maxVal) maxVal=hm[i];
-  if (maxVal < 0.01) return;
-  const levels = [0.15,0.3,0.45,0.6,0.75,0.9];
-  for (const level of levels) {
-    ctx.strokeStyle = `rgba(224,26,0,${Math.min(1,(0.4+level*0.65)).toFixed(2)})`;
-    ctx.lineWidth = 2.5; /* ← thicker heatmap lines */
-    ctx.beginPath();
-    for (let cy=0; cy<hmH-1; cy++) {
-      for (let cx=0; cx<hmW-1; cx++) {
-        const vTL=hm[cy*hmW+cx]/maxVal, vTR=hm[cy*hmW+(cx+1)]/maxVal;
-        const vBR=hm[(cy+1)*hmW+(cx+1)]/maxVal, vBL=hm[(cy+1)*hmW+cx]/maxVal;
-        const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);
-        if (idx===0||idx===15) continue;
-        const sx0=cx*W/hmW, sx1=(cx+1)*W/hmW, sy0=cy*H/hmH, sy1=(cy+1)*H/hmH;
-        function lerp(v0,v1) { return Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0))); }
-        const T=[sx0+lerp(vTL,vTR)*(sx1-sx0), sy0];
-        const R=[sx1, sy0+lerp(vTR,vBR)*(sy1-sy0)];
-        const B=[sx0+lerp(vBL,vBR)*(sx1-sx0), sy1];
-        const L=[sx0, sy0+lerp(vTL,vBL)*(sy1-sy0)];
-        for (const [p1,p2] of getMSSegs(idx,T,R,B,L)) {
-          ctx.moveTo(p1[0],p1[1]); ctx.lineTo(p2[0],p2[1]);
-        }
-      }
+function getMSSegs(idx,T,R,B,L){switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}}
+function drawMarchingSquares(ctx,W,H,hm,hmW,hmH){
+  let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal<0.01)return;
+  const levels=[0.15,0.3,0.45,0.6,0.75,0.9];
+  for(const level of levels){
+    ctx.strokeStyle=`rgba(224,26,0,${Math.min(1,(0.4+level*0.65)).toFixed(2)})`;ctx.lineWidth=2.5;ctx.beginPath();
+    for(let cy=0;cy<hmH-1;cy++)for(let cx=0;cx<hmW-1;cx++){
+      const vTL=hm[cy*hmW+cx]/maxVal,vTR=hm[cy*hmW+(cx+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx]/maxVal;
+      const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;
+      const sx0=cx*W/hmW,sx1=(cx+1)*W/hmW,sy0=cy*H/hmH,sy1=(cy+1)*H/hmH;
+      function lerp(v0,v1){return Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));}
+      const T=[sx0+lerp(vTL,vTR)*(sx1-sx0),sy0],R=[sx1,sy0+lerp(vTR,vBR)*(sy1-sy0)],B=[sx0+lerp(vBL,vBR)*(sx1-sx0),sy1],L=[sx0,sy0+lerp(vTL,vBL)*(sy1-sy0)];
+      for(const[p1,p2]of getMSSegs(idx,T,R,B,L)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}
     }
     ctx.stroke();
   }
@@ -1270,603 +929,253 @@ function drawMarchingSquares(ctx, W, H, hm, hmW, hmH) {
 /* ══════════════════════════════════════════════════════════════════════
    STATIC RENDER FUNCTIONS
    ══════════════════════════════════════════════════════════════════════ */
-function staticGaze(ctx, W, H, log) {
+function staticGaze(ctx,W,H,log){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(224,26,0,0.5)';for(const p of log){ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fill();}}
+function staticFixation(ctx,W,H,history){
   ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='rgba(224,26,0,0.5)';
-  for (const p of log) { ctx.beginPath(); ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2); ctx.fill(); }
+  for(const fix of history){
+    const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();
+    if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}
+  }
+}
+function staticSaccade(ctx,W,H,history){
+  ctx.clearRect(0,0,W,H);
+  for(const sac of history){
+    const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
+    ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();
+    const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();
+  }
+}
+function staticScanPath(ctx,W,H,history){
+  ctx.clearRect(0,0,W,H);if(!history.length)return;
+  if(history.length>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();history.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+  for(let j=0;j<history.length;j++){const cx=history[j].x*W,cy=history[j].y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}
+}
+function staticHeatmap(ctx,W,H,log){ctx.clearRect(0,0,W,H);const hmW=200,hmH=112;drawMarchingSquares(ctx,W,H,buildHeatmapFromLog(log,hmW,hmH),hmW,hmH);}
+function staticFirstFix(ctx,W,H,fix,modeTs){
+  ctx.clearRect(0,0,W,H);
+  if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return;}
+  const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;
+  ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
 }
 
-function staticFixation(ctx, W, H, history) {
-  ctx.clearRect(0,0,W,H);
-  for (const fix of history) {
-    const cx=fix.x*W, cy=fix.y*H, r=Math.min(8+fix.duration/80,44);
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='rgba(224,26,0,0.12)'; ctx.fill();
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle='rgba(224,26,0,0.85)'; ctx.lineWidth=2; ctx.stroke();
-    if (fix.duration>300) {
-      ctx.fillStyle='rgba(224,26,0,0.9)'; ctx.font='bold 9px Heebo';
-      ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-      ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);
+/* ══════════════════════════════════════════════════════════════════════
+   HOME MODE PREVIEWS (fixed aspect, no stretch)
+   ══════════════════════════════════════════════════════════════════════ */
+function buildModePreviews(){
+  const modes=[
+    {key:'GAZE',name:'GAZE',desc:'Shows where on the image the viewer\'s eyes landed, sample by sample.'},
+    {key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time mark where attention was held longest.'},
+    {key:'SACCADE',name:'SACCADE',desc:'Arrows trace rapid eye jumps between regions of interest.'},
+    {key:'SCANPATH',name:'SCAN PATH',desc:'Numbered sequence reveals the order in which areas were visited.'},
+    {key:'HEATMAP',name:'HEATMAP',desc:'Contour lines show density of gaze — highest attention at the center.'},
+    {key:'FIRSTFIX',name:'FIRST FIXATION',desc:'Pinpoints the very first area that captured attention after image onset.'},
+  ];
+  const gazeLog=[{x:0.25,y:0.35},{x:0.27,y:0.37},{x:0.55,y:0.28},{x:0.57,y:0.30},{x:0.72,y:0.52},{x:0.74,y:0.54},{x:0.38,y:0.68},{x:0.40,y:0.66},{x:0.5,y:0.45},{x:0.28,y:0.5},{x:0.68,y:0.25},{x:0.58,y:0.72}];
+  const fixHist=[{x:0.25,y:0.35,duration:320},{x:0.55,y:0.28,duration:580},{x:0.72,y:0.52,duration:240},{x:0.38,y:0.68,duration:460}];
+  const sacHist=[{fromX:0.25,fromY:0.35,toX:0.55,toY:0.28},{fromX:0.55,fromY:0.28,toX:0.72,toY:0.52},{fromX:0.72,fromY:0.52,toX:0.38,toY:0.68}];
+  const firstFix={x:0.25,y:0.35,startTs:100};
+  const grid=document.getElementById('modesGrid');grid.innerHTML='';
+  for(const m of modes){
+    const card=document.createElement('div');card.className='mode-card';
+    const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
+    const canvas=document.createElement('canvas');
+    canvas.className='mode-preview';
+    // Fixed 320×160 resolution regardless of display size — no distortion
+    canvas.width=320;canvas.height=160;
+    wrap.appendChild(canvas);
+    card.innerHTML=`<div class="mode-card-name">${m.name}</div>`;
+    card.appendChild(wrap);
+    const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);
+    grid.appendChild(card);
+    const ctx=canvas.getContext('2d');const W=320,H=160;
+    ctx.fillStyle='#f7f7f7';ctx.fillRect(0,0,W,H);
+    switch(m.key){
+      case 'GAZE':staticGaze(ctx,W,H,gazeLog);break;
+      case 'FIXATION':staticFixation(ctx,W,H,fixHist);break;
+      case 'SACCADE':staticSaccade(ctx,W,H,sacHist);break;
+      case 'SCANPATH':staticScanPath(ctx,W,H,fixHist);break;
+      case 'HEATMAP':staticHeatmap(ctx,W,H,gazeLog);break;
+      case 'FIRSTFIX':staticFirstFix(ctx,W,H,firstFix,0);break;
     }
   }
-}
-
-function staticSaccade(ctx, W, H, history) {
-  ctx.clearRect(0,0,W,H);
-  for (const sac of history) {
-    const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
-    ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(tx,ty);
-    ctx.strokeStyle='rgba(224,26,0,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
-    const a=Math.atan2(ty-fy,tx-fx),l=9;
-    ctx.beginPath(); ctx.moveTo(tx,ty);
-    ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));
-    ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));
-    ctx.closePath(); ctx.fillStyle='rgba(224,26,0,0.8)'; ctx.fill();
-  }
-}
-
-function staticScanPath(ctx, W, H, history) {
-  ctx.clearRect(0,0,W,H);
-  if (!history.length) return;
-  if (history.length>=2) {
-    ctx.save(); ctx.setLineDash([4,6]);
-    ctx.strokeStyle='rgba(224,26,0,0.6)'; ctx.lineWidth=1.5; ctx.beginPath();
-    history.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));
-    ctx.stroke(); ctx.setLineDash([]); ctx.restore();
-  }
-  for (let j=0;j<history.length;j++) {
-    const cx=history[j].x*W,cy=history[j].y*H;
-    ctx.beginPath(); ctx.arc(cx,cy,11,0,Math.PI*2);
-    ctx.strokeStyle='rgba(224,26,0,1)'; ctx.lineWidth=2; ctx.stroke();
-    ctx.fillStyle='rgba(224,26,0,1)'; ctx.font='bold 9px Heebo';
-    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(j+1,cx,cy);
-    ctx.textBaseline='alphabetic';
-  }
-}
-
-function staticHeatmap(ctx, W, H, log) {
-  ctx.clearRect(0,0,W,H);
-  const hmW=200,hmH=112;
-  const hm=buildHeatmapFromLog(log,hmW,hmH);
-  drawMarchingSquares(ctx,W,H,hm,hmW,hmH);
-}
-
-function staticFirstFix(ctx, W, H, fix, modeTs) {
-  ctx.clearRect(0,0,W,H);
-  if (!fix) {
-    ctx.fillStyle='rgba(150,150,150,0.7)'; ctx.font='300 11px Heebo';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2); return;
-  }
-  const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;
-  ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
-  ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
-  ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-  ctx.fillStyle='rgba(224,26,0,1)';
-  ctx.font='bold 11px Heebo'; ctx.fillText('FIRST FIXATION',cx,cy-46);
-  ctx.font='300 9px Heebo'; ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    ANIMATION ENGINE
    ══════════════════════════════════════════════════════════════════════ */
-function cancelAnimation() {
-  if (currentAnimation) { currentAnimation.cancel(); currentAnimation = null; }
+function cancelAnimation(){if(currentAnimation){currentAnimation.cancel();currentAnimation=null;}}
+function getDataCanvas(){const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');dc.width=area.offsetWidth;dc.height=area.offsetHeight;return dc;}
+function animateGaze(ctx,W,H,log){let tid=null,cancelled=false;const pts=log.slice();let i=0;function step(){if(cancelled||i>=pts.length)return;const p=pts[i++];ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.5)';ctx.fill();tid=setTimeout(step,50);}step();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};}
+function animateFixation(ctx,W,H,history){
+  let tid=null,rafId=null,cancelled=false;const fixes=history.slice();let i=0;const drawn=[];
+  function redrawAll(){for(const fix of drawn){const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}}}
+  function next(){if(cancelled||i>=fixes.length)return;const fix=fixes[i++];const cx=fix.x*W,cy=fix.y*H,rFinal=Math.min(8+fix.duration/80,44);const start=performance.now();function grow(now){if(cancelled)return;const t=Math.min(1,(now-start)/300);ctx.clearRect(0,0,W,H);redrawAll();const r=rFinal*t;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(t<1){rafId=requestAnimationFrame(grow);}else{if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+rFinal+13);}drawn.push(fix);tid=setTimeout(next,600);}}rafId=requestAnimationFrame(grow);}
+  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
 }
-
-function getDataCanvas() {
-  const dc = document.getElementById('dataCanvas');
-  const area = document.getElementById('dataImgArea');
-  dc.width = area.offsetWidth; dc.height = area.offsetHeight;
-  return dc;
+function animateSaccade(ctx,W,H,history){
+  let tid=null,rafId=null,cancelled=false;const sacs=history.slice();let i=0;const drawn=[];
+  function drawSacFull(sac){const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();}
+  function redrawAll(){for(const s of drawn)drawSacFull(s);}
+  function next(){if(cancelled||i>=sacs.length)return;const sac=sacs[i++];const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;const start=performance.now();function anim(now){if(cancelled)return;const t=Math.min(1,(now-start)/200);ctx.clearRect(0,0,W,H);redrawAll();const ex=fx+(tx-fx)*t,ey=fy+(ty-fy)*t;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(ex,ey);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();if(t<1){rafId=requestAnimationFrame(anim);}else{drawSacFull(sac);drawn.push(sac);tid=setTimeout(next,500);}}rafId=requestAnimationFrame(anim);}
+  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
 }
-
-function animateGaze(ctx, W, H, log) {
-  let tid = null, cancelled = false;
-  const pts = log.slice(); let i = 0;
-  function step() {
-    if (cancelled || i >= pts.length) return;
-    const p = pts[i++];
-    ctx.beginPath(); ctx.arc(p.x*W, p.y*H, 4, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(224,26,0,0.5)'; ctx.fill();
-    tid = setTimeout(step, 50);
-  }
-  step();
-  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
+function animateScanPath(ctx,W,H,history){
+  let tid=null,cancelled=false;const pts=history.slice();let shown=0;
+  function drawAll(n){ctx.clearRect(0,0,W,H);if(n<1)return;if(n>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();for(let j=0;j<n;j++){const{x,y}=pts[j];j===0?ctx.moveTo(x*W,y*H):ctx.lineTo(x*W,y*H);}ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<n;j++){const{x,y}=pts[j],cx=x*W,cy=y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}}
+  function next(){if(cancelled||shown>=pts.length)return;shown++;drawAll(shown);tid=setTimeout(next,700);}
+  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};
 }
-
-function animateFixation(ctx, W, H, history) {
-  let tid = null, rafId = null, cancelled = false;
-  const fixes = history.slice(); let i = 0;
-  const drawn = [];
-  function redrawAll() {
-    for (const fix of drawn) {
-      const cx=fix.x*W, cy=fix.y*H, r=Math.min(8+fix.duration/80,44);
-      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='rgba(224,26,0,0.12)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle='rgba(224,26,0,0.85)'; ctx.lineWidth=2; ctx.stroke();
-      if (fix.duration > 300) {
-        ctx.fillStyle='rgba(224,26,0,0.9)'; ctx.font='bold 9px Heebo';
-        ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-        ctx.fillText(Math.round(fix.duration)+'ms', cx, cy+r+13);
-      }
-    }
-  }
-  function next() {
-    if (cancelled || i >= fixes.length) return;
-    const fix = fixes[i++];
-    const cx=fix.x*W, cy=fix.y*H, rFinal=Math.min(8+fix.duration/80,44);
-    const start = performance.now();
-    function grow(now) {
-      if (cancelled) return;
-      const t = Math.min(1, (now-start)/300);
-      ctx.clearRect(0,0,W,H); redrawAll();
-      const r = rFinal*t;
-      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle='rgba(224,26,0,0.12)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.strokeStyle='rgba(224,26,0,0.85)'; ctx.lineWidth=2; ctx.stroke();
-      if (t < 1) { rafId = requestAnimationFrame(grow); }
-      else {
-        if (fix.duration > 300) {
-          ctx.fillStyle='rgba(224,26,0,0.9)'; ctx.font='bold 9px Heebo';
-          ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-          ctx.fillText(Math.round(fix.duration)+'ms', cx, cy+rFinal+13);
-        }
-        drawn.push(fix); tid = setTimeout(next, 600);
-      }
-    }
-    rafId = requestAnimationFrame(grow);
-  }
-  next();
-  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
+function animateHeatmap(ctx,W,H,log){
+  let tid=null,cancelled=false;const hmW=200,hmH=112,hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
+  const pts=log.slice();let i=0;
+  function addPt(p){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
+  function render(){ctx.clearRect(0,0,W,H);drawMarchingSquares(ctx,W,H,hm,hmW,hmH);}
+  const perStep=Math.max(1,Math.ceil(pts.length/60));
+  function step(){if(cancelled)return;let c=0;while(i<pts.length&&c<perStep){addPt(pts[i++]);c++;}render();if(i<pts.length)tid=setTimeout(step,50);}
+  step();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};
 }
-
-function animateSaccade(ctx, W, H, history) {
-  let tid = null, rafId = null, cancelled = false;
-  const sacs = history.slice(); let i = 0;
-  const drawn = [];
-  function drawSacFull(sac) {
-    const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
-    ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(tx,ty);
-    ctx.strokeStyle='rgba(224,26,0,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
-    const a=Math.atan2(ty-fy,tx-fx),l=9;
-    ctx.beginPath(); ctx.moveTo(tx,ty);
-    ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));
-    ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));
-    ctx.closePath(); ctx.fillStyle='rgba(224,26,0,0.8)'; ctx.fill();
-  }
-  function redrawAll() { for (const s of drawn) drawSacFull(s); }
-  function next() {
-    if (cancelled || i >= sacs.length) return;
-    const sac = sacs[i++];
-    const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
-    const start = performance.now();
-    function anim(now) {
-      if (cancelled) return;
-      const t = Math.min(1,(now-start)/200);
-      ctx.clearRect(0,0,W,H); redrawAll();
-      const ex=fx+(tx-fx)*t, ey=fy+(ty-fy)*t;
-      ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(ex,ey);
-      ctx.strokeStyle='rgba(224,26,0,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
-      if (t < 1) { rafId = requestAnimationFrame(anim); }
-      else { drawSacFull(sac); drawn.push(sac); tid = setTimeout(next, 500); }
-    }
-    rafId = requestAnimationFrame(anim);
-  }
-  next();
-  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
-}
-
-function animateScanPath(ctx, W, H, history) {
-  let tid = null, cancelled = false;
-  const pts = history.slice(); let shown = 0;
-  function drawAll(n) {
-    ctx.clearRect(0,0,W,H);
-    if (n < 1) return;
-    if (n >= 2) {
-      ctx.save(); ctx.setLineDash([4,6]);
-      ctx.strokeStyle='rgba(224,26,0,0.6)'; ctx.lineWidth=1.5; ctx.beginPath();
-      for (let j=0;j<n;j++){const{x,y}=pts[j];j===0?ctx.moveTo(x*W,y*H):ctx.lineTo(x*W,y*H);}
-      ctx.stroke(); ctx.setLineDash([]); ctx.restore();
-    }
-    for (let j=0;j<n;j++) {
-      const{x,y}=pts[j],cx=x*W,cy=y*H;
-      ctx.beginPath(); ctx.arc(cx,cy,11,0,Math.PI*2);
-      ctx.strokeStyle='rgba(224,26,0,1)'; ctx.lineWidth=2; ctx.stroke();
-      ctx.fillStyle='rgba(224,26,0,1)'; ctx.font='bold 9px Heebo';
-      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(j+1,cx,cy);
-      ctx.textBaseline='alphabetic';
-    }
-  }
-  function next() {
-    if (cancelled || shown >= pts.length) return;
-    shown++; drawAll(shown); tid = setTimeout(next, 700);
-  }
-  next();
-  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
-}
-
-function animateHeatmap(ctx, W, H, log) {
-  let tid = null, cancelled = false;
-  const hmW=200, hmH=112;
-  const hm = new Float32Array(hmW*hmH);
-  const sigma = 0.07*Math.max(hmW,hmH);
-  const r = Math.ceil(3*sigma), inv2s2 = 1/(2*sigma*sigma);
-  const pts = log.slice(); let i = 0;
-  function addPt(p) {
-    const gx=p.x*hmW,gy=p.y*hmH;
-    const x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r));
-    const y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));
-    for (let y=y0;y<=y1;y++) for (let x=x0;x<=x1;x++)
-      hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
-  }
-  function render() { ctx.clearRect(0,0,W,H); drawMarchingSquares(ctx,W,H,hm,hmW,hmH); }
-  const totalSteps=60, interval=50;
-  const perStep=Math.max(1,Math.ceil(pts.length/totalSteps));
-  function step() {
-    if (cancelled) return;
-    let c=0; while(i<pts.length&&c<perStep){addPt(pts[i++]);c++;}
-    render();
-    if (i<pts.length) tid=setTimeout(step,interval);
-  }
-  step();
-  return { cancel: () => { cancelled=true; clearTimeout(tid); } };
-}
-
-function animateFirstFix(ctx, W, H, fix, modeTs) {
-  let tid = null, rafId = null, cancelled = false;
-  if (!fix) {
-    ctx.fillStyle='rgba(150,150,150,0.7)'; ctx.font='300 11px Heebo';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);
-    return { cancel:()=>{} };
-  }
-  const cx=fix.x*W, cy=fix.y*H, offset=(fix.startTs-modeTs)/1000;
-  tid = setTimeout(() => {
-    if (cancelled) return;
-    const startPhase = performance.now();
-    function phase2(now) {
-      if (cancelled) return;
-      const t = Math.min(1,(now-startPhase)/600);
-      ctx.clearRect(0,0,W,H);
-      const ringR=20+t*40;
-      ctx.beginPath(); ctx.arc(cx,cy,ringR,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(224,26,0,${(1-t)*0.5})`; ctx.lineWidth=1.5; ctx.stroke();
-      ctx.globalAlpha=t;
-      ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
-      ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
-      ctx.globalAlpha=1;
-      if (t>0.5) {
-        ctx.globalAlpha=(t-0.5)*2;
-        ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-        ctx.fillStyle='rgba(224,26,0,1)';
-        ctx.font='bold 11px Heebo'; ctx.fillText('FIRST FIXATION',cx,cy-46);
-        ctx.font='300 9px Heebo'; ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
-        ctx.globalAlpha=1;
-      }
-      if (t<1) { rafId=requestAnimationFrame(phase2); }
-      else {
-        const startPulse=performance.now();
-        function pulse(now) {
-          if (cancelled) return;
-          const pt=(now-startPulse)/1000, pr=20+Math.sin(pt*Math.PI*2)*5;
-          ctx.clearRect(0,0,W,H);
-          ctx.beginPath(); ctx.arc(cx,cy,pr,0,Math.PI*2);
-          ctx.strokeStyle='rgba(224,26,0,0.35)'; ctx.lineWidth=1.5; ctx.stroke();
-          ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2);
-          ctx.fillStyle='rgba(224,26,0,1)'; ctx.fill();
-          ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-          ctx.fillStyle='rgba(224,26,0,1)';
-          ctx.font='bold 11px Heebo'; ctx.fillText('FIRST FIXATION',cx,cy-46);
-          ctx.font='300 9px Heebo'; ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
-          rafId=requestAnimationFrame(pulse);
-        }
-        rafId=requestAnimationFrame(pulse);
-      }
+function animateFirstFix(ctx,W,H,fix,modeTs){
+  let tid=null,rafId=null,cancelled=false;
+  if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return{cancel:()=>{}};}
+  const cx=fix.x*W,cy=fix.y*H,offset=(fix.startTs-modeTs)/1000;
+  tid=setTimeout(()=>{
+    if(cancelled)return;
+    const startPhase=performance.now();
+    function phase2(now){
+      if(cancelled)return;const t=Math.min(1,(now-startPhase)/600);ctx.clearRect(0,0,W,H);
+      const ringR=20+t*40;ctx.beginPath();ctx.arc(cx,cy,ringR,0,Math.PI*2);ctx.strokeStyle=`rgba(224,26,0,${(1-t)*0.5})`;ctx.lineWidth=1.5;ctx.stroke();
+      ctx.globalAlpha=t;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.globalAlpha=1;
+      if(t>0.5){ctx.globalAlpha=(t-0.5)*2;ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);ctx.globalAlpha=1;}
+      if(t<1){rafId=requestAnimationFrame(phase2);}else{const startPulse=performance.now();function pulse(now){if(cancelled)return;const pt=(now-startPulse)/1000,pr=20+Math.sin(pt*Math.PI*2)*5;ctx.clearRect(0,0,W,H);ctx.beginPath();ctx.arc(cx,cy,pr,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);rafId=requestAnimationFrame(pulse);}rafId=requestAnimationFrame(pulse);}
     }
     rafId=requestAnimationFrame(phase2);
-  }, 1000);
-  return { cancel: () => { cancelled=true; clearTimeout(tid); cancelAnimationFrame(rafId); } };
+  },1000);
+  return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    PLAY LAYER
    ══════════════════════════════════════════════════════════════════════ */
-function playLayer(layer) {
-  cancelAnimation();
-  const dc = getDataCanvas();
-  const ctx = dc.getContext('2d');
-  ctx.clearRect(0,0,dc.width,dc.height);
-  const W=dc.width, H=dc.height;
-  const sess = viewSession || { gazeLog, fixationHistory, saccadeHistory, scanPathHistory, firstFix, firstFixModeTs };
-  if (playMode === 'STATIC') {
-    switch(layer) {
-      case 'GAZE':     staticGaze(ctx,W,H,sess.gazeLog); break;
-      case 'FIXATION': staticFixation(ctx,W,H,sess.fixationHistory); break;
-      case 'SACCADE':  staticSaccade(ctx,W,H,sess.saccadeHistory); break;
-      case 'SCANPATH': staticScanPath(ctx,W,H,sess.scanPathHistory); break;
-      case 'HEATMAP':  staticHeatmap(ctx,W,H,sess.gazeLog); break;
-      case 'FIRSTFIX': staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs); break;
-    }
-  } else {
-    switch(layer) {
-      case 'GAZE':     currentAnimation=animateGaze(ctx,W,H,sess.gazeLog); break;
-      case 'FIXATION': currentAnimation=animateFixation(ctx,W,H,sess.fixationHistory); break;
-      case 'SACCADE':  currentAnimation=animateSaccade(ctx,W,H,sess.saccadeHistory); break;
-      case 'SCANPATH': currentAnimation=animateScanPath(ctx,W,H,sess.scanPathHistory); break;
-      case 'HEATMAP':  currentAnimation=animateHeatmap(ctx,W,H,sess.gazeLog); break;
-      case 'FIRSTFIX': currentAnimation=animateFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs); break;
-    }
-  }
+function playLayer(layer){
+  cancelAnimation();const dc=getDataCanvas();const ctx=dc.getContext('2d');ctx.clearRect(0,0,dc.width,dc.height);const W=dc.width,H=dc.height;
+  const sess=viewSession||{gazeLog,fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs};
+  if(playMode==='STATIC'){switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
+  else{switch(layer){case 'GAZE':currentAnimation=animateGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':currentAnimation=animateFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':currentAnimation=animateSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':currentAnimation=animateScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':currentAnimation=animateHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':currentAnimation=animateFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    COMPARE VIEW
    ══════════════════════════════════════════════════════════════════════ */
-function renderCompareView() {
-  const grid = document.getElementById('compareGrid');
-  grid.innerHTML = '';
-  const layer = dataActiveLayer || 'GAZE';
-  for (const sess of allSessions) {
-    const cell = document.createElement('div');
-    cell.className = 'compare-panel';
-    const ts = new Date(sess.timestamp).toLocaleTimeString();
-    const dur = sess.sessionDuration ? (sess.sessionDuration/1000).toFixed(1)+'s' : '—';
-    cell.innerHTML = `
-      <div class="compare-panel-header">
-        <div>
-          <div class="cp-user">${sess.user}</div>
-          <div class="cp-meta">${sess.age ? sess.age+' yrs' : ''}${sess.age && sess.gender ? ' · ' : ''}${sess.gender || ''}${sess.location ? ' · '+sess.location : ''}</div>
-        </div>
-        <div style="text-align:right">
-          <div class="cp-time">${sess.imageName}</div>
-          <div class="cp-time">${ts} · ${dur}</div>
-        </div>
-      </div>
-      <div class="compare-canvas-wrap">
-        <img class="cp-img" src="${sess.imageSrc}">
-        <canvas class="cp-canvas"></canvas>
-      </div>
-      <div class="cp-stats">${sess.fixationHistory.length} fix · ${sess.saccadeHistory.length} sac · ${sess.gazeLog.length} samples</div>
-    `;
+function renderCompareView(){
+  const grid=document.getElementById('compareGrid');grid.innerHTML='';const layer=dataActiveLayer||'GAZE';
+  for(const sess of allSessions){
+    const cell=document.createElement('div');cell.className='compare-panel';
+    const ts=new Date(sess.timestamp).toLocaleTimeString();
+    const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
+    cell.innerHTML=`<div class="compare-panel-header"><div><div class="cp-user">${sess.user}</div><div class="cp-meta">${sess.age?sess.age+' yrs':''}${sess.age&&sess.gender?' · ':''}${sess.gender||''}${sess.location?' · '+sess.location:''}</div></div><div style="text-align:right"><div class="cp-time">${sess.imageName}</div><div class="cp-time">${ts} · ${dur}</div></div></div><div class="compare-canvas-wrap"><img class="cp-img" src="${sess.imageSrc}"><canvas class="cp-canvas"></canvas></div><div class="cp-stats">${sess.fixationHistory.length} fix · ${sess.saccadeHistory.length} sac · ${sess.gazeLog.length} samples</div>`;
     grid.appendChild(cell);
-    const wrap = cell.querySelector('.compare-canvas-wrap');
-    const canvas = cell.querySelector('.cp-canvas');
-    setTimeout(() => {
-      canvas.width = wrap.offsetWidth;
-      canvas.height = wrap.offsetHeight;
-      const ctx = canvas.getContext('2d');
-      const W=canvas.width, H=canvas.height;
-      switch(layer) {
-        case 'GAZE':     staticGaze(ctx,W,H,sess.gazeLog); break;
-        case 'FIXATION': staticFixation(ctx,W,H,sess.fixationHistory); break;
-        case 'SACCADE':  staticSaccade(ctx,W,H,sess.saccadeHistory); break;
-        case 'SCANPATH': staticScanPath(ctx,W,H,sess.scanPathHistory); break;
-        case 'HEATMAP':  staticHeatmap(ctx,W,H,sess.gazeLog); break;
-        case 'FIRSTFIX': staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs); break;
-      }
-    }, 60);
+    const wrap=cell.querySelector('.compare-canvas-wrap'),canvas=cell.querySelector('.cp-canvas');
+    setTimeout(()=>{canvas.width=wrap.offsetWidth;canvas.height=wrap.offsetHeight;const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}},60);
   }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   DATA SCREEN — PER-USER GALLERY
+   PER-USER GALLERY
    ══════════════════════════════════════════════════════════════════════ */
-function captureSession() {
-  return {
-    user: currentUser || 'Unknown',
-    age: currentAge,
-    gender: currentGender,
-    location: userLocation,
-    imageSrc: mainImg.src,
-    imageName: imageLibrary[currentImageIdx]?.name || 'image',
-    timestamp: Date.now(),
-    sessionDuration: sessionStartTs ? Date.now() - sessionStartTs : 0,
-    gazeLog: gazeLog.slice(),
-    fixationHistory: fixationHistory.slice(),
-    saccadeHistory: saccadeHistory.slice(),
-    scanPathHistory: scanPathHistory.slice(),
-    firstFix,
-    firstFixModeTs,
-    sessionStartTs
-  };
+function captureSession(){
+  return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};
 }
 
-function renderHistoryList() {
-  const list = document.getElementById('dataImgList');
-  list.innerHTML = '';
-
-  // Group sessions by user
-  const byUser = new Map();
-  for (const sess of allSessions) {
-    if (!byUser.has(sess.user)) byUser.set(sess.user, []);
-    byUser.get(sess.user).push(sess);
-  }
-
-  for (const [userName, sessions] of byUser) {
-    const group = document.createElement('div');
-    group.className = 'user-group';
-
-    const header = document.createElement('div');
-    header.className = 'user-group-header';
-    const meta = sessions[0];
-    const metaStr = [meta.age ? meta.age+'y' : '', meta.gender || ''].filter(Boolean).join(' · ');
-    header.innerHTML = `
-      <div>
-        <div class="user-group-name">${userName}</div>
-        ${metaStr ? `<div class="user-group-meta">${metaStr}</div>` : ''}
-      </div>
-      <span class="user-group-count">${sessions.length}</span>
-    `;
-    header.addEventListener('click', () => group.classList.toggle('collapsed'));
-
-    const thumbs = document.createElement('div');
-    thumbs.className = 'user-group-thumbs';
-
-    for (const sess of sessions) {
-      const d = document.createElement('div');
-      d.className = 'd-thumb' + (sess === viewSession ? ' active' : '');
-      const ts = new Date(sess.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-      d.innerHTML = `
-        <img src="${sess.imageSrc}" alt=""/>
-        <div class="d-thumb-label">${sess.imageName} · ${ts}</div>
-        <div class="d-thumb-fix-badge">${sess.fixationHistory.length}F</div>
-      `;
-      d.onclick = () => {
-        viewSession = sess;
-        document.querySelectorAll('.d-thumb').forEach(el => el.classList.remove('active'));
-        d.classList.add('active');
-        document.getElementById('dataImg').src = sess.imageSrc;
-        renderStats();
-        playLayer(dataActiveLayer || 'GAZE');
+function renderGallery(){
+  const gallery=document.getElementById('dataGallery');gallery.innerHTML='';
+  const byUser=new Map();
+  for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
+  for(const[userName,sessions]of byUser){
+    const section=document.createElement('div');section.className='user-section';
+    const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||''].filter(Boolean).join(' · ');
+    const header=document.createElement('div');header.className='user-section-header';
+    header.innerHTML=`<div class="user-section-name">${userName}</div>${metaStr?`<div class="user-section-meta">${metaStr}</div>`:''}<span class="user-section-count">${sessions.length} image${sessions.length!==1?'s':''}</span>`;
+    header.addEventListener('click',()=>section.classList.toggle('collapsed'));
+    const imagesDiv=document.createElement('div');imagesDiv.className='user-section-images';
+    for(const sess of sessions){
+      const thumb=document.createElement('div');thumb.className='gallery-thumb'+(sess===viewSession?' active':'');
+      const ts=new Date(sess.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      thumb.innerHTML=`<img src="${sess.imageSrc}" alt=""/><div class="gallery-thumb-label">${sess.imageName}</div><div class="gallery-thumb-badge">${sess.fixationHistory.length}F</div>`;
+      thumb.onclick=()=>{
+        viewSession=sess;
+        document.querySelectorAll('.gallery-thumb').forEach(el=>el.classList.remove('active'));thumb.classList.add('active');
+        document.getElementById('dataImg').src=sess.imageSrc;renderStats();playLayer(dataActiveLayer||'GAZE');
       };
-      thumbs.appendChild(d);
+      imagesDiv.appendChild(thumb);
     }
-
-    group.appendChild(header);
-    group.appendChild(thumbs);
-    list.appendChild(group);
+    section.appendChild(header);section.appendChild(imagesDiv);gallery.appendChild(section);
   }
 }
 
-function openData() {
-  const snap = captureSession();
-  allSessions.push(snap);
-  viewSession = snap;
-  const screen = document.getElementById('dataScreen');
-  screen.style.display = 'flex';
-  dataView = 'SESSION';
-  document.getElementById('dataBody').style.display = 'flex';
-  document.getElementById('compareView').style.display = 'none';
+function openData(){
+  const snap=captureSession();allSessions.push(snap);viewSession=snap;
+  document.getElementById('dataScreen').style.display='flex';
+  document.getElementById('dataBody').style.display='flex';
+  document.getElementById('compareView').style.display='none';
   document.getElementById('sessionViewBtn').classList.add('active');
   document.getElementById('compareViewBtn').classList.remove('active');
-  renderHistoryList();
-  document.getElementById('dataImg').src = snap.imageSrc;
-  document.getElementById('dataImg').style.opacity = showImg ? '1' : '0';
+  renderGallery();
+  document.getElementById('dataImg').src=snap.imageSrc;
+  document.getElementById('dataImg').style.opacity=showImg?'1':'0';
   renderStats();
-  const activeBtn = document.querySelector('.layer-btn.active');
-  playLayer(activeBtn ? activeBtn.dataset.layer : 'GAZE');
+  const activeBtn=document.querySelector('.layer-btn.active');
+  playLayer(activeBtn?activeBtn.dataset.layer:'GAZE');
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    BOOT
    ══════════════════════════════════════════════════════════════════════ */
-async function boot() {
-  dotCanvas.width = window.innerWidth; dotCanvas.height = window.innerHeight;
-  window.addEventListener('resize', () => { dotCanvas.width=window.innerWidth; dotCanvas.height=window.innerHeight; });
-
-  heatCanvas = document.createElement('canvas');
-  heatCanvas.width = W_HEAT; heatCanvas.height = H_HEAT;
-  heatCtx2 = heatCanvas.getContext('2d');
-
-  const ok = await startEyeTracking();
-  if (ok) await runCalibration();
-  else { calOverlay.style.display='none'; enablePointerFallback(); }
-
+async function boot(){
+  dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;
+  window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});
+  heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');
+  const ok=await startEyeTracking();
+  if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}
   showLib();
-  await new Promise(resolve => {
-    document.getElementById('libBeginBtn').addEventListener('click', () => {
-      if (!imageLibrary.length) return;
-      document.getElementById('libraryScreen').style.display = 'none';
-      mainImg.src = imageLibrary[currentImageIdx].src;
+  await new Promise(resolve=>{
+    document.getElementById('libBeginBtn').addEventListener('click',()=>{
+      if(!imageLibrary.length)return;
+      document.getElementById('libraryScreen').style.display='none';
+      imgWrapper.style.display='block';
+      mainImg.src=imageLibrary[currentImageIdx].src;
       resolve();
     });
   });
-
-  sessionStartTs  = Date.now();
-  firstFixModeTs  = performance.now();
-  document.getElementById('dataBtn').style.display = 'block';
-  document.getElementById('finishBtn').style.display = 'block';
-  annLayer.style.opacity = '0';
-
-  setInterval(() => {
-    if (!gazeOn) return;
-    gazeLog.push({ t:Date.now()-sessionStartTs, x:sGX, y:sGY });
-    if (gazeLog.length > 10000) gazeLog.shift();
-  }, 100);
-
+  sessionStartTs=Date.now();firstFixModeTs=performance.now();
+  document.getElementById('finishBtn').style.display='block';
+  annLayer.style.opacity='0';
+  setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);
   requestAnimationFrame(mainLoop);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    EVENTS
    ══════════════════════════════════════════════════════════════════════ */
-document.getElementById('finishBtn').addEventListener('click', openData);
-document.getElementById('dataBtn').addEventListener('click', openData);
-
-document.getElementById('dataCloseBtn').addEventListener('click', () => {
-  cancelAnimation();
-  document.getElementById('dataScreen').style.display = 'none';
-});
-
-document.getElementById('sessionViewBtn').addEventListener('click', () => {
-  dataView = 'SESSION';
-  document.getElementById('sessionViewBtn').classList.add('active');
-  document.getElementById('compareViewBtn').classList.remove('active');
-  document.getElementById('dataBody').style.display = 'flex';
-  document.getElementById('compareView').style.display = 'none';
-});
-
-document.getElementById('compareViewBtn').addEventListener('click', () => {
-  dataView = 'COMPARE';
-  document.getElementById('compareViewBtn').classList.add('active');
-  document.getElementById('sessionViewBtn').classList.remove('active');
-  document.getElementById('dataBody').style.display = 'none';
-  document.getElementById('compareView').style.display = 'flex';
-  renderCompareView();
-});
-
-document.getElementById('animatedBtn').addEventListener('click', () => {
-  playMode = 'ANIMATED';
-  document.getElementById('animatedBtn').classList.add('active');
-  document.getElementById('staticBtn').classList.remove('active');
-  playLayer(dataActiveLayer);
-});
-
-document.getElementById('staticBtn').addEventListener('click', () => {
-  playMode = 'STATIC';
-  document.getElementById('staticBtn').classList.add('active');
-  document.getElementById('animatedBtn').classList.remove('active');
-  playLayer(dataActiveLayer);
-});
-
-document.getElementById('withImgBtn').addEventListener('click', () => {
-  showImg = true;
-  document.getElementById('withImgBtn').classList.add('active');
-  document.getElementById('withoutImgBtn').classList.remove('active');
-  document.getElementById('dataImg').style.opacity = '1';
-});
-
-document.getElementById('withoutImgBtn').addEventListener('click', () => {
-  showImg = false;
-  document.getElementById('withoutImgBtn').classList.add('active');
-  document.getElementById('withImgBtn').classList.remove('active');
-  document.getElementById('dataImg').style.opacity = '0';
-});
-
-document.querySelectorAll('.layer-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    dataActiveLayer = btn.dataset.layer;
-    playLayer(dataActiveLayer);
-  });
-});
-
-document.getElementById('playBtn').addEventListener('click', () => {
-  playLayer(dataActiveLayer || 'GAZE');
-});
+document.getElementById('finishBtn').addEventListener('click',openData);
+document.getElementById('dataCloseBtn').addEventListener('click',()=>{cancelAnimation();document.getElementById('dataScreen').style.display='none';});
+document.getElementById('sessionViewBtn').addEventListener('click',()=>{document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='flex';document.getElementById('compareView').style.display='none';});
+document.getElementById('compareViewBtn').addEventListener('click',()=>{document.getElementById('compareViewBtn').classList.add('active');document.getElementById('sessionViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='none';document.getElementById('compareView').style.display='flex';renderCompareView();});
+document.getElementById('animatedBtn').addEventListener('click',()=>{playMode='ANIMATED';document.getElementById('animatedBtn').classList.add('active');document.getElementById('staticBtn').classList.remove('active');playLayer(dataActiveLayer);});
+document.getElementById('staticBtn').addEventListener('click',()=>{playMode='STATIC';document.getElementById('staticBtn').classList.add('active');document.getElementById('animatedBtn').classList.remove('active');playLayer(dataActiveLayer);});
+document.getElementById('withImgBtn').addEventListener('click',()=>{showImg=true;document.getElementById('withImgBtn').classList.add('active');document.getElementById('withoutImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='1';});
+document.getElementById('withoutImgBtn').addEventListener('click',()=>{showImg=false;document.getElementById('withoutImgBtn').classList.add('active');document.getElementById('withImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='0';});
+document.querySelectorAll('.layer-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');dataActiveLayer=btn.dataset.layer;playLayer(dataActiveLayer);});});
+document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataActiveLayer||'GAZE');});
 
 /* ══════════════════════════════════════════════════════════════════════
    START
    ══════════════════════════════════════════════════════════════════════ */
-async function startApp() {
-  fetchLocation(); // non-blocking
-  await showNameScreen();
-  await boot();
-}
-
+async function startApp(){fetchLocation();await showNameScreen();await boot();}
 bootHome();
-
-// Build mode previews after all static functions are defined
-setTimeout(buildModePreviews, 100);
+setTimeout(buildModePreviews,200);
 </script>
 </body>
 </html>
