@@ -56,7 +56,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .hi-sub{font-size:13px;font-weight:300;color:#888;max-width:480px;line-height:1.7;margin-bottom:40px;}
 .hi-sub-light{color:rgba(255,255,255,0.5);}
 
-/* HOW IT WORKS — 3 columns full width */
 .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;}
 .step-item{padding:32px 36px;border-left:1px solid #eee;}
 .step-item:first-child{border-left:none;padding-left:0;}
@@ -65,7 +64,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .step-title{font-size:12px;font-weight:700;letter-spacing:0.18em;color:#111;margin-bottom:8px;text-transform:uppercase;}
 .step-desc{font-size:12px;font-weight:300;color:#888;line-height:1.7;}
 
-/* HOW-TO — full width numbered list */
 .howto-list{list-style:none;width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
 .howto-list li{display:flex;flex-direction:column;gap:8px;padding:28px 32px;border-left:1px solid #eee;}
 .howto-list li:first-child{border-left:none;}
@@ -74,7 +72,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .howto-text{font-size:12px;font-weight:300;color:#666;line-height:1.65;}
 .howto-text strong{font-weight:700;color:#111;}
 
-/* MODE CARDS */
 .modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;width:100%;}
 .mode-card{background:#fff;padding:24px 20px 20px;}
 .mode-card-name{font-size:9px;font-weight:700;letter-spacing:0.35em;color:#111;margin-bottom:8px;text-transform:uppercase;}
@@ -82,14 +79,13 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .mode-preview-wrap{width:100%;aspect-ratio:2/1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f7f7f7;border:1px solid #eee;}
 .mode-preview{display:block;width:100%;height:100%;}
 
-/* BUTTONS — global */
 .va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.18em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;border-radius:100px;}
 .va-btn-primary{background:#111;color:#fff;border:2px solid #111;font-size:13px;font-weight:700;padding:14px 48px;}
 .va-btn-primary:hover{background:#333;border-color:#333;}
 .va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:9px 24px;}
 .va-btn-secondary:hover{background:#111;color:#fff;}
 
-/* CAL */
+/* CAL — no top nav */
 #calOverlay{position:fixed;inset:0;z-index:1000;background:#fff;}
 #calCanvas{position:absolute;inset:0;width:100%;height:100%;}
 #calStartBtn{position:absolute;top:58%;left:50%;transform:translateX(-50%);display:none;z-index:1001;}
@@ -101,6 +97,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-card{aspect-ratio:4/3;border:1.5px solid #e0e0e0;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s;}
 .lib-card:hover{border-color:#999;}
 .lib-card.selected{border-color:#111;}
+.lib-card.viewed-once{opacity:0.4;cursor:not-allowed;}
+.lib-card.viewed-once::after{content:'VISTO';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.3em;}
 .lib-card img{width:100%;height:100%;object-fit:cover;display:block;}
 .lib-num{position:absolute;top:6px;left:8px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8);letter-spacing:0.1em;}
 .lib-add{aspect-ratio:4/3;border:1.5px dashed #ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:border-color 0.15s;}
@@ -109,7 +107,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-add-label{font-size:9px;font-weight:300;letter-spacing:0.2em;color:#ccc;}
 #libFileInput{display:none;}
 
-/* MAIN SESSION — image fills full screen */
+/* MAIN SESSION */
 #imgWrapper{position:fixed;inset:0;overflow:hidden;}
 #mainImg{display:block;width:100%;height:100%;object-fit:cover;}
 #dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
@@ -117,7 +115,20 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
 #info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
 
-/* FINISH SESSION BUTTON */
+/* SESSION INFO OVERLAY — always visible on image */
+#sessionInfoOverlay{
+  position:fixed;bottom:72px;left:50%;transform:translateX(-50%);
+  display:none;z-index:55;
+  background:rgba(0,0,0,0.72);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:8px;
+  padding:10px 20px;
+  display:none;
+  flex-direction:row;gap:24px;align-items:center;
+}
+.sio-item{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.sio-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+.sio-val{font-size:12px;font-weight:700;color:#fff;}
+
 #finishBtn{
   position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
   font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;
@@ -147,49 +158,38 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 /* DATA BODY */
 #dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
 
-/* LEFT: per-user gallery */
-#dataGallery{
-  width:220px;flex-shrink:0;background:#0a0a0a;border-right:1px solid #1e1e1e;
-  overflow-y:auto;display:flex;flex-direction:column;
-}
-.user-section{border-bottom:1px solid #1a1a1a;}
-.user-section-header{
-  padding:14px 14px 10px;cursor:pointer;user-select:none;
-  transition:background 0.12s;
-}
-.user-section-header:hover{background:#111;}
-.user-section-name{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#fff;text-transform:uppercase;margin-bottom:3px;}
-.user-section-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;}
-.user-section-count{
-  display:inline-block;font-size:8px;font-weight:700;letter-spacing:0.1em;
-  color:#fff;background:#333;padding:2px 7px;border-radius:100px;margin-top:4px;
-}
-.user-section-images{padding:8px 10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.user-section.collapsed .user-section-images{display:none;}
-
-.gallery-thumb{
-  aspect-ratio:4/3;border:1.5px solid #222;cursor:pointer;overflow:hidden;
-  position:relative;transition:border-color 0.15s;background:#111;border-radius:2px;
-}
-.gallery-thumb:hover{border-color:#555;}
-.gallery-thumb.active{border-color:#fff;}
-.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.gallery-thumb-label{
-  position:absolute;bottom:0;left:0;right:0;
-  background:rgba(0,0,0,0.8);font-size:7px;font-weight:300;
-  letter-spacing:0.04em;color:#aaa;padding:3px 5px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.gallery-thumb-badge{
-  position:absolute;top:4px;right:4px;font-size:7px;font-weight:700;
-  color:#fff;background:rgba(0,0,0,0.7);padding:2px 4px;border-radius:2px;
-}
-
 /* CENTER: full-screen canvas */
 #dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 #dataImgArea{position:relative;flex:1;overflow:hidden;background:#000;}
 #dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
+
+/* Session info on data image - always shown */
+#dataSessionBadge{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:row;gap:18px;align-items:center;
+  background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:8px;
+  padding:10px 20px;z-index:8;pointer-events:none;
+}
+.dsb-item{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+.dsb-val{font-size:12px;font-weight:700;color:#fff;}
+
+/* Analysis overlay on image - shown only when analysis layer active */
+#dataAnalysisBadge{
+  position:absolute;top:14px;right:14px;
+  display:none;flex-direction:column;gap:6px;
+  background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);
+  border:1px solid rgba(224,26,0,0.3);border-radius:8px;
+  padding:12px 16px;z-index:8;pointer-events:none;min-width:160px;
+}
+.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.6);text-transform:uppercase;margin-bottom:4px;margin-top:6px;}
+.dab-label:first-child{margin-top:0;}
+.dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;}
+.dab-name{font-size:9px;font-weight:300;color:#888;}
+.dab-val{font-size:11px;font-weight:700;color:#e01a00;}
+.dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.5);margin-left:2px;}
 
 /* Floating toolbar */
 #dataToolbar{
@@ -223,24 +223,48 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 }
 #playBtn:hover{background:#222;}
 
-/* Floating stats */
-#dataStats{
-  position:absolute;right:14px;top:60px;
-  width:180px;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.08);
-  overflow-y:auto;max-height:calc(100% - 80px);
-  padding:14px 12px;z-index:10;border-radius:4px;
+/* ═══ GALLERY SCREEN ═══ */
+#galleryScreen{
+  display:none;position:fixed;inset:0;z-index:1500;background:#111;
+  flex-direction:column;overflow:hidden;padding-top:52px;
 }
-.stat-group{margin-bottom:12px;padding-bottom:12px;}
-.stat-group+.stat-group{border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;}
-.stat-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:#555;margin-bottom:8px;text-transform:uppercase;}
-.stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.04);}
-.stat-name{font-size:9px;font-weight:300;color:#666;}
-.stat-val{font-size:12px;font-weight:700;color:#fff;}
-.stat-unit{font-size:8px;font-weight:300;color:#555;margin-left:2px;}
+#galleryHeader{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;
+}
+#galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
+.gallery-header-right{display:flex;align-items:center;gap:8px;}
+#galleryBody{flex:1;overflow-y:auto;padding:24px;}
+.gallery-user-block{margin-bottom:40px;}
+.gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#fff;text-transform:uppercase;margin-bottom:6px;}
+.gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
+.gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.gallery-item{
+  background:#0a0a0a;border:1px solid #1e1e1e;border-radius:4px;
+  overflow:hidden;cursor:pointer;transition:border-color 0.15s;
+}
+.gallery-item:hover{border-color:#444;}
+.gallery-item.active-view{border-color:#e01a00;}
+.gallery-item-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.gallery-item-info{padding:8px 10px;display:flex;justify-content:space-between;align-items:center;}
+.gallery-item-name{font-size:9px;font-weight:700;letter-spacing:0.1em;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gallery-item-stats{font-size:8px;font-weight:300;color:#555;white-space:nowrap;}
 
 /* COMPARE VIEW */
-#compareView{display:none;flex:1;overflow:auto;padding:20px;background:#0a0a0a;}
+#compareView{display:none;flex:1;overflow:hidden;flex-direction:column;}
+#compareFilters{
+  background:#0a0a0a;border-bottom:1px solid #1e1e1e;
+  padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;
+}
+.cf-label{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#555;text-transform:uppercase;}
+.cf-select{
+  font-family:'Heebo',sans-serif;font-size:10px;background:#111;color:#aaa;
+  border:1.5px solid #2a2a2a;padding:5px 10px;cursor:pointer;border-radius:100px;
+  outline:none;-webkit-appearance:none;
+}
+.cf-select:focus{border-color:#555;}
+.cf-sep{width:1px;height:16px;background:#2a2a2a;align-self:center;}
+#compareGrid-wrap{flex:1;overflow:auto;padding:20px;background:#0a0a0a;}
 #compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
 .compare-panel{background:#111;border:1px solid #222;overflow:hidden;border-radius:2px;}
 .compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:4px;}
@@ -280,6 +304,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="navLinks">
     <span class="nav-link active" id="navHomeLink">HOME</span>
     <span class="nav-link" id="navSessionLink">SESSION</span>
+    <span class="nav-link" id="navGalleryLink">GALLERY</span>
   </div>
 </nav>
 
@@ -308,8 +333,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 
   <div id="homeInfo">
-
-    <!-- HOW IT WORKS -->
     <div class="hi-section">
       <div class="hi-label">HOW IT WORKS</div>
       <h2 class="hi-title">From eyes to insights<br>in three steps.</h2>
@@ -336,7 +359,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       </div>
     </div>
 
-    <!-- 6 MODES -->
     <div class="hi-section" style="background:#f7f7f7;">
       <div class="hi-label">ANALYSIS MODES</div>
       <h2 class="hi-title">Six ways to read<br>visual attention.</h2>
@@ -344,7 +366,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       <div class="modes-grid" id="modesGrid"></div>
     </div>
 
-    <!-- HOW TO USE -->
     <div class="hi-section">
       <div class="hi-label">QUICK START</div>
       <h2 class="hi-title" style="margin-bottom:36px;">Up and running<br>in under a minute.</h2>
@@ -358,7 +379,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       </ol>
     </div>
 
-    <!-- DARK CTA -->
     <div class="hi-section hi-section-dark" style="text-align:center;padding:80px 48px;">
       <div class="hi-label hi-label-light">READY?</div>
       <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
@@ -374,6 +394,16 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <img id="mainImg" src="" alt="stimulus"/>
   <canvas id="dotCanvas"></canvas>
   <div id="annLayer"></div>
+</div>
+
+<!-- Session info always on screen during session -->
+<div id="sessionInfoOverlay">
+  <div class="sio-item"><span class="sio-label">SAMPLES</span><span class="sio-val" id="sio-samples">0</span></div>
+  <div class="sio-item"><span class="sio-label">DURATION</span><span class="sio-val" id="sio-duration">0s</span></div>
+  <div class="sio-item"><span class="sio-label">LOCATION</span><span class="sio-val" id="sio-location">—</span></div>
+  <div class="sio-item"><span class="sio-label">NAME</span><span class="sio-val" id="sio-name">—</span></div>
+  <div class="sio-item"><span class="sio-label">AGE</span><span class="sio-val" id="sio-age">—</span></div>
+  <div class="sio-item"><span class="sio-label">GENDER</span><span class="sio-val" id="sio-gender">—</span></div>
 </div>
 
 <div id="gazeDot"></div>
@@ -403,11 +433,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
     </div>
   </div>
   <div id="dataBody">
-
-    <!-- Per-user gallery -->
-    <div id="dataGallery"></div>
-
-    <!-- Full-screen canvas -->
+    <!-- CENTER: full-screen canvas -->
     <div id="dataCenter">
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
@@ -433,48 +459,75 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
           </div>
         </div>
 
-        <!-- Floating stats -->
-        <div id="dataStats">
-          <div class="stat-group">
-            <div class="stat-label">FIXATION</div>
-            <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-fix-count">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Avg dur</span><span><span class="stat-val" id="st-fix-avg">—</span><span class="stat-unit">ms</span></span></div>
-            <div class="stat-row"><span class="stat-name">Total dwell</span><span><span class="stat-val" id="st-fix-total">—</span><span class="stat-unit">ms</span></span></div>
-          </div>
-          <div class="stat-group">
-            <div class="stat-label">SACCADE</div>
-            <div class="stat-row"><span class="stat-name">Count</span><span><span class="stat-val" id="st-sac-count">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Avg amp</span><span><span class="stat-val" id="st-sac-amp">—</span><span class="stat-unit">%</span></span></div>
-          </div>
-          <div class="stat-group">
-            <div class="stat-label">SCAN PATH</div>
-            <div class="stat-row"><span class="stat-name">Steps</span><span><span class="stat-val" id="st-scan-steps">—</span></span></div>
-          </div>
-          <div class="stat-group">
-            <div class="stat-label">FIRST FIXATION</div>
-            <div class="stat-row"><span class="stat-name">TTFF</span><span><span class="stat-val" id="st-ttff">—</span><span class="stat-unit">s</span></span></div>
-            <div class="stat-row"><span class="stat-name">X</span><span><span class="stat-val" id="st-ff-x">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Y</span><span><span class="stat-val" id="st-ff-y">—</span></span></div>
-          </div>
-          <div class="stat-group">
-            <div class="stat-label">SESSION</div>
-            <div class="stat-row"><span class="stat-name">Samples</span><span><span class="stat-val" id="st-gaze-n">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Duration</span><span><span class="stat-val" id="st-duration">—</span><span class="stat-unit">s</span></span></div>
-            <div class="stat-row"><span class="stat-name">Location</span><span><span class="stat-val" id="st-location" style="font-size:9px;max-width:90px;text-align:right;">—</span></span></div>
-          </div>
-          <div class="stat-group">
-            <div class="stat-label">PARTICIPANT</div>
-            <div class="stat-row"><span class="stat-name">Name</span><span><span class="stat-val" id="st-user-name" style="font-size:9px;">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Age</span><span><span class="stat-val" id="st-user-age">—</span></span></div>
-            <div class="stat-row"><span class="stat-name">Gender</span><span><span class="stat-val" id="st-user-gender" style="font-size:9px;">—</span></span></div>
-          </div>
+        <!-- Always-visible session info badge on data image -->
+        <div id="dataSessionBadge">
+          <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">DURATION</span><span class="dsb-val" id="dsb-duration">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">LOCATION</span><span class="dsb-val" id="dsb-location">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">—</span></div>
+        </div>
+
+        <!-- Analysis-specific stats badge — shown only when an analysis layer is active -->
+        <div id="dataAnalysisBadge">
+          <!-- Content injected by JS based on active layer -->
         </div>
       </div>
     </div>
   </div>
 
   <div id="compareView">
-    <div id="compareGrid"></div>
+    <div id="compareFilters">
+      <span class="cf-label">FILTER</span>
+      <select class="cf-select" id="cf-user"><option value="">All Users</option></select>
+      <select class="cf-select" id="cf-gender"><option value="">All Genders</option></select>
+      <select class="cf-select" id="cf-location"><option value="">All Locations</option></select>
+      <span class="cf-sep"></span>
+      <span class="cf-label">SORT BY</span>
+      <select class="cf-select" id="cf-sort">
+        <option value="">Default</option>
+        <option value="fixations_desc">Most Fixations</option>
+        <option value="fixations_asc">Fewest Fixations</option>
+        <option value="saccades_desc">Most Saccades</option>
+        <option value="saccades_asc">Fewest Saccades</option>
+        <option value="duration_desc">Longest Session</option>
+        <option value="duration_asc">Shortest Session</option>
+        <option value="samples_desc">Most Samples</option>
+        <option value="ttff_asc">Fastest TTFF</option>
+        <option value="ttff_desc">Slowest TTFF</option>
+        <option value="sacAmp_desc">Highest Sac Amp</option>
+        <option value="age_asc">Age ↑</option>
+        <option value="age_desc">Age ↓</option>
+      </select>
+      <span class="cf-sep"></span>
+      <span class="cf-label">LAYER</span>
+      <select class="cf-select" id="cf-layer">
+        <option value="GAZE">Gaze</option>
+        <option value="FIXATION">Fixation</option>
+        <option value="SACCADE">Saccade</option>
+        <option value="SCANPATH">Scan Path</option>
+        <option value="HEATMAP">Heatmap</option>
+        <option value="FIRSTFIX">First Fix</option>
+      </select>
+      <button id="cf-apply" class="va-btn va-btn-secondary" style="margin-left:4px;font-size:10px;padding:6px 18px;">APPLY</button>
+    </div>
+    <div id="compareGrid-wrap">
+      <div id="compareGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY SCREEN -->
+<div id="galleryScreen">
+  <div id="galleryHeader">
+    <div class="gallery-title">IMAGE GALLERY</div>
+    <div class="gallery-header-right">
+      <button id="galleryCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
+    </div>
+  </div>
+  <div id="galleryBody">
+    <!-- Populated by JS -->
   </div>
 </div>
 
@@ -510,7 +563,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 
 /* ══════════════════════════════════════════════════════════════════════
-   HOME SCREEN DEMO
+   HOME SCREEN DEMO — dots doubled in size
    ══════════════════════════════════════════════════════════════════════ */
 const HOME_N_ANN        = 250;
 const HOME_DOT_STEP     = 2;
@@ -525,6 +578,7 @@ const homeAnaC       = document.getElementById('homeAnaC');
 const homeAnaCtx     = homeAnaC.getContext('2d', {willReadFrequently:true});
 const navHomeLink    = document.getElementById('navHomeLink');
 const navSessionLink = document.getElementById('navSessionLink');
+const navGalleryLink = document.getElementById('navGalleryLink');
 
 let homeRunning   = true;
 let homeLastAnaTs = -9999;
@@ -543,8 +597,11 @@ function sizeHomeCanvas(){homeDotCanvas.width=window.innerWidth;homeDotCanvas.he
 
 function homeDrawDots(pts){
   const W=homeDotCanvas.width,H=homeDotCanvas.height;if(!W||!H)return;
-  homeDotCtx.clearRect(0,0,W,H);homeDotCtx.fillStyle='rgba(224,26,0,0.82)';homeDotCtx.beginPath();
-  for(const p of pts)homeDotCtx.rect(p.nx*W-1.5,p.ny*H-1.5,3,3);
+  homeDotCtx.clearRect(0,0,W,H);
+  homeDotCtx.fillStyle='rgba(224,26,0,0.82)';
+  homeDotCtx.beginPath();
+  // Doubled dot size: 6x6 squares instead of 3x3
+  for(const p of pts)homeDotCtx.rect(p.nx*W-3,p.ny*H-3,6,6);
   homeDotCtx.fill();
 }
 
@@ -570,7 +627,7 @@ function homeLoop(ts){
    ══════════════════════════════════════════════════════════════════════ */
 let appStarted = false;
 
-function showHome(){homeRunning=true;homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');requestAnimationFrame(homeLoop);}
+function showHome(){homeRunning=true;homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');requestAnimationFrame(homeLoop);}
 function hideHome(){homeRunning=false;homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
 function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
@@ -578,6 +635,7 @@ document.getElementById('homeStartBtn').addEventListener('click',goToSession);
 document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
 navSessionLink.addEventListener('click',goToSession);
 navHomeLink.addEventListener('click',()=>{if(appStarted)showHome();});
+navGalleryLink.addEventListener('click',()=>{if(allSessions.length>0)openGallery();});
 
 function bootHome(){
   sizeHomeCanvas();
@@ -587,13 +645,20 @@ function bootHome(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   GEOLOCATION
+   GEOLOCATION — auto-detect on page load
    ══════════════════════════════════════════════════════════════════════ */
 let userLocation='';
 async function fetchLocation(){
-  try{const r=await fetch('https://ipapi.co/json/');const d=await r.json();userLocation=[d.city,d.country_name].filter(Boolean).join(', ');}
+  try{
+    const r=await fetch('https://ipapi.co/json/');
+    const d=await r.json();
+    userLocation=[d.city,d.country_name].filter(Boolean).join(', ');
+    document.getElementById('sio-location').textContent=userLocation||'—';
+  }
   catch(_){userLocation='Unknown';}
 }
+// Auto-detect immediately on load
+fetchLocation();
 
 /* ══════════════════════════════════════════════════════════════════════
    CONSTANTS
@@ -618,6 +683,8 @@ const calStartBtn=document.getElementById('calStartBtn');
    ══════════════════════════════════════════════════════════════════════ */
 let currentUser='',currentAge='',currentGender='';
 let imageLibrary=[],currentImageIdx=0;
+// Track which images have been viewed by which user
+let viewedImages = {}; // key: "userName::imageIndex"
 let fixationHistory=[],currentFixation=null,scanPathHistory=[],saccadeHistory=[],saccadeActive=false,saccadeStart=null;
 let heatmap=new Float32Array(W_HEAT*H_HEAT),heatCanvas,heatCtx2;
 let firstFix=null,firstFixDone=false,firstFixModeTs=0,sessionStartTs=0,gazeLog=[];
@@ -628,6 +695,7 @@ let eyeCalMap=null;
 window._gazeHistory=[];
 let currentAnimation=null,dataActiveLayer='GAZE',playMode='ANIMATED',showImg=true,viewSession=null;
 const allSessions=[];
+let sessionInfoInterval=null;
 
 /* ══════════════════════════════════════════════════════════════════════
    EYE STABILITY
@@ -728,7 +796,7 @@ function inv3(m){
 function mv3(m,v){return[m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];}
 
 /* ══════════════════════════════════════════════════════════════════════
-   CALIBRATION
+   CALIBRATION — no top nav visible (nav hidden)
    ══════════════════════════════════════════════════════════════════════ */
 function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
 function drawCalIntro(){
@@ -768,6 +836,8 @@ function awaitDot(px,py,index){
   });
 }
 async function runCalibration(){
+  // Hide the main nav during calibration
+  document.getElementById('mainNav').style.display='none';
   resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();
   calStartBtn.style.display='block';
   await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));
@@ -779,7 +849,10 @@ async function runCalibration(){
     const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});
   }
   if(calData.length>=4)eyeCalMap=fitAffine(calData);
-  drawCalDone();await new Promise(r=>setTimeout(r,900));calOverlay.style.display='none';
+  drawCalDone();await new Promise(r=>setTimeout(r,900));
+  calOverlay.style.display='none';
+  // Restore nav
+  document.getElementById('mainNav').style.display='flex';
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -842,21 +915,34 @@ function enablePointerFallback(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   IMAGE LIBRARY
+   IMAGE LIBRARY — each user can view each image only once
    ══════════════════════════════════════════════════════════════════════ */
+function isImageViewed(imgIdx){
+  return !!viewedImages[`${currentUser}::${imgIdx}`];
+}
+function markImageViewed(imgIdx){
+  viewedImages[`${currentUser}::${imgIdx}`]=true;
+}
+
 function showLib(){document.getElementById('libraryScreen').style.display='flex';renderLib();}
 function renderLib(){
   const grid=document.getElementById('libGrid');grid.innerHTML='';
   imageLibrary.forEach((img,i)=>{
-    const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx?' selected':'');
+    const viewed=isImageViewed(i);
+    const card=document.createElement('div');
+    card.className='lib-card'+(i===currentImageIdx&&!viewed?' selected':'')+(viewed?' viewed-once':'');
     card.innerHTML=`<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
-    card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');};
+    if(!viewed){
+      card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');};
+    }
     grid.appendChild(card);
   });
   const add=document.createElement('div');add.className='lib-add';
   add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
   add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);
-  const btn=document.getElementById('libBeginBtn');btn.disabled=imageLibrary.length===0;btn.style.opacity=imageLibrary.length?'1':'0.4';
+  const btn=document.getElementById('libBeginBtn');
+  const hasAvailable=imageLibrary.some((_,i)=>!isImageViewed(i));
+  btn.disabled=!hasAvailable;btn.style.opacity=hasAvailable?'1':'0.4';
 }
 document.getElementById('libFileInput').addEventListener('change',e=>{
   Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});
@@ -878,26 +964,87 @@ async function showNameScreen(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   STATS
+   SESSION INFO OVERLAY (live during session)
    ══════════════════════════════════════════════════════════════════════ */
-function renderStatsForSession(sess){
-  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix;
-  const ft=sess.firstFixModeTs,gl=sess.gazeLog||[],st=sess.sessionStartTs;
-  const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0;
-  const fixTotal=fh.reduce((s,f)=>s+f.duration,0),sacC=sh.length;
-  const sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;
-  const ttff=ff?((ff.startTs-ft)/1000):null;
-  const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1):(st?((Date.now()-st)/1000).toFixed(1):null);
-  document.getElementById('st-fix-count').textContent=fixC||'—';document.getElementById('st-fix-avg').textContent=fixAvg||'—';document.getElementById('st-fix-total').textContent=fixTotal||'—';
-  document.getElementById('st-sac-count').textContent=sacC||'—';document.getElementById('st-sac-amp').textContent=sacAmp||'—';document.getElementById('st-scan-steps').textContent=sp.length||'—';
-  document.getElementById('st-ttff').textContent=ttff!==null?ttff.toFixed(2):'—';document.getElementById('st-ff-x').textContent=ff?(ff.x*100).toFixed(1)+'%':'—';document.getElementById('st-ff-y').textContent=ff?(ff.y*100).toFixed(1)+'%':'—';
-  document.getElementById('st-gaze-n').textContent=gl.length||'—';document.getElementById('st-duration').textContent=dur||'—';
-  document.getElementById('st-location').textContent=sess.location||'—';
-  document.getElementById('st-user-name').textContent=sess.user||'—';document.getElementById('st-user-age').textContent=sess.age||'—';document.getElementById('st-user-gender').textContent=sess.gender||'—';
+function startSessionInfoOverlay(){
+  const overlay=document.getElementById('sessionInfoOverlay');
+  overlay.style.display='flex';
+  document.getElementById('sio-name').textContent=currentUser||'—';
+  document.getElementById('sio-age').textContent=currentAge||'—';
+  document.getElementById('sio-gender').textContent=currentGender||'—';
+  document.getElementById('sio-location').textContent=userLocation||'—';
+  if(sessionInfoInterval)clearInterval(sessionInfoInterval);
+  sessionInfoInterval=setInterval(()=>{
+    document.getElementById('sio-samples').textContent=gazeLog.length;
+    const elapsed=sessionStartTs?((Date.now()-sessionStartTs)/1000).toFixed(1)+'s':'0s';
+    document.getElementById('sio-duration').textContent=elapsed;
+  },500);
 }
-function renderStats(){
-  const sess=viewSession||{fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs,gazeLog,sessionStartTs,location:userLocation,user:currentUser,age:currentAge,gender:currentGender};
-  renderStatsForSession(sess);
+function stopSessionInfoOverlay(){
+  document.getElementById('sessionInfoOverlay').style.display='none';
+  if(sessionInfoInterval){clearInterval(sessionInfoInterval);sessionInfoInterval=null;}
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DATA BADGE — session info always on data screen
+   ══════════════════════════════════════════════════════════════════════ */
+function renderDataSessionBadge(sess){
+  const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
+  document.getElementById('dsb-samples').textContent=sess.gazeLog?.length||'—';
+  document.getElementById('dsb-duration').textContent=dur;
+  document.getElementById('dsb-location').textContent=sess.location||'—';
+  document.getElementById('dsb-name').textContent=sess.user||'—';
+  document.getElementById('dsb-age').textContent=sess.age||'—';
+  document.getElementById('dsb-gender').textContent=sess.gender||'—';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ANALYSIS BADGE — shown only when analysis layer is active
+   ══════════════════════════════════════════════════════════════════════ */
+const ANALYSIS_LAYERS=['FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
+
+function renderAnalysisBadge(layer, sess){
+  const badge=document.getElementById('dataAnalysisBadge');
+  if(!ANALYSIS_LAYERS.includes(layer)){badge.style.display='none';return;}
+  badge.style.display='flex';
+  badge.innerHTML='';
+
+  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix;
+  const ft=sess.firstFixModeTs||0;
+
+  function row(label,val,unit=''){
+    const d=document.createElement('div');d.className='dab-row';
+    d.innerHTML=`<span class="dab-name">${label}</span><span><span class="dab-val">${val}</span>${unit?`<span class="dab-unit">${unit}</span>`:''}</span>`;
+    return d;
+  }
+  function lbl(t){const d=document.createElement('div');d.className='dab-label';d.textContent=t;return d;}
+
+  if(layer==='FIXATION'){
+    const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0;
+    const fixTotal=fh.reduce((s,f)=>s+f.duration,0);
+    badge.appendChild(lbl('FIXATION'));
+    badge.appendChild(row('Count',fixC||'—'));
+    badge.appendChild(row('Avg dur',fixAvg||'—','ms'));
+    badge.appendChild(row('Total dwell',fixTotal||'—','ms'));
+  } else if(layer==='SACCADE'){
+    const sacC=sh.length;
+    const sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;
+    badge.appendChild(lbl('SACCADE'));
+    badge.appendChild(row('Count',sacC||'—'));
+    badge.appendChild(row('Avg amp',sacAmp||'—','%'));
+  } else if(layer==='SCANPATH'){
+    badge.appendChild(lbl('SCAN PATH'));
+    badge.appendChild(row('Steps',sp.length||'—'));
+  } else if(layer==='HEATMAP'){
+    badge.appendChild(lbl('HEATMAP'));
+    badge.appendChild(row('Samples',sess.gazeLog?.length||'—'));
+  } else if(layer==='FIRSTFIX'){
+    const ttff=ff?((ff.startTs-ft)/1000):null;
+    badge.appendChild(lbl('FIRST FIXATION'));
+    badge.appendChild(row('TTFF',ttff!==null?ttff.toFixed(2)+'s':'—'));
+    badge.appendChild(row('X',ff?(ff.x*100).toFixed(1)+'%':'—'));
+    badge.appendChild(row('Y',ff?(ff.y*100).toFixed(1)+'%':'—'));
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -962,7 +1109,7 @@ function staticFirstFix(ctx,W,H,fix,modeTs){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   HOME MODE PREVIEWS (fixed aspect, no stretch)
+   HOME MODE PREVIEWS
    ══════════════════════════════════════════════════════════════════════ */
 function buildModePreviews(){
   const modes=[
@@ -982,9 +1129,7 @@ function buildModePreviews(){
     const card=document.createElement('div');card.className='mode-card';
     const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
     const canvas=document.createElement('canvas');
-    canvas.className='mode-preview';
-    // Fixed 320×160 resolution regardless of display size — no distortion
-    canvas.width=320;canvas.height=160;
+    canvas.className='mode-preview';canvas.width=320;canvas.height=160;
     wrap.appendChild(canvas);
     card.innerHTML=`<div class="mode-card-name">${m.name}</div>`;
     card.appendChild(wrap);
@@ -1062,16 +1207,54 @@ function animateFirstFix(ctx,W,H,fix,modeTs){
 function playLayer(layer){
   cancelAnimation();const dc=getDataCanvas();const ctx=dc.getContext('2d');ctx.clearRect(0,0,dc.width,dc.height);const W=dc.width,H=dc.height;
   const sess=viewSession||{gazeLog,fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs};
+  renderAnalysisBadge(layer, sess);
   if(playMode==='STATIC'){switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
   else{switch(layer){case 'GAZE':currentAnimation=animateGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':currentAnimation=animateFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':currentAnimation=animateSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':currentAnimation=animateScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':currentAnimation=animateHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':currentAnimation=animateFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   COMPARE VIEW
+   COMPARE FILTERS
    ══════════════════════════════════════════════════════════════════════ */
+function populateCompareFilters(){
+  const users=[...new Set(allSessions.map(s=>s.user))];
+  const genders=[...new Set(allSessions.map(s=>s.gender).filter(Boolean))];
+  const locations=[...new Set(allSessions.map(s=>s.location).filter(Boolean))];
+  const cfUser=document.getElementById('cf-user');cfUser.innerHTML='<option value="">All Users</option>'+users.map(u=>`<option value="${u}">${u}</option>`).join('');
+  const cfGender=document.getElementById('cf-gender');cfGender.innerHTML='<option value="">All Genders</option>'+genders.map(g=>`<option value="${g}">${g}</option>`).join('');
+  const cfLoc=document.getElementById('cf-location');cfLoc.innerHTML='<option value="">All Locations</option>'+locations.map(l=>`<option value="${l}">${l}</option>`).join('');
+}
+
+function getFilteredSessions(){
+  const user=document.getElementById('cf-user').value;
+  const gender=document.getElementById('cf-gender').value;
+  const location=document.getElementById('cf-location').value;
+  const sort=document.getElementById('cf-sort').value;
+  let list=allSessions.filter(s=>(!user||s.user===user)&&(!gender||s.gender===gender)&&(!location||s.location===location));
+  if(sort){
+    const[key,dir]=sort.split('_');const asc=dir==='asc';
+    const getVal=(s)=>{
+      switch(key){
+        case 'fixations':return s.fixationHistory?.length||0;
+        case 'saccades':return s.saccadeHistory?.length||0;
+        case 'duration':return s.sessionDuration||0;
+        case 'samples':return s.gazeLog?.length||0;
+        case 'ttff':return s.firstFix?(s.firstFix.startTs-s.firstFixModeTs):Infinity;
+        case 'sacAmp':{const sh=s.saccadeHistory||[];return sh.length?sh.reduce((a,f)=>a+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sh.length:0;}
+        case 'age':return parseInt(s.age)||0;
+        default:return 0;
+      }
+    };
+    list.sort((a,b)=>asc?getVal(a)-getVal(b):getVal(b)-getVal(a));
+  }
+  return list;
+}
+
 function renderCompareView(){
-  const grid=document.getElementById('compareGrid');grid.innerHTML='';const layer=dataActiveLayer||'GAZE';
-  for(const sess of allSessions){
+  populateCompareFilters();
+  const grid=document.getElementById('compareGrid');grid.innerHTML='';
+  const layer=document.getElementById('cf-layer').value||dataActiveLayer||'GAZE';
+  const sessions=getFilteredSessions();
+  for(const sess of sessions){
     const cell=document.createElement('div');cell.className='compare-panel';
     const ts=new Date(sess.timestamp).toLocaleTimeString();
     const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
@@ -1082,52 +1265,74 @@ function renderCompareView(){
   }
 }
 
+document.getElementById('cf-apply').addEventListener('click',renderCompareView);
+document.getElementById('cf-layer').addEventListener('change',renderCompareView);
+
 /* ══════════════════════════════════════════════════════════════════════
-   PER-USER GALLERY
+   GALLERY SCREEN — separate page with all viewed images
+   ══════════════════════════════════════════════════════════════════════ */
+function openGallery(){
+  const screen=document.getElementById('galleryScreen');
+  screen.style.display='flex';
+  navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');
+  renderGalleryScreen();
+}
+function closeGallery(){
+  document.getElementById('galleryScreen').style.display='none';
+  navGalleryLink.classList.remove('active');
+}
+function renderGalleryScreen(){
+  const body=document.getElementById('galleryBody');body.innerHTML='';
+  const byUser=new Map();
+  for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
+  if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}
+  for(const[userName,sessions]of byUser){
+    const block=document.createElement('div');block.className='gallery-user-block';
+    const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' · ');
+    block.innerHTML=`<div class="gallery-user-name">${userName}</div><div class="gallery-user-meta">${metaStr}</div><div class="gallery-images-row" id="gallery-row-${userName.replace(/\s/g,'_')}"></div>`;
+    body.appendChild(block);
+    const row=block.querySelector('.gallery-images-row');
+    for(const sess of sessions){
+      const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');
+      const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
+      item.innerHTML=`<img class="gallery-item-img" src="${sess.imageSrc}" alt="${sess.imageName}"/><div class="gallery-item-info"><span class="gallery-item-name">${sess.imageName}</span><span class="gallery-item-stats">${sess.fixationHistory.length}F · ${sess.gazeLog.length}S · ${dur}</span></div>`;
+      item.onclick=()=>{
+        viewSession=sess;
+        document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');
+        openData(false);
+      };
+      row.appendChild(item);
+    }
+  }
+}
+document.getElementById('galleryCloseBtn').addEventListener('click',closeGallery);
+
+/* ══════════════════════════════════════════════════════════════════════
+   CAPTURE & OPEN DATA
    ══════════════════════════════════════════════════════════════════════ */
 function captureSession(){
   return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};
 }
 
-function renderGallery(){
-  const gallery=document.getElementById('dataGallery');gallery.innerHTML='';
-  const byUser=new Map();
-  for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
-  for(const[userName,sessions]of byUser){
-    const section=document.createElement('div');section.className='user-section';
-    const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||''].filter(Boolean).join(' · ');
-    const header=document.createElement('div');header.className='user-section-header';
-    header.innerHTML=`<div class="user-section-name">${userName}</div>${metaStr?`<div class="user-section-meta">${metaStr}</div>`:''}<span class="user-section-count">${sessions.length} image${sessions.length!==1?'s':''}</span>`;
-    header.addEventListener('click',()=>section.classList.toggle('collapsed'));
-    const imagesDiv=document.createElement('div');imagesDiv.className='user-section-images';
-    for(const sess of sessions){
-      const thumb=document.createElement('div');thumb.className='gallery-thumb'+(sess===viewSession?' active':'');
-      const ts=new Date(sess.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-      thumb.innerHTML=`<img src="${sess.imageSrc}" alt=""/><div class="gallery-thumb-label">${sess.imageName}</div><div class="gallery-thumb-badge">${sess.fixationHistory.length}F</div>`;
-      thumb.onclick=()=>{
-        viewSession=sess;
-        document.querySelectorAll('.gallery-thumb').forEach(el=>el.classList.remove('active'));thumb.classList.add('active');
-        document.getElementById('dataImg').src=sess.imageSrc;renderStats();playLayer(dataActiveLayer||'GAZE');
-      };
-      imagesDiv.appendChild(thumb);
-    }
-    section.appendChild(header);section.appendChild(imagesDiv);gallery.appendChild(section);
+function openData(pushNew=true){
+  if(pushNew){
+    const snap=captureSession();
+    allSessions.push(snap);
+    viewSession=snap;
   }
-}
-
-function openData(){
-  const snap=captureSession();allSessions.push(snap);viewSession=snap;
   document.getElementById('dataScreen').style.display='flex';
   document.getElementById('dataBody').style.display='flex';
   document.getElementById('compareView').style.display='none';
   document.getElementById('sessionViewBtn').classList.add('active');
   document.getElementById('compareViewBtn').classList.remove('active');
-  renderGallery();
-  document.getElementById('dataImg').src=snap.imageSrc;
+  document.getElementById('galleryScreen').style.display='none';
+  document.getElementById('dataImg').src=viewSession.imageSrc;
   document.getElementById('dataImg').style.opacity=showImg?'1':'0';
-  renderStats();
+  renderDataSessionBadge(viewSession);
   const activeBtn=document.querySelector('.layer-btn.active');
-  playLayer(activeBtn?activeBtn.dataset.layer:'GAZE');
+  const layer=activeBtn?activeBtn.dataset.layer:'GAZE';
+  dataActiveLayer=layer;
+  playLayer(layer);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1143,6 +1348,14 @@ async function boot(){
   await new Promise(resolve=>{
     document.getElementById('libBeginBtn').addEventListener('click',()=>{
       if(!imageLibrary.length)return;
+      // Check the selected image hasn't been viewed
+      if(isImageViewed(currentImageIdx)){
+        // Find first unviewed
+        const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));
+        if(unviewed===-1)return;
+        currentImageIdx=unviewed;
+      }
+      markImageViewed(currentImageIdx);
       document.getElementById('libraryScreen').style.display='none';
       imgWrapper.style.display='block';
       mainImg.src=imageLibrary[currentImageIdx].src;
@@ -1152,6 +1365,7 @@ async function boot(){
   sessionStartTs=Date.now();firstFixModeTs=performance.now();
   document.getElementById('finishBtn').style.display='block';
   annLayer.style.opacity='0';
+  startSessionInfoOverlay();
   setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);
   requestAnimationFrame(mainLoop);
 }
@@ -1159,7 +1373,10 @@ async function boot(){
 /* ══════════════════════════════════════════════════════════════════════
    EVENTS
    ══════════════════════════════════════════════════════════════════════ */
-document.getElementById('finishBtn').addEventListener('click',openData);
+document.getElementById('finishBtn').addEventListener('click',()=>{
+  stopSessionInfoOverlay();
+  openData(true);
+});
 document.getElementById('dataCloseBtn').addEventListener('click',()=>{cancelAnimation();document.getElementById('dataScreen').style.display='none';});
 document.getElementById('sessionViewBtn').addEventListener('click',()=>{document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='flex';document.getElementById('compareView').style.display='none';});
 document.getElementById('compareViewBtn').addEventListener('click',()=>{document.getElementById('compareViewBtn').classList.add('active');document.getElementById('sessionViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='none';document.getElementById('compareView').style.display='flex';renderCompareView();});
@@ -1167,13 +1384,19 @@ document.getElementById('animatedBtn').addEventListener('click',()=>{playMode='A
 document.getElementById('staticBtn').addEventListener('click',()=>{playMode='STATIC';document.getElementById('staticBtn').classList.add('active');document.getElementById('animatedBtn').classList.remove('active');playLayer(dataActiveLayer);});
 document.getElementById('withImgBtn').addEventListener('click',()=>{showImg=true;document.getElementById('withImgBtn').classList.add('active');document.getElementById('withoutImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='1';});
 document.getElementById('withoutImgBtn').addEventListener('click',()=>{showImg=false;document.getElementById('withoutImgBtn').classList.add('active');document.getElementById('withImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='0';});
-document.querySelectorAll('.layer-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');dataActiveLayer=btn.dataset.layer;playLayer(dataActiveLayer);});});
+document.querySelectorAll('.layer-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');dataActiveLayer=btn.dataset.layer;
+    playLayer(dataActiveLayer);
+  });
+});
 document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataActiveLayer||'GAZE');});
 
 /* ══════════════════════════════════════════════════════════════════════
    START
    ══════════════════════════════════════════════════════════════════════ */
-async function startApp(){fetchLocation();await showNameScreen();await boot();}
+async function startApp(){await showNameScreen();await boot();}
 bootHome();
 setTimeout(buildModePreviews,200);
 </script>
