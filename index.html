@@ -124,14 +124,16 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .dab-val{font-size:11px;font-weight:700;color:#e01a00;}
 .dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.4);margin-left:2px;}
 /* TOOLBAR */
-#dataToolbar{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:nowrap;align-items:center;gap:2px;background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);padding:6px 10px;z-index:10;border:1px solid rgba(255,255,255,0.08);border-radius:100px;}
+#dataToolbar{display:flex;flex-wrap:nowrap;align-items:center;gap:2px;background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);padding:6px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;transition:max-height 0.25s ease,opacity 0.2s,padding 0.25s;max-height:60px;}
+#dataToolbar.collapsed{max-height:0;padding:0 6px;opacity:0;pointer-events:none;}
+.toolbar-sep{width:1px;height:16px;background:rgba(255,255,255,0.2);flex-shrink:0;margin:0 8px;}
 .layer-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#555;background:transparent;border:1.5px solid transparent;padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;white-space:nowrap;border-radius:100px;position:relative;}
 .layer-btn:hover{color:#fff;}
 .layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
 /* Tooltip */
 .layer-btn[data-tooltip]::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.92);color:#ccc;font-size:9px;font-weight:300;letter-spacing:0.04em;white-space:nowrap;padding:5px 10px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity 0.15s;border:1px solid rgba(255,255,255,0.08);z-index:100;}
 .layer-btn[data-tooltip]:hover::after{opacity:1;}
-.toolbar-sep{width:1px;height:14px;background:#2a2a2a;flex-shrink:0;}
+/* toolbar-sep consolidated above */
 .toggle-group{display:flex;gap:2px;}
 .toggle-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.05em;padding:5px 8px;border:1.5px solid transparent;background:transparent;color:#555;cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:100px;}
 .toggle-btn:hover{color:#fff;}
@@ -141,8 +143,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .view-tab{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;padding:5px 9px;border:1.5px solid transparent;background:transparent;color:#555;cursor:pointer;transition:all 0.15s;border-radius:100px;}
 .view-tab.active{background:rgba(255,255,255,0.07);color:#fff;border-color:rgba(255,255,255,0.35);}
 .view-tab:hover{color:#fff;border-color:rgba(255,255,255,0.2);}
-#dataCloseBtn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#888;background:transparent;border:1.5px solid #333;padding:5px 9px;cursor:pointer;transition:all 0.15s;flex-shrink:0;border-radius:100px;}
-#dataCloseBtn:hover{color:#fff;border-color:#666;}
 /* GALLERY */
 #galleryScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
 #galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;}
@@ -219,6 +219,21 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .dash-user-stat-label{font-size:7px;font-weight:700;letter-spacing:0.25em;color:#444;text-transform:uppercase;margin-bottom:3px;}
 .dash-user-stat-val{font-size:13px;font-weight:700;color:#e01a00;}
 .dash-empty{color:#333;font-size:11px;letter-spacing:0.2em;text-align:center;padding:60px 0;}
+
+/* Toolbar collapse button */
+#dataToolbarWrap{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;z-index:10;gap:0;
+}
+#dataToolbarCollapseBtn{
+  width:28px;height:20px;padding:0;cursor:pointer;margin-bottom:4px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;color:rgba(255,255,255,0.7);
+  transition:color 0.15s,background 0.15s;
+}
+#dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.12);}
+#dataToolbarCollapseBtn .tcb-arrow{font-size:11px;font-weight:900;line-height:1;}
 </style>
 </head>
 <body>
@@ -331,7 +346,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <canvas id="dataCanvas"></canvas>
 
         <div id="dataToolbarWrap">
-          <button id="dataToolbarCollapseBtn"><span class="tcb-arrow">&#9650;</span> TOOLBAR</button>
+          <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9650;</span></button>
           <div id="dataToolbar">
             <button class="view-tab active" id="sessionViewBtn">SESSION</button>
             <button class="view-tab" id="compareViewBtn">COMPARE</button>
@@ -353,7 +368,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
               <button class="toggle-btn" id="withoutImgBtn">IMAGE OFF</button>
             </div>
             <span class="toolbar-sep"></span>
-            <button id="dataCloseBtn">&#10005; CLOSE</button>
+            <!-- no close btn - collapse handled by toolbar toggle -->
           </div>
         </div>
 
@@ -677,7 +692,7 @@ function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessi
 async function boot(){dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');const ok=await startEyeTracking();if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}showLib();await new Promise(resolve=>{document.getElementById('libBeginBtn').addEventListener('click',()=>{if(!imageLibrary.length)return;if(isImageViewed(currentImageIdx)){const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));if(unviewed===-1)return;currentImageIdx=unviewed;}markImageViewed(currentImageIdx);document.getElementById('libraryScreen').style.display='none';imgWrapper.style.display='block';mainImg.src=imageLibrary[currentImageIdx].src;resolve();});});sessionStartTs=Date.now();firstFixModeTs=performance.now();document.getElementById('finishBtn').style.display='block';annLayer.style.opacity='0';startSessionInfoOverlay();setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);requestAnimationFrame(mainLoop);}
 
 document.getElementById('finishBtn').addEventListener('click',()=>{stopSessionInfoOverlay();openData(true);});
-document.getElementById('dataCloseBtn').addEventListener('click',()=>{cancelAnimation();document.getElementById('dataScreen').style.display='none';});
+// dataCloseBtn removed - toolbar uses collapse toggle instead
 document.getElementById('sessionViewBtn').addEventListener('click',()=>{
   document.getElementById('sessionViewBtn').classList.add('active');
   document.getElementById('compareViewBtn').classList.remove('active');
@@ -719,9 +734,9 @@ dataToolbarCollapseBtn.addEventListener('click',()=>{
   toolbarCollapsed=!toolbarCollapsed;
   dataToolbar.classList.toggle('collapsed',toolbarCollapsed);
   const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');
-  arrow.textContent=toolbarCollapsed?'&#9660;':'&#9650;';
   arrow.innerHTML=toolbarCollapsed?'&#9660;':'&#9650;';
-  dataToolbarCollapseBtn.style.opacity=toolbarCollapsed?'0.55':'1';
+  dataToolbarCollapseBtn.title=toolbarCollapsed?'Show toolbar':'Hide toolbar';
+  dataToolbarCollapseBtn.style.opacity=toolbarCollapsed?'0.6':'1';
 });
 
 /* ══════════════════════════════════════════════════════════════════════
