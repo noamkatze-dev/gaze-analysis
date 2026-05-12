@@ -141,7 +141,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .layer-btn:hover{color:#fff;}
 .layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
 /* Tooltip */
-.layer-btn[data-tooltip]::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.92);color:#ccc;font-size:9px;font-weight:300;letter-spacing:0.04em;white-space:nowrap;padding:5px 10px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity 0.15s;border:1px solid rgba(255,255,255,0.08);z-index:100;}
+.layer-btn[data-tooltip]::after{content:attr(data-tooltip);position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.88);color:#ccc;font-size:9px;font-weight:300;letter-spacing:0.04em;white-space:nowrap;padding:5px 10px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity 0.15s;border:1px solid rgba(255,255,255,0.08);z-index:100;}
 .layer-btn[data-tooltip]:hover::after{opacity:1;}
 /* toolbar-sep consolidated above */
 .toggle-group{display:flex;gap:2px;}
@@ -158,7 +158,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
 #galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
 .gallery-header-right{display:flex;align-items:center;gap:8px;}
-#galleryBody{flex:1;overflow-y:auto;padding:24px;background:#f5f5f5;}
+#galleryBody{flex:1;overflow-y:auto;padding:24px;background:#f5f5f5;padding-top:16px;}
 .gallery-user-block{margin-bottom:40px;}
 .gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#111;text-transform:uppercase;margin-bottom:6px;}
 .gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
@@ -202,8 +202,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #dashboardScreen{display:none;position:fixed;inset:0;z-index:1600;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
 #dashboardHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
 #dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
-#dashboardBody{flex:1;overflow-y:auto;padding:24px 28px;}
-.dash-section{margin-bottom:36px;}
+#dashboardBody{flex:1;overflow-y:auto;padding:24px 28px;padding-top:16px;}
+.dash-section{margin-bottom:28px;}
 .dash-section-title{font-size:8px;font-weight:700;letter-spacing:0.45em;color:#999;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;}
 .dash-kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px;}
 .dash-kpi{background:#fff;border:1px solid #eee;border-radius:6px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
@@ -444,12 +444,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 </div>
 
 <div id="galleryScreen">
-  <div id="galleryHeader">
-    <div class="gallery-title">IMAGE GALLERY</div>
-    <div class="gallery-header-right">
-      <button id="galleryCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
-    </div>
-  </div>
+  <div id="galleryHeader" style="display:none;"></div>
   <div id="galleryBody"></div>
 </div>
 
@@ -599,7 +594,7 @@ function enablePointerFallback(){infoEl.textContent='MOVE MOUSE TO EXPLORE';cons
 function isImageViewed(i){return !!viewedImages[currentUser+'::'+i];}
 function markImageViewed(i){viewedImages[currentUser+'::'+i]=true;}
 function showLib(){document.getElementById('libraryScreen').style.display='flex';renderLib();}
-function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTML='';imageLibrary.forEach((img,i)=>{const viewed=isImageViewed(i);const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx?' selected':'')+(viewed?' viewed-once':'');card.innerHTML='<img src="'+img.src+'" alt="'+img.name+'"/><span class="lib-num">'+String(i+1).padStart(2,'0')+'</span>';card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};grid.appendChild(card);});const add=document.createElement('div');add.className='lib-add';add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);updateBeginBtn();}
+function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTML='';imageLibrary.forEach((img,i)=>{const viewed=isImageViewed(i);const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx&&!viewed?' selected':'')+(viewed?' viewed-once':'');card.innerHTML='<img src="'+img.src+'" alt="'+img.name+'"/><span class="lib-num">'+String(i+1).padStart(2,'0')+'</span>';if(!viewed){card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};}else{card.style.cursor='default';}grid.appendChild(card);});const add=document.createElement('div');add.className='lib-add';add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);updateBeginBtn();}
 function updateBeginBtn(){const btn=document.getElementById('libBeginBtn');const ok=imageLibrary.length>0&&!isImageViewed(currentImageIdx);btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';}
 document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
 
@@ -705,16 +700,24 @@ function buildModePreviews(){
           ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);
         }break;
       case 'HEATMAP':{
-        const hmW=100,hmH=Math.round(100*H/W),hm=new Float32Array(hmW*hmH);
-        const sigma=0.1*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
+        // Draw heatmap only inside the safe area (inset by M on all sides)
+        const SW=W-2*M, SH=H-2*M; // safe width/height
+        const hmW=60,hmH=Math.round(60*SH/SW),hm=new Float32Array(hmW*hmH);
+        const sigma=0.12*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
         for(const p of gazeLog){
+          // Map gaze (0-1) to safe grid coords
           const gx=p.x*hmW,gy=p.y*hmH,
             x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),
             y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));
           for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)
             hm[y*hmW+x]+=0.22*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
         }
-        ctx.save();ctx.lineWidth=LW;drawMarchingSquares(ctx,W,H,hm,hmW,hmH);ctx.restore();
+        // Draw marching squares offset by M so contours stay inside canvas
+        ctx.save();
+        ctx.translate(M,M);
+        ctx.lineWidth=LW;
+        drawMarchingSquares(ctx,SW,SH,hm,hmW,hmH);
+        ctx.restore();
       }break;
       case 'FIRSTFIX':{
         const cx=safeX(firstFixPrev.x*W),cy=safeY(firstFixPrev.y*H);
@@ -758,7 +761,7 @@ function openGallery(){
 }
 function closeGallery(){document.getElementById('galleryScreen').style.display='none';navGalleryLink.classList.remove('active');}
 function renderGalleryScreen(){const body=document.getElementById('galleryBody');body.innerHTML='';const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}for(const[userName,sessions]of byUser){const block=document.createElement('div');block.className='gallery-user-block';const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' . ');block.innerHTML='<div class="gallery-user-name">'+userName+'</div><div class="gallery-user-meta">'+metaStr+'</div><div class="gallery-images-row" id="gallery-row-'+userName.replace(/\s/g,'_')+'"></div>';body.appendChild(block);const row=block.querySelector('.gallery-images-row');for(const sess of sessions){const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';item.innerHTML='<img class="gallery-item-img" src="'+sess.imageSrc+'" alt="'+sess.imageName+'"/><div class="gallery-item-info"><span class="gallery-item-name">'+sess.imageName+'</span><span class="gallery-item-stats">'+sess.fixationHistory.length+'F . '+sess.gazeLog.length+'S . '+dur+'</span></div>';item.onclick=()=>{viewSession=sess;document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');openData(false);};row.appendChild(item);}}}
-document.getElementById('galleryCloseBtn').addEventListener('click',closeGallery);
+// galleryCloseBtn removed
 
 function captureSession(){return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};}
 function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessions.push(snap);viewSession=snap;}const dataScreen=document.getElementById('dataScreen');const dataBody=document.getElementById('dataBody');const compareView=document.getElementById('compareView');dataScreen.style.display='flex';dataBody.style.display='flex';compareView.style.display='none';document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('galleryScreen').style.display='none';document.getElementById('dataImg').src=viewSession.imageSrc;document.getElementById('dataImg').style.opacity=showImg?'1':'0';renderDataSessionBadge(viewSession);const activeBtn=document.querySelector('.layer-btn.active');const layer=activeBtn?activeBtn.dataset.layer:'GAZE';dataActiveLayer=layer;playLayer(layer);}
@@ -825,7 +828,7 @@ dataToolbarCollapseBtn.addEventListener('click',()=>{
    ══════════════════════════════════════════════════════════════════════ */
 const navDashboardLink=document.getElementById('navDashboardLink');
 navDashboardLink.addEventListener('click',()=>openDashboard());
-document.getElementById('dashboardCloseBtn').addEventListener('click',()=>closeDashboard());
+// dashboardCloseBtn removed
 
 function openDashboard(){
   homeScreen.style.display='none';
@@ -848,7 +851,7 @@ function renderDashboard(){
   const container=document.getElementById('dashboardContent');
   container.innerHTML='';
   if(allSessions.length===0){
-    container.innerHTML='<div class="dash-empty">NO SESSIONS YET — complete a session to see your analytics</div>';
+    container.innerHTML='<div style="padding:60px 0;text-align:center;font-size:11px;letter-spacing:0.25em;color:#ccc;font-family:Heebo,sans-serif;">NO SESSIONS YET</div>';
     return;
   }
 
@@ -876,13 +879,22 @@ function renderDashboard(){
   kpiSection.appendChild(kpiRow);
   container.appendChild(kpiSection);
 
+  // Personal sparkline chart
+  const sparkSection=document.createElement('div');sparkSection.className='dash-section';
+  sparkSection.innerHTML='<div class="dash-section-title">MY SESSION OVERVIEW</div>';
+  sparkSection.appendChild(makeRingChart([
+    {label:'Fixations',val:totalFix,max:Math.max(totalFix,50)},
+    {label:'Saccades',val:totalSac,max:Math.max(totalSac,40)},
+    {label:'Samples',val:latest.gazeLog.length,max:Math.max(latest.gazeLog.length,200)},
+  ]));
+  container.appendChild(sparkSection);
+
   if(allSessions.length>1){
-    // ── Canvas bar chart: Fixations per session
     const compSection=document.createElement('div');compSection.className='dash-section';
     compSection.innerHTML='<div class="dash-section-title">SESSIONS COMPARISON</div>';
-    compSection.appendChild(makeBarChart('FIXATION COUNT',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length})),'fix'));
-    compSection.appendChild(makeBarChart('SACCADE COUNT',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length})),'sac'));
-    compSection.appendChild(makeBarChart('SESSION DURATION (s)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)})),'s'));
+    compSection.appendChild(makeBarChart('FIXATION COUNT',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length}))));
+    compSection.appendChild(makeBarChart('SACCADE COUNT',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length}))));
+    compSection.appendChild(makeBarChart('SESSION DURATION (s)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)}))));
     compSection.appendChild(makeBarChart('AVG FIXATION DURATION (ms)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));
     container.appendChild(compSection);
   }
@@ -917,36 +929,94 @@ function renderDashboard(){
   }
 }
 
+function makeRingChart(metrics){
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:flex;gap:16px;flex-wrap:wrap;';
+  const dpr=window.devicePixelRatio||1;
+  const SIZE=120;
+  metrics.forEach(m=>{
+    const cell=document.createElement('div');
+    cell.style.cssText='display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #eee;border-radius:8px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,0.04);';
+    const canvas=document.createElement('canvas');
+    canvas.width=SIZE*dpr;canvas.height=SIZE*dpr;
+    canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';
+    const label=document.createElement('div');
+    label.style.cssText='font-size:8px;font-weight:700;letter-spacing:0.3em;color:#bbb;font-family:Heebo,sans-serif;text-transform:uppercase;';
+    label.textContent=m.label;
+    cell.appendChild(canvas);cell.appendChild(label);wrap.appendChild(cell);
+    setTimeout(()=>{
+      const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+      const cx=SIZE/2,cy=SIZE/2,outerR=SIZE/2-8,innerR=outerR-14;
+      const pct=Math.min(1,m.val/m.max);
+      const startA=-Math.PI/2;
+      // Track
+      ctx.beginPath();ctx.arc(cx,cy,outerR,0,Math.PI*2);
+      ctx.strokeStyle='#f0f0f0';ctx.lineWidth=14;ctx.stroke();
+      // Fill
+      if(pct>0){
+        ctx.beginPath();ctx.arc(cx,cy,outerR,startA,startA+pct*Math.PI*2);
+        ctx.strokeStyle='#e01a00';ctx.lineWidth=14;ctx.lineCap='round';ctx.stroke();
+      }
+      // Center value
+      ctx.fillStyle='#111';ctx.font='700 22px Heebo';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(m.val,cx,cy-6);
+      ctx.fillStyle='#ccc';ctx.font='300 9px Heebo';
+      ctx.fillText('/ '+m.max,cx,cy+12);
+    },60);
+  });
+  return wrap;
+}
+
 function makeBarChart(title, data, unit=''){
   const wrap=document.createElement('div');wrap.className='dash-chart-area';
-  wrap.innerHTML='<div class="dash-chart-title">'+title+'</div>';
   const dpr=window.devicePixelRatio||1;
-  const W=wrap.offsetWidth||800,H=Math.max(60,data.length*32+24);
+  const PAD_L=100,PAD_R=60,PAD_T=28,PAD_B=8;
+  const rowH=28, barH=12;
+  const H_canvas=PAD_T+data.length*rowH+PAD_B;
   const canvas=document.createElement('canvas');
-  canvas.width=W*dpr;canvas.height=H*dpr;
-  canvas.style.width='100%';canvas.style.height=H+'px';
+  canvas.style.width='100%';canvas.style.height=H_canvas+'px';canvas.style.display='block';
   wrap.appendChild(canvas);
-  // Draw after append so offsetWidth is known
   setTimeout(()=>{
-    const W2=canvas.offsetWidth||800;
-    canvas.width=W2*dpr;canvas.height=H*dpr;
+    const W2=canvas.offsetWidth||600;
+    canvas.width=W2*dpr;canvas.height=H_canvas*dpr;
     const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
     const maxVal=Math.max(...data.map(d=>d.val),1);
-    const labelW=90,barH=14,rowH=32,padT=12,padR=50;
-    ctx.font='300 9px Heebo';
+    const barZone=W2-PAD_L-PAD_R;
+    // Title
+    ctx.font='700 8px Heebo';ctx.letterSpacing='0.3em';
+    ctx.fillStyle='rgba(0,0,0,0.25)';ctx.textAlign='left';
+    ctx.fillText(title.toUpperCase(),PAD_L,14);
+    // Grid lines (4 divisions)
+    for(let g=0;g<=4;g++){
+      const x=PAD_L+barZone*g/4;
+      ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(x,PAD_T);ctx.lineTo(x,H_canvas-PAD_B);ctx.stroke();
+    }
     data.forEach((d,i)=>{
-      const y=padT+i*rowH;
-      const barW=(W2-labelW-padR)*d.val/maxVal;
-      // label
-      ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='right';ctx.textBaseline='middle';
-      ctx.fillText(d.label,labelW-8,y+barH/2);
-      // bar bg
-      ctx.fillStyle='#f0f0f0';ctx.fillRect(labelW,y,W2-labelW-padR,barH);
-      // bar fill
-      ctx.fillStyle='#e01a00';ctx.fillRect(labelW,y,barW,barH);
-      // value
-      ctx.fillStyle='rgba(0,0,0,0.5)';ctx.textAlign='left';
-      ctx.fillText(d.val+(unit?' '+unit:''),labelW+barW+6,y+barH/2);
+      const y=PAD_T+i*rowH;
+      const barW=barZone*d.val/maxVal;
+      // Label
+      ctx.font='300 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.45)';
+      ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(d.label,PAD_L-10,y+barH/2);
+      // Bar track
+      ctx.fillStyle='#f0f0f0';
+      ctx.beginPath();
+      const r=barH/2;
+      ctx.roundRect(PAD_L,y,barZone,barH,r);
+      ctx.fill();
+      // Bar fill
+      if(barW>0){
+        ctx.fillStyle='#e01a00';
+        ctx.beginPath();
+        ctx.roundRect(PAD_L,y,barW,barH,r);
+        ctx.fill();
+      }
+      // Value
+      ctx.font='700 9px Heebo';ctx.fillStyle='rgba(0,0,0,0.4)';
+      ctx.textAlign='left';ctx.textBaseline='middle';
+      ctx.fillText(d.val+(unit?' '+unit:''),PAD_L+barW+8,y+barH/2);
     });
   },60);
   return wrap;
@@ -955,12 +1025,7 @@ function makeBarChart(title, data, unit=''){
 
 <!-- DASHBOARD SCREEN -->
 <div id="dashboardScreen">
-  <div id="dashboardHeader">
-    <div class="dash-title">ANALYTICS DASHBOARD</div>
-    <div class="gallery-header-right">
-      <button id="dashboardCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
-    </div>
-  </div>
+  <div id="dashboardHeader" style="display:none;"></div>
   <div id="dashboardBody">
     <div id="dashboardContent"></div>
   </div>
