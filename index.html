@@ -90,11 +90,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #sessionInfoOverlay{display:none !important;}
 #finishBtn{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;color:#fff;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.5);padding:11px 32px;cursor:pointer;z-index:60;display:none;transition:background 0.15s,color 0.15s,border-color 0.15s;border-radius:100px;backdrop-filter:blur(8px);}
 #finishBtn:hover{background:rgba(255,255,255,0.95);color:#111;border-color:#fff;}
-#dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
+#dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#fff;flex-direction:column;overflow:hidden;padding-top:52px;}
 #dataHeader{display:none;}
 #dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
 #dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
-#dataImgArea{position:relative;flex:1;overflow:hidden;background:#000;}
+#dataImgArea{position:relative;flex:1;overflow:hidden;background:#eee;}
 #dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
 /* COLLAPSIBLE OVERLAYS */
@@ -110,23 +110,33 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.25);text-transform:uppercase;}
 .dsb-val{font-size:11px;font-weight:700;color:#fff;}
 /* Analysis badge - aligned under toolbar top-right */
-#dataAnalysisBadge{position:absolute;top:76px;right:14px;display:none;flex-direction:column;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);border:1px solid rgba(224,26,0,0.15);border-radius:12px;z-index:8;pointer-events:all;min-width:170px;overflow:hidden;}
-.dab-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(224,26,0,0.1);}
-.dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(224,26,0,0.5);text-transform:uppercase;}
-.dab-toggle{font-size:13px;color:rgba(224,26,0,0.85);transition:transform 0.2s;line-height:1;font-weight:900;}
+#dataAnalysisBadge{
+  position:absolute;bottom:14px;right:14px;
+  display:none;flex-direction:column;
+  background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.08);border-radius:12px;
+  z-index:8;pointer-events:all;min-width:170px;overflow:hidden;
+}
+.dab-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(255,255,255,0.06);}
+.dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+.dab-toggle{font-size:13px;color:rgba(255,255,255,0.75);transition:transform 0.2s;line-height:1;font-weight:900;}
 .dab-toggle.collapsed{transform:rotate(180deg);}
 .dab-content{overflow:hidden;max-height:200px;transition:max-height 0.25s ease;padding:8px 12px;}
 .dab-content.collapsed{max-height:0;padding-top:0;padding-bottom:0;}
-.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.45);text-transform:uppercase;margin-bottom:4px;margin-top:6px;}
-.dab-label:first-child{margin-top:0;}
 .dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;gap:12px;}
-.dab-name{font-size:9px;font-weight:300;color:#666;}
-.dab-val{font-size:11px;font-weight:700;color:#e01a00;}
-.dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.4);margin-left:2px;}
+.dab-name{font-size:9px;font-weight:300;color:rgba(255,255,255,0.4);}
+.dab-val{font-size:11px;font-weight:700;color:#fff;}
+.dab-unit{font-size:8px;font-weight:300;color:rgba(255,255,255,0.35);margin-left:2px;}
 /* TOOLBAR */
-#dataToolbar{display:flex;flex-wrap:nowrap;align-items:center;gap:2px;background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);padding:6px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;transition:max-height 0.25s ease,opacity 0.2s,padding 0.25s;max-height:60px;}
-#dataToolbar.collapsed{max-height:0;padding:0 6px;opacity:0;pointer-events:none;}
-.toolbar-sep{width:1px;height:16px;background:rgba(255,255,255,0.2);flex-shrink:0;margin:0 8px;}
+#dataToolbar{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  display:flex;flex-wrap:nowrap;align-items:center;gap:2px;
+  background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);
+  padding:5px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:100px;
+  z-index:10;transition:opacity 0.2s;
+}
+#dataToolbar.collapsed .toolbar-inner-content{display:none;}
+.toolbar-sep{width:1px;height:16px;background:rgba(255,255,255,0.22);flex-shrink:0;margin:0 8px;}
 .layer-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#555;background:transparent;border:1.5px solid transparent;padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;white-space:nowrap;border-radius:100px;position:relative;}
 .layer-btn:hover{color:#fff;}
 .layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
@@ -144,39 +154,39 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .view-tab.active{background:rgba(255,255,255,0.07);color:#fff;border-color:rgba(255,255,255,0.35);}
 .view-tab:hover{color:#fff;border-color:rgba(255,255,255,0.2);}
 /* GALLERY */
-#galleryScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
-#galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;}
-#galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
+#galleryScreen{display:none;position:fixed;inset:0;z-index:1500;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
+#galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
+#galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
 .gallery-header-right{display:flex;align-items:center;gap:8px;}
-#galleryBody{flex:1;overflow-y:auto;padding:24px;}
+#galleryBody{flex:1;overflow-y:auto;padding:24px;background:#f5f5f5;}
 .gallery-user-block{margin-bottom:40px;}
-.gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#fff;text-transform:uppercase;margin-bottom:6px;}
+.gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#111;text-transform:uppercase;margin-bottom:6px;}
 .gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
 .gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
-.gallery-item{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color 0.15s;}
-.gallery-item:hover{border-color:#444;}
+.gallery-item{background:#fff;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color 0.15s;}
+.gallery-item:hover{border-color:#999;}
 .gallery-item.active-view{border-color:#e01a00;}
 .gallery-item-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
 .gallery-item-info{padding:5px 8px;display:flex;justify-content:space-between;align-items:center;}
-.gallery-item-name{font-size:8px;font-weight:700;letter-spacing:0.1em;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.gallery-item-stats{font-size:7px;font-weight:300;color:#555;white-space:nowrap;}
+.gallery-item-name{font-size:8px;font-weight:700;letter-spacing:0.1em;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gallery-item-stats{font-size:7px;font-weight:300;color:#999;white-space:nowrap;}
 #compareView{display:none;flex:1;overflow:hidden;flex-direction:column;}
-#compareFilters{background:#0a0a0a;border-bottom:1px solid #1e1e1e;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;}
-.cf-label{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#555;text-transform:uppercase;}
-.cf-select{font-family:'Heebo',sans-serif;font-size:10px;background:#111;color:#aaa;border:1.5px solid #2a2a2a;padding:5px 10px;cursor:pointer;border-radius:100px;outline:none;-webkit-appearance:none;}
+#compareFilters{background:#fff;border-bottom:1px solid #eee;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;}
+.cf-label{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#999;text-transform:uppercase;}
+.cf-select{font-family:'Heebo',sans-serif;font-size:10px;background:#fff;color:#333;border:1.5px solid #ddd;padding:5px 10px;cursor:pointer;border-radius:100px;outline:none;-webkit-appearance:none;}
 .cf-select:focus{border-color:#555;}
-.cf-sep{width:1px;height:16px;background:#2a2a2a;align-self:center;}
-#compareGrid-wrap{flex:1;overflow:auto;padding:16px;background:#0a0a0a;}
+.cf-sep{width:1px;height:16px;background:#ddd;align-self:center;}
+#compareGrid-wrap{flex:1;overflow:auto;padding:16px;background:#f5f5f5;}
 #compareGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
-.compare-panel{background:#111;border:1px solid #222;overflow:hidden;border-radius:2px;}
-.compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 10px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:3px;}
-.cp-user{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#fff;}
-.cp-meta{font-size:7px;font-weight:300;color:#555;line-height:1.4;}
-.cp-time{font-size:8px;font-weight:300;color:#555;}
+.compare-panel{background:#fff;border:1px solid #e0e0e0;overflow:hidden;border-radius:4px;}
+.compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 10px;border-bottom:1px solid #eee;flex-wrap:wrap;gap:3px;}
+.cp-user{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#111;}
+.cp-meta{font-size:7px;font-weight:300;color:#999;line-height:1.4;}
+.cp-time{font-size:8px;font-weight:300;color:#999;}
 .compare-canvas-wrap{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
 .cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cp-canvas{position:absolute;inset:0;pointer-events:none;}
-.cp-stats{font-size:8px;font-weight:300;color:#555;padding:5px 10px;letter-spacing:0.05em;border-top:1px solid #1a1a1a;}
+.cp-stats{font-size:8px;font-weight:300;color:#999;padding:5px 10px;letter-spacing:0.05em;border-top:1px solid #eee;}
 #nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
 .ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:52px;}
 .ns-form{display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;}
@@ -189,51 +199,47 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .ns-row .ns-field{flex:1;}
 
 /* DASHBOARD SCREEN */
-#dashboardScreen{display:none;position:fixed;inset:0;z-index:1600;background:#0a0a0a;flex-direction:column;overflow:hidden;padding-top:52px;}
-#dashboardHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #1a1a1a;flex-shrink:0;background:#0a0a0a;}
-#dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
+#dashboardScreen{display:none;position:fixed;inset:0;z-index:1600;background:#f5f5f5;flex-direction:column;overflow:hidden;padding-top:52px;}
+#dashboardHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #eee;flex-shrink:0;background:#fff;}
+#dashboardHeader .dash-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#111;}
 #dashboardBody{flex:1;overflow-y:auto;padding:24px 28px;}
 .dash-section{margin-bottom:36px;}
-.dash-section-title{font-size:8px;font-weight:700;letter-spacing:0.45em;color:#555;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #1a1a1a;}
+.dash-section-title{font-size:8px;font-weight:700;letter-spacing:0.45em;color:#999;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #e0e0e0;}
 .dash-kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px;}
-.dash-kpi{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:14px 16px;}
-.dash-kpi-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:#444;text-transform:uppercase;margin-bottom:6px;}
-.dash-kpi-val{font-size:22px;font-weight:700;color:#fff;line-height:1;}
+.dash-kpi{background:#fff;border:1px solid #eee;border-radius:6px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.dash-kpi-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:#bbb;text-transform:uppercase;margin-bottom:6px;}
+.dash-kpi-val{font-size:22px;font-weight:700;color:#111;line-height:1;}
 .dash-kpi-unit{font-size:9px;font-weight:300;color:#555;margin-left:3px;}
-.dash-kpi-sub{font-size:8px;font-weight:300;color:#555;margin-top:3px;}
-.dash-kpi.accent{border-color:rgba(224,26,0,0.2);}
+.dash-kpi-sub{font-size:8px;font-weight:300;color:#bbb;margin-top:3px;}
+.dash-kpi.accent{border-color:rgba(224,26,0,0.15);}
 .dash-kpi.accent .dash-kpi-val{color:#e01a00;}
-.dash-chart-area{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:16px;margin-bottom:12px;}
-.dash-chart-title{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#555;text-transform:uppercase;margin-bottom:12px;}
+.dash-chart-area{background:#fff;border:1px solid #eee;border-radius:6px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.dash-chart-title{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#bbb;text-transform:uppercase;margin-bottom:12px;}
 .dash-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.dash-bar-label{font-size:9px;font-weight:300;color:#666;width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
-.dash-bar-wrap{flex:1;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden;}
+.dash-bar-label{font-size:9px;font-weight:300;color:#999;width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.dash-bar-wrap{flex:1;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden;}
 .dash-bar-fill{height:100%;background:#e01a00;border-radius:3px;transition:width 0.6s ease;}
 .dash-bar-val{font-size:8px;font-weight:700;color:#e01a00;width:40px;text-align:right;flex-shrink:0;}
 .dash-compare-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
-.dash-user-card{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:14px 16px;}
-.dash-user-card-name{font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;}
-.dash-user-card-meta{font-size:8px;font-weight:300;color:#555;margin-bottom:10px;}
+.dash-user-card{background:#fff;border:1px solid #eee;border-radius:6px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.dash-user-card-name{font-size:11px;font-weight:700;color:#111;margin-bottom:2px;}
+.dash-user-card-meta{font-size:8px;font-weight:300;color:#bbb;margin-bottom:10px;}
 .dash-user-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.dash-user-stat{background:#0a0a0a;border-radius:4px;padding:8px 10px;}
-.dash-user-stat-label{font-size:7px;font-weight:700;letter-spacing:0.25em;color:#444;text-transform:uppercase;margin-bottom:3px;}
+.dash-user-stat{background:#f8f8f8;border-radius:4px;padding:8px 10px;}
+.dash-user-stat-label{font-size:7px;font-weight:700;letter-spacing:0.25em;color:#bbb;text-transform:uppercase;margin-bottom:3px;}
 .dash-user-stat-val{font-size:13px;font-weight:700;color:#e01a00;}
-.dash-empty{color:#333;font-size:11px;letter-spacing:0.2em;text-align:center;padding:60px 0;}
+.dash-empty{color:#ccc;font-size:11px;letter-spacing:0.2em;text-align:center;padding:60px 0;}
 
 /* Toolbar collapse button */
-#dataToolbarWrap{
-  position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;z-index:10;gap:0;
-}
 #dataToolbarCollapseBtn{
-  width:28px;height:20px;padding:0;cursor:pointer;margin-bottom:4px;
+  width:22px;height:22px;padding:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);
-  border-radius:100px;color:rgba(255,255,255,0.7);
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;color:rgba(255,255,255,0.7);flex-shrink:0;
   transition:color 0.15s,background 0.15s;
 }
-#dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.12);}
-#dataToolbarCollapseBtn .tcb-arrow{font-size:11px;font-weight:900;line-height:1;}
+#dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.18);}
+#dataToolbarCollapseBtn .tcb-arrow{font-size:10px;font-weight:900;line-height:1;}
 </style>
 </head>
 <body>
@@ -345,9 +351,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
 
-        <div id="dataToolbarWrap">
-          <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9650;</span></button>
-          <div id="dataToolbar">
+        <div id="dataToolbar">
             <button class="view-tab active" id="sessionViewBtn">SESSION</button>
             <button class="view-tab" id="compareViewBtn">COMPARE</button>
             <span class="toolbar-sep"></span>
@@ -368,9 +372,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
               <button class="toggle-btn" id="withoutImgBtn">IMAGE OFF</button>
             </div>
             <span class="toolbar-sep"></span>
-            <!-- no close btn - collapse handled by toolbar toggle -->
+            <button id="dataToolbarCollapseBtn" title="Hide toolbar"><span class="tcb-arrow">&#9660;</span></button>
           </div>
-        </div>
 
         <div id="dataSessionBadge">
           <div class="dsb-header" id="dsbHeader">
@@ -486,13 +489,42 @@ const navSessionLink=document.getElementById('navSessionLink');
 const navGalleryLink=document.getElementById('navGalleryLink');
 let appStarted=false;
 
-function showHome(){homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');}
+function showHome(){
+  homeScreen.style.display='block';
+  document.getElementById('dataScreen').style.display='none';
+  document.getElementById('galleryScreen').style.display='none';
+  document.getElementById('dashboardScreen').style.display='none';
+  navHomeLink.classList.add('active');
+  navSessionLink.classList.remove('active');
+  navGalleryLink.classList.remove('active');
+  navDashboardLink.classList.remove('active');
+}
 function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
 function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
 document.getElementById('homeStartBtn').addEventListener('click',goToSession);
 document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
-navSessionLink.addEventListener('click',goToSession);
+navSessionLink.addEventListener('click',()=>{
+  if(appStarted){
+    homeScreen.style.display='none';
+    document.getElementById('galleryScreen').style.display='none';
+    document.getElementById('dashboardScreen').style.display='none';
+    // Show data screen if there's a session, otherwise show img wrapper
+    if(allSessions.length>0||document.getElementById('imgWrapper').style.display==='block'){
+      navSessionLink.classList.add('active');
+      navHomeLink.classList.remove('active');
+      navGalleryLink.classList.remove('active');
+      navDashboardLink.classList.remove('active');
+      if(allSessions.length>0){
+        document.getElementById('dataScreen').style.display='flex';
+      }
+    } else {
+      goToSession();
+    }
+  } else {
+    goToSession();
+  }
+});
 navHomeLink.addEventListener('click',()=>showHome());
 navGalleryLink.addEventListener('click',()=>openGallery());
 
@@ -616,49 +648,84 @@ function buildModePreviews(){
   for(const m of modes){
     const card=document.createElement('div');card.className='mode-card';
     const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
-    const canvas=document.createElement('canvas');canvas.className='mode-preview';canvas.width=300;canvas.height=120;
+    const canvas=document.createElement('canvas');canvas.className='mode-preview';
+    // Use devicePixelRatio for crisp rendering
+    const dpr=window.devicePixelRatio||1;
+    const CW=300,CH=120;
+    canvas.width=CW*dpr;canvas.height=CH*dpr;
+    canvas.style.width=CW+'px';canvas.style.height=CH+'px';
     wrap.appendChild(canvas);card.innerHTML='<div class="mode-card-name">'+m.name+'</div>';card.appendChild(wrap);
     const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);
     grid.appendChild(card);
-    const ctx=canvas.getContext('2d');const W=300,H=120;ctx.clearRect(0,0,W,H);
-    // Use a clipped region so nothing overflows the canvas
-    ctx.save(); ctx.rect(0,0,W,H); ctx.clip();
+    const ctx=canvas.getContext('2d');
+    ctx.scale(dpr,dpr);
+    const W=CW,H=CH;ctx.clearRect(0,0,W,H);
+    const M=10; // margin so nothing touches the edge
+    const safeX=x=>Math.max(M,Math.min(W-M,x));
+    const safeY=y=>Math.max(M,Math.min(H-M,y));
+    const R='rgba(224,26,0,1)',LW=1;
     switch(m.key){
       case 'GAZE':
         for(const p of gazeLog){
-          const px2=Math.max(2,Math.min(W-2,p.x*W)), py2=Math.max(2,Math.min(H-2,p.y*H));
-          ctx.beginPath();ctx.arc(px2,py2,2.5,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.75)';ctx.fill();
+          ctx.beginPath();ctx.arc(safeX(p.x*W),safeY(p.y*H),2,0,Math.PI*2);
+          ctx.fillStyle=R;ctx.fill();
         }break;
       case 'FIXATION':
         for(const fix of fixHist){
-          const cx=fix.x*W,cy=fix.y*H,r=Math.min(5+fix.duration/150,Math.min(W,H)*0.18);
-          ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();
-          ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=1;ctx.stroke();
-          ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.9)';ctx.fill();
+          const cx=safeX(fix.x*W),cy=safeY(fix.y*H);
+          const r=Math.min(6+fix.duration/130,H*0.3-M);
+          ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+          ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();
+          ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);
+          ctx.fillStyle=R;ctx.fill();
         }break;
       case 'SACCADE':
         for(const sac of sacHist){
-          const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
-          ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1;ctx.stroke();
-          const a=Math.atan2(ty-fy,tx-fx),l=6;
-          ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();
+          const fx=safeX(sac.fromX*W),fy=safeY(sac.fromY*H),tx=safeX(sac.toX*W),ty=safeY(sac.toY*H);
+          ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);
+          ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();
+          const a=Math.atan2(ty-fy,tx-fx),l=7;
+          ctx.beginPath();ctx.moveTo(tx,ty);
+          ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));
+          ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));
+          ctx.closePath();ctx.fillStyle=R;ctx.fill();
         }break;
       case 'SCANPATH':
-        if(fixHist.length>=2){ctx.save();ctx.setLineDash([3,5]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1;ctx.beginPath();fixHist.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));ctx.stroke();ctx.setLineDash([]);ctx.restore();}
-        for(let j=0;j<fixHist.length;j++){const cx=fixHist[j].x*W,cy=fixHist[j].y*H,nr=8;ctx.beginPath();ctx.arc(cx,cy,nr,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.9)';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 7px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);}
-        break;
+        if(fixHist.length>=2){
+          ctx.save();ctx.setLineDash([3,6]);
+          ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.beginPath();
+          fixHist.forEach((p,j)=>j===0?ctx.moveTo(safeX(p.x*W),safeY(p.y*H)):ctx.lineTo(safeX(p.x*W),safeY(p.y*H)));
+          ctx.stroke();ctx.setLineDash([]);ctx.restore();
+        }
+        for(let j=0;j<fixHist.length;j++){
+          const cx=safeX(fixHist[j].x*W),cy=safeY(fixHist[j].y*H);
+          ctx.beginPath();ctx.arc(cx,cy,9,0,Math.PI*2);
+          ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();
+          ctx.fillStyle=R;ctx.font='bold 8px Heebo';
+          ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);
+        }break;
       case 'HEATMAP':{
-        const hmW=80,hmH=Math.round(80*H/W),hm=new Float32Array(hmW*hmH),sigma=0.09*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
-        for(const p of gazeLog){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.2*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
-        drawMarchingSquares(ctx,W,H,hm,hmW,hmH);
+        const hmW=100,hmH=Math.round(100*H/W),hm=new Float32Array(hmW*hmH);
+        const sigma=0.1*Math.max(hmW,hmH),hr=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
+        for(const p of gazeLog){
+          const gx=p.x*hmW,gy=p.y*hmH,
+            x0=Math.max(0,Math.floor(gx-hr)),x1=Math.min(hmW-1,Math.ceil(gx+hr)),
+            y0=Math.max(0,Math.floor(gy-hr)),y1=Math.min(hmH-1,Math.ceil(gy+hr));
+          for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)
+            hm[y*hmW+x]+=0.22*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
+        }
+        ctx.save();ctx.lineWidth=LW;drawMarchingSquares(ctx,W,H,hm,hmW,hmH);ctx.restore();
       }break;
       case 'FIRSTFIX':{
-        const cx=firstFixPrev.x*W,cy=firstFixPrev.y*H;
-        [24,16].forEach((r,i)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=`rgba(224,26,0,${0.2-i*0.05})`;ctx.lineWidth=1;ctx.stroke();});
-        ctx.beginPath();ctx.arc(cx,cy,7,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.9)';ctx.fill();
+        const cx=safeX(firstFixPrev.x*W),cy=safeY(firstFixPrev.y*H);
+        [22,14].forEach(r=>{
+          ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+          ctx.strokeStyle=R;ctx.lineWidth=LW;ctx.stroke();
+        });
+        ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);
+        ctx.fillStyle=R;ctx.fill();
       }break;
     }
-    ctx.restore();
   }
 }
 
@@ -681,7 +748,14 @@ function renderCompareView(){populateCompareFilters();const grid=document.getEle
 document.getElementById('cf-apply').addEventListener('click',renderCompareView);
 document.getElementById('cf-layer').addEventListener('change',renderCompareView);
 
-function openGallery(){const screen=document.getElementById('galleryScreen');screen.style.display='flex';navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');renderGalleryScreen();}
+function openGallery(){
+  homeScreen.style.display='none';
+  document.getElementById('dataScreen').style.display='none';
+  document.getElementById('dashboardScreen').style.display='none';
+  const screen=document.getElementById('galleryScreen');screen.style.display='flex';
+  navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');navDashboardLink.classList.remove('active');
+  renderGalleryScreen();
+}
 function closeGallery(){document.getElementById('galleryScreen').style.display='none';navGalleryLink.classList.remove('active');}
 function renderGalleryScreen(){const body=document.getElementById('galleryBody');body.innerHTML='';const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}for(const[userName,sessions]of byUser){const block=document.createElement('div');block.className='gallery-user-block';const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' . ');block.innerHTML='<div class="gallery-user-name">'+userName+'</div><div class="gallery-user-meta">'+metaStr+'</div><div class="gallery-images-row" id="gallery-row-'+userName.replace(/\s/g,'_')+'"></div>';body.appendChild(block);const row=block.querySelector('.gallery-images-row');for(const sess of sessions){const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';item.innerHTML='<img class="gallery-item-img" src="'+sess.imageSrc+'" alt="'+sess.imageName+'"/><div class="gallery-item-info"><span class="gallery-item-name">'+sess.imageName+'</span><span class="gallery-item-stats">'+sess.fixationHistory.length+'F . '+sess.gazeLog.length+'S . '+dur+'</span></div>';item.onclick=()=>{viewSession=sess;document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');openData(false);};row.appendChild(item);}}}
 document.getElementById('galleryCloseBtn').addEventListener('click',closeGallery);
@@ -730,13 +804,20 @@ function bootHome(){}
 const dataToolbarCollapseBtn=document.getElementById('dataToolbarCollapseBtn');
 const dataToolbar=document.getElementById('dataToolbar');
 let toolbarCollapsed=false;
+
+// Elements to hide when collapsed (everything except the collapse button itself)
+const toolbarInnerEls=()=>Array.from(dataToolbar.children).filter(el=>el!==dataToolbarCollapseBtn);
+
 dataToolbarCollapseBtn.addEventListener('click',()=>{
   toolbarCollapsed=!toolbarCollapsed;
-  dataToolbar.classList.toggle('collapsed',toolbarCollapsed);
+  toolbarInnerEls().forEach(el=>{
+    el.style.display=toolbarCollapsed?'none':'';
+  });
   const arrow=dataToolbarCollapseBtn.querySelector('.tcb-arrow');
-  arrow.innerHTML=toolbarCollapsed?'&#9660;':'&#9650;';
+  arrow.innerHTML=toolbarCollapsed?'&#9654;':'&#9660;';
   dataToolbarCollapseBtn.title=toolbarCollapsed?'Show toolbar':'Hide toolbar';
-  dataToolbarCollapseBtn.style.opacity=toolbarCollapsed?'0.6':'1';
+  // When collapsed, toolbar pill shrinks to just the arrow button
+  dataToolbar.style.padding=toolbarCollapsed?'5px':'5px 10px';
 });
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -747,6 +828,9 @@ navDashboardLink.addEventListener('click',()=>openDashboard());
 document.getElementById('dashboardCloseBtn').addEventListener('click',()=>closeDashboard());
 
 function openDashboard(){
+  homeScreen.style.display='none';
+  document.getElementById('dataScreen').style.display='none';
+  document.getElementById('galleryScreen').style.display='none';
   const scr=document.getElementById('dashboardScreen');
   scr.style.display='flex';
   navDashboardLink.classList.add('active');
@@ -763,13 +847,11 @@ function closeDashboard(){
 function renderDashboard(){
   const container=document.getElementById('dashboardContent');
   container.innerHTML='';
-
   if(allSessions.length===0){
     container.innerHTML='<div class="dash-empty">NO SESSIONS YET — complete a session to see your analytics</div>';
     return;
   }
 
-  // ── PERSONAL KPIs (most recent session)
   const latest=allSessions[allSessions.length-1];
   const totalFix=latest.fixationHistory.length;
   const totalSac=latest.saccadeHistory.length;
@@ -778,65 +860,34 @@ function renderDashboard(){
   const dur=latest.sessionDuration?(latest.sessionDuration/1000).toFixed(1):0;
   const ttff=latest.firstFix?((latest.firstFix.startTs-latest.firstFixModeTs)/1000).toFixed(2):null;
 
+  // KPI row
   const kpiSection=document.createElement('div');kpiSection.className='dash-section';
   kpiSection.innerHTML='<div class="dash-section-title">MY LAST SESSION — '+latest.user+'</div>';
   const kpiRow=document.createElement('div');kpiRow.className='dash-kpi-row';
   kpiRow.innerHTML=`
-    <div class="dash-kpi accent"><div class="dash-kpi-label">FIXATIONS</div><div class="dash-kpi-val">${totalFix}</div><div class="dash-kpi-sub">gaze holds</div></div>
-    <div class="dash-kpi accent"><div class="dash-kpi-label">AVG FIXATION</div><div class="dash-kpi-val">${avgFixDur}<span class="dash-kpi-unit">ms</span></div><div class="dash-kpi-sub">dwell time</div></div>
-    <div class="dash-kpi accent"><div class="dash-kpi-label">SACCADES</div><div class="dash-kpi-val">${totalSac}</div><div class="dash-kpi-sub">eye jumps</div></div>
-    <div class="dash-kpi accent"><div class="dash-kpi-label">SAC AMPLITUDE</div><div class="dash-kpi-val">${sacAmp}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">avg distance</div></div>
+    <div class="dash-kpi accent"><div class="dash-kpi-label">FIXATIONS</div><div class="dash-kpi-val">${totalFix||'—'}</div><div class="dash-kpi-sub">gaze holds</div></div>
+    <div class="dash-kpi accent"><div class="dash-kpi-label">AVG FIXATION</div><div class="dash-kpi-val">${avgFixDur||'—'}<span class="dash-kpi-unit">ms</span></div><div class="dash-kpi-sub">dwell time</div></div>
+    <div class="dash-kpi accent"><div class="dash-kpi-label">SACCADES</div><div class="dash-kpi-val">${totalSac||'—'}</div><div class="dash-kpi-sub">eye jumps</div></div>
+    <div class="dash-kpi accent"><div class="dash-kpi-label">SAC AMPLITUDE</div><div class="dash-kpi-val">${sacAmp||'—'}<span class="dash-kpi-unit">%</span></div><div class="dash-kpi-sub">avg distance</div></div>
     <div class="dash-kpi accent"><div class="dash-kpi-label">DURATION</div><div class="dash-kpi-val">${dur}<span class="dash-kpi-unit">s</span></div><div class="dash-kpi-sub">viewing time</div></div>
     <div class="dash-kpi accent"><div class="dash-kpi-label">TTFF</div><div class="dash-kpi-val">${ttff||'—'}<span class="dash-kpi-unit">${ttff?'s':''}</span></div><div class="dash-kpi-sub">time to first fix</div></div>
     <div class="dash-kpi"><div class="dash-kpi-label">SAMPLES</div><div class="dash-kpi-val">${latest.gazeLog.length}</div><div class="dash-kpi-sub">gaze points</div></div>
-    <div class="dash-kpi"><div class="dash-kpi-label">IMAGE</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>
-  `;
+    <div class="dash-kpi"><div class="dash-kpi-label">IMAGE</div><div class="dash-kpi-val" style="font-size:13px">${latest.imageName}</div></div>`;
   kpiSection.appendChild(kpiRow);
   container.appendChild(kpiSection);
 
-  // ── ALL SESSIONS COMPARISON BAR CHART
   if(allSessions.length>1){
+    // ── Canvas bar chart: Fixations per session
     const compSection=document.createElement('div');compSection.className='dash-section';
-    compSection.innerHTML='<div class="dash-section-title">ALL SESSIONS — FIXATION COUNT</div>';
-    const chartArea=document.createElement('div');chartArea.className='dash-chart-area';
-    const maxFix=Math.max(...allSessions.map(s=>s.fixationHistory.length))||1;
-    allSessions.forEach((sess,idx)=>{
-      const row=document.createElement('div');row.className='dash-bar-row';
-      const pct=(sess.fixationHistory.length/maxFix*100).toFixed(1);
-      row.innerHTML=`<div class="dash-bar-label" title="${sess.user}">${sess.user}</div><div class="dash-bar-wrap"><div class="dash-bar-fill" style="width:0%" data-w="${pct}%"></div></div><div class="dash-bar-val">${sess.fixationHistory.length}</div>`;
-      chartArea.appendChild(row);
-    });
-    compSection.appendChild(chartArea);
-
-    // Saccade chart
-    const chartArea2=document.createElement('div');chartArea2.className='dash-chart-area';
-    chartArea2.innerHTML='<div class="dash-chart-title">SACCADE COUNT</div>';
-    const maxSac=Math.max(...allSessions.map(s=>s.saccadeHistory.length))||1;
-    allSessions.forEach(sess=>{
-      const row=document.createElement('div');row.className='dash-bar-row';
-      const pct=(sess.saccadeHistory.length/maxSac*100).toFixed(1);
-      row.innerHTML=`<div class="dash-bar-label" title="${sess.user}">${sess.user}</div><div class="dash-bar-wrap"><div class="dash-bar-fill" style="width:0%" data-w="${pct}%"></div></div><div class="dash-bar-val">${sess.saccadeHistory.length}</div>`;
-      chartArea2.appendChild(row);
-    });
-
-    // Duration chart
-    const chartArea3=document.createElement('div');chartArea3.className='dash-chart-area';
-    chartArea3.innerHTML='<div class="dash-chart-title">SESSION DURATION (s)</div>';
-    const maxDur=Math.max(...allSessions.map(s=>s.sessionDuration))||1;
-    allSessions.forEach(sess=>{
-      const row=document.createElement('div');row.className='dash-bar-row';
-      const pct=(sess.sessionDuration/maxDur*100).toFixed(1);
-      const durS=(sess.sessionDuration/1000).toFixed(1);
-      row.innerHTML=`<div class="dash-bar-label" title="${sess.user}">${sess.user}</div><div class="dash-bar-wrap"><div class="dash-bar-fill" style="width:0%" data-w="${pct}%"></div></div><div class="dash-bar-val">${durS}s</div>`;
-      chartArea3.appendChild(row);
-    });
-
-    compSection.appendChild(chartArea2);
-    compSection.appendChild(chartArea3);
+    compSection.innerHTML='<div class="dash-section-title">SESSIONS COMPARISON</div>';
+    compSection.appendChild(makeBarChart('FIXATION COUNT',allSessions.map(s=>({label:s.user,val:s.fixationHistory.length})),'fix'));
+    compSection.appendChild(makeBarChart('SACCADE COUNT',allSessions.map(s=>({label:s.user,val:s.saccadeHistory.length})),'sac'));
+    compSection.appendChild(makeBarChart('SESSION DURATION (s)',allSessions.map(s=>({label:s.user,val:+(s.sessionDuration/1000).toFixed(1)})),'s'));
+    compSection.appendChild(makeBarChart('AVG FIXATION DURATION (ms)',allSessions.map(s=>{const f=s.fixationHistory;return{label:s.user,val:f.length?Math.round(f.reduce((a,x)=>a+x.duration,0)/f.length):0};})));
     container.appendChild(compSection);
   }
 
-  // ── PER USER CARDS
+  // Per-user summary cards
   const byUser=new Map();
   for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
   if(byUser.size>1){
@@ -845,14 +896,13 @@ function renderDashboard(){
     const grid=document.createElement('div');grid.className='dash-compare-grid';
     for(const[user,sessions]of byUser){
       const card=document.createElement('div');card.className='dash-user-card';
-      const totFix=sessions.reduce((s,ss)=>s+ss.fixationHistory.length,0);
+      const allFix=sessions.flatMap(ss=>ss.fixationHistory);
+      const totFix=allFix.length;
       const totSac=sessions.reduce((s,ss)=>s+ss.saccadeHistory.length,0);
       const totDur=sessions.reduce((s,ss)=>s+ss.sessionDuration,0);
-      const allFix=sessions.flatMap(ss=>ss.fixationHistory);
-      const avgF=allFix.length?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/allFix.length):0;
+      const avgF=totFix?Math.round(allFix.reduce((s,f)=>s+f.duration,0)/totFix):0;
       const meta=sessions[0];
-      card.innerHTML=`
-        <div class="dash-user-card-name">${user}</div>
+      card.innerHTML=`<div class="dash-user-card-name">${user}</div>
         <div class="dash-user-card-meta">${meta.age?meta.age+'y · ':''}${meta.gender||''} · ${sessions.length} session${sessions.length>1?'s':''}</div>
         <div class="dash-user-stats">
           <div class="dash-user-stat"><div class="dash-user-stat-label">FIXATIONS</div><div class="dash-user-stat-val">${totFix}</div></div>
@@ -865,13 +915,41 @@ function renderDashboard(){
     userSection.appendChild(grid);
     container.appendChild(userSection);
   }
+}
 
-  // Animate bars after render
-  requestAnimationFrame(()=>{
-    document.querySelectorAll('.dash-bar-fill[data-w]').forEach(el=>{
-      el.style.width=el.dataset.w;
+function makeBarChart(title, data, unit=''){
+  const wrap=document.createElement('div');wrap.className='dash-chart-area';
+  wrap.innerHTML='<div class="dash-chart-title">'+title+'</div>';
+  const dpr=window.devicePixelRatio||1;
+  const W=wrap.offsetWidth||800,H=Math.max(60,data.length*32+24);
+  const canvas=document.createElement('canvas');
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width='100%';canvas.style.height=H+'px';
+  wrap.appendChild(canvas);
+  // Draw after append so offsetWidth is known
+  setTimeout(()=>{
+    const W2=canvas.offsetWidth||800;
+    canvas.width=W2*dpr;canvas.height=H*dpr;
+    const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+    const maxVal=Math.max(...data.map(d=>d.val),1);
+    const labelW=90,barH=14,rowH=32,padT=12,padR=50;
+    ctx.font='300 9px Heebo';
+    data.forEach((d,i)=>{
+      const y=padT+i*rowH;
+      const barW=(W2-labelW-padR)*d.val/maxVal;
+      // label
+      ctx.fillStyle='rgba(0,0,0,0.4)';ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(d.label,labelW-8,y+barH/2);
+      // bar bg
+      ctx.fillStyle='#f0f0f0';ctx.fillRect(labelW,y,W2-labelW-padR,barH);
+      // bar fill
+      ctx.fillStyle='#e01a00';ctx.fillRect(labelW,y,barW,barH);
+      // value
+      ctx.fillStyle='rgba(0,0,0,0.5)';ctx.textAlign='left';
+      ctx.fillText(d.val+(unit?' '+unit:''),labelW+barW+6,y+barH/2);
     });
-  });
+  },60);
+  return wrap;
 }
 </script>
 
