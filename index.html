@@ -20,8 +20,10 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
 /* ═══ HOME ═══ */
 #homeScreen{position:fixed;inset:0;z-index:8999;background:#000;overflow-y:auto;overflow-x:hidden;}
-#homeVideo{position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;}
-#homeDotCanvas{position:fixed;inset:0;pointer-events:none;z-index:1;}
+/* Changed: image instead of video */
+#homeHeroImg{position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;}
+
+/* Removed homeDotCanvas styling - no more red dots */
 
 #homeHero{
   position:fixed;inset:0;z-index:3;
@@ -30,8 +32,10 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 }
 .home-content{text-align:center;pointer-events:all;display:flex;flex-direction:column;align-items:center;}
 .home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#000;margin-bottom:18px;text-transform:uppercase;}
-.home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);text-transform:uppercase;}
-.home-subtitle{font-size:14px;font-weight:400;color:#000;max-width:420px;line-height:1.6;margin:0 auto 36px;}
+/* Changed: nowrap so heading stays on one line */
+.home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);text-transform:uppercase;white-space:nowrap;}
+/* Changed: nowrap so subtitle stays on one line */
+.home-subtitle{font-size:14px;font-weight:400;color:#000;white-space:nowrap;line-height:1.6;margin:0 auto 36px;}
 #homeStartBtn{
   background:#000;color:#fff;border:2px solid #000;
   font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;
@@ -41,8 +45,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #homeStartBtn:hover{background:#333;border-color:#333;}
 .home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
 .home-badge{font-size:10px;color:#000;border:1px solid rgba(0,0,0,0.35);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;background:rgba(255,255,255,0.6);}
-.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#000;display:flex;flex-direction:column;align-items:center;gap:6px;}
-.home-scroll-hint-arrow{font-size:14px;color:#000;}
+/* Changed: scroll hint text and arrow in red */
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#e01a00;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.home-scroll-hint-arrow{font-size:14px;color:#e01a00;}
 
 /* INFO SECTIONS */
 #homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
@@ -51,7 +56,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .hi-section-dark{background:#0a0a0a;}
 .hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#111;margin-bottom:20px;text-transform:uppercase;}
 .hi-label-light{color:rgba(255,255,255,0.5);}
-.hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;}
+/* Changed: nowrap for all hi-title elements */
+.hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;white-space:nowrap;}
 .hi-title-light{color:#fff;}
 .hi-sub{font-size:13px;font-weight:300;color:#888;max-width:480px;line-height:1.7;margin-bottom:40px;}
 .hi-sub-light{color:rgba(255,255,255,0.5);}
@@ -72,11 +78,13 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .howto-text{font-size:12px;font-weight:300;color:#666;line-height:1.65;}
 .howto-text strong{font-weight:700;color:#111;}
 
+/* Changed: more minimal modes grid - smaller previews, less padding */
 .modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;width:100%;}
-.mode-card{background:#fff;padding:24px 20px 20px;}
-.mode-card-name{font-size:9px;font-weight:700;letter-spacing:0.35em;color:#111;margin-bottom:8px;text-transform:uppercase;}
-.mode-card-desc{font-size:11px;font-weight:300;color:#888;line-height:1.6;margin-top:10px;}
-.mode-preview-wrap{width:100%;aspect-ratio:2/1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f7f7f7;border:1px solid #eee;}
+.mode-card{background:#fff;padding:16px 16px 14px;}
+.mode-card-name{font-size:8px;font-weight:700;letter-spacing:0.35em;color:#111;margin-bottom:6px;text-transform:uppercase;}
+.mode-card-desc{font-size:10px;font-weight:300;color:#aaa;line-height:1.5;margin-top:8px;}
+/* Changed: smaller aspect ratio for mode previews */
+.mode-preview-wrap{width:100%;aspect-ratio:3/1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f9f9f9;}
 .mode-preview{display:block;width:100%;height:100%;}
 
 .va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.18em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;border-radius:100px;}
@@ -97,8 +105,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-card{aspect-ratio:4/3;border:1.5px solid #e0e0e0;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s;}
 .lib-card:hover{border-color:#999;}
 .lib-card.selected{border-color:#111;}
-.lib-card.viewed-once{opacity:0.4;cursor:not-allowed;}
-.lib-card.viewed-once::after{content:'VISTO';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.3em;}
+/* Changed: viewed-once images are greyed but can still be viewed again */
+.lib-card.viewed-once{opacity:0.55;}
+.lib-card.viewed-once::after{content:'VIEWED';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.3em;}
 .lib-card img{width:100%;height:100%;object-fit:cover;display:block;}
 .lib-num{position:absolute;top:6px;left:8px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.8);letter-spacing:0.1em;}
 .lib-add{aspect-ratio:4/3;border:1.5px dashed #ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:border-color 0.15s;}
@@ -107,7 +116,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-add-label{font-size:9px;font-weight:300;letter-spacing:0.2em;color:#ccc;}
 #libFileInput{display:none;}
 
-/* MAIN SESSION */
+/* MAIN SESSION — no info overlay, just finish button */
 #imgWrapper{position:fixed;inset:0;overflow:hidden;}
 #mainImg{display:block;width:100%;height:100%;object-fit:cover;}
 #dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
@@ -115,45 +124,24 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
 #info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
 
-/* SESSION INFO OVERLAY — always visible on image */
-#sessionInfoOverlay{
-  position:fixed;bottom:72px;left:50%;transform:translateX(-50%);
-  display:none;z-index:55;
-  background:rgba(0,0,0,0.72);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);border-radius:8px;
-  padding:10px 20px;
-  display:none;
-  flex-direction:row;gap:24px;align-items:center;
-}
-.sio-item{display:flex;flex-direction:column;align-items:center;gap:2px;}
-.sio-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
-.sio-val{font-size:12px;font-weight:700;color:#fff;}
+/* SESSION INFO OVERLAY — hidden, removed from session view */
+#sessionInfoOverlay{display:none !important;}
 
 #finishBtn{
   position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
   font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;
-  color:#fff;background:#111;border:2px solid #fff;
-  padding:13px 36px;cursor:pointer;z-index:60;display:none;
-  transition:background 0.15s,color 0.15s;border-radius:100px;
-  backdrop-filter:blur(4px);
+  color:#fff;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.5);
+  padding:11px 32px;cursor:pointer;z-index:60;display:none;
+  transition:background 0.15s,color 0.15s,border-color 0.15s;border-radius:100px;
+  backdrop-filter:blur(8px);
 }
-#finishBtn:hover{background:#fff;color:#111;}
+#finishBtn:hover{background:rgba(255,255,255,0.95);color:#111;border-color:#fff;}
 
 /* ═══ DATA SCREEN ═══ */
 #dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
-#dataHeader{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;
-}
-#dataHeader .data-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
-.data-header-right{display:flex;align-items:center;gap:8px;}
-.view-tab{
-  font-family:'Heebo',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;
-  padding:7px 16px;border:1.5px solid #333;background:transparent;color:#666;
-  cursor:pointer;transition:all 0.15s;border-radius:100px;
-}
-.view-tab.active{background:rgba(255,255,255,0.1);color:#fff;border-color:#fff;}
-.view-tab:hover{color:#fff;border-color:#fff;}
+
+/* Changed: no separate header bar — toolbar handles everything on the image */
+#dataHeader{display:none;}
 
 /* DATA BODY */
 #dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
@@ -164,64 +152,81 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
 
-/* Session info on data image - always shown */
+/* Session info badge on data image — more minimal */
 #dataSessionBadge{
   position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:row;gap:18px;align-items:center;
-  background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.1);border-radius:8px;
-  padding:10px 20px;z-index:8;pointer-events:none;
+  display:flex;flex-direction:row;gap:14px;align-items:center;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.08);border-radius:100px;
+  padding:7px 18px;z-index:8;pointer-events:none;
 }
-.dsb-item{display:flex;flex-direction:column;align-items:center;gap:2px;}
-.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.4);text-transform:uppercase;}
-.dsb-val{font-size:12px;font-weight:700;color:#fff;}
+.dsb-item{display:flex;flex-direction:row;align-items:center;gap:5px;}
+.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+.dsb-val{font-size:11px;font-weight:700;color:#fff;}
 
-/* Analysis overlay on image - shown only when analysis layer active */
+/* Analysis overlay on image */
 #dataAnalysisBadge{
-  position:absolute;top:14px;right:14px;
-  display:none;flex-direction:column;gap:6px;
-  background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);
-  border:1px solid rgba(224,26,0,0.3);border-radius:8px;
-  padding:12px 16px;z-index:8;pointer-events:none;min-width:160px;
+  position:absolute;top:64px;right:14px;
+  display:none;flex-direction:column;gap:4px;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
+  border:1px solid rgba(224,26,0,0.2);border-radius:8px;
+  padding:10px 14px;z-index:8;pointer-events:none;min-width:140px;
 }
-.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.6);text-transform:uppercase;margin-bottom:4px;margin-top:6px;}
+.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.6);text-transform:uppercase;margin-bottom:3px;margin-top:5px;}
 .dab-label:first-child{margin-top:0;}
-.dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;}
+.dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;}
 .dab-name{font-size:9px;font-weight:300;color:#888;}
 .dab-val{font-size:11px;font-weight:700;color:#e01a00;}
 .dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.5);margin-left:2px;}
 
-/* Floating toolbar */
+/* Floating toolbar — now includes SESSION/COMPARE/CLOSE controls */
 #dataToolbar{
   position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  display:flex;flex-wrap:nowrap;align-items:center;gap:5px;
-  background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);
-  padding:8px 14px;z-index:10;border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-wrap:nowrap;align-items:center;gap:4px;
+  background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);
+  padding:7px 12px;z-index:10;border:1px solid rgba(255,255,255,0.08);
   border-radius:100px;
 }
 .layer-btn{
-  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;
-  color:#666;background:transparent;border:1.5px solid transparent;
-  padding:6px 10px;cursor:pointer;transition:color 0.15s,border-color 0.15s;
+  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
+  color:#555;background:transparent;border:1.5px solid transparent;
+  padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;
   white-space:nowrap;border-radius:100px;
 }
 .layer-btn:hover{color:#fff;}
-.layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);}
-.toolbar-sep{width:1px;height:18px;background:#333;flex-shrink:0;}
-.toggle-group{display:flex;gap:4px;}
+.layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
+.toolbar-sep{width:1px;height:14px;background:#2a2a2a;flex-shrink:0;}
+.toggle-group{display:flex;gap:3px;}
 .toggle-btn{
-  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;
-  padding:6px 10px;border:1.5px solid transparent;background:transparent;color:#555;
+  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.08em;
+  padding:5px 9px;border:1.5px solid transparent;background:transparent;color:#555;
   cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:100px;
 }
 .toggle-btn:hover{color:#fff;}
-.toggle-btn.active{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);}
+.toggle-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
 #playBtn{
-  font-family:'Heebo',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;
-  color:#fff;background:#111;border:1.5px solid #444;
-  padding:6px 14px;cursor:pointer;transition:background 0.15s;flex-shrink:0;border-radius:100px;
+  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
+  color:#fff;background:#222;border:1.5px solid #3a3a3a;
+  padding:5px 12px;cursor:pointer;transition:background 0.15s;flex-shrink:0;border-radius:100px;
 }
-#playBtn:hover{background:#222;}
+#playBtn:hover{background:#333;}
+
+/* View tab buttons — now inside the toolbar area */
+.view-tab{
+  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
+  padding:5px 10px;border:1.5px solid transparent;background:transparent;color:#555;
+  cursor:pointer;transition:all 0.15s;border-radius:100px;
+}
+.view-tab.active{background:rgba(255,255,255,0.07);color:#fff;border-color:rgba(255,255,255,0.35);}
+.view-tab:hover{color:#fff;border-color:rgba(255,255,255,0.2);}
+
+/* Close button inside toolbar */
+#dataCloseBtn{
+  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
+  color:#888;background:transparent;border:1.5px solid #333;
+  padding:5px 10px;cursor:pointer;transition:all 0.15s;flex-shrink:0;border-radius:100px;
+}
+#dataCloseBtn:hover{color:#fff;border-color:#666;}
 
 /* ═══ GALLERY SCREEN ═══ */
 #galleryScreen{
@@ -238,7 +243,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .gallery-user-block{margin-bottom:40px;}
 .gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#fff;text-transform:uppercase;margin-bottom:6px;}
 .gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
-.gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+/* Changed: smaller thumbnails in gallery for tighter compare view */
+.gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
 .gallery-item{
   background:#0a0a0a;border:1px solid #1e1e1e;border-radius:4px;
   overflow:hidden;cursor:pointer;transition:border-color 0.15s;
@@ -246,9 +252,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .gallery-item:hover{border-color:#444;}
 .gallery-item.active-view{border-color:#e01a00;}
 .gallery-item-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
-.gallery-item-info{padding:8px 10px;display:flex;justify-content:space-between;align-items:center;}
-.gallery-item-name{font-size:9px;font-weight:700;letter-spacing:0.1em;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.gallery-item-stats{font-size:8px;font-weight:300;color:#555;white-space:nowrap;}
+.gallery-item-info{padding:5px 8px;display:flex;justify-content:space-between;align-items:center;}
+.gallery-item-name{font-size:8px;font-weight:700;letter-spacing:0.1em;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gallery-item-stats{font-size:7px;font-weight:300;color:#555;white-space:nowrap;}
 
 /* COMPARE VIEW */
 #compareView{display:none;flex:1;overflow:hidden;flex-direction:column;}
@@ -264,17 +270,19 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 }
 .cf-select:focus{border-color:#555;}
 .cf-sep{width:1px;height:16px;background:#2a2a2a;align-self:center;}
-#compareGrid-wrap{flex:1;overflow:auto;padding:20px;background:#0a0a0a;}
-#compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+#compareGrid-wrap{flex:1;overflow:auto;padding:16px;background:#0a0a0a;}
+/* Changed: smaller compare panels — more per row */
+#compareGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
 .compare-panel{background:#111;border:1px solid #222;overflow:hidden;border-radius:2px;}
-.compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 12px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:4px;}
-.cp-user{font-size:11px;font-weight:700;letter-spacing:0.1em;color:#fff;}
-.cp-meta{font-size:8px;font-weight:300;color:#555;line-height:1.5;}
-.cp-time{font-size:9px;font-weight:300;color:#555;}
-.compare-canvas-wrap{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden;}
+.compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 10px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:3px;}
+.cp-user{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#fff;}
+.cp-meta{font-size:7px;font-weight:300;color:#555;line-height:1.4;}
+.cp-time{font-size:8px;font-weight:300;color:#555;}
+/* Changed: smaller aspect ratio for compare panels */
+.compare-canvas-wrap{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
 .cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cp-canvas{position:absolute;inset:0;pointer-events:none;}
-.cp-stats{font-size:9px;font-weight:300;color:#555;padding:7px 12px;letter-spacing:0.06em;border-top:1px solid #1a1a1a;}
+.cp-stats{font-size:8px;font-weight:300;color:#555;padding:5px 10px;letter-spacing:0.05em;border-top:1px solid #1a1a1a;}
 
 /* NAME SCREEN */
 #nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
@@ -304,19 +312,22 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="navLinks">
     <span class="nav-link active" id="navHomeLink">HOME</span>
     <span class="nav-link" id="navSessionLink">SESSION</span>
+    <!-- Changed: gallery nav link always clickable -->
     <span class="nav-link" id="navGalleryLink">GALLERY</span>
   </div>
 </nav>
 
 <!-- ═══ HOME ═══ -->
 <div id="homeScreen">
-  <video id="homeVideo" src="benjamin netanyahu.mp4" autoplay loop muted playsinline></video>
-  <canvas id="homeDotCanvas"></canvas>
+  <!-- Changed: image instead of video, no dot canvas -->
+  <img id="homeHeroImg" src="david.jpg" alt="hero" style="position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;"/>
 
   <div id="homeHero">
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
-      <h1 class="home-heading">SEE WHERE<br>ATTENTION GOES.</h1>
+      <!-- Changed: single line heading -->
+      <h1 class="home-heading">SEE WHERE ATTENTION GOES.</h1>
+      <!-- Changed: single line subtitle -->
       <p class="home-subtitle">Real-time eye tracking analysis using iris detection and behavioral classification.</p>
       <button id="homeStartBtn">START SESSION</button>
       <div class="home-badges">
@@ -325,6 +336,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">Real-time</span>
         <span class="home-badge">Multi-user Compare</span>
       </div>
+      <!-- Changed: red scroll hint -->
       <div class="home-scroll-hint">
         SCROLL TO LEARN MORE
         <span class="home-scroll-hint-arrow">↓</span>
@@ -335,7 +347,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="homeInfo">
     <div class="hi-section">
       <div class="hi-label">HOW IT WORKS</div>
-      <h2 class="hi-title">From eyes to insights<br>in three steps.</h2>
+      <!-- Changed: single line -->
+      <h2 class="hi-title">From eyes to insights in three steps.</h2>
       <p class="hi-sub">The system uses your webcam to detect iris position in real-time, maps gaze to screen coordinates via affine calibration, then classifies movements into research-grade metrics.</p>
       <div class="steps-row">
         <div class="step-item">
@@ -361,14 +374,16 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
     <div class="hi-section" style="background:#f7f7f7;">
       <div class="hi-label">ANALYSIS MODES</div>
-      <h2 class="hi-title">Six ways to read<br>visual attention.</h2>
+      <!-- Changed: single line -->
+      <h2 class="hi-title">Six ways to read visual attention.</h2>
       <p class="hi-sub">Switch between modes in real-time to explore different dimensions of how a viewer scans an image.</p>
       <div class="modes-grid" id="modesGrid"></div>
     </div>
 
     <div class="hi-section">
       <div class="hi-label">QUICK START</div>
-      <h2 class="hi-title" style="margin-bottom:36px;">Up and running<br>in under a minute.</h2>
+      <!-- Changed: single line -->
+      <h2 class="hi-title" style="margin-bottom:36px;">Up and running in under a minute.</h2>
       <ol class="howto-list">
         <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts. Only your face is used — nothing is stored externally.</span></li>
         <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> — name, age, and gender. These are stored with your session for group comparison.</span></li>
@@ -396,15 +411,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="annLayer"></div>
 </div>
 
-<!-- Session info always on screen during session -->
-<div id="sessionInfoOverlay">
-  <div class="sio-item"><span class="sio-label">SAMPLES</span><span class="sio-val" id="sio-samples">0</span></div>
-  <div class="sio-item"><span class="sio-label">DURATION</span><span class="sio-val" id="sio-duration">0s</span></div>
-  <div class="sio-item"><span class="sio-label">LOCATION</span><span class="sio-val" id="sio-location">—</span></div>
-  <div class="sio-item"><span class="sio-label">NAME</span><span class="sio-val" id="sio-name">—</span></div>
-  <div class="sio-item"><span class="sio-label">AGE</span><span class="sio-val" id="sio-age">—</span></div>
-  <div class="sio-item"><span class="sio-label">GENDER</span><span class="sio-val" id="sio-gender">—</span></div>
-</div>
+<!-- Session info overlay — hidden per request -->
+<div id="sessionInfoOverlay" style="display:none !important;"></div>
 
 <div id="gazeDot"></div>
 <div id="info">ALLOW CAMERA ACCESS</div>
@@ -422,9 +430,10 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <button id="libBeginBtn" class="va-btn va-btn-primary" disabled style="opacity:0.4">BEGIN SESSION</button>
 </div>
 
-<!-- DATA SCREEN -->
+<!-- DATA SCREEN — no separate header, toolbar is on the image -->
 <div id="dataScreen">
-  <div id="dataHeader">
+  <!-- Hidden header, controls moved to toolbar -->
+  <div id="dataHeader" style="display:none;">
     <div class="data-title">SESSION DATA</div>
     <div class="data-header-right">
       <button class="view-tab active" id="sessionViewBtn">SESSION</button>
@@ -432,47 +441,50 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       <button id="dataCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
     </div>
   </div>
-  <div id="dataBody">
+  <div id="dataBody" style="padding-top:0;">
     <!-- CENTER: full-screen canvas -->
     <div id="dataCenter">
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
 
-        <!-- Floating toolbar -->
+        <!-- Floating toolbar — now includes view controls + close -->
         <div id="dataToolbar">
-          <button class="layer-btn active" data-layer="GAZE">GAZE</button>
-          <button class="layer-btn" data-layer="FIXATION">FIXATION</button>
-          <button class="layer-btn" data-layer="SACCADE">SACCADE</button>
-          <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
-          <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
-          <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
+          <button class="view-tab active" id="sessionViewBtn">SESSION</button>
+          <button class="view-tab" id="compareViewBtn">COMPARE</button>
           <span class="toolbar-sep"></span>
-          <button id="playBtn">REPLAY</button>
+          <button class="layer-btn active" data-layer="GAZE">GAZE</button>
+          <button class="layer-btn" data-layer="FIXATION">FIX</button>
+          <button class="layer-btn" data-layer="SACCADE">SAC</button>
+          <button class="layer-btn" data-layer="SCANPATH">PATH</button>
+          <button class="layer-btn" data-layer="HEATMAP">HEAT</button>
+          <button class="layer-btn" data-layer="FIRSTFIX">FIRST</button>
+          <span class="toolbar-sep"></span>
+          <button id="playBtn">↺ REPLAY</button>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="animatedBtn">ANIMATED</button>
+            <button class="toggle-btn active" id="animatedBtn">ANIM</button>
             <button class="toggle-btn" id="staticBtn">STATIC</button>
           </div>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="withImgBtn">WITH IMAGE</button>
-            <button class="toggle-btn" id="withoutImgBtn">WITHOUT</button>
+            <button class="toggle-btn active" id="withImgBtn">IMG</button>
+            <button class="toggle-btn" id="withoutImgBtn">OFF</button>
           </div>
+          <span class="toolbar-sep"></span>
+          <button id="dataCloseBtn">✕</button>
         </div>
 
-        <!-- Always-visible session info badge on data image -->
+        <!-- Always-visible session info badge on data image — minimal pill style -->
         <div id="dataSessionBadge">
-          <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">DURATION</span><span class="dsb-val" id="dsb-duration">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">LOCATION</span><span class="dsb-val" id="dsb-location">—</span></div>
           <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">—</span></div>
           <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">—</span></div>
           <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">LOC</span><span class="dsb-val" id="dsb-location">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">DUR</span><span class="dsb-val" id="dsb-duration">—</span></div>
+          <div class="dsb-item"><span class="dsb-label">PTS</span><span class="dsb-val" id="dsb-samples">—</span></div>
         </div>
 
-        <!-- Analysis-specific stats badge — shown only when an analysis layer is active -->
-        <div id="dataAnalysisBadge">
-          <!-- Content injected by JS based on active layer -->
-        </div>
+        <!-- Analysis-specific stats badge -->
+        <div id="dataAnalysisBadge"></div>
       </div>
     </div>
   </div>
@@ -563,86 +575,28 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 
 /* ══════════════════════════════════════════════════════════════════════
-   HOME SCREEN DEMO — dots doubled in size
+   HOME SCREEN — no video, no dot analysis
    ══════════════════════════════════════════════════════════════════════ */
-const HOME_N_ANN        = 250;
-const HOME_DOT_STEP     = 2;
-const HOME_DOT_THRESH   = 10;
-const HOME_ANA_INTERVAL = 600;
-
 const homeScreen     = document.getElementById('homeScreen');
-const homeVideo      = document.getElementById('homeVideo');
-const homeDotCanvas  = document.getElementById('homeDotCanvas');
-const homeDotCtx     = homeDotCanvas.getContext('2d');
-const homeAnaC       = document.getElementById('homeAnaC');
-const homeAnaCtx     = homeAnaC.getContext('2d', {willReadFrequently:true});
 const navHomeLink    = document.getElementById('navHomeLink');
 const navSessionLink = document.getElementById('navSessionLink');
 const navGalleryLink = document.getElementById('navGalleryLink');
-
-let homeRunning   = true;
-let homeLastAnaTs = -9999;
-
-function sobel(px, w, h) {
-  const g=new Float32Array(w*h),gx=new Float32Array(w*h),gy=new Float32Array(w*h),mg=new Float32Array(w*h);
-  for(let i=0;i<w*h;i++){const o=i*4;g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2];}
-  for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
-    const i=y*w+x,tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];
-    gx[i]=(tr+2*mr+br)-(tl+2*ml+bl);gy[i]=(bl+2*bc+br)-(tl+2*tc+tr);mg[i]=Math.hypot(gx[i],gy[i]);
-  }
-  return {gx,gy,mg};
-}
-
-function sizeHomeCanvas(){homeDotCanvas.width=window.innerWidth;homeDotCanvas.height=window.innerHeight;}
-
-function homeDrawDots(pts){
-  const W=homeDotCanvas.width,H=homeDotCanvas.height;if(!W||!H)return;
-  homeDotCtx.clearRect(0,0,W,H);
-  homeDotCtx.fillStyle='rgba(224,26,0,0.82)';
-  homeDotCtx.beginPath();
-  // Doubled dot size: 6x6 squares instead of 3x3
-  for(const p of pts)homeDotCtx.rect(p.nx*W-3,p.ny*H-3,6,6);
-  homeDotCtx.fill();
-}
-
-function homeAnalyze(){
-  if(homeVideo.readyState<2)return;
-  const W=160,H=90;homeAnaCtx.drawImage(homeVideo,0,0,W,H);
-  const id=homeAnaCtx.getImageData(0,0,W,H),px=id.data,{mg}=sobel(px,W,H),all=[];
-  for(let y=1;y<H-1;y+=HOME_DOT_STEP)for(let x=1;x<W-1;x+=HOME_DOT_STEP){
-    const i=y*W+x;if(mg[i]>=HOME_DOT_THRESH)all.push({i,mag:mg[i]});
-  }
-  all.sort((a,b)=>b.mag-a.mag);if(all.length>HOME_N_ANN)all.length=HOME_N_ANN;
-  homeDrawDots(all.map(({i})=>({nx:Math.max(0.01,Math.min(0.99,(i%W)/W)),ny:Math.max(0.01,Math.min(0.99,Math.floor(i/W)/H))})));
-}
-
-function homeLoop(ts){
-  if(!homeRunning)return;
-  if(ts-homeLastAnaTs>HOME_ANA_INTERVAL){homeAnalyze();homeLastAnaTs=ts;}
-  requestAnimationFrame(homeLoop);
-}
 
 /* ══════════════════════════════════════════════════════════════════════
    NAVIGATION
    ══════════════════════════════════════════════════════════════════════ */
 let appStarted = false;
 
-function showHome(){homeRunning=true;homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');requestAnimationFrame(homeLoop);}
-function hideHome(){homeRunning=false;homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
+function showHome(){homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');}
+function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
 function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
 document.getElementById('homeStartBtn').addEventListener('click',goToSession);
 document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
 navSessionLink.addEventListener('click',goToSession);
-navHomeLink.addEventListener('click',()=>{if(appStarted)showHome();});
-navGalleryLink.addEventListener('click',()=>{if(allSessions.length>0)openGallery();});
-
-function bootHome(){
-  sizeHomeCanvas();
-  window.addEventListener('resize',sizeHomeCanvas);
-  homeVideo.addEventListener('loadedmetadata',sizeHomeCanvas);
-  requestAnimationFrame(homeLoop);
-}
+navHomeLink.addEventListener('click',()=>{showHome();});
+// Changed: gallery always openable
+navGalleryLink.addEventListener('click',()=>{openGallery();});
 
 /* ══════════════════════════════════════════════════════════════════════
    GEOLOCATION — auto-detect on page load
@@ -653,11 +607,9 @@ async function fetchLocation(){
     const r=await fetch('https://ipapi.co/json/');
     const d=await r.json();
     userLocation=[d.city,d.country_name].filter(Boolean).join(', ');
-    document.getElementById('sio-location').textContent=userLocation||'—';
   }
   catch(_){userLocation='Unknown';}
 }
-// Auto-detect immediately on load
 fetchLocation();
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -683,8 +635,8 @@ const calStartBtn=document.getElementById('calStartBtn');
    ══════════════════════════════════════════════════════════════════════ */
 let currentUser='',currentAge='',currentGender='';
 let imageLibrary=[],currentImageIdx=0;
-// Track which images have been viewed by which user
-let viewedImages = {}; // key: "userName::imageIndex"
+// Changed: viewed tracking allows re-viewing but marks as viewed
+let viewedImages = {};
 let fixationHistory=[],currentFixation=null,scanPathHistory=[],saccadeHistory=[],saccadeActive=false,saccadeStart=null;
 let heatmap=new Float32Array(W_HEAT*H_HEAT),heatCanvas,heatCtx2;
 let firstFix=null,firstFixDone=false,firstFixModeTs=0,sessionStartTs=0,gazeLog=[];
@@ -796,7 +748,7 @@ function inv3(m){
 function mv3(m,v){return[m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];}
 
 /* ══════════════════════════════════════════════════════════════════════
-   CALIBRATION — no top nav visible (nav hidden)
+   CALIBRATION
    ══════════════════════════════════════════════════════════════════════ */
 function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
 function drawCalIntro(){
@@ -836,7 +788,6 @@ function awaitDot(px,py,index){
   });
 }
 async function runCalibration(){
-  // Hide the main nav during calibration
   document.getElementById('mainNav').style.display='none';
   resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();
   calStartBtn.style.display='block';
@@ -851,7 +802,6 @@ async function runCalibration(){
   if(calData.length>=4)eyeCalMap=fitAffine(calData);
   drawCalDone();await new Promise(r=>setTimeout(r,900));
   calOverlay.style.display='none';
-  // Restore nav
   document.getElementById('mainNav').style.display='flex';
 }
 
@@ -915,7 +865,7 @@ function enablePointerFallback(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   IMAGE LIBRARY — each user can view each image only once
+   IMAGE LIBRARY — each image can be viewed once per user
    ══════════════════════════════════════════════════════════════════════ */
 function isImageViewed(imgIdx){
   return !!viewedImages[`${currentUser}::${imgIdx}`];
@@ -930,20 +880,26 @@ function renderLib(){
   imageLibrary.forEach((img,i)=>{
     const viewed=isImageViewed(i);
     const card=document.createElement('div');
-    card.className='lib-card'+(i===currentImageIdx&&!viewed?' selected':'')+(viewed?' viewed-once':'');
+    // Changed: viewed images shown with overlay but still selectable
+    card.className='lib-card'+(i===currentImageIdx?' selected':'')+(viewed?' viewed-once':'');
     card.innerHTML=`<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
-    if(!viewed){
-      card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');};
-    }
+    // All images selectable, even viewed ones (but begin btn handles enforcement)
+    card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};
     grid.appendChild(card);
   });
   const add=document.createElement('div');add.className='lib-add';
   add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
   add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);
-  const btn=document.getElementById('libBeginBtn');
-  const hasAvailable=imageLibrary.some((_,i)=>!isImageViewed(i));
-  btn.disabled=!hasAvailable;btn.style.opacity=hasAvailable?'1':'0.4';
+  updateBeginBtn();
 }
+
+function updateBeginBtn(){
+  const btn=document.getElementById('libBeginBtn');
+  // Can begin if there's any image selected that hasn't been viewed
+  const canBegin = imageLibrary.length > 0 && !isImageViewed(currentImageIdx);
+  btn.disabled=!canBegin;btn.style.opacity=canBegin?'1':'0.4';
+}
+
 document.getElementById('libFileInput').addEventListener('change',e=>{
   Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});
   e.target.value='';
@@ -964,29 +920,17 @@ async function showNameScreen(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   SESSION INFO OVERLAY (live during session)
+   SESSION INFO OVERLAY — removed per request
    ══════════════════════════════════════════════════════════════════════ */
 function startSessionInfoOverlay(){
-  const overlay=document.getElementById('sessionInfoOverlay');
-  overlay.style.display='flex';
-  document.getElementById('sio-name').textContent=currentUser||'—';
-  document.getElementById('sio-age').textContent=currentAge||'—';
-  document.getElementById('sio-gender').textContent=currentGender||'—';
-  document.getElementById('sio-location').textContent=userLocation||'—';
-  if(sessionInfoInterval)clearInterval(sessionInfoInterval);
-  sessionInfoInterval=setInterval(()=>{
-    document.getElementById('sio-samples').textContent=gazeLog.length;
-    const elapsed=sessionStartTs?((Date.now()-sessionStartTs)/1000).toFixed(1)+'s':'0s';
-    document.getElementById('sio-duration').textContent=elapsed;
-  },500);
+  // No-op: session info overlay hidden
 }
 function stopSessionInfoOverlay(){
-  document.getElementById('sessionInfoOverlay').style.display='none';
-  if(sessionInfoInterval){clearInterval(sessionInfoInterval);sessionInfoInterval=null;}
+  // No-op
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   DATA BADGE — session info always on data screen
+   DATA BADGE — session info on data screen
    ══════════════════════════════════════════════════════════════════════ */
 function renderDataSessionBadge(sess){
   const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
@@ -999,7 +943,7 @@ function renderDataSessionBadge(sess){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS BADGE — shown only when analysis layer is active
+   ANALYSIS BADGE
    ══════════════════════════════════════════════════════════════════════ */
 const ANALYSIS_LAYERS=['FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
 
@@ -1109,16 +1053,16 @@ function staticFirstFix(ctx,W,H,fix,modeTs){
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   HOME MODE PREVIEWS
+   HOME MODE PREVIEWS — minimal style
    ══════════════════════════════════════════════════════════════════════ */
 function buildModePreviews(){
   const modes=[
-    {key:'GAZE',name:'GAZE',desc:'Shows where on the image the viewer\'s eyes landed, sample by sample.'},
-    {key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time mark where attention was held longest.'},
-    {key:'SACCADE',name:'SACCADE',desc:'Arrows trace rapid eye jumps between regions of interest.'},
-    {key:'SCANPATH',name:'SCAN PATH',desc:'Numbered sequence reveals the order in which areas were visited.'},
-    {key:'HEATMAP',name:'HEATMAP',desc:'Contour lines show density of gaze — highest attention at the center.'},
-    {key:'FIRSTFIX',name:'FIRST FIXATION',desc:'Pinpoints the very first area that captured attention after image onset.'},
+    {key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions across the image.'},
+    {key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},
+    {key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},
+    {key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},
+    {key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},
+    {key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after image onset.'},
   ];
   const gazeLog=[{x:0.25,y:0.35},{x:0.27,y:0.37},{x:0.55,y:0.28},{x:0.57,y:0.30},{x:0.72,y:0.52},{x:0.74,y:0.54},{x:0.38,y:0.68},{x:0.40,y:0.66},{x:0.5,y:0.45},{x:0.28,y:0.5},{x:0.68,y:0.25},{x:0.58,y:0.72}];
   const fixHist=[{x:0.25,y:0.35,duration:320},{x:0.55,y:0.28,duration:580},{x:0.72,y:0.52,duration:240},{x:0.38,y:0.68,duration:460}];
@@ -1128,15 +1072,17 @@ function buildModePreviews(){
   for(const m of modes){
     const card=document.createElement('div');card.className='mode-card';
     const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
+    // Changed: smaller canvas for more minimal previews
     const canvas=document.createElement('canvas');
-    canvas.className='mode-preview';canvas.width=320;canvas.height=160;
+    canvas.className='mode-preview';canvas.width=240;canvas.height=80;
     wrap.appendChild(canvas);
     card.innerHTML=`<div class="mode-card-name">${m.name}</div>`;
     card.appendChild(wrap);
     const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);
     grid.appendChild(card);
-    const ctx=canvas.getContext('2d');const W=320,H=160;
-    ctx.fillStyle='#f7f7f7';ctx.fillRect(0,0,W,H);
+    const ctx=canvas.getContext('2d');const W=240,H=80;
+    // Changed: transparent background for cleaner look
+    ctx.clearRect(0,0,W,H);
     switch(m.key){
       case 'GAZE':staticGaze(ctx,W,H,gazeLog);break;
       case 'FIXATION':staticFixation(ctx,W,H,fixHist);break;
@@ -1254,6 +1200,10 @@ function renderCompareView(){
   const grid=document.getElementById('compareGrid');grid.innerHTML='';
   const layer=document.getElementById('cf-layer').value||dataActiveLayer||'GAZE';
   const sessions=getFilteredSessions();
+  if(sessions.length===0){
+    grid.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;padding:40px 0;">NO SESSIONS TO COMPARE YET</div>';
+    return;
+  }
   for(const sess of sessions){
     const cell=document.createElement('div');cell.className='compare-panel';
     const ts=new Date(sess.timestamp).toLocaleTimeString();
@@ -1269,7 +1219,7 @@ document.getElementById('cf-apply').addEventListener('click',renderCompareView);
 document.getElementById('cf-layer').addEventListener('change',renderCompareView);
 
 /* ══════════════════════════════════════════════════════════════════════
-   GALLERY SCREEN — separate page with all viewed images
+   GALLERY SCREEN — always openable
    ══════════════════════════════════════════════════════════════════════ */
 function openGallery(){
   const screen=document.getElementById('galleryScreen');
@@ -1348,9 +1298,7 @@ async function boot(){
   await new Promise(resolve=>{
     document.getElementById('libBeginBtn').addEventListener('click',()=>{
       if(!imageLibrary.length)return;
-      // Check the selected image hasn't been viewed
       if(isImageViewed(currentImageIdx)){
-        // Find first unviewed
         const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));
         if(unviewed===-1)return;
         currentImageIdx=unviewed;
@@ -1399,6 +1347,10 @@ document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataA
 async function startApp(){await showNameScreen();await boot();}
 bootHome();
 setTimeout(buildModePreviews,200);
+
+function bootHome(){
+  // Static hero image, no video/canvas setup needed
+}
 </script>
 </body>
 </html>
