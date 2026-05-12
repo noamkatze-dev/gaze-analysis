@@ -8,8 +8,6 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-family:'Heebo',sans-serif;}
-
-/* ═══ NAV ═══ */
 #mainNav{position:fixed;top:0;left:0;right:0;height:52px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:9000;cursor:default;}
 #navBrand{display:flex;align-items:center;gap:10px;}
 .nav-va{font-size:18px;font-weight:700;color:#111;letter-spacing:0.04em;}
@@ -17,51 +15,28 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #navLinks{display:flex;gap:28px;align-items:center;}
 .nav-link{font-size:10px;font-weight:700;letter-spacing:0.22em;color:#999;cursor:pointer;user-select:none;transition:color 0.15s;}
 .nav-link:hover,.nav-link.active{color:#111;}
-
-/* ═══ HOME ═══ */
 #homeScreen{position:fixed;inset:0;z-index:8999;background:#000;overflow-y:auto;overflow-x:hidden;}
-/* Changed: image instead of video */
 #homeHeroImg{position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;}
-
-/* Removed homeDotCanvas styling - no more red dots */
-
-#homeHero{
-  position:fixed;inset:0;z-index:3;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  pointer-events:none;
-}
+#homeHero{position:fixed;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
 .home-content{text-align:center;pointer-events:all;display:flex;flex-direction:column;align-items:center;}
 .home-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.5em;color:#000;margin-bottom:18px;text-transform:uppercase;}
-/* Changed: nowrap so heading stays on one line */
 .home-heading{font-size:52px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,0.35);text-transform:uppercase;white-space:nowrap;}
-/* Changed: nowrap so subtitle stays on one line */
 .home-subtitle{font-size:14px;font-weight:400;color:#000;white-space:nowrap;line-height:1.6;margin:0 auto 36px;}
-#homeStartBtn{
-  background:#000;color:#fff;border:2px solid #000;
-  font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;
-  padding:14px 48px;cursor:pointer;transition:background 0.18s,border-color 0.18s;
-  margin-bottom:28px;border-radius:100px;
-}
+#homeStartBtn{background:#000;color:#fff;border:2px solid #000;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;transition:background 0.18s,border-color 0.18s;margin-bottom:28px;border-radius:100px;}
 #homeStartBtn:hover{background:#333;border-color:#333;}
-.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:0;}
 .home-badge{font-size:10px;color:#000;border:1px solid rgba(0,0,0,0.35);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;background:rgba(255,255,255,0.6);}
-/* Changed: scroll hint text and arrow in red */
-.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#e01a00;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#e01a00;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:48px;}
 .home-scroll-hint-arrow{font-size:14px;color:#e01a00;}
-
-/* INFO SECTIONS */
 #homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
 .hi-section{padding:72px 64px;}
 .hi-section+.hi-section{border-top:1px solid #eee;}
 .hi-section-dark{background:#0a0a0a;}
 .hi-label{font-size:8px;font-weight:700;letter-spacing:0.5em;color:#111;margin-bottom:20px;text-transform:uppercase;}
 .hi-label-light{color:rgba(255,255,255,0.5);}
-/* Changed: nowrap for all hi-title elements */
 .hi-title{font-size:28px;font-weight:700;color:#111;margin-bottom:8px;line-height:1.2;white-space:nowrap;}
 .hi-title-light{color:#fff;}
 .hi-sub{font-size:13px;font-weight:300;color:#888;max-width:480px;line-height:1.7;margin-bottom:40px;}
-.hi-sub-light{color:rgba(255,255,255,0.5);}
-
 .steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;}
 .step-item{padding:32px 36px;border-left:1px solid #eee;}
 .step-item:first-child{border-left:none;padding-left:0;}
@@ -69,7 +44,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .step-icon{font-size:28px;margin-bottom:12px;line-height:1;}
 .step-title{font-size:12px;font-weight:700;letter-spacing:0.18em;color:#111;margin-bottom:8px;text-transform:uppercase;}
 .step-desc{font-size:12px;font-weight:300;color:#888;line-height:1.7;}
-
 .howto-list{list-style:none;width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
 .howto-list li{display:flex;flex-direction:column;gap:8px;padding:28px 32px;border-left:1px solid #eee;}
 .howto-list li:first-child{border-left:none;}
@@ -77,35 +51,27 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .howto-n{font-size:10px;font-weight:700;color:#111;letter-spacing:0.2em;}
 .howto-text{font-size:12px;font-weight:300;color:#666;line-height:1.65;}
 .howto-text strong{font-weight:700;color:#111;}
-
-/* Changed: more minimal modes grid - smaller previews, less padding */
-.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#eee;width:100%;}
-.mode-card{background:#fff;padding:16px 16px 14px;}
-.mode-card-name{font-size:8px;font-weight:700;letter-spacing:0.35em;color:#111;margin-bottom:6px;text-transform:uppercase;}
-.mode-card-desc{font-size:10px;font-weight:300;color:#aaa;line-height:1.5;margin-top:8px;}
-/* Changed: smaller aspect ratio for mode previews */
-.mode-preview-wrap{width:100%;aspect-ratio:3/1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f9f9f9;}
+/* MODES GRID - ultra minimal */
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#f0f0f0;width:100%;}
+.mode-card{background:#fff;padding:20px 20px 16px;}
+.mode-card-name{font-size:8px;font-weight:700;letter-spacing:0.4em;color:#bbb;margin-bottom:10px;text-transform:uppercase;}
+.mode-card-desc{font-size:10px;font-weight:300;color:#ccc;line-height:1.5;margin-top:10px;}
+.mode-preview-wrap{width:100%;aspect-ratio:5/2;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;}
 .mode-preview{display:block;width:100%;height:100%;}
-
 .va-btn{font-family:'Heebo',sans-serif;letter-spacing:0.18em;cursor:pointer;transition:background 0.18s,color 0.18s,border-color 0.18s;border-radius:100px;}
 .va-btn-primary{background:#111;color:#fff;border:2px solid #111;font-size:13px;font-weight:700;padding:14px 48px;}
 .va-btn-primary:hover{background:#333;border-color:#333;}
 .va-btn-secondary{background:#fff;color:#111;border:2px solid #111;font-size:12px;font-weight:700;padding:9px 24px;}
 .va-btn-secondary:hover{background:#111;color:#fff;}
-
-/* CAL — no top nav */
 #calOverlay{position:fixed;inset:0;z-index:1000;background:#fff;}
 #calCanvas{position:absolute;inset:0;width:100%;height:100%;}
 #calStartBtn{position:absolute;top:58%;left:50%;transform:translateX(-50%);display:none;z-index:1001;}
-
-/* LIBRARY */
 .screen{display:none;position:fixed;inset:0;z-index:1100;background:#fff;flex-direction:column;align-items:center;justify-content:center;}
 .screen-title{font-size:9px;font-weight:300;letter-spacing:0.6em;color:#bbb;margin-bottom:36px;}
 .lib-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;width:90vw;margin-bottom:36px;max-height:52vh;overflow-y:auto;}
 .lib-card{aspect-ratio:4/3;border:1.5px solid #e0e0e0;cursor:pointer;overflow:hidden;position:relative;transition:border-color 0.15s;}
 .lib-card:hover{border-color:#999;}
 .lib-card.selected{border-color:#111;}
-/* Changed: viewed-once images are greyed but can still be viewed again */
 .lib-card.viewed-once{opacity:0.55;}
 .lib-card.viewed-once::after{content:'VIEWED';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.3em;}
 .lib-card img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -115,187 +81,105 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 .lib-add-plus{font-size:28px;color:#ccc;line-height:1;}
 .lib-add-label{font-size:9px;font-weight:300;letter-spacing:0.2em;color:#ccc;}
 #libFileInput{display:none;}
-
-/* MAIN SESSION — no info overlay, just finish button */
 #imgWrapper{position:fixed;inset:0;overflow:hidden;}
 #mainImg{display:block;width:100%;height:100%;object-fit:cover;}
 #dotCanvas{position:absolute;inset:0;pointer-events:none;z-index:5;}
 #annLayer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6;opacity:0;}
 #gazeDot{position:fixed;width:22px;height:22px;border-radius:50%;border:2px solid rgba(224,26,0,0.85);background:rgba(224,26,0,0.12);transform:translate(-50%,-50%);pointer-events:none;z-index:50;}
 #info{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;color:rgba(255,255,255,0.6);pointer-events:none;transition:opacity 2s ease;white-space:nowrap;z-index:50;}
-
-/* SESSION INFO OVERLAY — hidden, removed from session view */
 #sessionInfoOverlay{display:none !important;}
-
-#finishBtn{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
-  font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;
-  color:#fff;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.5);
-  padding:11px 32px;cursor:pointer;z-index:60;display:none;
-  transition:background 0.15s,color 0.15s,border-color 0.15s;border-radius:100px;
-  backdrop-filter:blur(8px);
-}
+#finishBtn{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;color:#fff;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.5);padding:11px 32px;cursor:pointer;z-index:60;display:none;transition:background 0.15s,color 0.15s,border-color 0.15s;border-radius:100px;backdrop-filter:blur(8px);}
 #finishBtn:hover{background:rgba(255,255,255,0.95);color:#111;border-color:#fff;}
-
-/* ═══ DATA SCREEN ═══ */
 #dataScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
-
-/* Changed: no separate header bar — toolbar handles everything on the image */
 #dataHeader{display:none;}
-
-/* DATA BODY */
 #dataBody{display:flex;flex:1;overflow:hidden;position:relative;}
-
-/* CENTER: full-screen canvas */
 #dataCenter{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;}
 #dataImgArea{position:relative;flex:1;overflow:hidden;background:#000;}
 #dataImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 #dataCanvas{position:absolute;inset:0;pointer-events:none;z-index:2;}
-
-/* Session info badge on data image — more minimal */
-#dataSessionBadge{
-  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:row;gap:14px;align-items:center;
-  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.08);border-radius:100px;
-  padding:7px 18px;z-index:8;pointer-events:none;
-}
-.dsb-item{display:flex;flex-direction:row;align-items:center;gap:5px;}
-.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+/* COLLAPSIBLE OVERLAYS */
+#dataSessionBadge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:stretch;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);border-radius:12px;z-index:8;pointer-events:all;min-width:380px;overflow:hidden;}
+.dsb-header{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;cursor:pointer;user-select:none;}
+.dsb-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+.dsb-toggle{font-size:9px;color:rgba(255,255,255,0.3);transition:transform 0.2s;line-height:1;}
+.dsb-toggle.collapsed{transform:rotate(180deg);}
+.dsb-content{display:flex;flex-direction:row;align-items:stretch;border-top:1px solid rgba(255,255,255,0.06);overflow:hidden;max-height:60px;transition:max-height 0.25s ease,border-top 0.25s;}
+.dsb-content.collapsed{max-height:0;border-top-width:0;}
+.dsb-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 14px;border-right:1px solid rgba(255,255,255,0.05);}
+.dsb-item:last-child{border-right:none;}
+.dsb-label{font-size:7px;font-weight:700;letter-spacing:0.3em;color:rgba(255,255,255,0.25);text-transform:uppercase;}
 .dsb-val{font-size:11px;font-weight:700;color:#fff;}
-
-/* Analysis overlay on image */
-#dataAnalysisBadge{
-  position:absolute;top:64px;right:14px;
-  display:none;flex-direction:column;gap:4px;
-  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
-  border:1px solid rgba(224,26,0,0.2);border-radius:8px;
-  padding:10px 14px;z-index:8;pointer-events:none;min-width:140px;
-}
-.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.6);text-transform:uppercase;margin-bottom:3px;margin-top:5px;}
+/* Analysis badge - aligned under toolbar top-right */
+#dataAnalysisBadge{position:absolute;top:58px;right:14px;display:none;flex-direction:column;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);border:1px solid rgba(224,26,0,0.15);border-radius:12px;z-index:8;pointer-events:all;min-width:170px;overflow:hidden;}
+.dab-header{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;cursor:pointer;user-select:none;border-bottom:1px solid rgba(224,26,0,0.1);}
+.dab-header-label{font-size:7px;font-weight:700;letter-spacing:0.35em;color:rgba(224,26,0,0.5);text-transform:uppercase;}
+.dab-toggle{font-size:9px;color:rgba(224,26,0,0.35);transition:transform 0.2s;line-height:1;}
+.dab-toggle.collapsed{transform:rotate(180deg);}
+.dab-content{overflow:hidden;max-height:200px;transition:max-height 0.25s ease;padding:8px 12px;}
+.dab-content.collapsed{max-height:0;padding-top:0;padding-bottom:0;}
+.dab-label{font-size:7px;font-weight:700;letter-spacing:0.4em;color:rgba(224,26,0,0.45);text-transform:uppercase;margin-bottom:4px;margin-top:6px;}
 .dab-label:first-child{margin-top:0;}
-.dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;}
-.dab-name{font-size:9px;font-weight:300;color:#888;}
+.dab-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;gap:12px;}
+.dab-name{font-size:9px;font-weight:300;color:#666;}
 .dab-val{font-size:11px;font-weight:700;color:#e01a00;}
-.dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.5);margin-left:2px;}
-
-/* Floating toolbar — now includes SESSION/COMPARE/CLOSE controls */
-#dataToolbar{
-  position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  display:flex;flex-wrap:nowrap;align-items:center;gap:4px;
-  background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);
-  padding:7px 12px;z-index:10;border:1px solid rgba(255,255,255,0.08);
-  border-radius:100px;
-}
-.layer-btn{
-  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
-  color:#555;background:transparent;border:1.5px solid transparent;
-  padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;
-  white-space:nowrap;border-radius:100px;
-}
+.dab-unit{font-size:8px;font-weight:300;color:rgba(224,26,0,0.4);margin-left:2px;}
+/* TOOLBAR */
+#dataToolbar{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:nowrap;align-items:center;gap:2px;background:rgba(0,0,0,0.72);backdrop-filter:blur(14px);padding:6px 10px;z-index:10;border:1px solid rgba(255,255,255,0.08);border-radius:100px;}
+.layer-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#555;background:transparent;border:1.5px solid transparent;padding:5px 9px;cursor:pointer;transition:color 0.15s,border-color 0.15s;white-space:nowrap;border-radius:100px;}
 .layer-btn:hover{color:#fff;}
 .layer-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
 .toolbar-sep{width:1px;height:14px;background:#2a2a2a;flex-shrink:0;}
-.toggle-group{display:flex;gap:3px;}
-.toggle-btn{
-  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.08em;
-  padding:5px 9px;border:1.5px solid transparent;background:transparent;color:#555;
-  cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:100px;
-}
+.toggle-group{display:flex;gap:2px;}
+.toggle-btn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.05em;padding:5px 8px;border:1.5px solid transparent;background:transparent;color:#555;cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:100px;}
 .toggle-btn:hover{color:#fff;}
 .toggle-btn.active{color:#fff;border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);}
-#playBtn{
-  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
-  color:#fff;background:#222;border:1.5px solid #3a3a3a;
-  padding:5px 12px;cursor:pointer;transition:background 0.15s;flex-shrink:0;border-radius:100px;
-}
+#playBtn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#fff;background:#222;border:1.5px solid #3a3a3a;padding:5px 10px;cursor:pointer;transition:background 0.15s;flex-shrink:0;border-radius:100px;}
 #playBtn:hover{background:#333;}
-
-/* View tab buttons — now inside the toolbar area */
-.view-tab{
-  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
-  padding:5px 10px;border:1.5px solid transparent;background:transparent;color:#555;
-  cursor:pointer;transition:all 0.15s;border-radius:100px;
-}
+.view-tab{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;padding:5px 9px;border:1.5px solid transparent;background:transparent;color:#555;cursor:pointer;transition:all 0.15s;border-radius:100px;}
 .view-tab.active{background:rgba(255,255,255,0.07);color:#fff;border-color:rgba(255,255,255,0.35);}
 .view-tab:hover{color:#fff;border-color:rgba(255,255,255,0.2);}
-
-/* Close button inside toolbar */
-#dataCloseBtn{
-  font-family:'Heebo',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.1em;
-  color:#888;background:transparent;border:1.5px solid #333;
-  padding:5px 10px;cursor:pointer;transition:all 0.15s;flex-shrink:0;border-radius:100px;
-}
+#dataCloseBtn{font-family:'Heebo',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.06em;color:#888;background:transparent;border:1.5px solid #333;padding:5px 9px;cursor:pointer;transition:all 0.15s;flex-shrink:0;border-radius:100px;}
 #dataCloseBtn:hover{color:#fff;border-color:#666;}
-
-/* ═══ GALLERY SCREEN ═══ */
-#galleryScreen{
-  display:none;position:fixed;inset:0;z-index:1500;background:#111;
-  flex-direction:column;overflow:hidden;padding-top:52px;
-}
-#galleryHeader{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;
-}
+/* GALLERY */
+#galleryScreen{display:none;position:fixed;inset:0;z-index:1500;background:#111;flex-direction:column;overflow:hidden;padding-top:52px;}
+#galleryHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid #222;flex-shrink:0;background:#0a0a0a;}
 #galleryHeader .gallery-title{font-size:11px;font-weight:700;letter-spacing:0.45em;color:#fff;}
 .gallery-header-right{display:flex;align-items:center;gap:8px;}
 #galleryBody{flex:1;overflow-y:auto;padding:24px;}
 .gallery-user-block{margin-bottom:40px;}
 .gallery-user-name{font-size:11px;font-weight:700;letter-spacing:0.3em;color:#fff;text-transform:uppercase;margin-bottom:6px;}
 .gallery-user-meta{font-size:9px;font-weight:300;color:#555;letter-spacing:0.06em;margin-bottom:16px;}
-/* Changed: smaller thumbnails in gallery for tighter compare view */
 .gallery-images-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
-.gallery-item{
-  background:#0a0a0a;border:1px solid #1e1e1e;border-radius:4px;
-  overflow:hidden;cursor:pointer;transition:border-color 0.15s;
-}
+.gallery-item{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color 0.15s;}
 .gallery-item:hover{border-color:#444;}
 .gallery-item.active-view{border-color:#e01a00;}
 .gallery-item-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
 .gallery-item-info{padding:5px 8px;display:flex;justify-content:space-between;align-items:center;}
 .gallery-item-name{font-size:8px;font-weight:700;letter-spacing:0.1em;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .gallery-item-stats{font-size:7px;font-weight:300;color:#555;white-space:nowrap;}
-
-/* COMPARE VIEW */
 #compareView{display:none;flex:1;overflow:hidden;flex-direction:column;}
-#compareFilters{
-  background:#0a0a0a;border-bottom:1px solid #1e1e1e;
-  padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;
-}
+#compareFilters{background:#0a0a0a;border-bottom:1px solid #1e1e1e;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0;}
 .cf-label{font-size:8px;font-weight:700;letter-spacing:0.3em;color:#555;text-transform:uppercase;}
-.cf-select{
-  font-family:'Heebo',sans-serif;font-size:10px;background:#111;color:#aaa;
-  border:1.5px solid #2a2a2a;padding:5px 10px;cursor:pointer;border-radius:100px;
-  outline:none;-webkit-appearance:none;
-}
+.cf-select{font-family:'Heebo',sans-serif;font-size:10px;background:#111;color:#aaa;border:1.5px solid #2a2a2a;padding:5px 10px;cursor:pointer;border-radius:100px;outline:none;-webkit-appearance:none;}
 .cf-select:focus{border-color:#555;}
 .cf-sep{width:1px;height:16px;background:#2a2a2a;align-self:center;}
 #compareGrid-wrap{flex:1;overflow:auto;padding:16px;background:#0a0a0a;}
-/* Changed: smaller compare panels — more per row */
 #compareGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
 .compare-panel{background:#111;border:1px solid #222;overflow:hidden;border-radius:2px;}
 .compare-panel-header{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 10px;border-bottom:1px solid #1a1a1a;flex-wrap:wrap;gap:3px;}
 .cp-user{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#fff;}
 .cp-meta{font-size:7px;font-weight:300;color:#555;line-height:1.4;}
 .cp-time{font-size:8px;font-weight:300;color:#555;}
-/* Changed: smaller aspect ratio for compare panels */
 .compare-canvas-wrap{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;}
 .cp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .cp-canvas{position:absolute;inset:0;pointer-events:none;}
 .cp-stats{font-size:8px;font-weight:300;color:#555;padding:5px 10px;letter-spacing:0.05em;border-top:1px solid #1a1a1a;}
-
-/* NAME SCREEN */
 #nameScreen{display:none;position:fixed;inset:0;z-index:2000;background:#fff;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:40px 20px;}
 .ns-title{font-size:9px;font-weight:300;letter-spacing:0.55em;color:#bbb;margin-bottom:52px;}
 .ns-form{display:flex;flex-direction:column;align-items:center;width:100%;max-width:320px;}
 .ns-field{width:100%;margin-bottom:30px;}
 .ns-field label{display:block;font-size:9px;font-weight:700;letter-spacing:0.3em;color:#111;margin-bottom:12px;text-transform:uppercase;}
-.ns-field input,.ns-field select{
-  background:transparent;border:none;border-bottom:1.5px solid #ddd;color:#111;
-  font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.08em;
-  padding:10px 4px;width:100%;caret-color:#111;transition:border-color 0.15s;
-  -webkit-appearance:none;border-radius:0;
-}
+.ns-field input,.ns-field select{background:transparent;border:none;border-bottom:1.5px solid #ddd;color:#111;font-family:'Heebo',sans-serif;font-size:16px;letter-spacing:0.08em;padding:10px 4px;width:100%;caret-color:#111;transition:border-color 0.15s;-webkit-appearance:none;border-radius:0;}
 .ns-field input:focus,.ns-field select:focus{border-bottom-color:#111;outline:none;}
 .ns-field input::placeholder{color:#ccc;font-size:14px;}
 .ns-row{display:flex;gap:24px;width:100%;}
@@ -312,22 +196,16 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="navLinks">
     <span class="nav-link active" id="navHomeLink">HOME</span>
     <span class="nav-link" id="navSessionLink">SESSION</span>
-    <!-- Changed: gallery nav link always clickable -->
     <span class="nav-link" id="navGalleryLink">GALLERY</span>
   </div>
 </nav>
 
-<!-- ═══ HOME ═══ -->
 <div id="homeScreen">
-  <!-- Changed: image instead of video, no dot canvas -->
-  <img id="homeHeroImg" src="david.jpg" alt="hero" style="position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;"/>
-
+  <img id="homeHeroImg" src="david.jpeg" alt="hero" style="position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;"/>
   <div id="homeHero">
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
-      <!-- Changed: single line heading -->
       <h1 class="home-heading">SEE WHERE ATTENTION GOES.</h1>
-      <!-- Changed: single line subtitle -->
       <p class="home-subtitle">Real-time eye tracking analysis using iris detection and behavioral classification.</p>
       <button id="homeStartBtn">START SESSION</button>
       <div class="home-badges">
@@ -336,10 +214,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">Real-time</span>
         <span class="home-badge">Multi-user Compare</span>
       </div>
-      <!-- Changed: red scroll hint -->
       <div class="home-scroll-hint">
         SCROLL TO LEARN MORE
-        <span class="home-scroll-hint-arrow">↓</span>
+        <span class="home-scroll-hint-arrow">&#8595;</span>
       </div>
     </div>
   </div>
@@ -347,34 +224,17 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <div id="homeInfo">
     <div class="hi-section">
       <div class="hi-label">HOW IT WORKS</div>
-      <!-- Changed: single line -->
       <h2 class="hi-title">From eyes to insights in three steps.</h2>
       <p class="hi-sub">The system uses your webcam to detect iris position in real-time, maps gaze to screen coordinates via affine calibration, then classifies movements into research-grade metrics.</p>
       <div class="steps-row">
-        <div class="step-item">
-          <div class="step-num">01</div>
-          <div class="step-icon">👁</div>
-          <div class="step-title">EYE TRACKING</div>
-          <div class="step-desc">MediaPipe detects 478 facial landmarks per frame, isolating the iris center in both eyes for sub-pixel gaze estimation.</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">02</div>
-          <div class="step-icon">⊕</div>
-          <div class="step-title">CALIBRATION</div>
-          <div class="step-desc">A 9-point affine calibration maps your unique eye movement range to screen coordinates. Keep your head still — move only your eyes.</div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">03</div>
-          <div class="step-icon">◈</div>
-          <div class="step-title">GAZE ANALYSIS</div>
-          <div class="step-desc">Gaze samples are classified in real-time into fixations, saccades, scan paths, and heatmaps using I-DT and I-VT algorithms.</div>
-        </div>
+        <div class="step-item"><div class="step-num">01</div><div class="step-icon">&#128065;</div><div class="step-title">EYE TRACKING</div><div class="step-desc">MediaPipe detects 478 facial landmarks per frame, isolating the iris center in both eyes for sub-pixel gaze estimation.</div></div>
+        <div class="step-item"><div class="step-num">02</div><div class="step-icon">&#8853;</div><div class="step-title">CALIBRATION</div><div class="step-desc">A 9-point affine calibration maps your unique eye movement range to screen coordinates. Keep your head still.</div></div>
+        <div class="step-item"><div class="step-num">03</div><div class="step-icon">&#9672;</div><div class="step-title">GAZE ANALYSIS</div><div class="step-desc">Gaze samples are classified in real-time into fixations, saccades, scan paths, and heatmaps using I-DT and I-VT algorithms.</div></div>
       </div>
     </div>
 
     <div class="hi-section" style="background:#f7f7f7;">
       <div class="hi-label">ANALYSIS MODES</div>
-      <!-- Changed: single line -->
       <h2 class="hi-title">Six ways to read visual attention.</h2>
       <p class="hi-sub">Switch between modes in real-time to explore different dimensions of how a viewer scans an image.</p>
       <div class="modes-grid" id="modesGrid"></div>
@@ -382,38 +242,34 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
     <div class="hi-section">
       <div class="hi-label">QUICK START</div>
-      <!-- Changed: single line -->
       <h2 class="hi-title" style="margin-bottom:36px;">Up and running in under a minute.</h2>
       <ol class="howto-list">
-        <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts. Only your face is used — nothing is stored externally.</span></li>
-        <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> — name, age, and gender. These are stored with your session for group comparison.</span></li>
-        <li><span class="howto-n">03</span><span class="howto-text"><strong>Complete the 9-point calibration.</strong> Keep your head completely still and move only your eyes to each dot. Hold until the ring fills.</span></li>
-        <li><span class="howto-n">04</span><span class="howto-text"><strong>Select an image</strong> from the library, or upload your own stimulus image.</span></li>
-        <li><span class="howto-n">05</span><span class="howto-text"><strong>View the image naturally.</strong> Your gaze is recorded automatically. When done, press FINISH SESSION.</span></li>
-        <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> — fixations, saccades, heatmaps, scan path, and first fixation. Compare with others in the COMPARE tab.</span></li>
+        <li><span class="howto-n">01</span><span class="howto-text"><strong>Allow camera access</strong> when the browser prompts.</span></li>
+        <li><span class="howto-n">02</span><span class="howto-text"><strong>Enter your details</strong> for group comparison.</span></li>
+        <li><span class="howto-n">03</span><span class="howto-text"><strong>Complete the 9-point calibration.</strong> Eyes only.</span></li>
+        <li><span class="howto-n">04</span><span class="howto-text"><strong>Select an image</strong> from the library or upload.</span></li>
+        <li><span class="howto-n">05</span><span class="howto-text"><strong>View naturally.</strong> Press FINISH when done.</span></li>
+        <li><span class="howto-n">06</span><span class="howto-text"><strong>Explore your data</strong> and compare with others.</span></li>
       </ol>
     </div>
 
     <div class="hi-section hi-section-dark" style="text-align:center;padding:80px 48px;">
       <div class="hi-label hi-label-light">READY?</div>
       <h2 class="hi-title hi-title-light" style="margin-bottom:32px;">Start your session now.</h2>
-      <button id="homeStartBtn2" style="background:#fff;color:#111;border:2px solid #fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;transition:background 0.18s;border-radius:100px;">START SESSION</button>
+      <button id="homeStartBtn2" style="background:#fff;color:#111;border:2px solid #fff;font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.22em;padding:14px 48px;cursor:pointer;border-radius:100px;">START SESSION</button>
     </div>
   </div>
 </div>
 
 <canvas id="homeAnaC" style="display:none" width="160" height="90"></canvas>
 
-<!-- MAIN SESSION -->
 <div id="imgWrapper" style="display:none;">
   <img id="mainImg" src="" alt="stimulus"/>
   <canvas id="dotCanvas"></canvas>
   <div id="annLayer"></div>
 </div>
 
-<!-- Session info overlay — hidden per request -->
 <div id="sessionInfoOverlay" style="display:none !important;"></div>
-
 <div id="gazeDot"></div>
 <div id="info">ALLOW CAMERA ACCESS</div>
 <button id="finishBtn">FINISH SESSION</button>
@@ -430,61 +286,61 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   <button id="libBeginBtn" class="va-btn va-btn-primary" disabled style="opacity:0.4">BEGIN SESSION</button>
 </div>
 
-<!-- DATA SCREEN — no separate header, toolbar is on the image -->
 <div id="dataScreen">
-  <!-- Hidden header, controls moved to toolbar -->
-  <div id="dataHeader" style="display:none;">
-    <div class="data-title">SESSION DATA</div>
-    <div class="data-header-right">
-      <button class="view-tab active" id="sessionViewBtn">SESSION</button>
-      <button class="view-tab" id="compareViewBtn">COMPARE</button>
-      <button id="dataCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
-    </div>
-  </div>
+  <div id="dataHeader" style="display:none;"></div>
   <div id="dataBody" style="padding-top:0;">
-    <!-- CENTER: full-screen canvas -->
     <div id="dataCenter">
       <div id="dataImgArea">
         <img id="dataImg" src="" alt=""/>
         <canvas id="dataCanvas"></canvas>
 
-        <!-- Floating toolbar — now includes view controls + close -->
         <div id="dataToolbar">
           <button class="view-tab active" id="sessionViewBtn">SESSION</button>
           <button class="view-tab" id="compareViewBtn">COMPARE</button>
           <span class="toolbar-sep"></span>
           <button class="layer-btn active" data-layer="GAZE">GAZE</button>
-          <button class="layer-btn" data-layer="FIXATION">FIX</button>
-          <button class="layer-btn" data-layer="SACCADE">SAC</button>
-          <button class="layer-btn" data-layer="SCANPATH">PATH</button>
-          <button class="layer-btn" data-layer="HEATMAP">HEAT</button>
-          <button class="layer-btn" data-layer="FIRSTFIX">FIRST</button>
+          <button class="layer-btn" data-layer="FIXATION">FIXATION</button>
+          <button class="layer-btn" data-layer="SACCADE">SACCADE</button>
+          <button class="layer-btn" data-layer="SCANPATH">SCAN PATH</button>
+          <button class="layer-btn" data-layer="HEATMAP">HEATMAP</button>
+          <button class="layer-btn" data-layer="FIRSTFIX">FIRST FIX</button>
           <span class="toolbar-sep"></span>
-          <button id="playBtn">↺ REPLAY</button>
+          <button id="playBtn">&#8634; REPLAY</button>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="animatedBtn">ANIM</button>
+            <button class="toggle-btn active" id="animatedBtn">ANIMATED</button>
             <button class="toggle-btn" id="staticBtn">STATIC</button>
           </div>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="withImgBtn">IMG</button>
-            <button class="toggle-btn" id="withoutImgBtn">OFF</button>
+            <button class="toggle-btn active" id="withImgBtn">IMAGE ON</button>
+            <button class="toggle-btn" id="withoutImgBtn">IMAGE OFF</button>
           </div>
           <span class="toolbar-sep"></span>
-          <button id="dataCloseBtn">✕</button>
+          <button id="dataCloseBtn">&#10005; CLOSE</button>
         </div>
 
-        <!-- Always-visible session info badge on data image — minimal pill style -->
         <div id="dataSessionBadge">
-          <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">LOC</span><span class="dsb-val" id="dsb-location">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">DUR</span><span class="dsb-val" id="dsb-duration">—</span></div>
-          <div class="dsb-item"><span class="dsb-label">PTS</span><span class="dsb-val" id="dsb-samples">—</span></div>
+          <div class="dsb-header" id="dsbHeader">
+            <span class="dsb-header-label">SESSION INFO</span>
+            <span class="dsb-toggle" id="dsbToggle">&#9650;</span>
+          </div>
+          <div class="dsb-content" id="dsbContent">
+            <div class="dsb-item"><span class="dsb-label">NAME</span><span class="dsb-val" id="dsb-name">&#8212;</span></div>
+            <div class="dsb-item"><span class="dsb-label">AGE</span><span class="dsb-val" id="dsb-age">&#8212;</span></div>
+            <div class="dsb-item"><span class="dsb-label">GENDER</span><span class="dsb-val" id="dsb-gender">&#8212;</span></div>
+            <div class="dsb-item"><span class="dsb-label">LOCATION</span><span class="dsb-val" id="dsb-location">&#8212;</span></div>
+            <div class="dsb-item"><span class="dsb-label">DURATION</span><span class="dsb-val" id="dsb-duration">&#8212;</span></div>
+            <div class="dsb-item"><span class="dsb-label">SAMPLES</span><span class="dsb-val" id="dsb-samples">&#8212;</span></div>
+          </div>
         </div>
 
-        <!-- Analysis-specific stats badge -->
-        <div id="dataAnalysisBadge"></div>
+        <div id="dataAnalysisBadge">
+          <div class="dab-header" id="dabHeader">
+            <span class="dab-header-label" id="dabHeaderLabel">ANALYSIS</span>
+            <span class="dab-toggle" id="dabToggle">&#9650;</span>
+          </div>
+          <div class="dab-content" id="dabContent"></div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -509,8 +365,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <option value="ttff_asc">Fastest TTFF</option>
         <option value="ttff_desc">Slowest TTFF</option>
         <option value="sacAmp_desc">Highest Sac Amp</option>
-        <option value="age_asc">Age ↑</option>
-        <option value="age_desc">Age ↓</option>
+        <option value="age_asc">Age Up</option>
+        <option value="age_desc">Age Down</option>
       </select>
       <span class="cf-sep"></span>
       <span class="cf-label">LAYER</span>
@@ -530,7 +386,6 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
 </div>
 
-<!-- GALLERY SCREEN -->
 <div id="galleryScreen">
   <div id="galleryHeader">
     <div class="gallery-title">IMAGE GALLERY</div>
@@ -538,12 +393,9 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
       <button id="galleryCloseBtn" class="va-btn va-btn-secondary">CLOSE</button>
     </div>
   </div>
-  <div id="galleryBody">
-    <!-- Populated by JS -->
-  </div>
+  <div id="galleryBody"></div>
 </div>
 
-<!-- NAME SCREEN -->
 <div id="nameScreen">
   <div class="ns-title">VISUAL ANALYSIS SYSTEM</div>
   <div class="ns-form">
@@ -554,7 +406,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
     <div class="ns-row">
       <div class="ns-field">
         <label for="ageInput">AGE</label>
-        <input id="ageInput" type="number" min="1" max="120" placeholder="—"/>
+        <input id="ageInput" type="number" min="1" max="120" placeholder="&#8212;"/>
       </div>
       <div class="ns-field">
         <label for="genderInput">GENDER</label>
@@ -574,18 +426,11 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 'use strict';
 import { FaceLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
 
-/* ══════════════════════════════════════════════════════════════════════
-   HOME SCREEN — no video, no dot analysis
-   ══════════════════════════════════════════════════════════════════════ */
-const homeScreen     = document.getElementById('homeScreen');
-const navHomeLink    = document.getElementById('navHomeLink');
-const navSessionLink = document.getElementById('navSessionLink');
-const navGalleryLink = document.getElementById('navGalleryLink');
-
-/* ══════════════════════════════════════════════════════════════════════
-   NAVIGATION
-   ══════════════════════════════════════════════════════════════════════ */
-let appStarted = false;
+const homeScreen=document.getElementById('homeScreen');
+const navHomeLink=document.getElementById('navHomeLink');
+const navSessionLink=document.getElementById('navSessionLink');
+const navGalleryLink=document.getElementById('navGalleryLink');
+let appStarted=false;
 
 function showHome(){homeScreen.style.display='block';navHomeLink.classList.add('active');navSessionLink.classList.remove('active');navGalleryLink.classList.remove('active');}
 function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
@@ -594,35 +439,30 @@ function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 document.getElementById('homeStartBtn').addEventListener('click',goToSession);
 document.getElementById('homeStartBtn2').addEventListener('click',goToSession);
 navSessionLink.addEventListener('click',goToSession);
-navHomeLink.addEventListener('click',()=>{showHome();});
-// Changed: gallery always openable
-navGalleryLink.addEventListener('click',()=>{openGallery();});
+navHomeLink.addEventListener('click',()=>showHome());
+navGalleryLink.addEventListener('click',()=>openGallery());
 
-/* ══════════════════════════════════════════════════════════════════════
-   GEOLOCATION — auto-detect on page load
-   ══════════════════════════════════════════════════════════════════════ */
+// Collapsible: session badge
+const dsbHeader=document.getElementById('dsbHeader');
+const dsbContent=document.getElementById('dsbContent');
+const dsbToggle=document.getElementById('dsbToggle');
+dsbHeader.addEventListener('click',()=>{const c=dsbContent.classList.toggle('collapsed');dsbToggle.classList.toggle('collapsed',c);});
+
+// Collapsible: analysis badge
+const dabHeader=document.getElementById('dabHeader');
+const dabContent=document.getElementById('dabContent');
+const dabToggle=document.getElementById('dabToggle');
+dabHeader.addEventListener('click',()=>{const c=dabContent.classList.toggle('collapsed');dabToggle.classList.toggle('collapsed',c);});
+
 let userLocation='';
-async function fetchLocation(){
-  try{
-    const r=await fetch('https://ipapi.co/json/');
-    const d=await r.json();
-    userLocation=[d.city,d.country_name].filter(Boolean).join(', ');
-  }
-  catch(_){userLocation='Unknown';}
-}
+async function fetchLocation(){try{const r=await fetch('https://ipapi.co/json/');const d=await r.json();userLocation=[d.city,d.country_name].filter(Boolean).join(', ');}catch(_){userLocation='Unknown';}}
 fetchLocation();
 
-/* ══════════════════════════════════════════════════════════════════════
-   CONSTANTS
-   ══════════════════════════════════════════════════════════════════════ */
 const FIX_DISPERSION=0.04,FIX_MIN_DURATION=150,SAC_VELOCITY=0.8,SAC_MIN_AMP=0.03;
 const W_HEAT=200,H_HEAT=112,HEAT_SIGMA=0.07,HEAT_WEIGHT=0.18,HEAT_DECAY=0.9975,GAZE_LERP=0.08;
 const CAL_PTS=[[0.1,0.1],[0.5,0.1],[0.9,0.1],[0.9,0.5],[0.5,0.5],[0.1,0.5],[0.1,0.9],[0.5,0.9],[0.9,0.9]];
 const CAL_VAR_THRESH=0.0012,CAL_FILL_RATE=0.6,CAL_DRAIN_RATE=0.8,BUF_MAX=30;
 
-/* ══════════════════════════════════════════════════════════════════════
-   DOM
-   ══════════════════════════════════════════════════════════════════════ */
 const mainImg=document.getElementById('mainImg'),imgWrapper=document.getElementById('imgWrapper');
 const dotCanvas=document.getElementById('dotCanvas'),dotCtx=dotCanvas.getContext('2d');
 const annLayer=document.getElementById('annLayer'),gazeDot=document.getElementById('gazeDot');
@@ -630,13 +470,8 @@ const infoEl=document.getElementById('info'),calOverlay=document.getElementById(
 const calCanvas=document.getElementById('calCanvas'),calCtx=calCanvas.getContext('2d');
 const calStartBtn=document.getElementById('calStartBtn');
 
-/* ══════════════════════════════════════════════════════════════════════
-   STATE
-   ══════════════════════════════════════════════════════════════════════ */
 let currentUser='',currentAge='',currentGender='';
-let imageLibrary=[],currentImageIdx=0;
-// Changed: viewed tracking allows re-viewing but marks as viewed
-let viewedImages = {};
+let imageLibrary=[],currentImageIdx=0,viewedImages={};
 let fixationHistory=[],currentFixation=null,scanPathHistory=[],saccadeHistory=[],saccadeActive=false,saccadeStart=null;
 let heatmap=new Float32Array(W_HEAT*H_HEAT),heatCanvas,heatCtx2;
 let firstFix=null,firstFixDone=false,firstFixModeTs=0,sessionStartTs=0,gazeLog=[];
@@ -647,710 +482,146 @@ let eyeCalMap=null;
 window._gazeHistory=[];
 let currentAnimation=null,dataActiveLayer='GAZE',playMode='ANIMATED',showImg=true,viewSession=null;
 const allSessions=[];
-let sessionInfoInterval=null;
 
-/* ══════════════════════════════════════════════════════════════════════
-   EYE STABILITY
-   ══════════════════════════════════════════════════════════════════════ */
-function eyeStab(){
-  const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;
-  const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N);
-  const mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N;
-  const vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;
-  return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));
-}
+function eyeStab(){const N=Math.min(eyeOffXBuf.length,20);if(N<8)return 0;const xs=eyeOffXBuf.slice(-N),ys=eyeOffYBuf.slice(-N);const mx=xs.reduce((a,b)=>a+b,0)/N,my=ys.reduce((a,b)=>a+b,0)/N;const vx=xs.reduce((a,b)=>a+(b-mx)**2,0)/N,vy=ys.reduce((a,b)=>a+(b-my)**2,0)/N;return Math.max(0,Math.min(1,1-(vx+vy)/CAL_VAR_THRESH));}
 
-/* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — FIXATION I-DT
-   ══════════════════════════════════════════════════════════════════════ */
-function updateFixations(ts){
-  const gh=window._gazeHistory;if(gh.length<2)return;
-  const win=gh.filter(p=>p.ts>ts-600);if(win.length<2)return;
-  const xs=win.map(p=>p.x),ys=win.map(p=>p.y);
-  const disp=(Math.max(...xs)-Math.min(...xs))+(Math.max(...ys)-Math.min(...ys));
-  if(disp<FIX_DISPERSION){
-    const cx=xs.reduce((a,b)=>a+b,0)/xs.length,cy=ys.reduce((a,b)=>a+b,0)/ys.length;
-    if(!currentFixation){currentFixation={startTs:ts,cx,cy};}
-    else{currentFixation.cx=cx;currentFixation.cy=cy;currentFixation.duration=ts-currentFixation.startTs;}
-  }else{
-    if(currentFixation){
-      const dur=ts-currentFixation.startTs;
-      if(dur>=FIX_MIN_DURATION){
-        const fe={x:currentFixation.cx,y:currentFixation.cy,startTs:currentFixation.startTs,endTs:ts,duration:dur};
-        fixationHistory.push(fe);if(fixationHistory.length>100)fixationHistory.shift();
-        scanPathHistory.push(fe);if(scanPathHistory.length>50)scanPathHistory.shift();
-      }
-      currentFixation=null;
-    }
-  }
-}
+function updateFixations(ts){const gh=window._gazeHistory;if(gh.length<2)return;const win=gh.filter(p=>p.ts>ts-600);if(win.length<2)return;const xs=win.map(p=>p.x),ys=win.map(p=>p.y);const disp=(Math.max(...xs)-Math.min(...xs))+(Math.max(...ys)-Math.min(...ys));if(disp<FIX_DISPERSION){const cx=xs.reduce((a,b)=>a+b,0)/xs.length,cy=ys.reduce((a,b)=>a+b,0)/ys.length;if(!currentFixation){currentFixation={startTs:ts,cx,cy};}else{currentFixation.cx=cx;currentFixation.cy=cy;currentFixation.duration=ts-currentFixation.startTs;}}else{if(currentFixation){const dur=ts-currentFixation.startTs;if(dur>=FIX_MIN_DURATION){const fe={x:currentFixation.cx,y:currentFixation.cy,startTs:currentFixation.startTs,endTs:ts,duration:dur};fixationHistory.push(fe);if(fixationHistory.length>100)fixationHistory.shift();scanPathHistory.push(fe);if(scanPathHistory.length>50)scanPathHistory.shift();}currentFixation=null;}}}
 
-/* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — SACCADE I-VT
-   ══════════════════════════════════════════════════════════════════════ */
-function updateSaccades(ts){
-  const gh=window._gazeHistory;if(gh.length<2)return;
-  const last=gh[gh.length-1],prev=gh[gh.length-2],dt=(last.ts-prev.ts)/1000;if(dt<=0)return;
-  const vel=Math.hypot(last.x-prev.x,last.y-prev.y)/dt;
-  if(vel>=SAC_VELOCITY){if(!saccadeActive){saccadeActive=true;saccadeStart={x:prev.x,y:prev.y,ts:prev.ts};}}
-  else{
-    if(saccadeActive&&saccadeStart){
-      const amp=Math.hypot(last.x-saccadeStart.x,last.y-saccadeStart.y);
-      if(amp>=SAC_MIN_AMP){saccadeHistory.push({fromX:saccadeStart.x,fromY:saccadeStart.y,toX:last.x,toY:last.y,startTs:saccadeStart.ts,endTs:ts,duration:ts-saccadeStart.ts});if(saccadeHistory.length>100)saccadeHistory.shift();}
-      saccadeActive=false;saccadeStart=null;
-    }
-  }
-}
+function updateSaccades(ts){const gh=window._gazeHistory;if(gh.length<2)return;const last=gh[gh.length-1],prev=gh[gh.length-2],dt=(last.ts-prev.ts)/1000;if(dt<=0)return;const vel=Math.hypot(last.x-prev.x,last.y-prev.y)/dt;if(vel>=SAC_VELOCITY){if(!saccadeActive){saccadeActive=true;saccadeStart={x:prev.x,y:prev.y,ts:prev.ts};}}else{if(saccadeActive&&saccadeStart){const amp=Math.hypot(last.x-saccadeStart.x,last.y-saccadeStart.y);if(amp>=SAC_MIN_AMP){saccadeHistory.push({fromX:saccadeStart.x,fromY:saccadeStart.y,toX:last.x,toY:last.y,startTs:saccadeStart.ts,endTs:ts,duration:ts-saccadeStart.ts});if(saccadeHistory.length>100)saccadeHistory.shift();}saccadeActive=false;saccadeStart=null;}}}
 
-/* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS — HEATMAP
-   ══════════════════════════════════════════════════════════════════════ */
-function updateHeatmap(){
-  for(let i=0;i<heatmap.length;i++)heatmap[i]*=HEAT_DECAY;
-  const gx=sGX*W_HEAT,gy=sGY*H_HEAT,sigma=HEAT_SIGMA*Math.max(W_HEAT,H_HEAT),r=Math.ceil(3*sigma);
-  const x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(W_HEAT-1,Math.ceil(gx+r));
-  const y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(H_HEAT-1,Math.ceil(gy+r));
-  const inv2s2=1/(2*sigma*sigma);
-  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)heatmap[y*W_HEAT+x]+=HEAT_WEIGHT*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);
-}
-
+function updateHeatmap(){for(let i=0;i<heatmap.length;i++)heatmap[i]*=HEAT_DECAY;const gx=sGX*W_HEAT,gy=sGY*H_HEAT,sigma=HEAT_SIGMA*Math.max(W_HEAT,H_HEAT),r=Math.ceil(3*sigma);const x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(W_HEAT-1,Math.ceil(gx+r));const y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(H_HEAT-1,Math.ceil(gy+r));const inv2s2=1/(2*sigma*sigma);for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)heatmap[y*W_HEAT+x]+=HEAT_WEIGHT*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
 function updateFirstFix(){if(firstFixDone)return;const recent=fixationHistory.filter(f=>f.startTs>=firstFixModeTs);if(recent.length>0){firstFix=recent[0];firstFixDone=true;}}
 function drawFrame(){dotCtx.clearRect(0,0,dotCanvas.width,dotCanvas.height);}
-
-function applyGaze(ts){
-  lastGazeTs=ts;sGX+=(rawGX-sGX)*GAZE_LERP;sGY+=(rawGY-sGY)*GAZE_LERP;
-  const W=imgWrapper.offsetWidth,H=imgWrapper.offsetHeight;if(!W||!H)return;
-  const rect=imgWrapper.getBoundingClientRect();
-  gazeDot.style.left=(rect.left+sGX*W)+'px';gazeDot.style.top=(rect.top+sGY*H)+'px';
-  window._gazeHistory.push({x:sGX,y:sGY,ts});if(window._gazeHistory.length>90)window._gazeHistory.shift();
-}
-
+function applyGaze(ts){lastGazeTs=ts;sGX+=(rawGX-sGX)*GAZE_LERP;sGY+=(rawGY-sGY)*GAZE_LERP;const W=imgWrapper.offsetWidth,H=imgWrapper.offsetHeight;if(!W||!H)return;const rect=imgWrapper.getBoundingClientRect();gazeDot.style.left=(rect.left+sGX*W)+'px';gazeDot.style.top=(rect.top+sGY*H)+'px';window._gazeHistory.push({x:sGX,y:sGY,ts});if(window._gazeHistory.length>90)window._gazeHistory.shift();}
 function mainLoop(ts){applyGaze(ts);updateFixations(ts);updateSaccades(ts);updateHeatmap();updateFirstFix();drawFrame();requestAnimationFrame(mainLoop);}
 
-/* ══════════════════════════════════════════════════════════════════════
-   AFFINE FIT
-   ══════════════════════════════════════════════════════════════════════ */
-function fitAffine(data){
-  let A00=0,A01=0,A02=0,A11=0,A12=0,Bx0=0,Bx1=0,Bx2=0,By0=0,By1=0,By2=0;
-  const n=data.length;
-  for(const d of data){A00+=d.ox*d.ox;A01+=d.ox*d.oy;A02+=d.ox;A11+=d.oy*d.oy;A12+=d.oy;Bx0+=d.ox*d.sx;Bx1+=d.oy*d.sx;Bx2+=d.sx;By0+=d.ox*d.sy;By1+=d.oy*d.sy;By2+=d.sy;}
-  const M=[[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];
-  const inv=inv3(M);if(!inv)return null;
-  const [ax,bx,cx]=mv3(inv,[Bx0,Bx1,Bx2]);const [ay,by,cy]=mv3(inv,[By0,By1,By2]);
-  return {ax,bx,cx,ay,by,cy};
-}
-function inv3(m){
-  const[[a,b,c],[d,e,f],[g,h,k]]=m;
-  const det=a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);if(Math.abs(det)<1e-12)return null;
-  const s=1/det;
-  return[[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],[(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],[(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];
-}
+function fitAffine(data){let A00=0,A01=0,A02=0,A11=0,A12=0,Bx0=0,Bx1=0,Bx2=0,By0=0,By1=0,By2=0;const n=data.length;for(const d of data){A00+=d.ox*d.ox;A01+=d.ox*d.oy;A02+=d.ox;A11+=d.oy*d.oy;A12+=d.oy;Bx0+=d.ox*d.sx;Bx1+=d.oy*d.sx;Bx2+=d.sx;By0+=d.ox*d.sy;By1+=d.oy*d.sy;By2+=d.sy;}const M=[[A00,A01,A02],[A01,A11,A12],[A02,A12,n]];const inv=inv3(M);if(!inv)return null;const[ax,bx,cx]=mv3(inv,[Bx0,Bx1,Bx2]);const[ay,by,cy]=mv3(inv,[By0,By1,By2]);return{ax,bx,cx,ay,by,cy};}
+function inv3(m){const[[a,b,c],[d,e,f],[g,h,k]]=m;const det=a*(e*k-f*h)-b*(d*k-f*g)+c*(d*h-e*g);if(Math.abs(det)<1e-12)return null;const s=1/det;return[[(e*k-f*h)*s,(c*h-b*k)*s,(b*f-c*e)*s],[(f*g-d*k)*s,(a*k-c*g)*s,(c*d-a*f)*s],[(d*h-e*g)*s,(b*g-a*h)*s,(a*e-b*d)*s]];}
 function mv3(m,v){return[m[0][0]*v[0]+m[0][1]*v[1]+m[0][2]*v[2],m[1][0]*v[0]+m[1][1]*v[1]+m[1][2]*v[2],m[2][0]*v[0]+m[2][1]*v[1]+m[2][2]*v[2]];}
 
-/* ══════════════════════════════════════════════════════════════════════
-   CALIBRATION
-   ══════════════════════════════════════════════════════════════════════ */
 function resizeCal(){calCanvas.width=window.innerWidth;calCanvas.height=window.innerHeight;}
-function drawCalIntro(){
-  const W=calCanvas.width,H=calCanvas.height;
-  calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
-  calCtx.fillStyle='#111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);
-  calCtx.strokeStyle='#ddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();
-  calCtx.fillStyle='#666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL — move only your EYES to each dot',W/2,H/2-14);
-  calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);
-  calCtx.fillStyle='#aaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady — only eyes should move',W/2,H/2+34);
-}
-function drawCalDone(){
-  const W=calCanvas.width,H=calCanvas.height;
-  calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';
-  calCtx.fillStyle='#111';calCtx.font='bold 24px Heebo';calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);
-  calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);
-}
-function awaitDot(px,py,index){
-  return new Promise(resolve=>{
-    let progress=0,prevTs=null;const samples=[];
-    function frame(ts){
-      const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;
-      const s=eyeStab();
-      progress+=s*CAL_FILL_RATE*dt;progress-=(1-s)*CAL_DRAIN_RATE*dt;progress=Math.max(0,Math.min(1,progress));
-      if(s>0.45&&eyeValid)samples.push({ox:curEyeOffX,oy:curEyeOffY});
-      const W=calCanvas.width,H=calCanvas.height;
-      calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);
-      calCtx.textAlign='right';calCtx.fillStyle='#aaa';calCtx.font='14px Heebo';calCtx.fillText(`${index+1}  /  ${CAL_PTS.length}`,W-28,36);
-      calCtx.textAlign='center';calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('LOOK AT DOT · HEAD STILL · EYES ONLY',W/2,H-26);
-      calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1.5;calCtx.stroke();
-      if(progress>0){calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);calCtx.strokeStyle=`rgba(224,26,0,${0.35+s*0.65})`;calCtx.lineWidth=2;calCtx.stroke();}
-      const r=3.5+s*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);calCtx.fillStyle=`rgba(224,26,0,${0.2+s*0.8})`;calCtx.fill();
-      if(progress>=1){calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='rgba(224,26,0,0.9)';calCtx.lineWidth=2;calCtx.stroke();const n=samples.length||1;setTimeout(()=>resolve({ox:samples.reduce((a,v)=>a+v.ox,0)/n,oy:samples.reduce((a,v)=>a+v.oy,0)/n}),280);}
-      else requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  });
-}
-async function runCalibration(){
-  document.getElementById('mainNav').style.display='none';
-  resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();
-  calStartBtn.style.display='block';
-  await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));
-  calStartBtn.style.display='none';
-  const calData=[];
-  for(let i=0;i<CAL_PTS.length;i++){
-    const[nx,ny]=CAL_PTS[i],px=nx*window.innerWidth,py=ny*window.innerHeight;
-    if(i>0)await new Promise(r=>setTimeout(r,320));
-    const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});
-  }
-  if(calData.length>=4)eyeCalMap=fitAffine(calData);
-  drawCalDone();await new Promise(r=>setTimeout(r,900));
-  calOverlay.style.display='none';
-  document.getElementById('mainNav').style.display='flex';
-}
+function drawCalIntro(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 22px Heebo';calCtx.fillText('EYE TRACKING CALIBRATION',W/2,H/2-52);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1;calCtx.beginPath();calCtx.moveTo(W/2-220,H/2-36);calCtx.lineTo(W/2+220,H/2-36);calCtx.stroke();calCtx.fillStyle='#666';calCtx.font='14px Heebo';calCtx.fillText('Keep your HEAD STILL - move only your EYES to each dot',W/2,H/2-14);calCtx.fillText('Hold your gaze until the ring fills completely',W/2,H/2+8);calCtx.fillStyle='#aaa';calCtx.font='12px Heebo';calCtx.fillText('Head steady - only eyes should move',W/2,H/2+34);}
+function drawCalDone(){const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='center';calCtx.fillStyle='#111';calCtx.font='bold 24px Heebo';calCtx.fillText('SYNCHRONIZED',W/2,H/2-8);calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('Calibration complete',W/2,H/2+18);}
+function awaitDot(px,py,index){return new Promise(resolve=>{let progress=0,prevTs=null;const samples=[];function frame(ts){const dt=prevTs?Math.min((ts-prevTs)/1000,0.05):0;prevTs=ts;const s=eyeStab();progress+=s*CAL_FILL_RATE*dt;progress-=(1-s)*CAL_DRAIN_RATE*dt;progress=Math.max(0,Math.min(1,progress));if(s>0.45&&eyeValid)samples.push({ox:curEyeOffX,oy:curEyeOffY});const W=calCanvas.width,H=calCanvas.height;calCtx.fillStyle='#fff';calCtx.fillRect(0,0,W,H);calCtx.textAlign='right';calCtx.fillStyle='#aaa';calCtx.font='14px Heebo';calCtx.fillText((index+1)+'  /  '+CAL_PTS.length,W-28,36);calCtx.textAlign='center';calCtx.fillStyle='#aaa';calCtx.font='13px Heebo';calCtx.fillText('LOOK AT DOT - HEAD STILL - EYES ONLY',W/2,H-26);calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='#ddd';calCtx.lineWidth=1.5;calCtx.stroke();if(progress>0){calCtx.beginPath();calCtx.arc(px,py,22,-Math.PI/2,-Math.PI/2+progress*Math.PI*2);calCtx.strokeStyle='rgba(224,26,0,'+(0.35+s*0.65)+')';calCtx.lineWidth=2;calCtx.stroke();}const r=3.5+s*2.5;calCtx.beginPath();calCtx.arc(px,py,r,0,Math.PI*2);calCtx.fillStyle='rgba(224,26,0,'+(0.2+s*0.8)+')';calCtx.fill();if(progress>=1){calCtx.beginPath();calCtx.arc(px,py,22,0,Math.PI*2);calCtx.strokeStyle='rgba(224,26,0,0.9)';calCtx.lineWidth=2;calCtx.stroke();const n=samples.length||1;setTimeout(()=>resolve({ox:samples.reduce((a,v)=>a+v.ox,0)/n,oy:samples.reduce((a,v)=>a+v.oy,0)/n}),280);}else requestAnimationFrame(frame);}requestAnimationFrame(frame);});}
 
-/* ══════════════════════════════════════════════════════════════════════
-   EYE TRACKING
-   ══════════════════════════════════════════════════════════════════════ */
-async function startEyeTracking(){
-  let fl;
-  try{const fs=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');fl=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1});}
-  catch(e){console.warn('[eye]',e);return false;}
-  try{
-    const webcamEl=document.createElement('video');
-    webcamEl.style.cssText='position:fixed;bottom:8px;right:8px;width:1px;height:1px;opacity:0;';
-    webcamEl.autoplay=true;webcamEl.muted=true;webcamEl.playsInline=true;
-    document.body.appendChild(webcamEl);
-    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});
-    webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});
-    let lastCamT=-1;
-    function track(){
-      if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){
-        lastCamT=webcamEl.currentTime;
-        try{
-          const res=fl.detectForVideo(webcamEl,performance.now());
-          if(res.faceLandmarks?.length>0){
-            const lm=res.faceLandmarks[0];
-            const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];
-            const hxR=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8,hyR=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;
-            curOffX=1-hxR;curOffY=hyR;offXBuf.push(curOffX);if(offXBuf.length>BUF_MAX)offXBuf.shift();offYBuf.push(curOffY);if(offYBuf.length>BUF_MAX)offYBuf.shift();
-            const lI=lm[468],rI=lm[473],lIn=lm[33],lO=lm[133],rIn=lm[362],rO=lm[263];
-            if(lI&&rI&&lIn&&lO&&rIn&&rO){
-              const lEW=Math.hypot(lO.x-lIn.x,lO.y-lIn.y),rEW=Math.hypot(rO.x-rIn.x,rO.y-rIn.y);
-              if(lEW>0.01&&rEW>0.01){
-                let eX=((lI.x-lIn.x)/lEW+(rI.x-rIn.x)/rEW)/2,eY=((lI.y-lIn.y)/lEW+(rI.y-rIn.y)/rEW)/2;
-                eX=(eX-0.5)*2.5+0.5;eY=(eY-0.5)*2.5+0.5;eX=1-eX;
-                curEyeOffX=eX;curEyeOffY=eY;eyeOffXBuf.push(eX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();eyeOffYBuf.push(eY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();
-                eyeValid=true;
-                if(eyeCalMap){rawGX=eyeCalMap.ax*eX+eyeCalMap.bx*eY+eyeCalMap.cx;rawGY=eyeCalMap.ay*eX+eyeCalMap.by*eY+eyeCalMap.cy;}else{rawGX=eX;rawGY=eY;}
-                rawGX=Math.max(0,Math.min(1,rawGX));rawGY=Math.max(0,Math.min(1,rawGY));
-                if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}
-              }else eyeValid=false;
-            }else eyeValid=false;
-          }
-        }catch(_){}
-      }
-      requestAnimationFrame(track);
-    }
-    requestAnimationFrame(track);
-  }catch(e){console.warn('[eye] webcam',e);return false;}
-  return true;
-}
+async function runCalibration(){document.getElementById('mainNav').style.display='none';resizeCal();window.addEventListener('resize',resizeCal);drawCalIntro();calStartBtn.style.display='block';await new Promise(r=>calStartBtn.addEventListener('click',r,{once:true}));calStartBtn.style.display='none';const calData=[];for(let i=0;i<CAL_PTS.length;i++){const[nx,ny]=CAL_PTS[i],px=nx*window.innerWidth,py=ny*window.innerHeight;if(i>0)await new Promise(r=>setTimeout(r,320));const{ox,oy}=await awaitDot(px,py,i);calData.push({sx:nx,sy:ny,ox,oy});}if(calData.length>=4)eyeCalMap=fitAffine(calData);drawCalDone();await new Promise(r=>setTimeout(r,900));calOverlay.style.display='none';document.getElementById('mainNav').style.display='flex';}
 
-function enablePointerFallback(){
-  infoEl.textContent='MOVE MOUSE TO EXPLORE';
-  const onMove=(cx,cy)=>{
-    const rect=imgWrapper.getBoundingClientRect();
-    const nx=(cx-rect.left)/rect.width,ny=(cy-rect.top)/rect.height;
-    if(nx>=0&&nx<=1&&ny>=0&&ny<=1){rawGX=nx;rawGY=ny;if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}
-  };
-  document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
-  document.addEventListener('touchmove',e=>{e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
-}
+async function startEyeTracking(){let fl;try{const fs=await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');fl=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:'GPU'},outputFaceBlendshapes:false,runningMode:'VIDEO',numFaces:1});}catch(e){console.warn('[eye]',e);return false;}try{const webcamEl=document.createElement('video');webcamEl.style.cssText='position:fixed;bottom:8px;right:8px;width:1px;height:1px;opacity:0;';webcamEl.autoplay=true;webcamEl.muted=true;webcamEl.playsInline=true;document.body.appendChild(webcamEl);const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}}});webcamEl.srcObject=stream;await new Promise(r=>{webcamEl.onloadeddata=r;});let lastCamT=-1;function track(){if(webcamEl.readyState>=2&&webcamEl.currentTime!==lastCamT){lastCamT=webcamEl.currentTime;try{const res=fl.detectForVideo(webcamEl,performance.now());if(res.faceLandmarks?.length>0){const lm=res.faceLandmarks[0];const nose=lm[1],brow=lm[168],chin=lm[152],lChk=lm[234],rChk=lm[454];const hxR=(nose.x*4+brow.x+chin.x+lChk.x+rChk.x)/8,hyR=(nose.y*4+brow.y+chin.y+lChk.y+rChk.y)/8;curOffX=1-hxR;curOffY=hyR;offXBuf.push(curOffX);if(offXBuf.length>BUF_MAX)offXBuf.shift();offYBuf.push(curOffY);if(offYBuf.length>BUF_MAX)offYBuf.shift();const lI=lm[468],rI=lm[473],lIn=lm[33],lO=lm[133],rIn=lm[362],rO=lm[263];if(lI&&rI&&lIn&&lO&&rIn&&rO){const lEW=Math.hypot(lO.x-lIn.x,lO.y-lIn.y),rEW=Math.hypot(rO.x-rIn.x,rO.y-rIn.y);if(lEW>0.01&&rEW>0.01){let eX=((lI.x-lIn.x)/lEW+(rI.x-rIn.x)/rEW)/2,eY=((lI.y-lIn.y)/lEW+(rI.y-rIn.y)/rEW)/2;eX=(eX-0.5)*2.5+0.5;eY=(eY-0.5)*2.5+0.5;eX=1-eX;curEyeOffX=eX;curEyeOffY=eY;eyeOffXBuf.push(eX);if(eyeOffXBuf.length>BUF_MAX)eyeOffXBuf.shift();eyeOffYBuf.push(eY);if(eyeOffYBuf.length>BUF_MAX)eyeOffYBuf.shift();eyeValid=true;if(eyeCalMap){rawGX=eyeCalMap.ax*eX+eyeCalMap.bx*eY+eyeCalMap.cx;rawGY=eyeCalMap.ay*eX+eyeCalMap.by*eY+eyeCalMap.cy;}else{rawGX=eX;rawGY=eY;}rawGX=Math.max(0,Math.min(1,rawGX));rawGY=Math.max(0,Math.min(1,rawGY));if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}else eyeValid=false;}else eyeValid=false;}}catch(_){}}requestAnimationFrame(track);}requestAnimationFrame(track);}catch(e){console.warn('[eye] webcam',e);return false;}return true;}
 
-/* ══════════════════════════════════════════════════════════════════════
-   IMAGE LIBRARY — each image can be viewed once per user
-   ══════════════════════════════════════════════════════════════════════ */
-function isImageViewed(imgIdx){
-  return !!viewedImages[`${currentUser}::${imgIdx}`];
-}
-function markImageViewed(imgIdx){
-  viewedImages[`${currentUser}::${imgIdx}`]=true;
-}
+function enablePointerFallback(){infoEl.textContent='MOVE MOUSE TO EXPLORE';const onMove=(cx,cy)=>{const rect=imgWrapper.getBoundingClientRect();const nx=(cx-rect.left)/rect.width,ny=(cy-rect.top)/rect.height;if(nx>=0&&nx<=1&&ny>=0&&ny<=1){rawGX=nx;rawGY=ny;if(!gazeOn){gazeOn=true;infoEl.style.opacity='0';}}};document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));document.addEventListener('touchmove',e=>{e.preventDefault();onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});}
 
+function isImageViewed(i){return !!viewedImages[currentUser+'::'+i];}
+function markImageViewed(i){viewedImages[currentUser+'::'+i]=true;}
 function showLib(){document.getElementById('libraryScreen').style.display='flex';renderLib();}
-function renderLib(){
-  const grid=document.getElementById('libGrid');grid.innerHTML='';
-  imageLibrary.forEach((img,i)=>{
-    const viewed=isImageViewed(i);
-    const card=document.createElement('div');
-    // Changed: viewed images shown with overlay but still selectable
-    card.className='lib-card'+(i===currentImageIdx?' selected':'')+(viewed?' viewed-once':'');
-    card.innerHTML=`<img src="${img.src}" alt="${img.name}"/><span class="lib-num">${String(i+1).padStart(2,'0')}</span>`;
-    // All images selectable, even viewed ones (but begin btn handles enforcement)
-    card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};
-    grid.appendChild(card);
-  });
-  const add=document.createElement('div');add.className='lib-add';
-  add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';
-  add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);
-  updateBeginBtn();
-}
+function renderLib(){const grid=document.getElementById('libGrid');grid.innerHTML='';imageLibrary.forEach((img,i)=>{const viewed=isImageViewed(i);const card=document.createElement('div');card.className='lib-card'+(i===currentImageIdx?' selected':'')+(viewed?' viewed-once':'');card.innerHTML='<img src="'+img.src+'" alt="'+img.name+'"/><span class="lib-num">'+String(i+1).padStart(2,'0')+'</span>';card.onclick=()=>{currentImageIdx=i;document.querySelectorAll('.lib-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');updateBeginBtn();};grid.appendChild(card);});const add=document.createElement('div');add.className='lib-add';add.innerHTML='<span class="lib-add-plus">+</span><span class="lib-add-label">ADD IMAGE</span>';add.onclick=()=>document.getElementById('libFileInput').click();grid.appendChild(add);updateBeginBtn();}
+function updateBeginBtn(){const btn=document.getElementById('libBeginBtn');const ok=imageLibrary.length>0&&!isImageViewed(currentImageIdx);btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';}
+document.getElementById('libFileInput').addEventListener('change',e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});e.target.value='';});
 
-function updateBeginBtn(){
-  const btn=document.getElementById('libBeginBtn');
-  // Can begin if there's any image selected that hasn't been viewed
-  const canBegin = imageLibrary.length > 0 && !isImageViewed(currentImageIdx);
-  btn.disabled=!canBegin;btn.style.opacity=canBegin?'1':'0.4';
-}
+async function showNameScreen(){return new Promise(resolve=>{const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');const btn=document.getElementById('nameContinue');scr.style.display='flex';inp.focus();function proceed(){const v=inp.value.trim();if(!v){inp.focus();return;}currentUser=v;currentAge=ageInp.value.trim();currentGender=genderInp.value;scr.style.display='none';resolve();}btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});});}
+function startSessionInfoOverlay(){}
+function stopSessionInfoOverlay(){}
 
-document.getElementById('libFileInput').addEventListener('change',e=>{
-  Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{imageLibrary.push({src:ev.target.result,name:file.name.replace(/\.[^.]+$/,'')});renderLib();};r.readAsDataURL(file);});
-  e.target.value='';
-});
+function renderDataSessionBadge(sess){const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';document.getElementById('dsb-samples').textContent=sess.gazeLog?.length||'--';document.getElementById('dsb-duration').textContent=dur;document.getElementById('dsb-location').textContent=sess.location||'--';document.getElementById('dsb-name').textContent=sess.user||'--';document.getElementById('dsb-age').textContent=sess.age||'--';document.getElementById('dsb-gender').textContent=sess.gender||'--';document.getElementById('dsbContent').classList.remove('collapsed');document.getElementById('dsbToggle').classList.remove('collapsed');}
 
-/* ══════════════════════════════════════════════════════════════════════
-   NAME SCREEN
-   ══════════════════════════════════════════════════════════════════════ */
-async function showNameScreen(){
-  return new Promise(resolve=>{
-    const scr=document.getElementById('nameScreen'),inp=document.getElementById('nameInput');
-    const ageInp=document.getElementById('ageInput'),genderInp=document.getElementById('genderInput');
-    const btn=document.getElementById('nameContinue');
-    scr.style.display='flex';inp.focus();
-    function proceed(){const v=inp.value.trim();if(!v){inp.focus();return;}currentUser=v;currentAge=ageInp.value.trim();currentGender=genderInp.value;scr.style.display='none';resolve();}
-    btn.addEventListener('click',proceed);inp.addEventListener('keydown',e=>{if(e.key==='Enter')proceed();});
-  });
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   SESSION INFO OVERLAY — removed per request
-   ══════════════════════════════════════════════════════════════════════ */
-function startSessionInfoOverlay(){
-  // No-op: session info overlay hidden
-}
-function stopSessionInfoOverlay(){
-  // No-op
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   DATA BADGE — session info on data screen
-   ══════════════════════════════════════════════════════════════════════ */
-function renderDataSessionBadge(sess){
-  const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
-  document.getElementById('dsb-samples').textContent=sess.gazeLog?.length||'—';
-  document.getElementById('dsb-duration').textContent=dur;
-  document.getElementById('dsb-location').textContent=sess.location||'—';
-  document.getElementById('dsb-name').textContent=sess.user||'—';
-  document.getElementById('dsb-age').textContent=sess.age||'—';
-  document.getElementById('dsb-gender').textContent=sess.gender||'—';
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   ANALYSIS BADGE
-   ══════════════════════════════════════════════════════════════════════ */
 const ANALYSIS_LAYERS=['FIXATION','SACCADE','SCANPATH','HEATMAP','FIRSTFIX'];
-
-function renderAnalysisBadge(layer, sess){
+function renderAnalysisBadge(layer,sess){
   const badge=document.getElementById('dataAnalysisBadge');
+  const content=document.getElementById('dabContent');
+  const headerLabel=document.getElementById('dabHeaderLabel');
   if(!ANALYSIS_LAYERS.includes(layer)){badge.style.display='none';return;}
-  badge.style.display='flex';
-  badge.innerHTML='';
-
-  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix;
-  const ft=sess.firstFixModeTs||0;
-
-  function row(label,val,unit=''){
-    const d=document.createElement('div');d.className='dab-row';
-    d.innerHTML=`<span class="dab-name">${label}</span><span><span class="dab-val">${val}</span>${unit?`<span class="dab-unit">${unit}</span>`:''}</span>`;
-    return d;
-  }
+  badge.style.display='flex';content.innerHTML='';
+  const fh=sess.fixationHistory||[],sh=sess.saccadeHistory||[],sp=sess.scanPathHistory||[],ff=sess.firstFix,ft=sess.firstFixModeTs||0;
+  function row(label,val,unit){const d=document.createElement('div');d.className='dab-row';d.innerHTML='<span class="dab-name">'+label+'</span><span><span class="dab-val">'+val+'</span>'+(unit?'<span class="dab-unit">'+unit+'</span>':'')+'</span>';return d;}
   function lbl(t){const d=document.createElement('div');d.className='dab-label';d.textContent=t;return d;}
-
-  if(layer==='FIXATION'){
-    const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0;
-    const fixTotal=fh.reduce((s,f)=>s+f.duration,0);
-    badge.appendChild(lbl('FIXATION'));
-    badge.appendChild(row('Count',fixC||'—'));
-    badge.appendChild(row('Avg dur',fixAvg||'—','ms'));
-    badge.appendChild(row('Total dwell',fixTotal||'—','ms'));
-  } else if(layer==='SACCADE'){
-    const sacC=sh.length;
-    const sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;
-    badge.appendChild(lbl('SACCADE'));
-    badge.appendChild(row('Count',sacC||'—'));
-    badge.appendChild(row('Avg amp',sacAmp||'—','%'));
-  } else if(layer==='SCANPATH'){
-    badge.appendChild(lbl('SCAN PATH'));
-    badge.appendChild(row('Steps',sp.length||'—'));
-  } else if(layer==='HEATMAP'){
-    badge.appendChild(lbl('HEATMAP'));
-    badge.appendChild(row('Samples',sess.gazeLog?.length||'—'));
-  } else if(layer==='FIRSTFIX'){
-    const ttff=ff?((ff.startTs-ft)/1000):null;
-    badge.appendChild(lbl('FIRST FIXATION'));
-    badge.appendChild(row('TTFF',ttff!==null?ttff.toFixed(2)+'s':'—'));
-    badge.appendChild(row('X',ff?(ff.x*100).toFixed(1)+'%':'—'));
-    badge.appendChild(row('Y',ff?(ff.y*100).toFixed(1)+'%':'—'));
-  }
+  if(layer==='FIXATION'){headerLabel.textContent='FIXATION';const fixC=fh.length,fixAvg=fixC?Math.round(fh.reduce((s,f)=>s+f.duration,0)/fixC):0,fixTotal=fh.reduce((s,f)=>s+f.duration,0);content.appendChild(lbl('FIXATION'));content.appendChild(row('Count',fixC||'--'));content.appendChild(row('Avg dur',fixAvg||'--','ms'));content.appendChild(row('Total dwell',fixTotal||'--','ms'));}
+  else if(layer==='SACCADE'){headerLabel.textContent='SACCADE';const sacC=sh.length,sacAmp=sacC?+(sh.reduce((s,f)=>s+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sacC*100).toFixed(1):0;content.appendChild(lbl('SACCADE'));content.appendChild(row('Count',sacC||'--'));content.appendChild(row('Avg amp',sacAmp||'--','%'));}
+  else if(layer==='SCANPATH'){headerLabel.textContent='SCAN PATH';content.appendChild(lbl('SCAN PATH'));content.appendChild(row('Steps',sp.length||'--'));}
+  else if(layer==='HEATMAP'){headerLabel.textContent='HEATMAP';content.appendChild(lbl('HEATMAP'));content.appendChild(row('Samples',sess.gazeLog?.length||'--'));}
+  else if(layer==='FIRSTFIX'){headerLabel.textContent='FIRST FIXATION';const ttff=ff?((ff.startTs-ft)/1000):null;content.appendChild(lbl('FIRST FIXATION'));content.appendChild(row('TTFF',ttff!==null?ttff.toFixed(2)+'s':'--'));content.appendChild(row('X',ff?(ff.x*100).toFixed(1)+'%':'--'));content.appendChild(row('Y',ff?(ff.y*100).toFixed(1)+'%':'--'));}
+  content.classList.remove('collapsed');document.getElementById('dabToggle').classList.remove('collapsed');
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   MARCHING SQUARES HEATMAP
-   ══════════════════════════════════════════════════════════════════════ */
-function buildHeatmapFromLog(log,hmW,hmH){
-  const hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
-  for(const p of log){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
-  return hm;
-}
+function buildHeatmapFromLog(log,hmW,hmH){const hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of log){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}return hm;}
 function getMSSegs(idx,T,R,B,L){switch(idx){case 1:return[[L,B]];case 2:return[[R,B]];case 3:return[[L,R]];case 4:return[[T,R]];case 5:return[[T,R],[L,B]];case 6:return[[T,B]];case 7:return[[T,L]];case 8:return[[T,L]];case 9:return[[T,B]];case 10:return[[L,T],[R,B]];case 11:return[[T,R]];case 12:return[[L,R]];case 13:return[[R,B]];case 14:return[[L,B]];default:return[];}}
-function drawMarchingSquares(ctx,W,H,hm,hmW,hmH){
-  let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal<0.01)return;
-  const levels=[0.15,0.3,0.45,0.6,0.75,0.9];
-  for(const level of levels){
-    ctx.strokeStyle=`rgba(224,26,0,${Math.min(1,(0.4+level*0.65)).toFixed(2)})`;ctx.lineWidth=2.5;ctx.beginPath();
-    for(let cy=0;cy<hmH-1;cy++)for(let cx=0;cx<hmW-1;cx++){
-      const vTL=hm[cy*hmW+cx]/maxVal,vTR=hm[cy*hmW+(cx+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx]/maxVal;
-      const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;
-      const sx0=cx*W/hmW,sx1=(cx+1)*W/hmW,sy0=cy*H/hmH,sy1=(cy+1)*H/hmH;
-      function lerp(v0,v1){return Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));}
-      const T=[sx0+lerp(vTL,vTR)*(sx1-sx0),sy0],R=[sx1,sy0+lerp(vTR,vBR)*(sy1-sy0)],B=[sx0+lerp(vBL,vBR)*(sx1-sx0),sy1],L=[sx0,sy0+lerp(vTL,vBL)*(sy1-sy0)];
-      for(const[p1,p2]of getMSSegs(idx,T,R,B,L)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}
-    }
-    ctx.stroke();
-  }
-}
+function drawMarchingSquares(ctx,W,H,hm,hmW,hmH){let maxVal=0;for(let i=0;i<hm.length;i++)if(hm[i]>maxVal)maxVal=hm[i];if(maxVal<0.01)return;const levels=[0.15,0.3,0.45,0.6,0.75,0.9];for(const level of levels){ctx.strokeStyle='rgba(224,26,0,'+Math.min(1,(0.4+level*0.65)).toFixed(2)+')';ctx.lineWidth=2.5;ctx.beginPath();for(let cy=0;cy<hmH-1;cy++)for(let cx=0;cx<hmW-1;cx++){const vTL=hm[cy*hmW+cx]/maxVal,vTR=hm[cy*hmW+(cx+1)]/maxVal,vBR=hm[(cy+1)*hmW+(cx+1)]/maxVal,vBL=hm[(cy+1)*hmW+cx]/maxVal;const idx=(vTL>=level?8:0)+(vTR>=level?4:0)+(vBR>=level?2:0)+(vBL>=level?1:0);if(idx===0||idx===15)continue;const sx0=cx*W/hmW,sx1=(cx+1)*W/hmW,sy0=cy*H/hmH,sy1=(cy+1)*H/hmH;function lerp(v0,v1){return Math.abs(v1-v0)<1e-10?0.5:Math.max(0,Math.min(1,(level-v0)/(v1-v0)));}const T=[sx0+lerp(vTL,vTR)*(sx1-sx0),sy0],R=[sx1,sy0+lerp(vTR,vBR)*(sy1-sy0)],B=[sx0+lerp(vBL,vBR)*(sx1-sx0),sy1],L=[sx0,sy0+lerp(vTL,vBL)*(sy1-sy0)];for(const[p1,p2]of getMSSegs(idx,T,R,B,L)){ctx.moveTo(p1[0],p1[1]);ctx.lineTo(p2[0],p2[1]);}}ctx.stroke();}}
 
-/* ══════════════════════════════════════════════════════════════════════
-   STATIC RENDER FUNCTIONS
-   ══════════════════════════════════════════════════════════════════════ */
 function staticGaze(ctx,W,H,log){ctx.clearRect(0,0,W,H);ctx.fillStyle='rgba(224,26,0,0.5)';for(const p of log){ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fill();}}
-function staticFixation(ctx,W,H,history){
-  ctx.clearRect(0,0,W,H);
-  for(const fix of history){
-    const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();
-    if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}
-  }
-}
-function staticSaccade(ctx,W,H,history){
-  ctx.clearRect(0,0,W,H);
-  for(const sac of history){
-    const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;
-    ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();
-    const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();
-  }
-}
-function staticScanPath(ctx,W,H,history){
-  ctx.clearRect(0,0,W,H);if(!history.length)return;
-  if(history.length>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();history.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));ctx.stroke();ctx.setLineDash([]);ctx.restore();}
-  for(let j=0;j<history.length;j++){const cx=history[j].x*W,cy=history[j].y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}
-}
+function staticFixation(ctx,W,H,history){ctx.clearRect(0,0,W,H);for(const fix of history){const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}}}
+function staticSaccade(ctx,W,H,history){ctx.clearRect(0,0,W,H);for(const sac of history){const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();}}
+function staticScanPath(ctx,W,H,history){ctx.clearRect(0,0,W,H);if(!history.length)return;if(history.length>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();history.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<history.length;j++){const cx=history[j].x*W,cy=history[j].y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}}
 function staticHeatmap(ctx,W,H,log){ctx.clearRect(0,0,W,H);const hmW=200,hmH=112;drawMarchingSquares(ctx,W,H,buildHeatmapFromLog(log,hmW,hmH),hmW,hmH);}
-function staticFirstFix(ctx,W,H,fix,modeTs){
-  ctx.clearRect(0,0,W,H);
-  if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return;}
-  const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;
-  ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();
-  ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);
-}
+function staticFirstFix(ctx,W,H,fix,modeTs){ctx.clearRect(0,0,W,H);if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return;}const cx=fix.x*W,cy=fix.y*H,offset=modeTs?((fix.startTs-modeTs)/1000):0;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);}
 
-/* ══════════════════════════════════════════════════════════════════════
-   HOME MODE PREVIEWS — minimal style
-   ══════════════════════════════════════════════════════════════════════ */
 function buildModePreviews(){
-  const modes=[
-    {key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions across the image.'},
-    {key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},
-    {key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},
-    {key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},
-    {key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},
-    {key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after image onset.'},
-  ];
-  const gazeLog=[{x:0.25,y:0.35},{x:0.27,y:0.37},{x:0.55,y:0.28},{x:0.57,y:0.30},{x:0.72,y:0.52},{x:0.74,y:0.54},{x:0.38,y:0.68},{x:0.40,y:0.66},{x:0.5,y:0.45},{x:0.28,y:0.5},{x:0.68,y:0.25},{x:0.58,y:0.72}];
-  const fixHist=[{x:0.25,y:0.35,duration:320},{x:0.55,y:0.28,duration:580},{x:0.72,y:0.52,duration:240},{x:0.38,y:0.68,duration:460}];
-  const sacHist=[{fromX:0.25,fromY:0.35,toX:0.55,toY:0.28},{fromX:0.55,fromY:0.28,toX:0.72,toY:0.52},{fromX:0.72,fromY:0.52,toX:0.38,toY:0.68}];
-  const firstFix={x:0.25,y:0.35,startTs:100};
+  const modes=[{key:'GAZE',name:'GAZE',desc:'Sample-by-sample gaze positions.'},{key:'FIXATION',name:'FIXATION',desc:'Circles proportional to dwell time.'},{key:'SACCADE',name:'SACCADE',desc:'Rapid eye jumps between regions.'},{key:'SCANPATH',name:'SCAN PATH',desc:'Ordered sequence of fixated areas.'},{key:'HEATMAP',name:'HEATMAP',desc:'Contour density map of attention.'},{key:'FIRSTFIX',name:'FIRST FIXATION',desc:'First area captured after onset.'},];
+  const gazeLog=[{x:0.22,y:0.32},{x:0.24,y:0.34},{x:0.52,y:0.25},{x:0.54,y:0.27},{x:0.70,y:0.50},{x:0.72,y:0.52},{x:0.36,y:0.65},{x:0.38,y:0.63},{x:0.50,y:0.42},{x:0.26,y:0.48},{x:0.66,y:0.22},{x:0.56,y:0.70}];
+  const fixHist=[{x:0.22,y:0.32,duration:280},{x:0.52,y:0.25,duration:420},{x:0.70,y:0.50,duration:200},{x:0.36,y:0.65,duration:380}];
+  const sacHist=[{fromX:0.22,fromY:0.32,toX:0.52,toY:0.25},{fromX:0.52,fromY:0.25,toX:0.70,toY:0.50},{fromX:0.70,fromY:0.50,toX:0.36,toY:0.65}];
+  const firstFixPrev={x:0.22,y:0.32,startTs:80};
   const grid=document.getElementById('modesGrid');grid.innerHTML='';
   for(const m of modes){
     const card=document.createElement('div');card.className='mode-card';
     const wrap=document.createElement('div');wrap.className='mode-preview-wrap';
-    // Changed: smaller canvas for more minimal previews
-    const canvas=document.createElement('canvas');
-    canvas.className='mode-preview';canvas.width=240;canvas.height=80;
-    wrap.appendChild(canvas);
-    card.innerHTML=`<div class="mode-card-name">${m.name}</div>`;
-    card.appendChild(wrap);
+    const canvas=document.createElement('canvas');canvas.className='mode-preview';canvas.width=300;canvas.height=120;
+    wrap.appendChild(canvas);card.innerHTML='<div class="mode-card-name">'+m.name+'</div>';card.appendChild(wrap);
     const desc=document.createElement('div');desc.className='mode-card-desc';desc.textContent=m.desc;card.appendChild(desc);
     grid.appendChild(card);
-    const ctx=canvas.getContext('2d');const W=240,H=80;
-    // Changed: transparent background for cleaner look
-    ctx.clearRect(0,0,W,H);
+    const ctx=canvas.getContext('2d');const W=300,H=120;ctx.clearRect(0,0,W,H);
     switch(m.key){
-      case 'GAZE':staticGaze(ctx,W,H,gazeLog);break;
-      case 'FIXATION':staticFixation(ctx,W,H,fixHist);break;
-      case 'SACCADE':staticSaccade(ctx,W,H,sacHist);break;
-      case 'SCANPATH':staticScanPath(ctx,W,H,fixHist);break;
-      case 'HEATMAP':staticHeatmap(ctx,W,H,gazeLog);break;
-      case 'FIRSTFIX':staticFirstFix(ctx,W,H,firstFix,0);break;
+      case 'GAZE':for(const p of gazeLog){ctx.beginPath();ctx.arc(p.x*W,p.y*H,2,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.28)';ctx.fill();}break;
+      case 'FIXATION':for(const fix of fixHist){const cx=fix.x*W,cy=fix.y*H,r=Math.min(4+fix.duration/160,18);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.32)';ctx.lineWidth=0.8;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,1.5,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.45)';ctx.fill();}break;
+      case 'SACCADE':for(const sac of sacHist){const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.25)';ctx.lineWidth=0.8;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=5;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.28)';ctx.fill();}break;
+      case 'SCANPATH':if(fixHist.length>=2){ctx.save();ctx.setLineDash([2,5]);ctx.strokeStyle='rgba(224,26,0,0.2)';ctx.lineWidth=0.8;ctx.beginPath();fixHist.forEach((p,j)=>j===0?ctx.moveTo(p.x*W,p.y*H):ctx.lineTo(p.x*W,p.y*H));ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<fixHist.length;j++){const cx=fixHist[j].x*W,cy=fixHist[j].y*H;ctx.beginPath();ctx.arc(cx,cy,6,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.28)';ctx.lineWidth=0.8;ctx.stroke();ctx.fillStyle='rgba(224,26,0,0.22)';ctx.font='bold 6px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);}break;
+      case 'HEATMAP':{const hmW=60,hmH=24,hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);for(const p of gazeLog){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}ctx.save();ctx.globalAlpha=0.38;drawMarchingSquares(ctx,W,H,hm,hmW,hmH);ctx.globalAlpha=1;ctx.restore();}break;
+      case 'FIRSTFIX':{const cx=firstFixPrev.x*W,cy=firstFixPrev.y*H;ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.5)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,10,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.18)';ctx.lineWidth=0.8;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,16,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.1)';ctx.lineWidth=0.6;ctx.stroke();}break;
     }
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   ANIMATION ENGINE
-   ══════════════════════════════════════════════════════════════════════ */
 function cancelAnimation(){if(currentAnimation){currentAnimation.cancel();currentAnimation=null;}}
 function getDataCanvas(){const dc=document.getElementById('dataCanvas'),area=document.getElementById('dataImgArea');dc.width=area.offsetWidth;dc.height=area.offsetHeight;return dc;}
 function animateGaze(ctx,W,H,log){let tid=null,cancelled=false;const pts=log.slice();let i=0;function step(){if(cancelled||i>=pts.length)return;const p=pts[i++];ctx.beginPath();ctx.arc(p.x*W,p.y*H,4,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.5)';ctx.fill();tid=setTimeout(step,50);}step();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};}
-function animateFixation(ctx,W,H,history){
-  let tid=null,rafId=null,cancelled=false;const fixes=history.slice();let i=0;const drawn=[];
-  function redrawAll(){for(const fix of drawn){const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}}}
-  function next(){if(cancelled||i>=fixes.length)return;const fix=fixes[i++];const cx=fix.x*W,cy=fix.y*H,rFinal=Math.min(8+fix.duration/80,44);const start=performance.now();function grow(now){if(cancelled)return;const t=Math.min(1,(now-start)/300);ctx.clearRect(0,0,W,H);redrawAll();const r=rFinal*t;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(t<1){rafId=requestAnimationFrame(grow);}else{if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+rFinal+13);}drawn.push(fix);tid=setTimeout(next,600);}}rafId=requestAnimationFrame(grow);}
-  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
-}
-function animateSaccade(ctx,W,H,history){
-  let tid=null,rafId=null,cancelled=false;const sacs=history.slice();let i=0;const drawn=[];
-  function drawSacFull(sac){const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();}
-  function redrawAll(){for(const s of drawn)drawSacFull(s);}
-  function next(){if(cancelled||i>=sacs.length)return;const sac=sacs[i++];const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;const start=performance.now();function anim(now){if(cancelled)return;const t=Math.min(1,(now-start)/200);ctx.clearRect(0,0,W,H);redrawAll();const ex=fx+(tx-fx)*t,ey=fy+(ty-fy)*t;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(ex,ey);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();if(t<1){rafId=requestAnimationFrame(anim);}else{drawSacFull(sac);drawn.push(sac);tid=setTimeout(next,500);}}rafId=requestAnimationFrame(anim);}
-  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
-}
-function animateScanPath(ctx,W,H,history){
-  let tid=null,cancelled=false;const pts=history.slice();let shown=0;
-  function drawAll(n){ctx.clearRect(0,0,W,H);if(n<1)return;if(n>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();for(let j=0;j<n;j++){const{x,y}=pts[j];j===0?ctx.moveTo(x*W,y*H):ctx.lineTo(x*W,y*H);}ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<n;j++){const{x,y}=pts[j],cx=x*W,cy=y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}}
-  function next(){if(cancelled||shown>=pts.length)return;shown++;drawAll(shown);tid=setTimeout(next,700);}
-  next();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};
-}
-function animateHeatmap(ctx,W,H,log){
-  let tid=null,cancelled=false;const hmW=200,hmH=112,hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);
-  const pts=log.slice();let i=0;
-  function addPt(p){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}
-  function render(){ctx.clearRect(0,0,W,H);drawMarchingSquares(ctx,W,H,hm,hmW,hmH);}
-  const perStep=Math.max(1,Math.ceil(pts.length/60));
-  function step(){if(cancelled)return;let c=0;while(i<pts.length&&c<perStep){addPt(pts[i++]);c++;}render();if(i<pts.length)tid=setTimeout(step,50);}
-  step();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};
-}
-function animateFirstFix(ctx,W,H,fix,modeTs){
-  let tid=null,rafId=null,cancelled=false;
-  if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return{cancel:()=>{}};}
-  const cx=fix.x*W,cy=fix.y*H,offset=(fix.startTs-modeTs)/1000;
-  tid=setTimeout(()=>{
-    if(cancelled)return;
-    const startPhase=performance.now();
-    function phase2(now){
-      if(cancelled)return;const t=Math.min(1,(now-startPhase)/600);ctx.clearRect(0,0,W,H);
-      const ringR=20+t*40;ctx.beginPath();ctx.arc(cx,cy,ringR,0,Math.PI*2);ctx.strokeStyle=`rgba(224,26,0,${(1-t)*0.5})`;ctx.lineWidth=1.5;ctx.stroke();
-      ctx.globalAlpha=t;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.globalAlpha=1;
-      if(t>0.5){ctx.globalAlpha=(t-0.5)*2;ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);ctx.globalAlpha=1;}
-      if(t<1){rafId=requestAnimationFrame(phase2);}else{const startPulse=performance.now();function pulse(now){if(cancelled)return;const pt=(now-startPulse)/1000,pr=20+Math.sin(pt*Math.PI*2)*5;ctx.clearRect(0,0,W,H);ctx.beginPath();ctx.arc(cx,cy,pr,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);rafId=requestAnimationFrame(pulse);}rafId=requestAnimationFrame(pulse);}
-    }
-    rafId=requestAnimationFrame(phase2);
-  },1000);
-  return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};
-}
+function animateFixation(ctx,W,H,history){let tid=null,rafId=null,cancelled=false;const fixes=history.slice();let i=0;const drawn=[];function redrawAll(){for(const fix of drawn){const cx=fix.x*W,cy=fix.y*H,r=Math.min(8+fix.duration/80,44);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+r+13);}}}function next(){if(cancelled||i>=fixes.length)return;const fix=fixes[i++];const cx=fix.x*W,cy=fix.y*H,rFinal=Math.min(8+fix.duration/80,44);const start=performance.now();function grow(now){if(cancelled)return;const t=Math.min(1,(now-start)/300);ctx.clearRect(0,0,W,H);redrawAll();const r=rFinal*t;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,0.12)';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.85)';ctx.lineWidth=2;ctx.stroke();if(t<1){rafId=requestAnimationFrame(grow);}else{if(fix.duration>300){ctx.fillStyle='rgba(224,26,0,0.9)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(Math.round(fix.duration)+'ms',cx,cy+rFinal+13);}drawn.push(fix);tid=setTimeout(next,600);}}rafId=requestAnimationFrame(grow);}next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};}
+function animateSaccade(ctx,W,H,history){let tid=null,rafId=null,cancelled=false;const sacs=history.slice();let i=0;const drawn=[];function drawSacFull(sac){const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();const a=Math.atan2(ty-fy,tx-fx),l=9;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-l*Math.cos(a-Math.PI/6),ty-l*Math.sin(a-Math.PI/6));ctx.lineTo(tx-l*Math.cos(a+Math.PI/6),ty-l*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle='rgba(224,26,0,0.8)';ctx.fill();}function redrawAll(){for(const s of drawn)drawSacFull(s);}function next(){if(cancelled||i>=sacs.length)return;const sac=sacs[i++];const fx=sac.fromX*W,fy=sac.fromY*H,tx=sac.toX*W,ty=sac.toY*H;const start=performance.now();function anim(now){if(cancelled)return;const t=Math.min(1,(now-start)/200);ctx.clearRect(0,0,W,H);redrawAll();const ex=fx+(tx-fx)*t,ey=fy+(ty-fy)*t;ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(ex,ey);ctx.strokeStyle='rgba(224,26,0,0.8)';ctx.lineWidth=1.5;ctx.stroke();if(t<1){rafId=requestAnimationFrame(anim);}else{drawSacFull(sac);drawn.push(sac);tid=setTimeout(next,500);}}rafId=requestAnimationFrame(anim);}next();return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};}
+function animateScanPath(ctx,W,H,history){let tid=null,cancelled=false;const pts=history.slice();let shown=0;function drawAll(n){ctx.clearRect(0,0,W,H);if(n<1)return;if(n>=2){ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle='rgba(224,26,0,0.6)';ctx.lineWidth=1.5;ctx.beginPath();for(let j=0;j<n;j++){const{x,y}=pts[j];j===0?ctx.moveTo(x*W,y*H):ctx.lineTo(x*W,y*H);}ctx.stroke();ctx.setLineDash([]);ctx.restore();}for(let j=0;j<n;j++){const{x,y}=pts[j],cx=x*W,cy=y*H;ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,1)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 9px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(j+1,cx,cy);ctx.textBaseline='alphabetic';}}function next(){if(cancelled||shown>=pts.length)return;shown++;drawAll(shown);tid=setTimeout(next,700);}next();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};}
+function animateHeatmap(ctx,W,H,log){let tid=null,cancelled=false;const hmW=200,hmH=112,hm=new Float32Array(hmW*hmH),sigma=0.07*Math.max(hmW,hmH),r=Math.ceil(3*sigma),inv2s2=1/(2*sigma*sigma);const pts=log.slice();let i=0;function addPt(p){const gx=p.x*hmW,gy=p.y*hmH,x0=Math.max(0,Math.floor(gx-r)),x1=Math.min(hmW-1,Math.ceil(gx+r)),y0=Math.max(0,Math.floor(gy-r)),y1=Math.min(hmH-1,Math.ceil(gy+r));for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)hm[y*hmW+x]+=0.18*Math.exp(-((x-gx)**2+(y-gy)**2)*inv2s2);}function render(){ctx.clearRect(0,0,W,H);drawMarchingSquares(ctx,W,H,hm,hmW,hmH);}const perStep=Math.max(1,Math.ceil(pts.length/60));function step(){if(cancelled)return;let c=0;while(i<pts.length&&c<perStep){addPt(pts[i++]);c++;}render();if(i<pts.length)tid=setTimeout(step,50);}step();return{cancel:()=>{cancelled=true;clearTimeout(tid);}};}
+function animateFirstFix(ctx,W,H,fix,modeTs){let tid=null,rafId=null,cancelled=false;if(!fix){ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='300 11px Heebo';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('NO FIRST FIXATION DETECTED',W/2,H/2);return{cancel:()=>{}};}const cx=fix.x*W,cy=fix.y*H,offset=(fix.startTs-modeTs)/1000;tid=setTimeout(()=>{if(cancelled)return;const startPhase=performance.now();function phase2(now){if(cancelled)return;const t=Math.min(1,(now-startPhase)/600);ctx.clearRect(0,0,W,H);const ringR=20+t*40;ctx.beginPath();ctx.arc(cx,cy,ringR,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,'+(1-t)*0.5+')';ctx.lineWidth=1.5;ctx.stroke();ctx.globalAlpha=t;ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.globalAlpha=1;if(t>0.5){ctx.globalAlpha=(t-0.5)*2;ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);ctx.globalAlpha=1;}if(t<1){rafId=requestAnimationFrame(phase2);}else{const startPulse=performance.now();function pulse(now){if(cancelled)return;const pt=(now-startPulse)/1000,pr=20+Math.sin(pt*Math.PI*2)*5;ctx.clearRect(0,0,W,H);ctx.beginPath();ctx.arc(cx,cy,pr,0,Math.PI*2);ctx.strokeStyle='rgba(224,26,0,0.35)';ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='rgba(224,26,0,1)';ctx.fill();ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='rgba(224,26,0,1)';ctx.font='bold 11px Heebo';ctx.fillText('FIRST FIXATION',cx,cy-46);ctx.font='300 9px Heebo';ctx.fillText('+'+offset.toFixed(2)+'s',cx,cy-32);rafId=requestAnimationFrame(pulse);}rafId=requestAnimationFrame(pulse);}}rafId=requestAnimationFrame(phase2);},1000);return{cancel:()=>{cancelled=true;clearTimeout(tid);cancelAnimationFrame(rafId);}};}
 
-/* ══════════════════════════════════════════════════════════════════════
-   PLAY LAYER
-   ══════════════════════════════════════════════════════════════════════ */
-function playLayer(layer){
-  cancelAnimation();const dc=getDataCanvas();const ctx=dc.getContext('2d');ctx.clearRect(0,0,dc.width,dc.height);const W=dc.width,H=dc.height;
-  const sess=viewSession||{gazeLog,fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs};
-  renderAnalysisBadge(layer, sess);
-  if(playMode==='STATIC'){switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
-  else{switch(layer){case 'GAZE':currentAnimation=animateGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':currentAnimation=animateFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':currentAnimation=animateSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':currentAnimation=animateScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':currentAnimation=animateHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':currentAnimation=animateFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}
-}
+function playLayer(layer){cancelAnimation();const dc=getDataCanvas();const ctx=dc.getContext('2d');ctx.clearRect(0,0,dc.width,dc.height);const W=dc.width,H=dc.height;const sess=viewSession||{gazeLog,fixationHistory,saccadeHistory,scanPathHistory,firstFix,firstFixModeTs};renderAnalysisBadge(layer,sess);if(playMode==='STATIC'){switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}else{switch(layer){case 'GAZE':currentAnimation=animateGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':currentAnimation=animateFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':currentAnimation=animateSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':currentAnimation=animateScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':currentAnimation=animateHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':currentAnimation=animateFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}}}
 
-/* ══════════════════════════════════════════════════════════════════════
-   COMPARE FILTERS
-   ══════════════════════════════════════════════════════════════════════ */
-function populateCompareFilters(){
-  const users=[...new Set(allSessions.map(s=>s.user))];
-  const genders=[...new Set(allSessions.map(s=>s.gender).filter(Boolean))];
-  const locations=[...new Set(allSessions.map(s=>s.location).filter(Boolean))];
-  const cfUser=document.getElementById('cf-user');cfUser.innerHTML='<option value="">All Users</option>'+users.map(u=>`<option value="${u}">${u}</option>`).join('');
-  const cfGender=document.getElementById('cf-gender');cfGender.innerHTML='<option value="">All Genders</option>'+genders.map(g=>`<option value="${g}">${g}</option>`).join('');
-  const cfLoc=document.getElementById('cf-location');cfLoc.innerHTML='<option value="">All Locations</option>'+locations.map(l=>`<option value="${l}">${l}</option>`).join('');
-}
+function populateCompareFilters(){const users=[...new Set(allSessions.map(s=>s.user))];const genders=[...new Set(allSessions.map(s=>s.gender).filter(Boolean))];const locations=[...new Set(allSessions.map(s=>s.location).filter(Boolean))];const cfUser=document.getElementById('cf-user');cfUser.innerHTML='<option value="">All Users</option>'+users.map(u=>'<option value="'+u+'">'+u+'</option>').join('');const cfGender=document.getElementById('cf-gender');cfGender.innerHTML='<option value="">All Genders</option>'+genders.map(g=>'<option value="'+g+'">'+g+'</option>').join('');const cfLoc=document.getElementById('cf-location');cfLoc.innerHTML='<option value="">All Locations</option>'+locations.map(l=>'<option value="'+l+'">'+l+'</option>').join('');}
+function getFilteredSessions(){const user=document.getElementById('cf-user').value,gender=document.getElementById('cf-gender').value,location=document.getElementById('cf-location').value,sort=document.getElementById('cf-sort').value;let list=allSessions.filter(s=>(!user||s.user===user)&&(!gender||s.gender===gender)&&(!location||s.location===location));if(sort){const[key,dir]=sort.split('_');const asc=dir==='asc';const getVal=(s)=>{switch(key){case 'fixations':return s.fixationHistory?.length||0;case 'saccades':return s.saccadeHistory?.length||0;case 'duration':return s.sessionDuration||0;case 'samples':return s.gazeLog?.length||0;case 'ttff':return s.firstFix?(s.firstFix.startTs-s.firstFixModeTs):Infinity;case 'sacAmp':{const sh=s.saccadeHistory||[];return sh.length?sh.reduce((a,f)=>a+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sh.length:0;}case 'age':return parseInt(s.age)||0;default:return 0;}};list.sort((a,b)=>asc?getVal(a)-getVal(b):getVal(b)-getVal(a));}return list;}
 
-function getFilteredSessions(){
-  const user=document.getElementById('cf-user').value;
-  const gender=document.getElementById('cf-gender').value;
-  const location=document.getElementById('cf-location').value;
-  const sort=document.getElementById('cf-sort').value;
-  let list=allSessions.filter(s=>(!user||s.user===user)&&(!gender||s.gender===gender)&&(!location||s.location===location));
-  if(sort){
-    const[key,dir]=sort.split('_');const asc=dir==='asc';
-    const getVal=(s)=>{
-      switch(key){
-        case 'fixations':return s.fixationHistory?.length||0;
-        case 'saccades':return s.saccadeHistory?.length||0;
-        case 'duration':return s.sessionDuration||0;
-        case 'samples':return s.gazeLog?.length||0;
-        case 'ttff':return s.firstFix?(s.firstFix.startTs-s.firstFixModeTs):Infinity;
-        case 'sacAmp':{const sh=s.saccadeHistory||[];return sh.length?sh.reduce((a,f)=>a+Math.hypot(f.toX-f.fromX,f.toY-f.fromY),0)/sh.length:0;}
-        case 'age':return parseInt(s.age)||0;
-        default:return 0;
-      }
-    };
-    list.sort((a,b)=>asc?getVal(a)-getVal(b):getVal(b)-getVal(a));
-  }
-  return list;
-}
-
-function renderCompareView(){
-  populateCompareFilters();
-  const grid=document.getElementById('compareGrid');grid.innerHTML='';
-  const layer=document.getElementById('cf-layer').value||dataActiveLayer||'GAZE';
-  const sessions=getFilteredSessions();
-  if(sessions.length===0){
-    grid.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;padding:40px 0;">NO SESSIONS TO COMPARE YET</div>';
-    return;
-  }
-  for(const sess of sessions){
-    const cell=document.createElement('div');cell.className='compare-panel';
-    const ts=new Date(sess.timestamp).toLocaleTimeString();
-    const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
-    cell.innerHTML=`<div class="compare-panel-header"><div><div class="cp-user">${sess.user}</div><div class="cp-meta">${sess.age?sess.age+' yrs':''}${sess.age&&sess.gender?' · ':''}${sess.gender||''}${sess.location?' · '+sess.location:''}</div></div><div style="text-align:right"><div class="cp-time">${sess.imageName}</div><div class="cp-time">${ts} · ${dur}</div></div></div><div class="compare-canvas-wrap"><img class="cp-img" src="${sess.imageSrc}"><canvas class="cp-canvas"></canvas></div><div class="cp-stats">${sess.fixationHistory.length} fix · ${sess.saccadeHistory.length} sac · ${sess.gazeLog.length} samples</div>`;
-    grid.appendChild(cell);
-    const wrap=cell.querySelector('.compare-canvas-wrap'),canvas=cell.querySelector('.cp-canvas');
-    setTimeout(()=>{canvas.width=wrap.offsetWidth;canvas.height=wrap.offsetHeight;const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}},60);
-  }
-}
+function renderCompareView(){populateCompareFilters();const grid=document.getElementById('compareGrid');grid.innerHTML='';const layer=document.getElementById('cf-layer').value||dataActiveLayer||'GAZE';const sessions=getFilteredSessions();if(sessions.length===0){grid.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;padding:40px 0;grid-column:1/-1;">NO SESSIONS TO COMPARE YET</div>';return;}for(const sess of sessions){const cell=document.createElement('div');cell.className='compare-panel';const ts=new Date(sess.timestamp).toLocaleTimeString();const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';cell.innerHTML='<div class="compare-panel-header"><div><div class="cp-user">'+sess.user+'</div><div class="cp-meta">'+(sess.age?sess.age+' yrs':'')+((sess.age&&sess.gender)?' . ':'')+( sess.gender||'')+(sess.location?' . '+sess.location:'')+'</div></div><div style="text-align:right"><div class="cp-time">'+sess.imageName+'</div><div class="cp-time">'+ts+' . '+dur+'</div></div></div><div class="compare-canvas-wrap"><img class="cp-img" src="'+sess.imageSrc+'"><canvas class="cp-canvas"></canvas></div><div class="cp-stats">'+sess.fixationHistory.length+' fix . '+sess.saccadeHistory.length+' sac . '+sess.gazeLog.length+' samples</div>';grid.appendChild(cell);const wrap=cell.querySelector('.compare-canvas-wrap'),canvas=cell.querySelector('.cp-canvas');setTimeout(()=>{canvas.width=wrap.offsetWidth;canvas.height=wrap.offsetHeight;const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;switch(layer){case 'GAZE':staticGaze(ctx,W,H,sess.gazeLog);break;case 'FIXATION':staticFixation(ctx,W,H,sess.fixationHistory);break;case 'SACCADE':staticSaccade(ctx,W,H,sess.saccadeHistory);break;case 'SCANPATH':staticScanPath(ctx,W,H,sess.scanPathHistory);break;case 'HEATMAP':staticHeatmap(ctx,W,H,sess.gazeLog);break;case 'FIRSTFIX':staticFirstFix(ctx,W,H,sess.firstFix,sess.firstFixModeTs);break;}},60);}}
 
 document.getElementById('cf-apply').addEventListener('click',renderCompareView);
 document.getElementById('cf-layer').addEventListener('change',renderCompareView);
 
-/* ══════════════════════════════════════════════════════════════════════
-   GALLERY SCREEN — always openable
-   ══════════════════════════════════════════════════════════════════════ */
-function openGallery(){
-  const screen=document.getElementById('galleryScreen');
-  screen.style.display='flex';
-  navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');
-  renderGalleryScreen();
-}
-function closeGallery(){
-  document.getElementById('galleryScreen').style.display='none';
-  navGalleryLink.classList.remove('active');
-}
-function renderGalleryScreen(){
-  const body=document.getElementById('galleryBody');body.innerHTML='';
-  const byUser=new Map();
-  for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}
-  if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}
-  for(const[userName,sessions]of byUser){
-    const block=document.createElement('div');block.className='gallery-user-block';
-    const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' · ');
-    block.innerHTML=`<div class="gallery-user-name">${userName}</div><div class="gallery-user-meta">${metaStr}</div><div class="gallery-images-row" id="gallery-row-${userName.replace(/\s/g,'_')}"></div>`;
-    body.appendChild(block);
-    const row=block.querySelector('.gallery-images-row');
-    for(const sess of sessions){
-      const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');
-      const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'—';
-      item.innerHTML=`<img class="gallery-item-img" src="${sess.imageSrc}" alt="${sess.imageName}"/><div class="gallery-item-info"><span class="gallery-item-name">${sess.imageName}</span><span class="gallery-item-stats">${sess.fixationHistory.length}F · ${sess.gazeLog.length}S · ${dur}</span></div>`;
-      item.onclick=()=>{
-        viewSession=sess;
-        document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');
-        openData(false);
-      };
-      row.appendChild(item);
-    }
-  }
-}
+function openGallery(){const screen=document.getElementById('galleryScreen');screen.style.display='flex';navGalleryLink.classList.add('active');navHomeLink.classList.remove('active');navSessionLink.classList.remove('active');renderGalleryScreen();}
+function closeGallery(){document.getElementById('galleryScreen').style.display='none';navGalleryLink.classList.remove('active');}
+function renderGalleryScreen(){const body=document.getElementById('galleryBody');body.innerHTML='';const byUser=new Map();for(const sess of allSessions){if(!byUser.has(sess.user))byUser.set(sess.user,[]);byUser.get(sess.user).push(sess);}if(byUser.size===0){body.innerHTML='<div style="color:#555;font-size:11px;letter-spacing:0.2em;text-align:center;margin-top:60px;">NO SESSIONS YET</div>';return;}for(const[userName,sessions]of byUser){const block=document.createElement('div');block.className='gallery-user-block';const meta=sessions[0];const metaStr=[meta.age?meta.age+'y':'',meta.gender||'',meta.location||''].filter(Boolean).join(' . ');block.innerHTML='<div class="gallery-user-name">'+userName+'</div><div class="gallery-user-meta">'+metaStr+'</div><div class="gallery-images-row" id="gallery-row-'+userName.replace(/\s/g,'_')+'"></div>';body.appendChild(block);const row=block.querySelector('.gallery-images-row');for(const sess of sessions){const item=document.createElement('div');item.className='gallery-item'+(sess===viewSession?' active-view':'');const dur=sess.sessionDuration?(sess.sessionDuration/1000).toFixed(1)+'s':'--';item.innerHTML='<img class="gallery-item-img" src="'+sess.imageSrc+'" alt="'+sess.imageName+'"/><div class="gallery-item-info"><span class="gallery-item-name">'+sess.imageName+'</span><span class="gallery-item-stats">'+sess.fixationHistory.length+'F . '+sess.gazeLog.length+'S . '+dur+'</span></div>';item.onclick=()=>{viewSession=sess;document.querySelectorAll('.gallery-item').forEach(el=>el.classList.remove('active-view'));item.classList.add('active-view');openData(false);};row.appendChild(item);}}}
 document.getElementById('galleryCloseBtn').addEventListener('click',closeGallery);
 
-/* ══════════════════════════════════════════════════════════════════════
-   CAPTURE & OPEN DATA
-   ══════════════════════════════════════════════════════════════════════ */
-function captureSession(){
-  return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};
-}
+function captureSession(){return{user:currentUser||'Unknown',age:currentAge,gender:currentGender,location:userLocation,imageSrc:mainImg.src,imageName:imageLibrary[currentImageIdx]?.name||'image',timestamp:Date.now(),sessionDuration:sessionStartTs?Date.now()-sessionStartTs:0,gazeLog:gazeLog.slice(),fixationHistory:fixationHistory.slice(),saccadeHistory:saccadeHistory.slice(),scanPathHistory:scanPathHistory.slice(),firstFix,firstFixModeTs,sessionStartTs};}
+function openData(pushNew=true){if(pushNew){const snap=captureSession();allSessions.push(snap);viewSession=snap;}const dataScreen=document.getElementById('dataScreen');const dataBody=document.getElementById('dataBody');const compareView=document.getElementById('compareView');dataScreen.style.display='flex';dataBody.style.display='flex';compareView.style.display='none';document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('galleryScreen').style.display='none';document.getElementById('dataImg').src=viewSession.imageSrc;document.getElementById('dataImg').style.opacity=showImg?'1':'0';renderDataSessionBadge(viewSession);const activeBtn=document.querySelector('.layer-btn.active');const layer=activeBtn?activeBtn.dataset.layer:'GAZE';dataActiveLayer=layer;playLayer(layer);}
 
-function openData(pushNew=true){
-  if(pushNew){
-    const snap=captureSession();
-    allSessions.push(snap);
-    viewSession=snap;
-  }
-  document.getElementById('dataScreen').style.display='flex';
-  document.getElementById('dataBody').style.display='flex';
-  document.getElementById('compareView').style.display='none';
-  document.getElementById('sessionViewBtn').classList.add('active');
-  document.getElementById('compareViewBtn').classList.remove('active');
-  document.getElementById('galleryScreen').style.display='none';
-  document.getElementById('dataImg').src=viewSession.imageSrc;
-  document.getElementById('dataImg').style.opacity=showImg?'1':'0';
-  renderDataSessionBadge(viewSession);
-  const activeBtn=document.querySelector('.layer-btn.active');
-  const layer=activeBtn?activeBtn.dataset.layer:'GAZE';
-  dataActiveLayer=layer;
-  playLayer(layer);
-}
+async function boot(){dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');const ok=await startEyeTracking();if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}showLib();await new Promise(resolve=>{document.getElementById('libBeginBtn').addEventListener('click',()=>{if(!imageLibrary.length)return;if(isImageViewed(currentImageIdx)){const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));if(unviewed===-1)return;currentImageIdx=unviewed;}markImageViewed(currentImageIdx);document.getElementById('libraryScreen').style.display='none';imgWrapper.style.display='block';mainImg.src=imageLibrary[currentImageIdx].src;resolve();});});sessionStartTs=Date.now();firstFixModeTs=performance.now();document.getElementById('finishBtn').style.display='block';annLayer.style.opacity='0';startSessionInfoOverlay();setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);requestAnimationFrame(mainLoop);}
 
-/* ══════════════════════════════════════════════════════════════════════
-   BOOT
-   ══════════════════════════════════════════════════════════════════════ */
-async function boot(){
-  dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;
-  window.addEventListener('resize',()=>{dotCanvas.width=window.innerWidth;dotCanvas.height=window.innerHeight;});
-  heatCanvas=document.createElement('canvas');heatCanvas.width=W_HEAT;heatCanvas.height=H_HEAT;heatCtx2=heatCanvas.getContext('2d');
-  const ok=await startEyeTracking();
-  if(ok)await runCalibration();else{calOverlay.style.display='none';enablePointerFallback();}
-  showLib();
-  await new Promise(resolve=>{
-    document.getElementById('libBeginBtn').addEventListener('click',()=>{
-      if(!imageLibrary.length)return;
-      if(isImageViewed(currentImageIdx)){
-        const unviewed=imageLibrary.findIndex((_,i)=>!isImageViewed(i));
-        if(unviewed===-1)return;
-        currentImageIdx=unviewed;
-      }
-      markImageViewed(currentImageIdx);
-      document.getElementById('libraryScreen').style.display='none';
-      imgWrapper.style.display='block';
-      mainImg.src=imageLibrary[currentImageIdx].src;
-      resolve();
-    });
-  });
-  sessionStartTs=Date.now();firstFixModeTs=performance.now();
-  document.getElementById('finishBtn').style.display='block';
-  annLayer.style.opacity='0';
-  startSessionInfoOverlay();
-  setInterval(()=>{if(!gazeOn)return;gazeLog.push({t:Date.now()-sessionStartTs,x:sGX,y:sGY});if(gazeLog.length>10000)gazeLog.shift();},100);
-  requestAnimationFrame(mainLoop);
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   EVENTS
-   ══════════════════════════════════════════════════════════════════════ */
-document.getElementById('finishBtn').addEventListener('click',()=>{
-  stopSessionInfoOverlay();
-  openData(true);
-});
+document.getElementById('finishBtn').addEventListener('click',()=>{stopSessionInfoOverlay();openData(true);});
 document.getElementById('dataCloseBtn').addEventListener('click',()=>{cancelAnimation();document.getElementById('dataScreen').style.display='none';});
-document.getElementById('sessionViewBtn').addEventListener('click',()=>{document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='flex';document.getElementById('compareView').style.display='none';});
+document.getElementById('sessionViewBtn').addEventListener('click',()=>{document.getElementById('sessionViewBtn').classList.add('active');document.getElementById('compareViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='flex';document.getElementById('compareView').style.display='none';playLayer(dataActiveLayer);});
 document.getElementById('compareViewBtn').addEventListener('click',()=>{document.getElementById('compareViewBtn').classList.add('active');document.getElementById('sessionViewBtn').classList.remove('active');document.getElementById('dataBody').style.display='none';document.getElementById('compareView').style.display='flex';renderCompareView();});
 document.getElementById('animatedBtn').addEventListener('click',()=>{playMode='ANIMATED';document.getElementById('animatedBtn').classList.add('active');document.getElementById('staticBtn').classList.remove('active');playLayer(dataActiveLayer);});
 document.getElementById('staticBtn').addEventListener('click',()=>{playMode='STATIC';document.getElementById('staticBtn').classList.add('active');document.getElementById('animatedBtn').classList.remove('active');playLayer(dataActiveLayer);});
 document.getElementById('withImgBtn').addEventListener('click',()=>{showImg=true;document.getElementById('withImgBtn').classList.add('active');document.getElementById('withoutImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='1';});
 document.getElementById('withoutImgBtn').addEventListener('click',()=>{showImg=false;document.getElementById('withoutImgBtn').classList.add('active');document.getElementById('withImgBtn').classList.remove('active');document.getElementById('dataImg').style.opacity='0';});
-document.querySelectorAll('.layer-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');dataActiveLayer=btn.dataset.layer;
-    playLayer(dataActiveLayer);
-  });
-});
+document.querySelectorAll('.layer-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.layer-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');dataActiveLayer=btn.dataset.layer;playLayer(dataActiveLayer);});});
 document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataActiveLayer||'GAZE');});
 
-/* ══════════════════════════════════════════════════════════════════════
-   START
-   ══════════════════════════════════════════════════════════════════════ */
 async function startApp(){await showNameScreen();await boot();}
 bootHome();
 setTimeout(buildModePreviews,200);
-
-function bootHome(){
-  // Static hero image, no video/canvas setup needed
-}
+function bootHome(){}
 </script>
 </body>
 </html>
