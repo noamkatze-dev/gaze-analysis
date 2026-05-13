@@ -26,7 +26,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 #homeStartBtn:hover{background:#333;border-color:#333;}
 .home-badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;}
 .home-badge{font-size:10px;color:#000;border:1px solid rgba(0,0,0,0.35);padding:5px 14px;border-radius:100px;letter-spacing:0.05em;background:rgba(255,255,255,0.6);}
-.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#e01a00;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:8px;}
+.home-scroll-hint{font-size:9px;font-weight:300;letter-spacing:0.4em;color:#e01a00;display:flex;flex-direction:column;align-items:center;gap:6px;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:4;pointer-events:none;}
 .home-scroll-hint-arrow{font-size:14px;color:#e01a00;}
 #homeInfo{position:relative;z-index:4;background:#fff;pointer-events:all;}
 .hi-section{padding:72px 64px;}
@@ -251,7 +251,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
   </div>
   <div id="navLinks">
     <span class="nav-link active" id="navHomeLink">HOME</span>
-    <span class="nav-link" id="navSessionLink">SESSION</span>
+    <span class="nav-link" id="navSessionLink">DATA</span>
     <span class="nav-link" id="navGalleryLink">GALLERY</span>
     <span class="nav-link" id="navDashboardLink">DASHBOARD</span>
   </div>
@@ -271,11 +271,12 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <span class="home-badge">Real-time</span>
         <span class="home-badge">Multi-user Compare</span>
       </div>
-      <div class="home-scroll-hint">
-        SCROLL TO LEARN MORE
-        <span class="home-scroll-hint-arrow">&#8595;</span>
-      </div>
     </div>
+  </div>
+  <!-- Scroll hint fixed at bottom of hero -->
+  <div class="home-scroll-hint">
+    SCROLL TO LEARN MORE
+    <span class="home-scroll-hint-arrow">&#8595;</span>
   </div>
 
   <div id="homeInfo">
@@ -352,7 +353,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
         <canvas id="dataCanvas"></canvas>
 
         <div id="dataToolbar">
-            <button class="view-tab active" id="sessionViewBtn">SESSION</button>
+            <button class="view-tab active" id="sessionViewBtn">DATA</button>
             <button class="view-tab" id="compareViewBtn">COMPARE</button>
             <span class="toolbar-sep"></span>
             <button class="layer-btn active" data-layer="GAZE" data-tooltip="Raw gaze sample positions">GAZE</button>
@@ -493,8 +494,10 @@ function showHome(){
   navSessionLink.classList.remove('active');
   navGalleryLink.classList.remove('active');
   navDashboardLink.classList.remove('active');
+  const hint=document.querySelector('.home-scroll-hint');
+  if(hint) hint.style.display='flex';
 }
-function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');}
+function hideHome(){homeScreen.style.display='none';navHomeLink.classList.remove('active');navSessionLink.classList.add('active');const hint=document.querySelector('.home-scroll-hint');if(hint)hint.style.display='none';}
 function goToSession(){hideHome();if(!appStarted){appStarted=true;startApp();}}
 
 document.getElementById('homeStartBtn').addEventListener('click',goToSession);
@@ -799,7 +802,14 @@ document.getElementById('playBtn').addEventListener('click',()=>{playLayer(dataA
 async function startApp(){await showNameScreen();await boot();}
 bootHome();
 setTimeout(buildModePreviews,200);
-function bootHome(){}
+function bootHome(){
+  // Hide scroll hint when scrolling down on home
+  const homeScr=document.getElementById('homeScreen');
+  homeScr.addEventListener('scroll',()=>{
+    const hint=document.querySelector('.home-scroll-hint');
+    if(hint) hint.style.opacity=homeScr.scrollTop>80?'0':'1';
+  });
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    TOOLBAR COLLAPSE
