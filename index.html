@@ -836,164 +836,122 @@ function startHeroAnalysis(){
   if(!canvas||!vid) return;
   const ctx=canvas.getContext('2d');
 
-  // Off-screen canvas for pixel sampling
-  const offW=320, offH=180;
+  // Offscreen at fixed low resolution - same approach as p5.js sketch
+  const offW=270, offH=480; // same ratio as original code
   const off=document.createElement('canvas');
   off.width=offW; off.height=offH;
   const offCtx=off.getContext('2d');
 
-  let prevPixels=null;
   let rafId=null;
-  let running=true;
+  let frameCount=0;
+  // Persistent dot accumulation buffer - like p5.js not clearing canvas
+  let dotCanvas=document.createElement('canvas');
+  let dotCtx=dotCanvas.getContext('2d');
 
-  // Resize canvas to match viewport
   function resizeCanvas(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
+    dotCanvas.width=canvas.width;
+    dotCanvas.height=canvas.height;
   }
   resizeCanvas();
   window.addEventListener('resize',resizeCanvas);
 
   function getPixelBrightness(pixels,x,y,w){
+    if(x<0||x>=w) return 0;
     const idx=(y*w+x)*4;
     return(pixels[idx]+pixels[idx+1]+pixels[idx+2])/3;
   }
 
-  function getSobelGradient(pixels,x,y,w,h){
-    if(x<1||x>=w-1||y<1||y>=h-1) return{mag:0,gx:0,gy:0};
-    const gx=
-      -getPixelBrightness(pixels,x-1,y-1,w)+getPixelBrightness(pixels,x+1,y-1,w)+
-      -2*getPixelBrightness(pixels,x-1,y,w)+2*getPixelBrightness(pixels,x+1,y,w)+
-      -getPixelBrightness(pixels,x-1,y+1,w)+getPixelBrightness(pixels,x+1,y+1,w);
-    const gy=
-      -getPixelBrightness(pixels,x-1,y-1,w)-2*getPixelBrightness(pixels,x,y-1,w)-getPixelBrightness(pixels,x+1,y-1,w)+
-      getPixelBrightness(pixels,x-1,y+1,w)+2*getPixelBrightness(pixels,x,y+1,w)+getPixelBrightness(pixels,x+1,y+1,w);
-    return{mag:Math.sqrt(gx*gx+gy*gy),gx,gy};
-  }
-
-  function analyzeAndDraw(){
-    if(!running||!vid||vid.paused||vid.ended) {rafId=requestAnimationFrame(analyzeAndDraw);return;}
-
-    // Check if homeScreen is visible
-    const hs=document.getElementById('homeScreen');
-    if(!hs||hs.style.display==='none'){rafId=requestAnimationFrame(analyzeAndDraw);return;}
-
+  // Calculate cover scale - exact same as CSS object-fit:cover
+  function getCoverScale(){
     const CW=canvas.width, CH=canvas.height;
-    ctx.clearRect(0,0,CW,CH);
-
-    // Draw video to offscreen at low res for analysis
-    try{
-      offCtx.drawImage(vid,0,0,offW,offH);
-    }catch(e){rafId=requestAnimationFrame(analyzeAndDraw);return;}
-
-    let imgData;
-    try{imgData=offCtx.getImageData(0,0,offW,offH);}
-    catch(e){rafId=requestAnimationFrame(analyzeAndDraw);return;}
-
-    const pixels=imgData.data;
-
-    // Calculate video cover scale (same as CSS object-fit:cover)
     const vidAR=(vid.videoWidth||16)/(vid.videoHeight||9);
     const canvAR=CW/CH;
     let drawW,drawH,offX,offY;
     if(vidAR>canvAR){
-      drawH=CH; drawW=vidAR*drawH;
-      offX=(CW-drawW)/2; offY=0;
+      drawH=CH; drawW=vidAR*drawH; offX=(CW-drawW)/2; offY=0;
     } else {
-      drawW=CW; drawH=drawW/vidAR;
-      offX=0; offY=(CH-drawH)/2;
+      drawW=CW; drawH=drawW/vidAR; offX=0; offY=(CH-drawH)/2;
     }
+    return{drawW,drawH,offX,offY,CW,CH};
+  }
 
-    // Sobel edge detection + motion on downsampled frame
-    const STEP=2;
-    const EDGE_THRESHOLD=90;
-    const MOTION_THRESHOLD=18;
+  function analyzeAndDraw(){
+    rafId=requestAnimationFrame(analyzeAndDraw);
+    if(!vid||vid.readyState<2) return;
+    const hs=document.getElementById('homeScreen');
+    if(!hs||hs.style.display==='none') return;
 
-    // Motion diff from previous frame
-    let motionMap=null;
-    if(prevPixels&&prevPixels.length===pixels.length){
-      motionMap=new Float32Array(offW*offH);
-      for(let i=0;i<pixels.length;i+=4){
-        const pidx=i/4;
-        const diff=Math.abs((pixels[i]+pixels[i+1]+pixels[i+2])/3-(prevPixels[i]+prevPixels[i+1]+prevPixels[i+2])/3);
-        motionMap[pidx]=diff;
-      }
-    }
-    prevPixels=new Uint8ClampedArray(pixels);
+    frameCount++;
 
-    // Collect strong edge points
-    const pts=[];
-    for(let y=STEP;y<offH-STEP;y+=STEP){
-      for(let x=STEP;x<offW-STEP;x+=STEP){
-        const{mag,gx,gy}=getSobelGradient(pixels,x,y,offW,offH);
-        if(mag>EDGE_THRESHOLD){
-          // Determine edge type by gradient direction
-          const angle=Math.atan2(Math.abs(gy),Math.abs(gx))*180/Math.PI;
-          // Motion weight
-          const motionVal=motionMap?motionMap[y*offW+x]:0;
-          const hasMotion=motionVal>MOTION_THRESHOLD;
-          pts.push({x,y,mag,angle,hasMotion,motionVal});
+    // Draw video to offscreen every frame
+    try{ offCtx.drawImage(vid,0,0,offW,offH); }
+    catch(e){ return; }
+
+    let imgData;
+    try{ imgData=offCtx.getImageData(0,0,offW,offH); }
+    catch(e){ return; }
+
+    const pixels=imgData.data;
+    const{drawW,drawH,offX,offY,CW,CH}=getCoverScale();
+
+    // === FADE the dot layer slightly each frame — like drawing on top of video ===
+    // This gives persistence without full flicker
+    // Every frame we fade 8% — so dots persist ~12 frames = ~0.4s at 30fps
+    dotCtx.globalAlpha=0.92;
+    dotCtx.globalCompositeOperation='destination-in';
+    dotCtx.fillStyle='rgba(0,0,0,1)';
+    dotCtx.fillRect(0,0,dotCanvas.width,dotCanvas.height);
+    dotCtx.globalAlpha=1;
+    dotCtx.globalCompositeOperation='source-over';
+
+    // === EDGE DETECTION — fixed step grid, like original step=4 ===
+    // Only analyze every 2nd frame to reduce flicker
+    if(frameCount%2===0){
+      const STEP=4; // same as original code
+      const THRESHOLD=90; // edge threshold
+
+      for(let y=STEP;y<offH-STEP;y+=STEP){
+        for(let x=STEP;x<offW-STEP;x+=STEP){
+          // Sobel X
+          const gx=
+            -getPixelBrightness(pixels,x-STEP,y-STEP,offW)+getPixelBrightness(pixels,x+STEP,y-STEP,offW)+
+            -2*getPixelBrightness(pixels,x-STEP,y,offW)+2*getPixelBrightness(pixels,x+STEP,y,offW)+
+            -getPixelBrightness(pixels,x-STEP,y+STEP,offW)+getPixelBrightness(pixels,x+STEP,y+STEP,offW);
+          // Sobel Y
+          const gy=
+            -getPixelBrightness(pixels,x-STEP,y-STEP,offW)-2*getPixelBrightness(pixels,x,y-STEP,offW)-getPixelBrightness(pixels,x+STEP,y-STEP,offW)+
+            getPixelBrightness(pixels,x-STEP,y+STEP,offW)+2*getPixelBrightness(pixels,x,y+STEP,offW)+getPixelBrightness(pixels,x+STEP,y+STEP,offW);
+
+          const mag=Math.sqrt(gx*gx+gy*gy);
+          if(mag>THRESHOLD){
+            // Map from off-screen pixel coords to canvas display coords
+            const sx=offX+(x/offW)*drawW;
+            const sy=offY+(y/offH)*drawH;
+            if(sx<0||sx>CW||sy<0||sy>CH) continue;
+
+            // Draw point on persistent dot layer — like p5.js stroke/point
+            const alpha=Math.min(1,(mag-THRESHOLD)/120);
+            dotCtx.beginPath();
+            dotCtx.arc(sx,sy,1.5,0,Math.PI*2);
+            dotCtx.fillStyle=`rgba(233,28,28,${(0.5+alpha*0.5).toFixed(2)})`;
+            dotCtx.fill();
+          }
         }
       }
     }
 
-    // Non-maximum suppression: keep only local maxima in a grid
-    const SUPPRESS_CELL=8; // suppress radius in offscreen pixels
-    const cellCols=Math.ceil(offW/SUPPRESS_CELL);
-    const cellRows=Math.ceil(offH/SUPPRESS_CELL);
-    const cellBest=new Float32Array(cellCols*cellRows);
-    const cellPt=new Array(cellCols*cellRows).fill(null);
-    for(const p of pts){
-      const ci=Math.floor(p.x/SUPPRESS_CELL);
-      const cj=Math.floor(p.y/SUPPRESS_CELL);
-      const cidx=cj*cellCols+ci;
-      // Boost score for motion points
-      const score=p.mag*(p.hasMotion?2.5:1);
-      if(score>cellBest[cidx]){cellBest[cidx]=score;cellPt[cidx]=p;}
-    }
-
-    // Draw dots
-    const DOT_R=2.5;
-    for(let i=0;i<cellPt.length;i++){
-      const p=cellPt[i];
-      if(!p) continue;
-
-      // Map from offscreen coords to canvas coords
-      const sx=offX+((p.x/offW)*drawW);
-      const sy=offY+((p.y/offH)*drawH);
-
-      // Clamp to canvas
-      if(sx<0||sx>CW||sy<0||sy>CH) continue;
-
-      // Color & size based on motion and magnitude
-      const intensity=Math.min(1,(p.mag-EDGE_THRESHOLD)/150);
-      const alpha=0.45+intensity*0.55;
-      const radius=p.hasMotion?DOT_R+1.5:DOT_R;
-
-      ctx.beginPath();
-      ctx.arc(sx,sy,radius,0,Math.PI*2);
-      // Motion points slightly brighter/larger
-      ctx.fillStyle=p.hasMotion
-        ?`rgba(233,28,28,${(alpha*0.9).toFixed(2)})`
-        :`rgba(233,28,28,${(alpha*0.65).toFixed(2)})`;
-      ctx.fill();
-    }
-
-    rafId=requestAnimationFrame(analyzeAndDraw);
+    // === Composite: clear main canvas, draw dot layer on top ===
+    ctx.clearRect(0,0,CW,CH);
+    ctx.drawImage(dotCanvas,0,0);
   }
 
-  // Start when video has data
   function tryStart(){
-    if(vid.readyState>=2){
-      analyzeAndDraw();
-    } else {
-      vid.addEventListener('canplay',()=>analyzeAndDraw(),{once:true});
-    }
+    if(vid.readyState>=2){ analyzeAndDraw(); }
+    else { vid.addEventListener('canplay',analyzeAndDraw,{once:true}); }
   }
   tryStart();
-
-  // Stop when navigating away from home
-  const origHideHome=hideHome;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
