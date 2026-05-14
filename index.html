@@ -240,6 +240,8 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 }
 #dataToolbarCollapseBtn:hover{color:#fff;background:rgba(255,255,255,0.18);}
 #dataToolbarCollapseBtn .tcb-arrow{font-size:10px;font-weight:900;line-height:1;}
+
+#heroAnalysisCanvas{display:block;}
 </style>
 </head>
 <body>
@@ -259,6 +261,7 @@ body{background:#fff;overflow:hidden;width:100vw;height:100vh;cursor:none;font-f
 
 <div id="homeScreen">
   <video id="homeHeroImg" autoplay muted loop playsinline style="position:sticky;top:0;left:0;width:100%;height:100vh;object-fit:cover;display:block;z-index:0;"><source src="david ben gurion.mp4" type="video/mp4"></video>
+  <canvas id="heroAnalysisCanvas" style="position:fixed;top:0;left:0;width:100%;height:100vh;pointer-events:none;z-index:2;"></canvas>
   <div id="homeHero">
     <div class="home-content">
       <div class="home-eyebrow">VISUAL ANALYSIS SYSTEM</div>
@@ -824,6 +827,173 @@ function bootHome(){
     const hint=document.querySelector('.home-scroll-hint');
     if(hint) hint.style.opacity=homeScr.scrollTop>80?'0':'1';
   });
+  startHeroAnalysis();
+}
+
+function startHeroAnalysis(){
+  const vid=document.getElementById('homeHeroImg');
+  const canvas=document.getElementById('heroAnalysisCanvas');
+  if(!canvas||!vid) return;
+  const ctx=canvas.getContext('2d');
+
+  // Off-screen canvas for pixel sampling
+  const offW=320, offH=180;
+  const off=document.createElement('canvas');
+  off.width=offW; off.height=offH;
+  const offCtx=off.getContext('2d');
+
+  let prevPixels=null;
+  let rafId=null;
+  let running=true;
+
+  // Resize canvas to match viewport
+  function resizeCanvas(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize',resizeCanvas);
+
+  function getPixelBrightness(pixels,x,y,w){
+    const idx=(y*w+x)*4;
+    return(pixels[idx]+pixels[idx+1]+pixels[idx+2])/3;
+  }
+
+  function getSobelGradient(pixels,x,y,w,h){
+    if(x<1||x>=w-1||y<1||y>=h-1) return{mag:0,gx:0,gy:0};
+    const gx=
+      -getPixelBrightness(pixels,x-1,y-1,w)+getPixelBrightness(pixels,x+1,y-1,w)+
+      -2*getPixelBrightness(pixels,x-1,y,w)+2*getPixelBrightness(pixels,x+1,y,w)+
+      -getPixelBrightness(pixels,x-1,y+1,w)+getPixelBrightness(pixels,x+1,y+1,w);
+    const gy=
+      -getPixelBrightness(pixels,x-1,y-1,w)-2*getPixelBrightness(pixels,x,y-1,w)-getPixelBrightness(pixels,x+1,y-1,w)+
+      getPixelBrightness(pixels,x-1,y+1,w)+2*getPixelBrightness(pixels,x,y+1,w)+getPixelBrightness(pixels,x+1,y+1,w);
+    return{mag:Math.sqrt(gx*gx+gy*gy),gx,gy};
+  }
+
+  function analyzeAndDraw(){
+    if(!running||!vid||vid.paused||vid.ended) {rafId=requestAnimationFrame(analyzeAndDraw);return;}
+
+    // Check if homeScreen is visible
+    const hs=document.getElementById('homeScreen');
+    if(!hs||hs.style.display==='none'){rafId=requestAnimationFrame(analyzeAndDraw);return;}
+
+    const CW=canvas.width, CH=canvas.height;
+    ctx.clearRect(0,0,CW,CH);
+
+    // Draw video to offscreen at low res for analysis
+    try{
+      offCtx.drawImage(vid,0,0,offW,offH);
+    }catch(e){rafId=requestAnimationFrame(analyzeAndDraw);return;}
+
+    let imgData;
+    try{imgData=offCtx.getImageData(0,0,offW,offH);}
+    catch(e){rafId=requestAnimationFrame(analyzeAndDraw);return;}
+
+    const pixels=imgData.data;
+
+    // Calculate video cover scale (same as CSS object-fit:cover)
+    const vidAR=(vid.videoWidth||16)/(vid.videoHeight||9);
+    const canvAR=CW/CH;
+    let drawW,drawH,offX,offY;
+    if(vidAR>canvAR){
+      drawH=CH; drawW=vidAR*drawH;
+      offX=(CW-drawW)/2; offY=0;
+    } else {
+      drawW=CW; drawH=drawW/vidAR;
+      offX=0; offY=(CH-drawH)/2;
+    }
+
+    // Sobel edge detection + motion on downsampled frame
+    const STEP=2;
+    const EDGE_THRESHOLD=90;
+    const MOTION_THRESHOLD=18;
+
+    // Motion diff from previous frame
+    let motionMap=null;
+    if(prevPixels&&prevPixels.length===pixels.length){
+      motionMap=new Float32Array(offW*offH);
+      for(let i=0;i<pixels.length;i+=4){
+        const pidx=i/4;
+        const diff=Math.abs((pixels[i]+pixels[i+1]+pixels[i+2])/3-(prevPixels[i]+prevPixels[i+1]+prevPixels[i+2])/3);
+        motionMap[pidx]=diff;
+      }
+    }
+    prevPixels=new Uint8ClampedArray(pixels);
+
+    // Collect strong edge points
+    const pts=[];
+    for(let y=STEP;y<offH-STEP;y+=STEP){
+      for(let x=STEP;x<offW-STEP;x+=STEP){
+        const{mag,gx,gy}=getSobelGradient(pixels,x,y,offW,offH);
+        if(mag>EDGE_THRESHOLD){
+          // Determine edge type by gradient direction
+          const angle=Math.atan2(Math.abs(gy),Math.abs(gx))*180/Math.PI;
+          // Motion weight
+          const motionVal=motionMap?motionMap[y*offW+x]:0;
+          const hasMotion=motionVal>MOTION_THRESHOLD;
+          pts.push({x,y,mag,angle,hasMotion,motionVal});
+        }
+      }
+    }
+
+    // Non-maximum suppression: keep only local maxima in a grid
+    const SUPPRESS_CELL=8; // suppress radius in offscreen pixels
+    const cellCols=Math.ceil(offW/SUPPRESS_CELL);
+    const cellRows=Math.ceil(offH/SUPPRESS_CELL);
+    const cellBest=new Float32Array(cellCols*cellRows);
+    const cellPt=new Array(cellCols*cellRows).fill(null);
+    for(const p of pts){
+      const ci=Math.floor(p.x/SUPPRESS_CELL);
+      const cj=Math.floor(p.y/SUPPRESS_CELL);
+      const cidx=cj*cellCols+ci;
+      // Boost score for motion points
+      const score=p.mag*(p.hasMotion?2.5:1);
+      if(score>cellBest[cidx]){cellBest[cidx]=score;cellPt[cidx]=p;}
+    }
+
+    // Draw dots
+    const DOT_R=2.5;
+    for(let i=0;i<cellPt.length;i++){
+      const p=cellPt[i];
+      if(!p) continue;
+
+      // Map from offscreen coords to canvas coords
+      const sx=offX+((p.x/offW)*drawW);
+      const sy=offY+((p.y/offH)*drawH);
+
+      // Clamp to canvas
+      if(sx<0||sx>CW||sy<0||sy>CH) continue;
+
+      // Color & size based on motion and magnitude
+      const intensity=Math.min(1,(p.mag-EDGE_THRESHOLD)/150);
+      const alpha=0.45+intensity*0.55;
+      const radius=p.hasMotion?DOT_R+1.5:DOT_R;
+
+      ctx.beginPath();
+      ctx.arc(sx,sy,radius,0,Math.PI*2);
+      // Motion points slightly brighter/larger
+      ctx.fillStyle=p.hasMotion
+        ?`rgba(233,28,28,${(alpha*0.9).toFixed(2)})`
+        :`rgba(233,28,28,${(alpha*0.65).toFixed(2)})`;
+      ctx.fill();
+    }
+
+    rafId=requestAnimationFrame(analyzeAndDraw);
+  }
+
+  // Start when video has data
+  function tryStart(){
+    if(vid.readyState>=2){
+      analyzeAndDraw();
+    } else {
+      vid.addEventListener('canplay',()=>analyzeAndDraw(),{once:true});
+    }
+  }
+  tryStart();
+
+  // Stop when navigating away from home
+  const origHideHome=hideHome;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
