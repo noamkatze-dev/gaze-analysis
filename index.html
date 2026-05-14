@@ -836,7 +836,6 @@ function startHeroAnalysis(){
   if(!canvas||!vid) return;
   const ctx=canvas.getContext('2d');
 
-  // Low-res offscreen for pixel analysis — same 270x480 ratio as original
   const offW=270, offH=480;
   const off=document.createElement('canvas');
   off.width=offW; off.height=offH;
@@ -847,84 +846,50 @@ function startHeroAnalysis(){
     canvas.height=window.innerHeight;
   }
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize',resizeCanvas);
 
-  // Equivalent of p5 map()
-  function mapVal(v,a,b,c,d){ return c+(d-c)*((v-a)/(b-a)); }
-
-  // Equivalent of getPixelBrightness()
-  function brightness(pixels,x,y,w){
-    if(x<0||x>=w||y<0||y>=offH) return 0;
-    const i=(~~y*w+~~x)*4;
-    return(pixels[i]+pixels[i+1]+pixels[i+2])/3;
-  }
-
-  // Cover scale — same logic as original videoRatio / canvasRatio
-  function coverScale(){
-    const CW=canvas.width, CH=canvas.height;
-    const vr=(vid.videoWidth||16)/(vid.videoHeight||9);
-    const cr=CW/CH;
-    let dW,dH,ox,oy;
-    if(vr>cr){ dH=CH; dW=vr*dH; ox=(CW-dW)/2; oy=0; }
-    else      { dW=CW; dH=dW/vr; ox=0; oy=(CH-dH)/2; }
-    return{dW,dH,ox,oy,CW,CH};
-  }
-
-  // Equivalent of drawEdgePoint() — just a single point on the overlay canvas
-  function drawEdgePoint(x,y,scale){
-    const sx=mapVal(x,0,offW,scale.ox,scale.ox+scale.dW);
-    const sy=mapVal(y,0,offH,scale.oy,scale.oy+scale.dH);
-    ctx.fillStyle='rgba(233,28,28,0.47)'; // stroke(255,0,0,120) equivalent
-    ctx.fillRect(sx-0.5,sy-0.5,1,1);      // strokeWeight(1) point()
-  }
-
-  // Equivalent of detectEdges() — threshold=200, step=4
-  function detectEdges(pixels,scale){
-    const THRESHOLD=200;
-    const STEP=4;
-    for(let y=STEP;y<offH-STEP;y+=STEP){
-      for(let x=STEP;x<offW-STEP;x+=STEP){
-        const gx=
-          -brightness(pixels,x-STEP,y-STEP,offW)+brightness(pixels,x+STEP,y-STEP,offW)+
-          -2*brightness(pixels,x-STEP,y,offW)+2*brightness(pixels,x+STEP,y,offW)+
-          -brightness(pixels,x-STEP,y+STEP,offW)+brightness(pixels,x+STEP,y+STEP,offW);
-        const gy=
-          -brightness(pixels,x-STEP,y-STEP,offW)-2*brightness(pixels,x,y-STEP,offW)-brightness(pixels,x+STEP,y-STEP,offW)+
-          brightness(pixels,x-STEP,y+STEP,offW)+2*brightness(pixels,x,y+STEP,offW)+brightness(pixels,x+STEP,y+STEP,offW);
-        const mag=Math.sqrt(gx*gx+gy*gy);
-        if(mag>THRESHOLD){
-          drawEdgePoint(x,y,scale); // draw immediately — like original
-        }
-      }
-    }
+  function px(p,x,y){
+    if(x<0||x>=offW||y<0||y>=offH) return 0;
+    const i=(y*offW+x)*4;
+    return(p[i]+p[i+1]+p[i+2])/3;
   }
 
   function loop(){
     requestAnimationFrame(loop);
     if(!vid||vid.readyState<2) return;
-    const hs=document.getElementById('homeScreen');
-    if(!hs||hs.style.display==='none') return;
+    if(document.getElementById('homeScreen')?.style.display==='none') return;
 
-    const scale=coverScale();
+    const CW=canvas.width, CH=canvas.height;
+    const vr=(vid.videoWidth||16)/(vid.videoHeight||9), cr=CW/CH;
+    let dW,dH,ox,oy;
+    if(vr>cr){dH=CH;dW=vr*dH;ox=(CW-dW)/2;oy=0;}
+    else{dW=CW;dH=dW/vr;ox=0;oy=(CH-dH)/2;}
 
-    // Clear overlay each frame — equivalent of background(0) + image(video)
-    // (video is behind in CSS, we just clear our overlay)
-    ctx.clearRect(0,0,scale.CW,scale.CH);
-
-    // Draw video to low-res offscreen for pixel analysis
-    try{ offCtx.drawImage(vid,0,0,offW,offH); }
-    catch(e){ return; }
-
+    try{offCtx.drawImage(vid,0,0,offW,offH);}catch(e){return;}
     let imgData;
-    try{ imgData=offCtx.getImageData(0,0,offW,offH); }
-    catch(e){ return; }
+    try{imgData=offCtx.getImageData(0,0,offW,offH);}catch(e){return;}
+    const p=imgData.data;
 
-    // Run edge detection + draw points — equivalent of analyzeFrame()→detectEdges()→drawEdgePoint()
-    detectEdges(imgData.data, scale);
+    ctx.clearRect(0,0,CW,CH);
+
+    const STEP=4, THRESH=200;
+    for(let y=STEP;y<offH-STEP;y+=STEP){
+      for(let x=STEP;x<offW-STEP;x+=STEP){
+        const gx=-px(p,x-STEP,y-STEP)+px(p,x+STEP,y-STEP)-2*px(p,x-STEP,y)+2*px(p,x+STEP,y)-px(p,x-STEP,y+STEP)+px(p,x+STEP,y+STEP);
+        const gy=-px(p,x-STEP,y-STEP)-2*px(p,x,y-STEP)-px(p,x+STEP,y-STEP)+px(p,x-STEP,y+STEP)+2*px(p,x,y+STEP)+px(p,x+STEP,y+STEP);
+        const mag=Math.sqrt(gx*gx+gy*gy);
+        if(mag>THRESH){
+          const sx=ox+(x/offW)*dW;
+          const sy=oy+(y/offH)*dH;
+          ctx.fillStyle='rgba(233,28,28,0.47)';
+          ctx.fillRect(sx,sy,1,1);
+        }
+      }
+    }
   }
 
-  if(vid.readyState>=2){ loop(); }
-  else{ vid.addEventListener('canplay',loop,{once:true}); }
+  if(vid.readyState>=2){loop();}
+  else{vid.addEventListener('canplay',loop,{once:true});}
 }
 
 /* ══════════════════════════════════════════════════════════════════════
