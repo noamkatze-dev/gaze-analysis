@@ -836,56 +836,82 @@ function startHeroAnalysis(){
   if(!canvas||!vid) return;
   const ctx=canvas.getContext('2d');
 
-  // Offscreen at fixed low resolution - same approach as p5.js sketch
-  const offW=270, offH=480; // same ratio as original code
+  // Low-res offscreen for pixel analysis — same 270x480 ratio as original
+  const offW=270, offH=480;
   const off=document.createElement('canvas');
   off.width=offW; off.height=offH;
   const offCtx=off.getContext('2d');
 
-  let rafId=null;
-  let frameCount=0;
-  // Persistent dot accumulation buffer - like p5.js not clearing canvas
-  let dotCanvas=document.createElement('canvas');
-  let dotCtx=dotCanvas.getContext('2d');
-
   function resizeCanvas(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
-    dotCanvas.width=canvas.width;
-    dotCanvas.height=canvas.height;
   }
   resizeCanvas();
-  window.addEventListener('resize',resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
 
-  function getPixelBrightness(pixels,x,y,w){
-    if(x<0||x>=w) return 0;
-    const idx=(y*w+x)*4;
-    return(pixels[idx]+pixels[idx+1]+pixels[idx+2])/3;
+  // Equivalent of p5 map()
+  function mapVal(v,a,b,c,d){ return c+(d-c)*((v-a)/(b-a)); }
+
+  // Equivalent of getPixelBrightness()
+  function brightness(pixels,x,y,w){
+    if(x<0||x>=w||y<0||y>=offH) return 0;
+    const i=(~~y*w+~~x)*4;
+    return(pixels[i]+pixels[i+1]+pixels[i+2])/3;
   }
 
-  // Calculate cover scale - exact same as CSS object-fit:cover
-  function getCoverScale(){
+  // Cover scale — same logic as original videoRatio / canvasRatio
+  function coverScale(){
     const CW=canvas.width, CH=canvas.height;
-    const vidAR=(vid.videoWidth||16)/(vid.videoHeight||9);
-    const canvAR=CW/CH;
-    let drawW,drawH,offX,offY;
-    if(vidAR>canvAR){
-      drawH=CH; drawW=vidAR*drawH; offX=(CW-drawW)/2; offY=0;
-    } else {
-      drawW=CW; drawH=drawW/vidAR; offX=0; offY=(CH-drawH)/2;
-    }
-    return{drawW,drawH,offX,offY,CW,CH};
+    const vr=(vid.videoWidth||16)/(vid.videoHeight||9);
+    const cr=CW/CH;
+    let dW,dH,ox,oy;
+    if(vr>cr){ dH=CH; dW=vr*dH; ox=(CW-dW)/2; oy=0; }
+    else      { dW=CW; dH=dW/vr; ox=0; oy=(CH-dH)/2; }
+    return{dW,dH,ox,oy,CW,CH};
   }
 
-  function analyzeAndDraw(){
-    rafId=requestAnimationFrame(analyzeAndDraw);
+  // Equivalent of drawEdgePoint() — just a single point on the overlay canvas
+  function drawEdgePoint(x,y,scale){
+    const sx=mapVal(x,0,offW,scale.ox,scale.ox+scale.dW);
+    const sy=mapVal(y,0,offH,scale.oy,scale.oy+scale.dH);
+    ctx.fillStyle='rgba(233,28,28,0.47)'; // stroke(255,0,0,120) equivalent
+    ctx.fillRect(sx-0.5,sy-0.5,1,1);      // strokeWeight(1) point()
+  }
+
+  // Equivalent of detectEdges() — threshold=200, step=4
+  function detectEdges(pixels,scale){
+    const THRESHOLD=200;
+    const STEP=4;
+    for(let y=STEP;y<offH-STEP;y+=STEP){
+      for(let x=STEP;x<offW-STEP;x+=STEP){
+        const gx=
+          -brightness(pixels,x-STEP,y-STEP,offW)+brightness(pixels,x+STEP,y-STEP,offW)+
+          -2*brightness(pixels,x-STEP,y,offW)+2*brightness(pixels,x+STEP,y,offW)+
+          -brightness(pixels,x-STEP,y+STEP,offW)+brightness(pixels,x+STEP,y+STEP,offW);
+        const gy=
+          -brightness(pixels,x-STEP,y-STEP,offW)-2*brightness(pixels,x,y-STEP,offW)-brightness(pixels,x+STEP,y-STEP,offW)+
+          brightness(pixels,x-STEP,y+STEP,offW)+2*brightness(pixels,x,y+STEP,offW)+brightness(pixels,x+STEP,y+STEP,offW);
+        const mag=Math.sqrt(gx*gx+gy*gy);
+        if(mag>THRESHOLD){
+          drawEdgePoint(x,y,scale); // draw immediately — like original
+        }
+      }
+    }
+  }
+
+  function loop(){
+    requestAnimationFrame(loop);
     if(!vid||vid.readyState<2) return;
     const hs=document.getElementById('homeScreen');
     if(!hs||hs.style.display==='none') return;
 
-    frameCount++;
+    const scale=coverScale();
 
-    // Draw video to offscreen every frame
+    // Clear overlay each frame — equivalent of background(0) + image(video)
+    // (video is behind in CSS, we just clear our overlay)
+    ctx.clearRect(0,0,scale.CW,scale.CH);
+
+    // Draw video to low-res offscreen for pixel analysis
     try{ offCtx.drawImage(vid,0,0,offW,offH); }
     catch(e){ return; }
 
@@ -893,65 +919,12 @@ function startHeroAnalysis(){
     try{ imgData=offCtx.getImageData(0,0,offW,offH); }
     catch(e){ return; }
 
-    const pixels=imgData.data;
-    const{drawW,drawH,offX,offY,CW,CH}=getCoverScale();
-
-    // === FADE the dot layer slightly each frame — like drawing on top of video ===
-    // This gives persistence without full flicker
-    // Every frame we fade 8% — so dots persist ~12 frames = ~0.4s at 30fps
-    dotCtx.globalAlpha=0.92;
-    dotCtx.globalCompositeOperation='destination-in';
-    dotCtx.fillStyle='rgba(0,0,0,1)';
-    dotCtx.fillRect(0,0,dotCanvas.width,dotCanvas.height);
-    dotCtx.globalAlpha=1;
-    dotCtx.globalCompositeOperation='source-over';
-
-    // === EDGE DETECTION — fixed step grid, like original step=4 ===
-    // Only analyze every 2nd frame to reduce flicker
-    if(frameCount%2===0){
-      const STEP=4; // same as original code
-      const THRESHOLD=90; // edge threshold
-
-      for(let y=STEP;y<offH-STEP;y+=STEP){
-        for(let x=STEP;x<offW-STEP;x+=STEP){
-          // Sobel X
-          const gx=
-            -getPixelBrightness(pixels,x-STEP,y-STEP,offW)+getPixelBrightness(pixels,x+STEP,y-STEP,offW)+
-            -2*getPixelBrightness(pixels,x-STEP,y,offW)+2*getPixelBrightness(pixels,x+STEP,y,offW)+
-            -getPixelBrightness(pixels,x-STEP,y+STEP,offW)+getPixelBrightness(pixels,x+STEP,y+STEP,offW);
-          // Sobel Y
-          const gy=
-            -getPixelBrightness(pixels,x-STEP,y-STEP,offW)-2*getPixelBrightness(pixels,x,y-STEP,offW)-getPixelBrightness(pixels,x+STEP,y-STEP,offW)+
-            getPixelBrightness(pixels,x-STEP,y+STEP,offW)+2*getPixelBrightness(pixels,x,y+STEP,offW)+getPixelBrightness(pixels,x+STEP,y+STEP,offW);
-
-          const mag=Math.sqrt(gx*gx+gy*gy);
-          if(mag>THRESHOLD){
-            // Map from off-screen pixel coords to canvas display coords
-            const sx=offX+(x/offW)*drawW;
-            const sy=offY+(y/offH)*drawH;
-            if(sx<0||sx>CW||sy<0||sy>CH) continue;
-
-            // Draw point on persistent dot layer — like p5.js stroke/point
-            const alpha=Math.min(1,(mag-THRESHOLD)/120);
-            dotCtx.beginPath();
-            dotCtx.arc(sx,sy,1.5,0,Math.PI*2);
-            dotCtx.fillStyle=`rgba(233,28,28,${(0.5+alpha*0.5).toFixed(2)})`;
-            dotCtx.fill();
-          }
-        }
-      }
-    }
-
-    // === Composite: clear main canvas, draw dot layer on top ===
-    ctx.clearRect(0,0,CW,CH);
-    ctx.drawImage(dotCanvas,0,0);
+    // Run edge detection + draw points — equivalent of analyzeFrame()→detectEdges()→drawEdgePoint()
+    detectEdges(imgData.data, scale);
   }
 
-  function tryStart(){
-    if(vid.readyState>=2){ analyzeAndDraw(); }
-    else { vid.addEventListener('canplay',analyzeAndDraw,{once:true}); }
-  }
-  tryStart();
+  if(vid.readyState>=2){ loop(); }
+  else{ vid.addEventListener('canplay',loop,{once:true}); }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
