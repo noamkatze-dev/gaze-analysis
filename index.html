@@ -836,10 +836,18 @@ function startHeroAnalysis(){
   if(!canvas||!vid) return;
   const ctx=canvas.getContext('2d');
 
-  const offW=270, offH=480;
-  const off=document.createElement('canvas');
-  off.width=offW; off.height=offH;
-  const offCtx=off.getContext('2d');
+  // Exact same as original: 160x90 analysis canvas
+  const AW=160, AH=90;
+  const anaC=document.createElement('canvas');
+  anaC.width=AW; anaC.height=AH;
+  const anaCtx=anaC.getContext('2d',{willReadFrequently:true});
+
+  const HOME_N_ANN=250;        // max dots — same as original
+  const HOME_DOT_STEP=2;       // sobel sampling step
+  const HOME_DOT_THRESH=10;    // magnitude threshold
+  const HOME_ANA_INTERVAL=600; // ms between analyses — same as original
+
+  let lastAnaTs=-9999;
 
   function resizeCanvas(){
     canvas.width=window.innerWidth;
@@ -848,48 +856,73 @@ function startHeroAnalysis(){
   resizeCanvas();
   window.addEventListener('resize',resizeCanvas);
 
-  function px(p,x,y){
-    if(x<0||x>=offW||y<0||y>=offH) return 0;
-    const i=(y*offW+x)*4;
-    return(p[i]+p[i+1]+p[i+2])/3;
+  // Exact sobel from original
+  function sobel(px,w,h){
+    const g=new Float32Array(w*h);
+    const mg=new Float32Array(w*h);
+    for(let i=0;i<w*h;i++){const o=i*4;g[i]=0.299*px[o]+0.587*px[o+1]+0.114*px[o+2];}
+    for(let y=1;y<h-1;y++){
+      for(let x=1;x<w-1;x++){
+        const i=y*w+x;
+        const tl=g[i-w-1],tc=g[i-w],tr=g[i-w+1],ml=g[i-1],mr=g[i+1],bl=g[i+w-1],bc=g[i+w],br=g[i+w+1];
+        const gx=(tr+2*mr+br)-(tl+2*ml+bl);
+        const gy=(bl+2*bc+br)-(tl+2*tc+tr);
+        mg[i]=Math.hypot(gx,gy);
+      }
+    }
+    return mg;
   }
 
-  function loop(){
+  // Exact homeDrawDots from original — 3x3 rect, nx/ny normalized coords
+  function drawDots(pts){
+    const W=canvas.width, H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='rgba(224,26,0,0.82)'; // same as original
+    ctx.beginPath();
+    for(const p of pts) ctx.rect(p.nx*W-1.5, p.ny*H-1.5, 3, 3);
+    ctx.fill();
+  }
+
+  // Exact homeAnalyze from original
+  function analyze(){
+    if(vid.readyState<2) return;
+    try{ anaCtx.drawImage(vid,0,0,AW,AH); }catch(e){ return; }
+    let id;
+    try{ id=anaCtx.getImageData(0,0,AW,AH); }catch(e){ return; }
+    const mg=sobel(id.data,AW,AH);
+
+    const all=[];
+    for(let y=1;y<AH-1;y+=HOME_DOT_STEP)
+      for(let x=1;x<AW-1;x+=HOME_DOT_STEP){
+        const i=y*AW+x;
+        if(mg[i]>=HOME_DOT_THRESH) all.push({i,mag:mg[i]});
+      }
+
+    // Sort by magnitude, keep top N — same as original
+    all.sort((a,b)=>b.mag-a.mag);
+    if(all.length>HOME_N_ANN) all.length=HOME_N_ANN;
+
+    const pts=all.map(({i})=>({
+      nx:Math.max(0.01,Math.min(0.99,(i%AW)/AW)),
+      ny:Math.max(0.01,Math.min(0.99,Math.floor(i/AW)/AH))
+    }));
+
+    drawDots(pts);
+  }
+
+  // Exact homeLoop from original — only analyze every 600ms
+  function loop(ts){
     requestAnimationFrame(loop);
     if(!vid||vid.readyState<2) return;
     if(document.getElementById('homeScreen')?.style.display==='none') return;
-
-    const CW=canvas.width, CH=canvas.height;
-    const vr=(vid.videoWidth||16)/(vid.videoHeight||9), cr=CW/CH;
-    let dW,dH,ox,oy;
-    if(vr>cr){dH=CH;dW=vr*dH;ox=(CW-dW)/2;oy=0;}
-    else{dW=CW;dH=dW/vr;ox=0;oy=(CH-dH)/2;}
-
-    try{offCtx.drawImage(vid,0,0,offW,offH);}catch(e){return;}
-    let imgData;
-    try{imgData=offCtx.getImageData(0,0,offW,offH);}catch(e){return;}
-    const p=imgData.data;
-
-    ctx.clearRect(0,0,CW,CH);
-
-    const STEP=4, THRESH=200;
-    for(let y=STEP;y<offH-STEP;y+=STEP){
-      for(let x=STEP;x<offW-STEP;x+=STEP){
-        const gx=-px(p,x-STEP,y-STEP)+px(p,x+STEP,y-STEP)-2*px(p,x-STEP,y)+2*px(p,x+STEP,y)-px(p,x-STEP,y+STEP)+px(p,x+STEP,y+STEP);
-        const gy=-px(p,x-STEP,y-STEP)-2*px(p,x,y-STEP)-px(p,x+STEP,y-STEP)+px(p,x-STEP,y+STEP)+2*px(p,x,y+STEP)+px(p,x+STEP,y+STEP);
-        const mag=Math.sqrt(gx*gx+gy*gy);
-        if(mag>THRESH){
-          const sx=ox+(x/offW)*dW;
-          const sy=oy+(y/offH)*dH;
-          ctx.fillStyle='rgba(233,28,28,0.47)';
-          ctx.fillRect(sx,sy,1,1);
-        }
-      }
+    if(ts-lastAnaTs>HOME_ANA_INTERVAL){
+      analyze();
+      lastAnaTs=ts;
     }
   }
 
-  if(vid.readyState>=2){loop();}
-  else{vid.addEventListener('canplay',loop,{once:true});}
+  if(vid.readyState>=2){ requestAnimationFrame(loop); }
+  else{ vid.addEventListener('canplay',()=>requestAnimationFrame(loop),{once:true}); }
 }
 
 /* ══════════════════════════════════════════════════════════════════════
