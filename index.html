@@ -878,9 +878,11 @@ function startHeroAnalysis(){
     const W=canvas.width, H=canvas.height;
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle='rgba(233,28,28,0.82)';
-    ctx.beginPath();
-    for(const p of pts) ctx.rect(p.nx*W-2.5, p.ny*H-2.5, 5, 5);
-    ctx.fill();
+    for(const p of pts){
+      ctx.beginPath();
+      ctx.arc(p.nx*W, p.ny*H, 2.5, 0, Math.PI*2);
+      ctx.fill();
+    }
   }
 
   // Exact homeAnalyze from original
